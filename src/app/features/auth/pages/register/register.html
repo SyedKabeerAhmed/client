@@ -1,0 +1,59 @@
+<div class="register-container">
+  <div class="container">
+    <div class="row justify-content-center align-items-center min-vh-100">
+      <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+        <div class="register-card">
+          <div class="card-header">
+            <div class="text-center">
+              <div class="logo-icon">
+                <img src="/asset/Logo.png" alt="Currency Converter Logo" class="custom-logo">
+              </div>
+              <h2 class="welcome-text">Create Account</h2>
+              <p class="subtitle">Join our currency converter platform</p>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <form (ngSubmit)="submit()" class="register-form">
+              <div class="form-group mb-4">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Email Address</mat-label>
+                  <input matInput type="email" [(ngModel)]="email" name="email" required>
+                  <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
+              </div>
+              
+              <div class="form-group mb-4">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Password</mat-label>
+                  <input matInput type="password" [(ngModel)]="password" name="password" required minlength="6">
+                  <mat-icon matSuffix>lock</mat-icon>
+                </mat-form-field>
+                <small class="form-text text-muted">Password must be at least 6 characters long</small>
+              </div>
+              
+              <div class="form-group mb-4">
+                <button mat-flat-button color="primary" type="submit" class="register-btn w-100">
+                  <mat-icon class="me-2">person_add</mat-icon>
+                  Create Account
+                </button>
+              </div>
+            </form>
+            
+            <div class="divider">
+              <span>or</span>
+            </div>
+            
+            <div class="login-link">
+              <p class="text-center mb-0">
+                Already have an account? 
+                <a routerLink="/login" class="link-primary">Sign in</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  

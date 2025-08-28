@@ -1,0 +1,339 @@
+.dashboard-container {
+  min-height: 100%;
+  padding: 2rem 0;
+}
+
+.converter-card, .history-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+}
+
+.card-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1.5rem;
+  
+  h2, h3 {
+    color: white;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .dashboard-logo {
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.converter-form {
+  .mat-form-field {
+    margin-bottom: 0;
+  }
+  
+  .currency-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    padding: 0.25rem 0;
+    
+    .currency-code {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #333;
+      letter-spacing: 0.5px;
+      min-width: 3.5rem;
+    }
+    
+    .currency-name {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.2;
+      font-weight: 400;
+      flex: 1;
+    }
+  }
+  
+  // Override Material Design dropdown styles to ensure proper spacing
+  ::ng-deep .mat-mdc-option {
+    .currency-option {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 0.75rem !important;
+    }
+  }
+}
+
+.convert-btn {
+  height: 3.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+  }
+  
+  mat-icon {
+    font-size: 1.3rem;
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+}
+
+.result-section {
+  margin-top: 2rem;
+}
+
+.result-card {
+  background: linear-gradient(
+    135deg,
+    #667eea 0%,
+    #764ba2 100%) !important;
+  color: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  text-align: center;
+  
+  .result-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    
+    mat-icon {
+      font-size: 1.5rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+  
+  .result-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    
+    .conversion-amount, .conversion-result {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      .amount {
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1;
+      }
+      
+      .currency {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin-top: 0.25rem;
+      }
+    }
+    
+    .conversion-arrow {
+      mat-icon {
+        font-size: 2rem;
+        width: 2rem;
+        height: 2rem;
+        opacity: 0.8;
+      }
+    }
+  }
+  
+  .result-rate {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+}
+
+.history-list {
+  .history-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .history-content {
+      .conversion-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        
+        .conversion-amounts {
+          display: flex;
+          align-items: center;
+          font-size: 1.1rem;
+          
+          .amount {
+            font-weight: 600;
+            color: #333;
+          }
+          
+          .currency {
+            color: #666;
+            margin: 0 0.25rem;
+          }
+          
+          mat-icon {
+            color: #999;
+            font-size: 1.2rem;
+            width: 1.2rem;
+            height: 1.2rem;
+          }
+        }
+        
+        .conversion-time {
+          display: flex;
+          align-items: center;
+          color: #888;
+          font-size: 0.9rem;
+          
+          mat-icon {
+            font-size: 1rem;
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.history-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  
+  .view-all-link {
+    display: inline-flex;
+    align-items: center;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: rgba(102, 126, 234, 0.1);
+      transform: translateX(5px);
+    }
+    
+    mat-icon {
+      margin-left: 0.5rem;
+      font-size: 1.1rem;
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1rem 0;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .card-header {
+    padding: 1.25rem;
+    
+    h2, h3 {
+      font-size: 1.5rem;
+    }
+    
+    mat-icon {
+      font-size: 1.75rem;
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+  }
+  
+  .result-card {
+    padding: 1.25rem;
+    
+    .result-content {
+      flex-direction: column;
+      gap: 0.5rem;
+      
+      .conversion-amount, .conversion-result {
+        .amount {
+          font-size: 1.75rem;
+        }
+      }
+      
+      .conversion-arrow {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  
+  .history-list .history-item .history-content .conversion-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .card-header {
+    padding: 1rem;
+    
+    h2, h3 {
+      font-size: 1.25rem;
+    }
+  }
+  
+  .convert-btn {
+    height: 3rem;
+    font-size: 1rem;
+  }
+  
+  .result-card {
+    padding: 1rem;
+    
+    .result-content .conversion-amount .amount,
+    .result-content .conversion-result .amount {
+      font-size: 1.5rem;
+    }
+  }
+}

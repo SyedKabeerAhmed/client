@@ -1,0 +1,95 @@
+<div class="history-container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10 col-xl-8">
+        <!-- History Header Card -->
+        <div class="history-header-card">
+          <div class="card-header">
+            <div class="d-flex align-items-center">
+              <img src="/asset/Logo.png" alt="Currency Converter Logo" class="history-logo me-3">
+              <h2 class="mb-0">Conversion History</h2>
+            </div>
+            <div class="header-actions">
+              <button mat-stroked-button color="primary" routerLink="/" class="back-btn">
+                <mat-icon class="me-2">arrow_back</mat-icon>
+                Back to Converter
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- History List Card -->
+        <div class="history-list-card" *ngIf="history.items().length > 0">
+          <div class="card-body">
+            <div class="history-stats">
+              <div class="stat-item">
+                <div class="stat-number">{{history.items().length}}</div>
+                <div class="stat-label">Total Conversions</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">{{getUniqueCurrencies()}}</div>
+                <div class="stat-label">Currencies Used</div>
+              </div>
+            </div>
+            
+            <div class="history-list">
+              <div class="history-item" *ngFor="let h of history.items(); trackBy: trackByHistory">
+                <div class="history-content">
+                  <div class="conversion-main">
+                    <div class="conversion-amounts">
+                      <div class="amount-from">
+                        <span class="amount">{{h.amount | number:'1.2-6'}}</span>
+                        <span class="currency">{{h.from}}</span>
+                      </div>
+                      <div class="conversion-arrow">
+                        <mat-icon>arrow_forward</mat-icon>
+                      </div>
+                      <div class="amount-to">
+                        <span class="amount">{{h.result | number:'1.2-6'}}</span>
+                        <span class="currency">{{h.to}}</span>
+                      </div>
+                    </div>
+                    <div class="conversion-rate">
+                      <small class="text-muted">
+                        1 {{h.from}} = {{(h.result / h.amount) | number:'1.4-6'}} {{h.to}}
+                      </small>
+                    </div>
+                  </div>
+                  
+                  <div class="conversion-details">
+                    <div class="conversion-time">
+                      <mat-icon class="me-2">schedule</mat-icon>
+                      <span>{{h.createdAt | date:'MMM dd, yyyy'}}</span>
+                    </div>
+                    <div class="conversion-time">
+                      <mat-icon class="me-2">access_time</mat-icon>
+                      <span>{{h.createdAt | date:'HH:mm:ss'}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Empty State -->
+        <div class="empty-state-card" *ngIf="history.items().length === 0">
+          <div class="card-body text-center">
+            <div class="empty-icon">
+              <mat-icon>history</mat-icon>
+            </div>
+            <h3 class="empty-title">No Conversion History</h3>
+            <p class="empty-description">
+              You haven't made any currency conversions yet. Start converting currencies to see your history here.
+            </p>
+            <button mat-flat-button color="primary" routerLink="/" class="start-converting-btn">
+              <img src="/asset/Logo.png" alt="Currency Converter Logo" class="btn-logo me-2">
+              Start Converting
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  

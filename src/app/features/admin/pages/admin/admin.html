@@ -1,0 +1,140 @@
+<div class="admin-container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10 col-xl-8">
+        <!-- Admin Header Card -->
+        <div class="admin-header-card">
+          <div class="card-header">
+            <div class="d-flex align-items-center">
+              <mat-icon class="me-3">admin_panel_settings</mat-icon>
+              <h2 class="mb-0">Admin Dashboard</h2>
+            </div>
+            <div class="header-actions">
+              <button mat-stroked-button color="primary" routerLink="/" class="back-btn">
+                <mat-icon class="me-2">arrow_back</mat-icon>
+                Back to Converter
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Users List Card -->
+        <div class="users-card">
+          <div class="card-header">
+            <div class="d-flex align-items-center">
+              <mat-icon class="me-3">people</mat-icon>
+              <h3 class="mb-0">Registered Users</h3>
+            </div>
+            <div class="user-count">
+              <span class="count-badge">{{users.length}}</span>
+              <span class="count-label">users</span>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <div class="users-list">
+              <div class="user-item" *ngFor="let u of users; trackBy: trackByUser">
+                <div class="user-info">
+                  <div class="user-avatar">
+                    <mat-icon>person</mat-icon>
+                  </div>
+                  <div class="user-details">
+                    <div class="user-email">{{u.email}}</div>
+                    <div class="user-role">
+                      <span class="role-badge" [class.role-admin]="u.role === 'ADMIN'" [class.role-user]="u.role === 'USER'">
+                        {{u.role}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="user-actions">
+                  <button mat-stroked-button color="primary" (click)="loadHistory(u._id)" class="view-history-btn">
+                    <mat-icon class="me-2">history</mat-icon>
+                    View History
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- User History Card -->
+        <div class="user-history-card" *ngIf="history.length > 0">
+          <div class="card-header">
+            <div class="d-flex align-items-center">
+              <mat-icon class="me-3">history</mat-icon>
+              <h3 class="mb-0">User Conversion History</h3>
+            </div>
+            <div class="history-actions">
+              <button mat-stroked-button color="warn" (click)="clearHistory()" class="clear-history-btn">
+                <mat-icon class="me-2">clear_all</mat-icon>
+                Clear History
+              </button>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <div class="history-stats">
+              <div class="stat-item">
+                <div class="stat-number">{{history.length}}</div>
+                <div class="stat-label">Total Conversions</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">{{getUniqueCurrencies()}}</div>
+                <div class="stat-label">Currencies Used</div>
+              </div>
+            </div>
+            
+            <div class="history-list">
+              <div class="history-item" *ngFor="let h of history; trackBy: trackByHistory">
+                <div class="history-content">
+                  <div class="conversion-main">
+                    <div class="conversion-amounts">
+                      <div class="amount-from">
+                        <span class="amount">{{h.amount | number:'1.2-6'}}</span>
+                        <span class="currency">{{h.from}}</span>
+                      </div>
+                      <div class="conversion-arrow">
+                        <mat-icon>arrow_forward</mat-icon>
+                      </div>
+                      <div class="amount-to">
+                        <span class="amount">{{h.result | number:'1.2-6'}}</span>
+                        <span class="currency">{{h.to}}</span>
+                      </div>
+                    </div>
+                    <div class="conversion-rate">
+                      <small class="text-muted">
+                        1 {{h.from}} = {{(h.result / h.amount) | number:'1.4-6'}} {{h.to}}
+                      </small>
+                    </div>
+                  </div>
+                  
+                  <div class="conversion-details">
+                    <div class="conversion-time">
+                      <mat-icon class="me-2">schedule</mat-icon>
+                      <span>{{h.createdAt | date:'MMM dd, yyyy HH:mm'}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Empty State -->
+        <div class="empty-state-card" *ngIf="users.length === 0">
+          <div class="card-body text-center">
+            <div class="empty-icon">
+              <mat-icon>people</mat-icon>
+            </div>
+            <h3 class="empty-title">No Users Found</h3>
+            <p class="empty-description">
+              There are no registered users in the system yet.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  

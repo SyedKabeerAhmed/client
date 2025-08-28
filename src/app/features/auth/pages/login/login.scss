@@ -1,0 +1,207 @@
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.login-card {
+  background: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  width: 100%;
+  max-width: 450px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.card-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
+  
+  .logo-icon {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .custom-logo {
+      width: 4rem;
+      height: 4rem;
+      object-fit: contain;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.5rem;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: scale(1.05);
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+  
+  .welcome-text {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: white;
+  }
+  
+  .subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+    font-weight: 400;
+  }
+}
+
+.card-body {
+  padding: 2.5rem 2rem;
+}
+
+.login-form {
+  .form-group {
+    margin-bottom: 1.5rem;
+    
+    .mat-form-field {
+      width: 100%;
+      
+      .mat-form-field-wrapper {
+        padding-bottom: 0;
+      }
+    }
+  }
+  
+  .login-btn {
+    height: 3.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+    
+    mat-icon {
+      font-size: 1.3rem;
+      width: 1.3rem;
+      height: 1.3rem;
+    }
+  }
+}
+
+.divider {
+  position: relative;
+  text-align: center;
+  margin: 2rem 0;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e0e0e0;
+  }
+  
+  span {
+    background: white;
+    padding: 0 1rem;
+    color: #666;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.register-link {
+  text-align: center;
+  
+  p {
+    color: #666;
+    font-size: 1rem;
+    
+    .link-primary {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      
+      &:hover {
+        color: #5a6fd8;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 576px) {
+  .login-container {
+    padding: 0.5rem;
+  }
+  
+  .login-card {
+    border-radius: 1rem;
+  }
+  
+  .card-header {
+    padding: 2rem 1.5rem 1.5rem;
+    
+    .logo-icon .custom-logo {
+      width: 3rem;
+      height: 3rem;
+      padding: 0.5rem;
+    }
+    
+    .welcome-text {
+      font-size: 1.75rem;
+    }
+    
+    .subtitle {
+      font-size: 1rem;
+    }
+  }
+  
+  .card-body {
+    padding: 2rem 1.5rem;
+  }
+  
+  .login-btn {
+    height: 3rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-header {
+    padding: 1.5rem 1rem 1rem;
+    
+    .logo-icon .custom-logo {
+      width: 2.5rem;
+      height: 2.5rem;
+      padding: 0.25rem;
+    }
+    
+    .welcome-text {
+      font-size: 1.5rem;
+    }
+  }
+  
+  .card-body {
+    padding: 1.5rem 1rem;
+  }
+}
