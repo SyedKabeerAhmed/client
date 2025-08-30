@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { AuthService } from './auth';
 import { lastValueFrom } from 'rxjs';
@@ -13,10 +13,27 @@ export class HistoryService {
 
   private key(){ return `cc_history_${this.auth.user()?.['_id'] ?? 'anon'}`; }
 
+  // Custom headers for ngrok
+  private getHeaders(): HttpHeaders {
+    const headers: Record<string, string> = {};
+    
+    // Always add ngrok header if using ngrok
+    if (environment.api.includes('ngrok-free.app')) {
+      headers['ngrok-skip-browser-warning'] = 'true';
+    }
+    
+    return new HttpHeaders(headers);
+  }
+
   async load(){
     const local = JSON.parse(localStorage.getItem(this.key()) ?? '[]');
     this.items.set(local);
-    const server = await lastValueFrom(this.http.get<Conv[]>(`${environment.api}/user/history`));
+    const server = await lastValueFrom(
+      this.http.get<Conv[]>(
+        `${environment.api}/user/history`,
+        { headers: this.getHeaders() }
+      )
+    );
     this.items.set(server);
     localStorage.setItem(this.key(), JSON.stringify(server));
   }
