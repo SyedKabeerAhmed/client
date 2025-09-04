@@ -1,6 +1,6 @@
 export const environment = {
   // API URL - Backend must have CORS configured for this domain
-  api: 'https://028b758e0620.ngrok-free.app',
+  api: 'https://server-production-e7f3.up.railway.app',
   
   // CORS Configuration Required on Backend:
   // The backend must allow requests from: https://client-bqkj.vercel.app
