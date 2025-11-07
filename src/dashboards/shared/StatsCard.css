@@ -1,0 +1,140 @@
+.stats-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.stats-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.stats-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: white;
+}
+
+.stats-card__trend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.stats-card__trend.up {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.stats-card__trend.down {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.stats-card__content {
+  text-align: left;
+}
+
+.stats-card__value {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+  color: #1f2937;
+  line-height: 1;
+}
+
+.stats-card__title {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 4px 0;
+  font-weight: 500;
+}
+
+.stats-card__subtitle {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* Color variants */
+.stats-card--blue .stats-card__icon {
+  background-color: #4A90E2;
+}
+
+.stats-card--green .stats-card__icon {
+  background-color: #10b981;
+}
+
+.stats-card--yellow .stats-card__icon {
+  background-color: #f59e0b;
+}
+
+.stats-card--red .stats-card__icon {
+  background-color: #ef4444;
+}
+
+.stats-card--purple .stats-card__icon {
+  background-color: #8b5cf6;
+}
+
+.stats-card--indigo .stats-card__icon {
+  background-color: #6366f1;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .stats-card {
+    padding: 20px;
+  }
+  
+  .stats-card__value {
+    font-size: 28px;
+  }
+  
+  .stats-card__icon {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-card {
+    padding: 16px;
+  }
+  
+  .stats-card__value {
+    font-size: 24px;
+  }
+  
+  .stats-card__icon {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+  
+  .stats-card__title {
+    font-size: 13px;
+  }
+}

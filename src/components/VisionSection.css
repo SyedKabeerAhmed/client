@@ -1,0 +1,96 @@
+/* Vision Section Styles */
+.vision-section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+  background-color: #dbeafe;
+}
+
+.vision-content {
+  max-width: 100%;
+  text-align: left;
+}
+
+.vision-badge {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #1e293b;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+
+.vision-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #0c4a6e;
+  line-height: 1.2;
+  margin-bottom: 28px;
+  max-width: 900px;
+}
+
+.vision-description {
+  font-size: 1.15rem;
+  color: #334155;
+  line-height: 1.8;
+  margin-bottom: 0;
+  max-width: 100%;
+  font-weight: 400;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .vision-section {
+    padding: 60px 0;
+  }
+  
+  .vision-title {
+    font-size: 2.5rem;
+  }
+  
+  .vision-description {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .vision-section {
+    padding: 50px 0;
+  }
+  
+  .vision-content {
+    text-align: center;
+  }
+  
+  .vision-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .vision-description {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  
+  .vision-badge {
+    font-size: 0.9rem;
+    padding: 6px 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .vision-section {
+    padding: 40px 0;
+  }
+  
+  .vision-title {
+    font-size: 1.75rem;
+  }
+  
+  .vision-description {
+    font-size: 0.95rem;
+  }
+}
+

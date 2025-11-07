@@ -1,0 +1,92 @@
+.banner-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-background {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 500px;
+  position: relative;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(30, 58, 138, 0.3) 100%);
+  display: flex;
+  align-items: center;
+}
+
+.banner-content {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  max-width: 600px;
+}
+
+.banner-badge {
+  display: inline-block;
+  background-color: #e5e7eb;
+  color: #6b7280;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.banner-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.banner-description {
+  font-size: 1.1rem;
+  color: #374151;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.min-vh-50 {
+  min-height: 50vh;
+}
+
+@media (max-width: 768px) {
+  .banner-background {
+    min-height: 400px;
+  }
+  
+  .banner-content {
+    padding: 30px 20px;
+    margin: 20px;
+  }
+  
+  .banner-title {
+    font-size: 2.2rem;
+  }
+  
+  .banner-description {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .banner-title {
+    font-size: 1.8rem;
+  }
+  
+  .banner-content {
+    padding: 20px 15px;
+    margin: 15px;
+  }
+}

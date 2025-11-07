@@ -1,0 +1,87 @@
+.file-upload-container {
+  width: 100%;
+}
+
+.file-upload-area {
+  border: 2px dashed #cbd5e0;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #f7fafc;
+}
+
+.file-upload-area:hover {
+  border-color: #4299e1;
+  background: #ebf8ff;
+}
+
+.file-upload-area.dragging {
+  border-color: #4299e1;
+  background: #ebf8ff;
+  transform: scale(1.02);
+}
+
+.file-upload-icon {
+  font-size: 3rem;
+  color: #4299e1;
+  margin-bottom: 1rem;
+}
+
+.file-upload-text {
+  color: #4a5568;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.file-upload-label {
+  color: #718096;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.file-preview {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+}
+
+.file-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.file-info i {
+  color: #4299e1;
+}
+
+.file-info span {
+  font-size: 0.875rem;
+  color: #2d3748;
+}
+
+.file-size {
+  color: #718096;
+}
+
+.file-thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+

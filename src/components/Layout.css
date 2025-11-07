@@ -1,0 +1,16 @@
+/* Layout Component Styles */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: 0;
+}
+
+/* Ensure proper spacing for pages */
+.main-content > div {
+  width: 100%;
+}

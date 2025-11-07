@@ -1,0 +1,21 @@
+.admin-inventory {
+  padding: 2rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.status-badge.low-stock {
+  background: #feb2b2;
+  color: #742a2a;
+}
+
+.status-badge.in-stock {
+  background: #c6f6d5;
+  color: #22543d;
+}
+

@@ -1,0 +1,66 @@
+/* App specific styles */
+.App {
+  min-height: 100vh;
+}
+
+/* Home page specific styles */
+.home-page {
+  overflow-x: hidden;
+}
+
+/* Section spacing */
+.section-spacing {
+  padding: 80px 0;
+}
+
+@media (max-width: 768px) {
+  .section-spacing {
+    padding: 60px 0;
+  }
+}
+
+/* Custom Bootstrap overrides */
+.navbar-toggler {
+  border: none;
+  padding: 4px 8px;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 8px 0;
+}
+
+.dropdown-item {
+  padding: 8px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f3f4f6;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Error states */
+.error {
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
+
+/* Success states */
+.success {
+  color: #059669;
+  font-size: 0.875rem;
+  margin-top: 4px;
+}

@@ -1,0 +1,194 @@
+.data-table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.data-table th {
+  background-color: #f8fafc;
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.data-table td {
+  padding: 16px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #374151;
+  vertical-align: middle;
+}
+
+.data-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.clickable-row {
+  cursor: pointer;
+}
+
+.clickable-row:hover {
+  background-color: #f0f9ff !important;
+}
+
+.actions-column {
+  text-align: center;
+  width: 120px;
+}
+
+.data-table-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.data-table-loading .loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f3f4f6;
+  border-top: 3px solid #4A90E2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+.data-table-loading p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Action buttons */
+.action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0 2px;
+  transition: all 0.3s ease;
+}
+
+.action-btn.primary {
+  background-color: #4A90E2;
+  color: white;
+}
+
+.action-btn.primary:hover {
+  background-color: #357abd;
+}
+
+.action-btn.danger {
+  background-color: #ef4444;
+  color: white;
+}
+
+.action-btn.danger:hover {
+  background-color: #dc2626;
+}
+
+.action-btn.secondary {
+  background-color: #6b7280;
+  color: white;
+}
+
+.action-btn.secondary:hover {
+  background-color: #4b5563;
+}
+
+/* Status badges */
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-badge.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.confirmed {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.status-badge.in_queue {
+  background-color: #e0e7ff;
+  color: #3730a3;
+}
+
+.status-badge.in_process {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.ready_to_ship {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.shipped {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.status-badge.delivered {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.cancelled {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .data-table-container {
+    overflow-x: auto;
+  }
+  
+  .data-table {
+    min-width: 600px;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .data-table th,
+  .data-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+  
+  .action-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}

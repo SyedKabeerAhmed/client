@@ -1,0 +1,42 @@
+.top-bar {
+  background-color: #1e3a8a;
+  color: white;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+.promo-text {
+  font-weight: 500;
+}
+
+.top-bar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.shopping-bag {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-register {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.login-register:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .top-bar {
+    text-align: center;
+    padding: 6px 0;
+  }
+  
+  .top-bar-actions {
+    justify-content: center;
+    margin-top: 4px;
+  }
+}
