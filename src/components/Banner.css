@@ -29,6 +29,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   max-width: 600px;
+  text-align: left;
 }
 
 .banner-badge {
@@ -40,6 +41,7 @@
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 20px;
+  text-align: left;
 }
 
 .banner-title {
@@ -48,6 +50,8 @@
   color: #1e3a8a;
   line-height: 1.2;
   margin-bottom: 20px;
+  text-align: left;
+  width: 100%;
 }
 
 .banner-description {
@@ -55,6 +59,8 @@
   color: #374151;
   line-height: 1.6;
   margin-bottom: 0;
+  text-align: left;
+  width: 100%;
 }
 
 .min-vh-50 {

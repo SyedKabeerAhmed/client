@@ -10,9 +10,9 @@ const PremiumSystemsSection = ({
   return (
     <div className="premium-systems-section">
       <Container>
-        <div className="section-header text-center mb-5">
-          <h2 className="section-title">{title}</h2>
-          <p className="section-subtitle">{subtitle}</p>
+        <div className="premium-section-header text-center mb-5">
+          <h2 className="premium-section-title">{title}</h2>
+          <p className="premium-section-subtitle">{subtitle}</p>
         </div>
         
         <Row className="g-4">
@@ -32,7 +32,7 @@ const PremiumSystemsSection = ({
                   <p className="premium-category">{product.category}</p>
                   </div>
                   <button className="premium-button" >
-                    <span className="button-arrow" alt={product.buttonText || "Explore"}>↗</span>
+                    <span className="premium-button-arrow" alt={product.buttonText || "Explore"}>↗</span>
                   </button>
                 </div>
               </div>

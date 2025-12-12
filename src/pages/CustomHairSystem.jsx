@@ -3,7 +3,6 @@ import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
 import Banner from '../components/Banner'
 import Newsletter from '../components/Newsletter'
 import { useNavigate } from 'react-router-dom'
-import backgroundImage from '../assets/images/scandinavian-interior-mockup-wall-decal-background 2.png'
 import './CustomHairSystem.css'
 
 const CustomHairSystem = () => {
@@ -56,22 +55,22 @@ const CustomHairSystem = () => {
     {
       title: 'Easy One-Click Ordering',
       description: 'Production starts immediately after payment—no confirmations, no emails, no salon visits.',
-      image: '/src/assets/images/Frame 97.png'
+      image: '/src/assets/images/Frame_97.png'
     },
     {
       title: 'Designed for the Perfect Fit',
       description: 'Diverse options to suit all ethnicities, hair textures, and lifestyles.',
-      image: '/src/assets/images/Frame 2147226869.png'
+      image: '/src/assets/images/Frame_2147226869.png'
     },
     {
       title: 'Fast and Reliable Rush Service',
       description: 'Get your order faster with our expedited processing and delivery options.',
-      image: '/src/assets/images/Frame 97 (1).png'
+      image: '/src/assets/images/Frame_97_(1).png'
     },
     {
       title: 'Exquisite Hand-Knotted Artistry',
       description: 'Each piece is expertly hand-knotted by artisans with 10+ years of experience.',
-      image: '/src/assets/images/Frame 97 (1).png'
+      image: '/src/assets/images/Frame_97_(1).png'
     }
   ]
    // route to customize hair system
@@ -87,7 +86,7 @@ const CustomHairSystem = () => {
         badge="Custom Hair System"
         title="Make Your Custom Hair System"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis."
-        backgroundImage={backgroundImage}
+        backgroundImage="/src/assets/images/scandinavian-interior-mockup-wall-decal-background_2.png"
       />
 
       {/* Features Section */}
@@ -136,7 +135,7 @@ const CustomHairSystem = () => {
               </Col>
               <Col lg={6}>
                 <div className="design-image">
-                  <img src="/src/assets/images/Frame 97 (2).png" alt="Hair System Design" />
+                  <img src="/src/assets/images/Frame_97_(2).png" alt="Hair System Design" />
                 </div>
               </Col>
             </Row>
@@ -157,37 +156,37 @@ const CustomHairSystem = () => {
           <Row className="g-4">
             <Col md={6} lg={4}>
               <div className="before-after-card">
-                <img src="/src/assets/images/Frame 2147226906.png" alt="Hair System Result" />
+                <img src="/src/assets/images/Frame_2147226906.png" alt="Hair System Result" />
               </div>
             </Col>
             
             <Col md={6} lg={4}>
               <div className="before-after-card">
-                <img src="/src/assets/images/Frame 2147226906.png" alt="Hair System Result" />
+                <img src="/src/assets/images/Frame_2147226906.png" alt="Hair System Result" />
               </div>
             </Col>
             
             <Col md={6} lg={4}>
               <div className="before-after-card">
-                <img src="/src/assets/images/Frame 2147226906.png" alt="Hair System Result" />
+                <img src="/src/assets/images/Frame_2147226906.png" alt="Hair System Result" />
               </div>
             </Col>
             
             <Col md={6} lg={4}>
               <div className="before-after-card">
-                <img src="/src/assets/images/Frame 2147226906.png" alt="Hair System Result" />
+                <img src="/src/assets/images/Frame_2147226906.png" alt="Hair System Result" />
               </div>
             </Col>
             
             <Col md={6} lg={4}>
               <div className="before-after-card">
-                <img src="/src/assets/images/Frame 2147226906.png" alt="Hair System Result" />
+                <img src="/src/assets/images/Frame_2147226906.png" alt="Hair System Result" />
               </div>
             </Col>
             
             <Col md={6} lg={4}>
               <div className="before-after-card">
-                <img src="/src/assets/images/Frame 2147226906.png" alt="Hair System Result" />
+                <img src="/src/assets/images/Frame_2147226906.png" alt="Hair System Result" />
               </div>
             </Col>
           </Row>

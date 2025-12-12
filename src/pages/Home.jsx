@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Banner from '../components/Banner'
 import FeaturesBar from '../components/FeaturesBar'
 import PremiumSystemsSection from '../components/PremiumSystemsSection'
@@ -7,92 +7,66 @@ import StylesSection from '../components/StylesSection'
 import Testimonials from '../components/Testimonials'
 import FAQ from '../components/FAQ'
 import Newsletter from '../components/Newsletter'
-import backgroundImage from '../assets/images/scandinavian-interior-mockup-wall-decal-background 2.png'
+import { productService } from '../services/productService'
 
 const Home = () => {
+  const [bestSellingProducts, setBestSellingProducts] = useState([])
+  const [loadingBestSelling, setLoadingBestSelling] = useState(true)
+
   // Premium Hair Systems Data
   const premiumSystems = [
     {
       name: "Skin",
       category: "Hair Systems",
-      image: "/src/assets/images/image 108.png",
+      image: "/src/assets/images/image_108.png",
       buttonText: "Explore"
     },
     {
       name: "Lace", 
       category: "Hair Systems",
-      image: "/src/assets/images/image 108.png",
+      image: "/src/assets/images/image_108.png",
       buttonText: "Explore"
     },
     {
       name: "Hybrid",
       category: "Hair Systems", 
-      image: "/src/assets/images/image 108.png",
+      image: "/src/assets/images/image_108.png",
       buttonText: "Explore"
     },
     {
       name: "Mono",
       category: "Hair Systems",
-      image: "/src/assets/images/image 108.png", 
+      image: "/src/assets/images/image_108.png", 
       buttonText: "Explore"
     }
   ]
 
-  // Best Selling Hair Systems Data
-  const bestSellingSystems = [
-    {
-      name: "Neo Hair System",
-      category: "Premium Collection",
-      image: "/src/assets/images/Rectangle 2.png",
-      price: "£200",
-      description: "Combining the easy attachment of skin bases with the breathability of lace, hybrid systems offer a versatile solution.",
-      ratings: {
-        "Durability": 4,
-        "Comfort": 4,
-        "Appearance": 5,
-        "Maintenance": 3
-      }
-    },
-    {
-      name: "Neo Hair System",
-      category: "Premium Collection", 
-      image: "/src/assets/images/Rectangle 2.png",
-      price: "£200",
-      description: "Combining the easy attachment of skin bases with the breathability of lace, hybrid systems offer a versatile solution.",
-      ratings: {
-        "Durability": 4,
-        "Comfort": 4,
-        "Appearance": 5,
-        "Maintenance": 3
-      }
-    },
-    {
-      name: "Neo Hair System",
-      category: "Premium Collection",
-      image: "/src/assets/images/Rectangle 2.png", 
-      price: "£200",
-      description: "Combining the easy attachment of skin bases with the breathability of lace, hybrid systems offer a versatile solution.",
-      ratings: {
-        "Durability": 4,
-        "Comfort": 4,
-        "Appearance": 5,
-        "Maintenance": 3
-      }
-    },
-    {
-      name: "Neo Hair System",
-      category: "Premium Collection",
-      image: "/src/assets/images/Rectangle 2.png",
-      price: "£200", 
-      description: "Combining the easy attachment of skin bases with the breathability of lace, hybrid systems offer a versatile solution.",
-      ratings: {
-        "Durability": 4,
-        "Comfort": 4,
-        "Appearance": 5,
-        "Maintenance": 3
+  // Fetch best selling products from API
+  useEffect(() => {
+    const fetchBestSellingProducts = async () => {
+      try {
+        setLoadingBestSelling(true)
+        const response = await productService.getBestSellingProducts({ limit: 4 })
+        
+        // Handle API response format
+        let products = []
+        if (response.success && response.data && response.data.products) {
+          products = response.data.products
+        } else if (response.products) {
+          products = response.products
+        }
+        
+        setBestSellingProducts(products)
+      } catch (error) {
+        console.error('Error fetching best selling products:', error)
+        setBestSellingProducts([])
+      } finally {
+        setLoadingBestSelling(false)
       }
     }
-  ]
+
+    fetchBestSellingProducts()
+  }, [])
 
   return (
     <div className="home-page">
@@ -101,7 +75,7 @@ const Home = () => {
         badge="New Arrival"
         title="Hair That Looks Real Confidence That Lasts"
         description="Explore systems made for comfort, style, and everyday wear."
-        backgroundImage={backgroundImage}
+        backgroundImage="/src/assets/images/scandinavian-interior-mockup-wall-decal-background_2.png"
       />
       
       <FeaturesBar />
@@ -115,7 +89,8 @@ const Home = () => {
       <BestSellingSection 
         title="Our Best Selling Hair Systems"
         subtitle="Discover The Most Trusted And Popular Systems, Chosen By Clients For Their Natural Look, Comfort, And Durability."
-        products={bestSellingSystems}
+        products={bestSellingProducts}
+        loading={loadingBestSelling}
       />
       
       <StylesSection />

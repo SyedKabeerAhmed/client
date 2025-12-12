@@ -1,19 +1,26 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { Navbar, Nav, Container, NavDropdown, Row, Col } from 'react-bootstrap'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart, faBell } from '@fortawesome/free-solid-svg-icons'
 import { useAuth } from '../contexts/AuthContext'
 import { useCart } from '../contexts/CartContext'
+import api from '../config/api'
 import './Navigation.css'
 
 const Navigation = () => {
   const location = useLocation()
+  const navigate = useNavigate()
   const [expanded, setExpanded] = useState(false)
   const [userDropdownOpen, setUserDropdownOpen] = useState(false)
+  const [notificationDropdownOpen, setNotificationDropdownOpen] = useState(false)
   const { user, logout, isAuthenticated } = useAuth()
   const { itemCount, loading } = useCart()
   const dropdownRef = useRef(null)
+  const notificationDropdownRef = useRef(null)
+  const [notifications, setNotifications] = useState([])
+  const [unreadCount, setUnreadCount] = useState(0)
+  const [notificationsLoading, setNotificationsLoading] = useState(false)
 
   // Check if we're on a dashboard route
   const isDashboardRoute = 
@@ -28,6 +35,9 @@ const Navigation = () => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setUserDropdownOpen(false)
       }
+      if (notificationDropdownRef.current && !notificationDropdownRef.current.contains(event.target)) {
+        setNotificationDropdownOpen(false)
+      }
     }
 
     document.addEventListener('mousedown', handleClickOutside)
@@ -35,6 +45,87 @@ const Navigation = () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [])
+
+  // Determine user role for API endpoint
+  const getUserRole = () => {
+    if (!user) return null
+    if (user.role === 'admin') return 'admin'
+    if (user.role === 'subadmin') return 'subadmin'
+    if (user.role === 'factory') return 'factory'
+    return 'user' // Regular consumer/business user
+  }
+
+  // NOTE: Navigation is only used on public website pages (Home, About, Help, Custom Hair, etc.).
+  // We intentionally do NOT show notifications here; notifications are handled in the dashboard header only.
+
+  const toggleNotificationDropdown = async () => {
+    // No-op: notifications are not shown on website pages
+    return
+  }
+
+  const handleMarkAsRead = async (notificationId, e) => {
+    e.stopPropagation()
+    
+    const userRole = getUserRole()
+    if (!userRole) return
+    
+    try {
+      await api.put(`/${userRole}/notifications/${notificationId}/read`)
+      
+      // Update local state
+      setNotifications(prev => prev.map(n => 
+        n._id === notificationId ? { ...n, isRead: true } : n
+      ))
+      setUnreadCount(prev => Math.max(0, prev - 1))
+    } catch (error) {
+      console.error('Failed to mark notification as read:', error)
+    }
+  }
+
+  const handleNotificationClick = async (notification) => {
+    // Mark as read if unread
+    if (!notification.isRead) {
+      const userRole = getUserRole()
+      if (userRole) {
+        try {
+          await api.put(`/${userRole}/notifications/${notification._id}/read`)
+          setNotifications(prev => prev.map(n => 
+            n._id === notification._id ? { ...n, isRead: true } : n
+          ))
+          setUnreadCount(prev => Math.max(0, prev - 1))
+        } catch (error) {
+          console.error('Failed to mark notification as read:', error)
+        }
+      }
+    }
+
+    // Close dropdown
+    setNotificationDropdownOpen(false)
+
+    // Navigate if actionUrl exists
+    if (notification.actionUrl) {
+      if (notification.actionUrl.startsWith('http')) {
+        window.open(notification.actionUrl, '_blank')
+      } else {
+        navigate(notification.actionUrl)
+      }
+    }
+  }
+
+  const formatTimeAgo = (dateString) => {
+    const date = new Date(dateString)
+    const now = new Date()
+    const diffMs = now - date
+    const diffMins = Math.floor(diffMs / 60000)
+    const diffHours = Math.floor(diffMs / 3600000)
+    const diffDays = Math.floor(diffMs / 86400000)
+
+    if (diffMins < 1) return 'Just now'
+    if (diffMins < 60) return `${diffMins}m ago`
+    if (diffHours < 24) return `${diffHours}h ago`
+    if (diffDays < 7) return `${diffDays}d ago`
+    return date.toLocaleDateString()
+  }
 
   const toggleDropdown = () => {
     setUserDropdownOpen(!userDropdownOpen)
@@ -76,6 +167,78 @@ const Navigation = () => {
                         <span className="cart-count">{itemCount}</span>
                       ) : null}
                     </Link>
+                  )}
+                  
+                  {/* Notification Bell - hidden on website pages; notifications are only in dashboard header */}
+                  {false && isAuthenticated && (
+                    <div className="notification-wrapper me-3" ref={notificationDropdownRef}>
+                      <button 
+                        className="notification-btn" 
+                        onClick={toggleNotificationDropdown}
+                        title="Notifications"
+                      >
+                        <FontAwesomeIcon icon={faBell} />
+                        {unreadCount > 0 && (
+                          <span className="notification-badge">{unreadCount > 99 ? '99+' : unreadCount}</span>
+                        )}
+                      </button>
+                      
+                      {notificationDropdownOpen && (
+                        <div className="notification-dropdown">
+                          <div className="notification-dropdown-header">
+                            <h3>Notifications</h3>
+                            {unreadCount > 0 && (
+                              <span className="unread-count">{unreadCount} unread</span>
+                            )}
+                          </div>
+                          
+                          <div className="notification-list">
+                            {notificationsLoading ? (
+                              <div className="notification-loading">Loading...</div>
+                            ) : notifications.length === 0 ? (
+                              <div className="notification-empty">No notifications</div>
+                            ) : (
+                              notifications.map((notification) => (
+                                <div
+                                  key={notification._id}
+                                  className={`notification-item ${!notification.isRead ? 'unread' : ''}`}
+                                  onClick={() => handleNotificationClick(notification)}
+                                >
+                                  <div className="notification-content">
+                                    <div className="notification-title">{notification.title}</div>
+                                    <div className="notification-message">{notification.message}</div>
+                                    <div className="notification-time">{formatTimeAgo(notification.createdAt)}</div>
+                                  </div>
+                                  {!notification.isRead && (
+                                    <button
+                                      className="notification-mark-read"
+                                      onClick={(e) => handleMarkAsRead(notification._id, e)}
+                                      title="Mark as read"
+                                    >
+                                      <i className="fas fa-circle"></i>
+                                    </button>
+                                  )}
+                                </div>
+                              ))
+                            )}
+                          </div>
+                          
+                          {notifications.length > 0 && (
+                            <div className="notification-footer">
+                              <button 
+                                className="view-all-notifications"
+                                onClick={() => {
+                                  setNotificationDropdownOpen(false)
+                                  navigate('/dashboard')
+                                }}
+                              >
+                                View All
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   )}
                   
                   {isAuthenticated ? (

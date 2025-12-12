@@ -21,7 +21,7 @@ const ProductDetail = () => {
   const [customization, setCustomization] = useState({
     hairColor: '',
     haircut: '',
-    cutToSize: false,
+    cutToSize: undefined, // undefined = not selected, false = "No", true = "Yes"
     size: '',
     additionalInfo: '',
     uploadedImages: []
@@ -67,6 +67,7 @@ const ProductDetail = () => {
   // Add to cart states
   const [addToCartLoading, setAddToCartLoading] = useState(false)
   const [addToCartSuccess, setAddToCartSuccess] = useState('')
+  const [addToCartError, setAddToCartError] = useState('')
 
   // Price calculation
   const calculateTotalPrice = () => {
@@ -136,7 +137,12 @@ const ProductDetail = () => {
   const handleSizeSelection = (size) => {
     handleCustomizationChange('size', size)
     handleCustomizationChange('cutToSize', true)  // Set cutToSize to true when size is selected
-    setShowSizeModal(false)
+  }
+
+  const handleSizeConfirm = () => {
+    if (customization.size) {
+      setShowSizeModal(false)
+    }
   }
 
   const handleHaircutSelection = (haircut) => {
@@ -175,6 +181,36 @@ const ProductDetail = () => {
     { inch: '2.50', cm: '6.35' },
     { inch: '2.75', cm: '6.99' },
     { inch: '3.00', cm: '7.62' }
+  ]
+
+  const sizeOptions = [
+    { inch: '1.50', cm: '3.81' },
+    { inch: '1.75', cm: '4.45' },
+    { inch: '2.00', cm: '5.08' },
+    { inch: '2.25', cm: '5.71' },
+    { inch: '2.50', cm: '6.35' },
+    { inch: '2.75', cm: '6.99' },
+    { inch: '3.00', cm: '7.62' },
+    { inch: '3.25', cm: '8.26' },
+    { inch: '3.50', cm: '8.89' },
+    { inch: '3.75', cm: '9.53' },
+    { inch: '4.00', cm: '10.16' },
+    { inch: '4.25', cm: '10.80' },
+    { inch: '4.50', cm: '11.43' },
+    { inch: '4.75', cm: '12.07' },
+    { inch: '5.00', cm: '12.70' },
+    { inch: '5.25', cm: '13.34' },
+    { inch: '5.50', cm: '13.97' },
+    { inch: '5.75', cm: '14.61' },
+    { inch: '6.00', cm: '15.24' },
+    { inch: '6.25', cm: '15.88' },
+    { inch: '6.50', cm: '16.51' },
+    { inch: '6.75', cm: '17.15' },
+    { inch: '7.00', cm: '17.78' },
+    { inch: '7.25', cm: '18.42' },
+    { inch: '7.50', cm: '19.05' },
+    { inch: '7.75', cm: '19.69' },
+    { inch: '8.00', cm: '20.32' }
   ]
 
   // Hair length handlers
@@ -322,33 +358,45 @@ const ProductDetail = () => {
       return
     }
 
-    // Validate single selection for haircut
-    const validateHaircutSelection = () => {
-      const haircut = customization.haircut
-      
-      if (haircut === 'I want to order my hair length' && !customization.hairLengths) {
-        alert('Please complete hair length selection')
-        return false
+    // Validate mandatory selections
+    const validationErrors = []
+    
+    // Validate hair color
+    if (!customization.hairColor || customization.hairColor.trim() === '') {
+      validationErrors.push('Hair Color')
+    }
+    
+    // Validate haircut - 'None' is a valid option
+    if (!customization.haircut || customization.haircut.trim() === '') {
+      validationErrors.push('Haircut')
+    } else if (customization.haircut !== 'None') {
+      // Additional validation for specific haircut options (only if not 'None')
+      if (customization.haircut === 'I want to order my hair length' && !customization.hairLengths) {
+        validationErrors.push('Haircut (complete hair length selection)')
+      } else if (customization.haircut === 'Upload hairstyle images you want' && !customization.uploadedImages?.length) {
+        validationErrors.push('Haircut (upload an image)')
+      } else if (customization.haircut === 'Choose your hairstyles' && !customization.selectedHairstyle) {
+        validationErrors.push('Haircut (select a hairstyle)')
       }
-      if (haircut === 'Upload hairstyle images you want' && !customization.uploadedImages?.length) {
-        alert('Please upload an image')
-        return false
-      }
-      if (haircut === 'Choose your hairstyles' && !customization.selectedHairstyle) {
-        alert('Please select a hairstyle')
-        return false
-      }
-      
-      return true
+    }
+    
+    // Validate cut to size - must select either "No" (false) or "Yes" (true with size)
+    // cutToSize can be false (No) or true (Yes with size), but must be explicitly set
+    if (customization.cutToSize === undefined || customization.cutToSize === null) {
+      validationErrors.push('Cut to Size')
+    } else if (customization.cutToSize === true && (!customization.size || customization.size.trim() === '')) {
+      validationErrors.push('Cut to Size (select a size)')
     }
 
-    if (!validateHaircutSelection()) {
+    if (validationErrors.length > 0) {
+      alert(`Please select the mandatory option: ${validationErrors.join(', ')}`)
       return
     }
 
     try {
       setAddToCartLoading(true)
       setAddToCartSuccess('')
+      setAddToCartError('')
       
       const totalPrice = calculateTotalPrice()
       await addToCart(id, customization, 1, totalPrice)
@@ -360,7 +408,11 @@ const ProductDetail = () => {
       
     } catch (error) {
       console.error('Failed to add to cart:', error)
-      // Error is handled by the cart context
+      const errorMessage = error.message || 'Failed to add product to cart'
+      setAddToCartError(errorMessage)
+      setTimeout(() => {
+        setAddToCartError('')
+      }, 5000)
     } finally {
       setAddToCartLoading(false)
     }
@@ -508,11 +560,11 @@ const ProductDetail = () => {
               <div className="product-images">
                 <div className="main-image">
                   <img 
-                    src={product.productImages?.[0] || '/src/assets/images/image 108.png'} 
+                    src={product.productImages?.[0] || '/src/assets/images/image_108.png'} 
                     alt={product.productName}
                     className="product-main-image"
                     onError={(e) => {
-                      e.target.src = '/src/assets/images/image 108.png'
+                      e.target.src = '/src/assets/images/image_108.png'
                     }}
                   />
                   {product.bestSelling && (
@@ -530,19 +582,19 @@ const ProductDetail = () => {
                 {/* Thumbnail Gallery */}
                 <div className="thumbnail-gallery">
                   <div className="thumbnail-item active">
-                    <img src={product.productImages?.[0] || '/src/assets/images/image 108.png'} alt="Main view" />
+                    <img src={product.productImages?.[0] || '/src/assets/images/image_108.png'} alt="Main view" />
                   </div>
                   <div className="thumbnail-item">
-                    <img src="/src/assets/images/image 108.png" alt="Base view" />
+                    <img src="/src/assets/images/image_108.png" alt="Base view" />
                   </div>
                   <div className="thumbnail-item">
-                    <img src="/src/assets/images/image 108.png" alt="Style 1" />
+                    <img src="/src/assets/images/image_108.png" alt="Style 1" />
                   </div>
                   <div className="thumbnail-item">
-                    <img src="/src/assets/images/image 108.png" alt="Style 2" />
+                    <img src="/src/assets/images/image_108.png" alt="Style 2" />
                   </div>
                   <div className="thumbnail-item">
-                    <img src="/src/assets/images/image 108.png" alt="Style 3" />
+                    <img src="/src/assets/images/image_108.png" alt="Style 3" />
                   </div>
                 </div>
               </div>
@@ -609,11 +661,11 @@ const ProductDetail = () => {
                   <h4 className="customization-title mb-4">Customize Your Hair System</h4>
                   
                   <Accordion activeKey={activeAccordion} onSelect={(e) => setActiveAccordion(e)}>
-                    {/* Hair Color */}
+                    {/* Hair_Color */}
                     <Accordion.Item eventKey="hairColor">
                       <Accordion.Header>
                         <div className="accordion-header-content">
-                          <span>Hair Color</span>
+                          <span>Hair_Color</span>
                           {customization.hairColor && (
                             <span className="selected-option">{customization.hairColor}</span>
                           )}
@@ -642,7 +694,7 @@ const ProductDetail = () => {
                                     >
                                       <div className="color-circle-container">
                                         <img 
-                                          src={`/src/assets/images/Hair Color/all_colors/${color.hair_color.replace('#', '')}.png`}
+                                          src={`/src/assets/images/Hair_Color/all_colors/${color.hair_color.replace('#', '')}.png`}
                                           alt={color.hair_color}
                                           className="color-circle"
                                           onError={(e) => {
@@ -771,17 +823,37 @@ const ProductDetail = () => {
                       <Accordion.Header>
                         <div className="accordion-header-content">
                           <span>Cut to size</span>
-                          {customization.cutToSize && (
+                          {customization.cutToSize === true && customization.size && (
+                            <span className="selected-option">
+                              {customization.size} inch = {sizeOptions.find(opt => opt.inch === customization.size)?.cm} cm
+                            </span>
+                          )}
+                          {customization.cutToSize === true && !customization.size && (
                             <span className="selected-option">Yes, cut to my size</span>
+                          )}
+                          {customization.cutToSize === false && (
+                            <span className="selected-option">No I will have it cut by my stylist</span>
                           )}
                         </div>
                       </Accordion.Header>
                       <Accordion.Body>
                         <div className="cut-to-size-options">
-                          <div className="cut-option" onClick={() => handleCustomizationChange('cutToSize', false)}>
+                          <div 
+                            className={`cut-option ${customization.cutToSize === false ? 'selected' : ''}`} 
+                            onClick={() => {
+                              handleCustomizationChange('cutToSize', false)
+                              handleCustomizationChange('size', '') // Clear size when selecting "No"
+                            }}
+                          >
                             <span>No I will have it cut by my stylist</span>
+                            {customization.cutToSize === false && (
+                              <FontAwesomeIcon icon={faCheck} className="ms-2" />
+                            )}
                           </div>
-                           <div className="cut-option" onClick={() => setShowSizeModal(true)}>
+                           <div 
+                             className={`cut-option ${customization.cutToSize === true ? 'selected' : ''}`} 
+                             onClick={() => setShowSizeModal(true)}
+                           >
                              <span>Yes, cut to my size</span>
                              <span className="price">$13.31</span>
                              <FontAwesomeIcon icon={faChevronRight} />
@@ -819,6 +891,14 @@ const ProductDetail = () => {
                     <Alert variant="success" className="mt-3">
                       <FontAwesomeIcon icon={faCheckCircle} className="me-2" />
                       {addToCartSuccess}
+                    </Alert>
+                  )}
+
+                  {/* Add to Cart Error Message */}
+                  {addToCartError && (
+                    <Alert variant="danger" className="mt-3">
+                      <FontAwesomeIcon icon={faExclamationCircle} className="me-2" />
+                      {addToCartError}
                     </Alert>
                   )}
 
@@ -917,7 +997,7 @@ const ProductDetail = () => {
                             <div className="spec-value">{product.productDetails?.hairDensity || 'N/A'}</div>
                           </div>
                           <div className="spec-row">
-                            <div className="spec-label">Hair Color:</div>
+                            <div className="spec-label">Hair_Color:</div>
                             <div className="spec-value">{product.productDetails?.hairColour || 'N/A'}</div>
                           </div>
                           <div className="spec-row">
@@ -975,7 +1055,7 @@ const ProductDetail = () => {
                                       <div className="review-header">
                                         <div className="reviewer-info">
                                           <div className="reviewer-avatar">
-                                            <img src="/src/assets/images/image 108.png" alt="Reviewer" />
+                                            <img src="/src/assets/images/image_108.png" alt="Reviewer" />
                                           </div>
                                           <div className="reviewer-details">
                                             <div className="reviewer-name">{review.reviewerName}</div>
@@ -1185,29 +1265,28 @@ const ProductDetail = () => {
         </Modal.Header>
         <Modal.Body>
           <div className="size-selection">
-            <div className="size-options">
-              {[
-                { inch: '1.50', cm: '3.81' },
-                { inch: '1.75', cm: '4.45' },
-                { inch: '2.00', cm: '5.08' },
-                { inch: '2.25', cm: '5.71' },
-                { inch: '2.50', cm: '6.35' }
-              ].map((size) => (
+            <div className="current-length">
+              {customization.size ? `${customization.size} inch = ${sizeOptions.find(opt => opt.inch === customization.size)?.cm} cm` : 'Select a size'}
+            </div>
+            <div className="length-options">
+              {sizeOptions.map((size) => (
                 <div 
                   key={size.inch}
-                  className={`size-option ${customization.size === size.inch ? 'selected' : ''}`}
+                  className={`length-option ${customization.size === size.inch ? 'selected' : ''}`}
                   onClick={() => handleSizeSelection(size.inch)}
                 >
-                  <span className="inch">{size.inch} inch</span>
-                  <span className="equals">=</span>
-                  <span className="cm">{size.cm} cm</span>
+                  <span className="inch">{size.inch}</span>
+                  <span className="cm">{size.cm}</span>
                 </div>
               ))}
             </div>
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={() => setShowSizeModal(false)}>
+          <Button variant="secondary" onClick={() => setShowSizeModal(false)}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleSizeConfirm}>
             Save Size
           </Button>
         </Modal.Footer>
@@ -1236,7 +1315,7 @@ const ProductDetail = () => {
                               src={`/src/${image}`} 
                               alt={`${haircut.cutType} - ${index + 1}`}
                               onError={(e) => {
-                                e.target.src = '/src/assets/images/image 108.png'
+                                e.target.src = '/src/assets/images/image_108.png'
                               }}
                             />
                           </div>
@@ -1326,7 +1405,7 @@ const ProductDetail = () => {
                   alt={`${hairLengthSteps[currentStep].label} section`}
                   className="head-section-image"
                   onError={(e) => {
-                    e.target.src = '/src/assets/images/image 108.png'
+                    e.target.src = '/src/assets/images/image_108.png'
                   }}
                 />
               </div>

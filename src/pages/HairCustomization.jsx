@@ -116,7 +116,7 @@ const HairCustomization = () => {
   })
   const [selectedGrayHairType, setSelectedGrayHairType] = useState('')
 
-  // Modal states for Hair Color selection
+  // Modal states for Hair_Color selection
   const [showHairColorModal, setShowHairColorModal] = useState(false)
   const [selectedHairColorType, setSelectedHairColorType] = useState('')
   const [selectedHairColorGender, setSelectedHairColorGender] = useState('women')
@@ -167,10 +167,10 @@ const HairCustomization = () => {
 
   // Base size options
   const baseSizeOptions = [
-    { id: 'topper', name: 'Topper', description: 'Partial coverage for crown area', price: 0, image: '/src/assets/images/image 108.png' },
-    { id: 'fullcap', name: 'Full Cap', description: 'Complete head coverage', price: 150, image: '/src/assets/images/image 108.png' },
-    { id: 'frontal', name: 'Frontal', description: 'Front hairline coverage', price: 0, image: '/src/assets/images/image 108.png' },
-    { id: 'template', name: 'Match My Template', description: 'Use your existing template', price: 0, image: '/src/assets/images/image 108.png' }
+    { id: 'topper', name: 'Topper', description: 'Partial coverage for crown area', price: 0, image: '/src/assets/images/image_108.png' },
+    { id: 'fullcap', name: 'Full Cap', description: 'Complete head coverage', price: 150, image: '/src/assets/images/image_108.png' },
+    { id: 'frontal', name: 'Frontal', description: 'Front hairline coverage', price: 0, image: '/src/assets/images/image_108.png' },
+    { id: 'template', name: 'Match My Template', description: 'Use your existing template', price: 0, image: '/src/assets/images/image_108.png' }
   ]
 
   // Template size options
@@ -432,7 +432,7 @@ const HairCustomization = () => {
       name: 'Remy hair', 
       description: '(selected premium hair, suitable for all styling needs)',
       price: 159.60, 
-      image: '/src/assets/images/remy-hair.png',
+      image: '/src/assets/images/customize/remy_hair.png',
       hasModal: false 
     },
     { 
@@ -440,7 +440,7 @@ const HairCustomization = () => {
       name: 'European hair', 
       description: '(fine, thin & soft, 7" and up is not available)',
       price: 159.60, 
-      image: '/src/assets/images/european-hair.png',
+      image: '/src/assets/images/customize/european_hair.png',
       hasModal: false 
     },
     { 
@@ -448,7 +448,7 @@ const HairCustomization = () => {
       name: 'Synthetic hair', 
       description: '',
       price: 0, 
-      image: '/src/assets/images/synthetic-hair.png',
+      image: '/src/assets/images/customize/synthetic_hair.png',
       hasModal: false 
     }
   ]
@@ -606,11 +606,11 @@ const HairCustomization = () => {
         name: 'Modern textured cut with layered styling',
         description: 'Maintains natural appearance with 1.25-1.75 inches of side hair.',
         images: [
-          '/src/assets/images/Haircut Images/LD0011/LD0011-1.png',
-          '/src/assets/images/Haircut Images/LD0011/LD0011-2.png',
-          '/src/assets/images/Haircut Images/LD0011/LD0011-3.png',
-          '/src/assets/images/Haircut Images/LD0011/LD0011-4.png',
-          '/src/assets/images/Haircut Images/LD0011/LD0011-5.png'
+          '/src/assets/images/Haircut_Images/LD0011/LD0011-1.png',
+          '/src/assets/images/Haircut_Images/LD0011/LD0011-2.png',
+          '/src/assets/images/Haircut_Images/LD0011/LD0011-3.png',
+          '/src/assets/images/Haircut_Images/LD0011/LD0011-4.png',
+          '/src/assets/images/Haircut_Images/LD0011/LD0011-5.png'
         ]
       },
       {
@@ -619,10 +619,10 @@ const HairCustomization = () => {
         name: 'Contemporary fade style with gradual transition',
         description: 'Requires 0.75-1.5 inches of natural hair for smooth blending.',
         images: [
-          '/src/assets/images/Haircut Images/LD0026/LD0026-1.png',
-          '/src/assets/images/Haircut Images/LD0026/LD0026-2.png',
-          '/src/assets/images/Haircut Images/LD0026/LD0026-3.png',
-          '/src/assets/images/Haircut Images/LD0026/LD0026-4.png'
+          '/src/assets/images/Haircut_Images/LD0026/LD0026-1.png',
+          '/src/assets/images/Haircut_Images/LD0026/LD0026-2.png',
+          '/src/assets/images/Haircut_Images/LD0026/LD0026-3.png',
+          '/src/assets/images/Haircut_Images/LD0026/LD0026-4.png'
         ]
       },
       {
@@ -631,10 +631,10 @@ const HairCustomization = () => {
         name: 'Stylish tapered cut with refined edges',
         description: 'Optimal with 1-1.5 inches of natural hair at the perimeter.',
         images: [
-          '/src/assets/images/Haircut Images/LD0035/LD0035-1.png',
-          '/src/assets/images/Haircut Images/LD0035/LD0035-2.png',
-          '/src/assets/images/Haircut Images/LD0035/LD0035-3.png',
-          '/src/assets/images/Haircut Images/LD0035/LD0035-4.png'
+          '/src/assets/images/Haircut_Images/LD0035/LD0035-1.png',
+          '/src/assets/images/Haircut_Images/LD0035/LD0035-2.png',
+          '/src/assets/images/Haircut_Images/LD0035/LD0035-3.png',
+          '/src/assets/images/Haircut_Images/LD0035/LD0035-4.png'
         ]
       }
     ],
@@ -645,10 +645,10 @@ const HairCustomization = () => {
         name: 'Elegant layered style with volume',
         description: 'Perfect for natural blending with 2-3 inches of hair.',
         images: [
-          '/src/assets/images/Haircut Images/LD0037/LD0037-1.png',
-          '/src/assets/images/Haircut Images/LD0037/LD0037-2.png',
-          '/src/assets/images/Haircut Images/LD0037/LD0037-3.png',
-          '/src/assets/images/Haircut Images/LD0037/LD0037-4.png'
+          '/src/assets/images/Haircut_Images/LD0037/LD0037-1.png',
+          '/src/assets/images/Haircut_Images/LD0037/LD0037-2.png',
+          '/src/assets/images/Haircut_Images/LD0037/LD0037-3.png',
+          '/src/assets/images/Haircut_Images/LD0037/LD0037-4.png'
         ]
       },
       {
@@ -657,11 +657,11 @@ const HairCustomization = () => {
         name: 'Soft waves with natural movement',
         description: 'Requires 2.5-3.5 inches for seamless integration.',
         images: [
-          '/src/assets/images/Haircut Images/LD0039/LD0039-1.png',
-          '/src/assets/images/Haircut Images/LD0039/LD0039-2.png',
-          '/src/assets/images/Haircut Images/LD0039/LD0039-3.png',
-          '/src/assets/images/Haircut Images/LD0039/LD0039-4.png',
-          '/src/assets/images/Haircut Images/LD0039/LD0039-5.png'
+          '/src/assets/images/Haircut_Images/LD0039/LD0039-1.png',
+          '/src/assets/images/Haircut_Images/LD0039/LD0039-2.png',
+          '/src/assets/images/Haircut_Images/LD0039/LD0039-3.png',
+          '/src/assets/images/Haircut_Images/LD0039/LD0039-4.png',
+          '/src/assets/images/Haircut_Images/LD0039/LD0039-5.png'
         ]
       },
       {
@@ -670,10 +670,10 @@ const HairCustomization = () => {
         name: 'Classic bob with sleek finish',
         description: 'Best with 1.5-2.5 inches of natural hair.',
         images: [
-          '/src/assets/images/Haircut Images/LD0042/LD0042-1.png',
-          '/src/assets/images/Haircut Images/LD0042/LD0042-2.png',
-          '/src/assets/images/Haircut Images/LD0042/LD0042-3.png',
-          '/src/assets/images/Haircut Images/LD0042/LD0042-4.png'
+          '/src/assets/images/Haircut_Images/LD0042/LD0042-1.png',
+          '/src/assets/images/Haircut_Images/LD0042/LD0042-2.png',
+          '/src/assets/images/Haircut_Images/LD0042/LD0042-3.png',
+          '/src/assets/images/Haircut_Images/LD0042/LD0042-4.png'
         ]
       }
     ]
@@ -683,76 +683,70 @@ const HairCustomization = () => {
   const hairColorColorOptions = {
     men: {
       dark: [
-        { id: '1', name: '1', smallImage: '/src/assets/images/Hair Color/all_colors/1.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/1.png' },
-        { id: '1A', name: '1A', smallImage: '/src/assets/images/Hair Color/all_colors/1A.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/1A.png' },
-        { id: '1B', name: '1B', smallImage: '/src/assets/images/Hair Color/all_colors/1B.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/1B.png' }
+        { id: '1', name: '1', smallImage: '/src/assets/images/Hair_Color/all_colors/1.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/1.png' },
+        { id: '1A', name: '1A', smallImage: '/src/assets/images/Hair_Color/all_colors/1A.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/1A.png' },
+        { id: '1B', name: '1B', smallImage: '/src/assets/images/Hair_Color/all_colors/1B.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/1B.png' }
       ],
       brown: [
-        { id: '2', name: '2', smallImage: '/src/assets/images/Hair Color/all_colors/2.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/2.png' },
-        { id: '4', name: '4', smallImage: '/src/assets/images/Hair Color/all_colors/4.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/4.png' },
-        { id: '6', name: '6', smallImage: '/src/assets/images/Hair Color/all_colors/6.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/6.png' },
-        { id: '8', name: '8', smallImage: '/src/assets/images/Hair Color/all_colors/8.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/8.png' },
-        { id: '9', name: '9', smallImage: '/src/assets/images/Hair Color/all_colors/9.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/9.png' },
-        { id: '10', name: '10', smallImage: '/src/assets/images/Hair Color/all_colors/10.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/10.png' }
+        { id: '2', name: '2', smallImage: '/src/assets/images/Hair_Color/all_colors/2.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/2.png' },
+        { id: '3', name: '3', smallImage: '/src/assets/images/Hair_Color/all_colors/3.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/3.png' },
+        { id: '4', name: '4', smallImage: '/src/assets/images/Hair_Color/all_colors/4.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/4.png' },
+        { id: '4R', name: '4R', smallImage: '/src/assets/images/Hair_Color/all_colors/4R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/4R.png' },
+        { id: '4ASH', name: '4ASH', smallImage: '/src/assets/images/Hair_Color/all_colors/4ASH.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/4ASH .png' },
+        { id: '5', name: '5', smallImage: '/src/assets/images/Hair_Color/all_colors/5.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/5.png' },
+        { id: '5R', name: '5R', smallImage: '/src/assets/images/Hair_Color/all_colors/5R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/5R.png' },
+        { id: '6', name: '6', smallImage: '/src/assets/images/Hair_Color/all_colors/6.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/6.png' },
+        { id: '6R', name: '6R', smallImage: '/src/assets/images/Hair_Color/all_colors/6R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/6R.png' },
+        { id: '6RD', name: '6RD', smallImage: '/src/assets/images/Hair_Color/all_colors/6RD.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/6RD.png' },
+        { id: '7', name: '7', smallImage: '/src/assets/images/Hair_Color/all_colors/7.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/7.png' },
+        { id: '7ASH', name: '7ASH', smallImage: '/src/assets/images/Hair_Color/all_colors/7ASH.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/7ASH.png' },
+        { id: '8R', name: '8R', smallImage: '/src/assets/images/Hair_Color/all_colors/8R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/8R.png' },
+        { id: '10R', name: '10R', smallImage: '/src/assets/images/Hair_Color/all_colors/10R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/10R.png' }
       ],
       blonde: [
-        { id: '12', name: '12', smallImage: '/src/assets/images/Hair Color/all_colors/12.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/12.png' },
-        { id: '16', name: '16', smallImage: '/src/assets/images/Hair Color/all_colors/16.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/16.png' },
-        { id: '18', name: '18', smallImage: '/src/assets/images/Hair Color/all_colors/18.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/18.png' },
-        { id: '22', name: '22', smallImage: '/src/assets/images/Hair Color/all_colors/22.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/22.png' },
-        { id: '24', name: '24', smallImage: '/src/assets/images/Hair Color/all_colors/24.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/24.png' },
-        { id: '27', name: '27', smallImage: '/src/assets/images/Hair Color/all_colors/27.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/27.png' },
-        { id: '30', name: '30', smallImage: '/src/assets/images/Hair Color/all_colors/30.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/30.png' },
-        { id: '33', name: '33', smallImage: '/src/assets/images/Hair Color/all_colors/33.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/33.png' },
-        { id: '60', name: '60', smallImage: '/src/assets/images/Hair Color/all_colors/60.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/60.png' },
-        { id: '613', name: '613', smallImage: '/src/assets/images/Hair Color/all_colors/613.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/613.png' }
+        { id: '12R', name: '12R', smallImage: '/src/assets/images/Hair_Color/all_colors/12R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/12R.png' },
+        { id: '17', name: '17', smallImage: '/src/assets/images/Hair_Color/all_colors/17.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/17.png' },
+        { id: '17R', name: '17R', smallImage: '/src/assets/images/Hair_Color/all_colors/17R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/17R.png' },
+        { id: '18', name: '18', smallImage: '/src/assets/images/Hair_Color/all_colors/18.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/18.png' },
+        { id: '20', name: '20', smallImage: '/src/assets/images/Hair_Color/all_colors/20.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/20.png' },
+        { id: '20R', name: '20R', smallImage: '/src/assets/images/Hair_Color/all_colors/20R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/20R.png' },
+        { id: '22R', name: '22R', smallImage: '/src/assets/images/Hair_Color/all_colors/22R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/22R.png' },
+        { id: '22', name: '22', smallImage: '/src/assets/images/Hair_Color/all_colors/22.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/22.png' },
+        { id: '30', name: '30', smallImage: '/src/assets/images/Hair_Color/all_colors/30.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/30.png' }
       ],
       gray: [
-        { id: 'R40', name: 'R40', smallImage: '/src/assets/images/Hair Color/all_colors/R40.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/R40.png' },
-        { id: 'R50', name: 'R50', smallImage: '/src/assets/images/Hair Color/all_colors/R50.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/R50.png' }
+        { id: '60', name: '60', smallImage: '/src/assets/images/Hair_Color/all_colors/60.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/60.png' },
       ]
     },
     women: {
       dark: [
-        { id: '1', name: '1', smallImage: '/src/assets/images/Hair Color/all_colors/1.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/1.png' },
-        { id: '10', name: '10', smallImage: '/src/assets/images/Hair Color/all_colors/10.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/10.png' }
+        { id: '1', name: '1', smallImage: '/src/assets/images/Hair_Color/all_colors/1.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/1.png' },
+        { id: '1B', name: '1B', smallImage: '/src/assets/images/Hair_Color/all_colors/1B.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/1B.png' }
       ],
       brown: [
-        { id: '2', name: '2', smallImage: '/src/assets/images/Hair Color/all_colors/2.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/2.png' },
-        { id: '4', name: '4', smallImage: '/src/assets/images/Hair Color/all_colors/4.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/4.png' },
-        { id: '6', name: '6', smallImage: '/src/assets/images/Hair Color/all_colors/6.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/6.png' },
-        { id: '8', name: '8', smallImage: '/src/assets/images/Hair Color/all_colors/8.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/8.png' },
-        { id: '9', name: '9', smallImage: '/src/assets/images/Hair Color/all_colors/9.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/9.png' },
-        { id: '10', name: '10', smallImage: '/src/assets/images/Hair Color/all_colors/10.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/10.png' },
-        { id: '5A', name: '5A', smallImage: '/src/assets/images/Hair Color/all_colors/5A.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/5A.png' },
-        { id: '5B', name: '5B', smallImage: '/src/assets/images/Hair Color/all_colors/5B.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/5B.png' },
-        { id: '5M', name: '5M', smallImage: '/src/assets/images/Hair Color/all_colors/5M.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/5M.png' },
-        { id: '6D', name: '6D', smallImage: '/src/assets/images/Hair Color/all_colors/6D.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/6D.png' },
-        { id: '7', name: '7', smallImage: '/src/assets/images/Hair Color/all_colors/7.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/7.png' },
-        { id: '7A', name: '7A', smallImage: '/src/assets/images/Hair Color/all_colors/7A.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/7A.png' },
-        { id: '8B', name: '8B', smallImage: '/src/assets/images/Hair Color/all_colors/8B.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/8B.png' },
-        { id: '10R', name: '10R', smallImage: '/src/assets/images/Hair Color/all_colors/10R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/10R.png' }
-      ],
+        { id: '2', name: '2', smallImage: '/src/assets/images/Hair_Color/all_colors/2.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/2.png' },
+        { id: '4', name: '4', smallImage: '/src/assets/images/Hair_Color/all_colors/4.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/4.png' },
+        { id: '6', name: '6', smallImage: '/src/assets/images/Hair_Color/all_colors/6.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/6.png' },
+        { id: '8', name: '8', smallImage: '/src/assets/images/Hair_Color/all_colors/8.jpg', bigImage: '/src/assets/images/Hair_Color/all_colors_big/8.jpg' },
+        { id: '9', name: '9', smallImage: '/src/assets/images/Hair_Color/all_colors/9.jpg', bigImage: '/src/assets/images/Hair_Color/all_colors_big/9.jpg' },
+        { id: '10', name: '10', smallImage: '/src/assets/images/Hair_Color/all_colors/10.jpg', bigImage: '/src/assets/images/Hair_Color/all_colors_big/10.jpg' },
+        ],
       blonde: [
-        { id: 'B10R', name: 'B10R', smallImage: '/src/assets/images/Hair Color/all_colors/B10R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/B10R.png' },
-        { id: 'B17', name: 'B17', smallImage: '/src/assets/images/Hair Color/all_colors/B17.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/B17.png' },
-        { id: 'B19A', name: 'B19A', smallImage: '/src/assets/images/Hair Color/all_colors/B19A.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/B19A.png' },
-        { id: 'B19', name: 'B19', smallImage: '/src/assets/images/Hair Color/all_colors/B19.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/B19.png' },
-        { id: 'B20', name: 'B20', smallImage: '/src/assets/images/Hair Color/all_colors/B20.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/B20.png' },
-        { id: 'B20A', name: 'B20A', smallImage: '/src/assets/images/Hair Color/all_colors/B20A.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/B20A.png' },
-        { id: 'B27', name: 'B27', smallImage: '/src/assets/images/Hair Color/all_colors/B27.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/B27.png' },
-        { id: 'B28', name: 'B28', smallImage: '/src/assets/images/Hair Color/all_colors/B28.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/B28.png' },
-        { id: 'B30', name: 'B30', smallImage: '/src/assets/images/Hair Color/all_colors/B30.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/B30.png' }
+        { id: '12R', name: '12R', smallImage: '/src/assets/images/Hair_Color/all_colors/12R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/12R.png' },
+        { id: '17', name: '17', smallImage: '/src/assets/images/Hair_Color/all_colors/17.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/17.png' },
+        { id: '17R', name: '17R', smallImage: '/src/assets/images/Hair_Color/all_colors/17R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/17R.png' },
+        { id: '18', name: '18', smallImage: '/src/assets/images/Hair_Color/all_colors/18.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/18.png' },
+        { id: '20', name: '20', smallImage: '/src/assets/images/Hair_Color/all_colors/20.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/20.png' },
+        { id: '20R', name: '20R', smallImage: '/src/assets/images/Hair_Color/all_colors/20R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/20R.png' },
+        { id: '22R', name: '22R', smallImage: '/src/assets/images/Hair_Color/all_colors/22R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/22R.png' },
+        { id: '22', name: '22', smallImage: '/src/assets/images/Hair_Color/all_colors/22.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/22.png' },
+        { id: '30', name: '30', smallImage: '/src/assets/images/Hair_Color/all_colors/30.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/30.png' }
       ],
       reddish: [
-        { id: '99J', name: '99J', smallImage: '/src/assets/images/Hair Color/all_colors/99J.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/99J.png' },
-        { id: '118', name: '118', smallImage: '/src/assets/images/Hair Color/all_colors/118.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/118.png' },
-        { id: '140', name: '140', smallImage: '/src/assets/images/Hair Color/all_colors/140.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/140.png' },
-        { id: '144', name: '144', smallImage: '/src/assets/images/Hair Color/all_colors/144.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/144.png' }
-      ],
-      gray: [
-        { id: 'R40', name: 'R40', smallImage: '/src/assets/images/Hair Color/all_colors/R40.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/R40.png' },
-        { id: 'R50', name: 'R50', smallImage: '/src/assets/images/Hair Color/all_colors/R50.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/R50.png' }
+        { id: '99J', name: '99J', smallImage: '/src/assets/images/Hair_Color/all_colors/99J.jpg', bigImage: '/src/assets/images/Hair_Color/all_colors_big/99J.jpg' },
+        { id: '118', name: '118', smallImage: '/src/assets/images/Hair_Color/all_colors/118.jpg', bigImage: '/src/assets/images/Hair_Color/all_colors_big/118.jpg' },
+        { id: '140', name: '140', smallImage: '/src/assets/images/Hair_Color/all_colors/140.jpg', bigImage: '/src/assets/images/Hair_Color/all_colors_big/140.jpg' },
+        { id: '144', name: '144', smallImage: '/src/assets/images/Hair_Color/all_colors/144.jpg', bigImage: '/src/assets/images/Hair_Color/all_colors_big/144.jpg' }
       ]
     }
   }
@@ -873,14 +867,14 @@ const HairCustomization = () => {
       id: 'human-gray-hair', 
       name: 'Human grey hair', 
       price: 20, 
-      image: '/src/assets/images/human-gray-hair.png',
+      image: '/src/assets/images/customize/human_grey_hair.png',
       description: 'Natural human grey hair'
     },
     { 
       id: 'synthetic-gray-hair', 
       name: 'Synthetic grey hair (best choice)', 
       price: 0, 
-      image: '/src/assets/images/synthetic-gray-hair.png',
+      image: '/src/assets/images/customize/synthetic_grey_hair.png',
       description: 'High-quality synthetic grey hair'
     }
   ]
@@ -888,78 +882,78 @@ const HairCustomization = () => {
   // Root color options (reusing highlight color options)
   const rootColorColorOptions = {
     dark: [
-      { id: '1', name: '1', smallImage: '/src/assets/images/Hair Color/all_colors/1.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/1.png' },
-      { id: '1A', name: '1A', smallImage: '/src/assets/images/Hair Color/all_colors/1A.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/1A.png' },
-      { id: '1B', name: '1B', smallImage: '/src/assets/images/Hair Color/all_colors/1B.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/1B.png' }
+      { id: '1', name: '1', smallImage: '/src/assets/images/Hair_Color/all_colors/1.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/1.png' },
+      { id: '1A', name: '1A', smallImage: '/src/assets/images/Hair_Color/all_colors/1A.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/1A.png' },
+      { id: '1B', name: '1B', smallImage: '/src/assets/images/Hair_Color/all_colors/1B.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/1B.png' }
     ],
     brown: [
-      { id: '2', name: '2', smallImage: '/src/assets/images/Hair Color/all_colors/2.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/2.png' },
-      { id: '3', name: '3', smallImage: '/src/assets/images/Hair Color/all_colors/3.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/3.png' },
-      { id: '4', name: '4', smallImage: '/src/assets/images/Hair Color/all_colors/4.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/4.png' },
-      { id: '4ASH', name: '4ASH', smallImage: '/src/assets/images/Hair Color/all_colors/4ASH.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/4ASH.png' },
-      { id: '4R', name: '4R', smallImage: '/src/assets/images/Hair Color/all_colors/4R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/4R.png' },
-      { id: '5', name: '5', smallImage: '/src/assets/images/Hair Color/all_colors/5.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/5.png' },
-      { id: '5R', name: '5R', smallImage: '/src/assets/images/Hair Color/all_colors/5R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/5R.png' },
-      { id: '6', name: '6', smallImage: '/src/assets/images/Hair Color/all_colors/6.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/6.png' },
-      { id: '6R', name: '6R', smallImage: '/src/assets/images/Hair Color/all_colors/6R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/6R.png' },
-      { id: '6RD', name: '6RD', smallImage: '/src/assets/images/Hair Color/all_colors/6RD.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/6RD.png' },
-      { id: '7', name: '7', smallImage: '/src/assets/images/Hair Color/all_colors/7.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/7.png' },
-      { id: '7ASH', name: '7ASH', smallImage: '/src/assets/images/Hair Color/all_colors/7ASH.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/7ASH.png' },
-      { id: '8R', name: '8R', smallImage: '/src/assets/images/Hair Color/all_colors/8R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/8R.png' },
-      { id: '10R', name: '10R', smallImage: '/src/assets/images/Hair Color/all_colors/10R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/10R.png' }
+      { id: '2', name: '2', smallImage: '/src/assets/images/Hair_Color/all_colors/2.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/2.png' },
+      { id: '3', name: '3', smallImage: '/src/assets/images/Hair_Color/all_colors/3.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/3.png' },
+      { id: '4', name: '4', smallImage: '/src/assets/images/Hair_Color/all_colors/4.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/4.png' },
+      { id: '4ASH', name: '4ASH', smallImage: '/src/assets/images/Hair_Color/all_colors/4ASH.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/4ASH.png' },
+      { id: '4R', name: '4R', smallImage: '/src/assets/images/Hair_Color/all_colors/4R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/4R.png' },
+      { id: '5', name: '5', smallImage: '/src/assets/images/Hair_Color/all_colors/5.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/5.png' },
+      { id: '5R', name: '5R', smallImage: '/src/assets/images/Hair_Color/all_colors/5R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/5R.png' },
+      { id: '6', name: '6', smallImage: '/src/assets/images/Hair_Color/all_colors/6.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/6.png' },
+      { id: '6R', name: '6R', smallImage: '/src/assets/images/Hair_Color/all_colors/6R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/6R.png' },
+      { id: '6RD', name: '6RD', smallImage: '/src/assets/images/Hair_Color/all_colors/6RD.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/6RD.png' },
+      { id: '7', name: '7', smallImage: '/src/assets/images/Hair_Color/all_colors/7.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/7.png' },
+      { id: '7ASH', name: '7ASH', smallImage: '/src/assets/images/Hair_Color/all_colors/7ASH.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/7ASH.png' },
+      { id: '8R', name: '8R', smallImage: '/src/assets/images/Hair_Color/all_colors/8R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/8R.png' },
+      { id: '10R', name: '10R', smallImage: '/src/assets/images/Hair_Color/all_colors/10R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/10R.png' }
     ],
     blonde: [
-      { id: '12R', name: '12R', smallImage: '/src/assets/images/Hair Color/all_colors/12R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/12R.png' },
-      { id: '17', name: '17', smallImage: '/src/assets/images/Hair Color/all_colors/17.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/17.png' },
-      { id: '17R', name: '17R', smallImage: '/src/assets/images/Hair Color/all_colors/17R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/17R.png' },
-      { id: '18', name: '18', smallImage: '/src/assets/images/Hair Color/all_colors/18.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/18.png' },
-      { id: '20', name: '20', smallImage: '/src/assets/images/Hair Color/all_colors/20.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/20.png' },
-      { id: '20R', name: '20R', smallImage: '/src/assets/images/Hair Color/all_colors/20R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/20R.png' },
-      { id: '22', name: '22', smallImage: '/src/assets/images/Hair Color/all_colors/22.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/22.png' },
-      { id: '22R', name: '22R', smallImage: '/src/assets/images/Hair Color/all_colors/22R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/22R.png' },
-      { id: '30', name: '30', smallImage: '/src/assets/images/Hair Color/all_colors/30.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/30.png' }
+      { id: '12R', name: '12R', smallImage: '/src/assets/images/Hair_Color/all_colors/12R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/12R.png' },
+      { id: '17', name: '17', smallImage: '/src/assets/images/Hair_Color/all_colors/17.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/17.png' },
+      { id: '17R', name: '17R', smallImage: '/src/assets/images/Hair_Color/all_colors/17R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/17R.png' },
+      { id: '18', name: '18', smallImage: '/src/assets/images/Hair_Color/all_colors/18.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/18.png' },
+      { id: '20', name: '20', smallImage: '/src/assets/images/Hair_Color/all_colors/20.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/20.png' },
+      { id: '20R', name: '20R', smallImage: '/src/assets/images/Hair_Color/all_colors/20R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/20R.png' },
+      { id: '22', name: '22', smallImage: '/src/assets/images/Hair_Color/all_colors/22.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/22.png' },
+      { id: '22R', name: '22R', smallImage: '/src/assets/images/Hair_Color/all_colors/22R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/22R.png' },
+      { id: '30', name: '30', smallImage: '/src/assets/images/Hair_Color/all_colors/30.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/30.png' }
     ],
     gray: [
-      { id: '60', name: '60', smallImage: '/src/assets/images/Hair Color/all_colors/60.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/60.png' }
+      { id: '60', name: '60', smallImage: '/src/assets/images/Hair_Color/all_colors/60.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/60.png' }
     ]
   }
 
   // Highlight color options using small images for circles and big images for preview
   const highlightColorOptions = {
     dark: [
-      { id: '1', name: '1', smallImage: '/src/assets/images/Hair Color/all_colors/1.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/1.png' },
-      { id: '1A', name: '1A', smallImage: '/src/assets/images/Hair Color/all_colors/1A.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/1A.png' },
-      { id: '1B', name: '1B', smallImage: '/src/assets/images/Hair Color/all_colors/1B.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/1B.png' }
+      { id: '1', name: '1', smallImage: '/src/assets/images/Hair_Color/all_colors/1.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/1.png' },
+      { id: '1A', name: '1A', smallImage: '/src/assets/images/Hair_Color/all_colors/1A.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/1A.png' },
+      { id: '1B', name: '1B', smallImage: '/src/assets/images/Hair_Color/all_colors/1B.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/1B.png' }
     ],
     brown: [
-      { id: '2', name: '2', smallImage: '/src/assets/images/Hair Color/all_colors/2.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/2.png' },
-      { id: '3', name: '3', smallImage: '/src/assets/images/Hair Color/all_colors/3.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/3.png' },
-      { id: '4', name: '4', smallImage: '/src/assets/images/Hair Color/all_colors/4.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/4.png' },
-      { id: '4ASH', name: '4ASH', smallImage: '/src/assets/images/Hair Color/all_colors/4ASH.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/4ASH.png' },
-      { id: '4R', name: '4R', smallImage: '/src/assets/images/Hair Color/all_colors/4R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/4R.png' },
-      { id: '5', name: '5', smallImage: '/src/assets/images/Hair Color/all_colors/5.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/5.png' },
-      { id: '5R', name: '5R', smallImage: '/src/assets/images/Hair Color/all_colors/5R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/5R.png' },
-      { id: '6', name: '6', smallImage: '/src/assets/images/Hair Color/all_colors/6.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/6.png' },
-      { id: '6R', name: '6R', smallImage: '/src/assets/images/Hair Color/all_colors/6R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/6R.png' },
-      { id: '6RD', name: '6RD', smallImage: '/src/assets/images/Hair Color/all_colors/6RD.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/6RD.png' },
-      { id: '7', name: '7', smallImage: '/src/assets/images/Hair Color/all_colors/7.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/7.png' },
-      { id: '7ASH', name: '7ASH', smallImage: '/src/assets/images/Hair Color/all_colors/7ASH.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/7ASH.png' },
-      { id: '8R', name: '8R', smallImage: '/src/assets/images/Hair Color/all_colors/8R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/8R.png' },
-      { id: '10R', name: '10R', smallImage: '/src/assets/images/Hair Color/all_colors/10R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/10R.png' }
+      { id: '2', name: '2', smallImage: '/src/assets/images/Hair_Color/all_colors/2.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/2.png' },
+      { id: '3', name: '3', smallImage: '/src/assets/images/Hair_Color/all_colors/3.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/3.png' },
+      { id: '4', name: '4', smallImage: '/src/assets/images/Hair_Color/all_colors/4.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/4.png' },
+      { id: '4ASH', name: '4ASH', smallImage: '/src/assets/images/Hair_Color/all_colors/4ASH.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/4ASH.png' },
+      { id: '4R', name: '4R', smallImage: '/src/assets/images/Hair_Color/all_colors/4R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/4R.png' },
+      { id: '5', name: '5', smallImage: '/src/assets/images/Hair_Color/all_colors/5.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/5.png' },
+      { id: '5R', name: '5R', smallImage: '/src/assets/images/Hair_Color/all_colors/5R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/5R.png' },
+      { id: '6', name: '6', smallImage: '/src/assets/images/Hair_Color/all_colors/6.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/6.png' },
+      { id: '6R', name: '6R', smallImage: '/src/assets/images/Hair_Color/all_colors/6R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/6R.png' },
+      { id: '6RD', name: '6RD', smallImage: '/src/assets/images/Hair_Color/all_colors/6RD.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/6RD.png' },
+      { id: '7', name: '7', smallImage: '/src/assets/images/Hair_Color/all_colors/7.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/7.png' },
+      { id: '7ASH', name: '7ASH', smallImage: '/src/assets/images/Hair_Color/all_colors/7ASH.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/7ASH.png' },
+      { id: '8R', name: '8R', smallImage: '/src/assets/images/Hair_Color/all_colors/8R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/8R.png' },
+      { id: '10R', name: '10R', smallImage: '/src/assets/images/Hair_Color/all_colors/10R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/10R.png' }
     ],
     blonde: [
-      { id: '12R', name: '12R', smallImage: '/src/assets/images/Hair Color/all_colors/12R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/12R.png' },
-      { id: '17', name: '17', smallImage: '/src/assets/images/Hair Color/all_colors/17.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/17.png' },
-      { id: '17R', name: '17R', smallImage: '/src/assets/images/Hair Color/all_colors/17R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/17R.png' },
-      { id: '18', name: '18', smallImage: '/src/assets/images/Hair Color/all_colors/18.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/18.png' },
-      { id: '20', name: '20', smallImage: '/src/assets/images/Hair Color/all_colors/20.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/20.png' },
-      { id: '20R', name: '20R', smallImage: '/src/assets/images/Hair Color/all_colors/20R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/20R.png' },
-      { id: '22', name: '22', smallImage: '/src/assets/images/Hair Color/all_colors/22.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/22.png' },
-      { id: '22R', name: '22R', smallImage: '/src/assets/images/Hair Color/all_colors/22R.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/22R.png' },
-      { id: '30', name: '30', smallImage: '/src/assets/images/Hair Color/all_colors/30.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/30.png' }
+      { id: '12R', name: '12R', smallImage: '/src/assets/images/Hair_Color/all_colors/12R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/12R.png' },
+      { id: '17', name: '17', smallImage: '/src/assets/images/Hair_Color/all_colors/17.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/17.png' },
+      { id: '17R', name: '17R', smallImage: '/src/assets/images/Hair_Color/all_colors/17R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/17R.png' },
+      { id: '18', name: '18', smallImage: '/src/assets/images/Hair_Color/all_colors/18.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/18.png' },
+      { id: '20', name: '20', smallImage: '/src/assets/images/Hair_Color/all_colors/20.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/20.png' },
+      { id: '20R', name: '20R', smallImage: '/src/assets/images/Hair_Color/all_colors/20R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/20R.png' },
+      { id: '22', name: '22', smallImage: '/src/assets/images/Hair_Color/all_colors/22.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/22.png' },
+      { id: '22R', name: '22R', smallImage: '/src/assets/images/Hair_Color/all_colors/22R.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/22R.png' },
+      { id: '30', name: '30', smallImage: '/src/assets/images/Hair_Color/all_colors/30.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/30.png' }
     ],
     gray: [
-      { id: '60', name: '60', smallImage: '/src/assets/images/Hair Color/all_colors/60.png', bigImage: '/src/assets/images/Hair Color/all_colors_big/60.png' }
+      { id: '60', name: '60', smallImage: '/src/assets/images/Hair_Color/all_colors/60.png', bigImage: '/src/assets/images/Hair_Color/all_colors_big/60.png' }
     ]
   }
 
@@ -1057,61 +1051,61 @@ const HairCustomization = () => {
       id: 'lastOrder',
       name: 'The same as my last order',
       description: '',
-      image: '/src/assets/images/base-design-last-order.png'
+      image: '/src/assets/images/customize/ic_same_as_my_last_order.webp'
     },
     {
       id: 'superskin',
       name: 'Custom SuperSkin(S1)',
       description: '0.08mm thin skin all over',
-      image: '/src/assets/images/base-design-superskin.png'
+      image: '/src/assets/images/customize/base-designs/s1-thin-skin-all-over2_(1).webp'
     },
     {
       id: 'elite',
       name: 'Custom Elite (L15)',
       description: 'French lace with PU edge on sides & back',
-      image: '/src/assets/images/base-design-elite.png'
+      image: '/src/assets/images/customize/base-designs/l15-french-lace-with-pu-edge2.webp'
     },
     {
       id: 'champion',
       name: 'Custom Champion(S7)',
       description: 'French lace all over',
-      image: '/src/assets/images/base-design-champion.png'
+      image: '/src/assets/images/customize/base-designs/s7-french-lace-all-over2.webp'
     },
     {
       id: 'orion',
       name: 'Custom Orion(S4)',
       description: 'Super fine mono with 1" thin skin perimeter and 1/4" lace front',
-      image: '/src/assets/images/base-design-orion.png'
+      image: '/src/assets/images/customize/base-designs/s4-super-fine-mono-with-pu-perimeter2.webp'
     },
     {
       id: 'combo',
       name: 'Custom Combo(S15)',
       description: 'Thin skin with 1/4" French lace front',
-      image: '/src/assets/images/base-design-combo.png'
+      image: '/src/assets/images/customize/base-designs/s15-thin-skin-with-french-lace-front2.webp'
     },
     {
       id: 'chronos',
       name: 'Custom Chronos (L16)',
       description: 'Fine welded mono with PU edge on side & back',
-      image: '/src/assets/images/base-design-chronos.png'
+      image: '/src/assets/images/customize/base-designs/l16-fine-welded-mono-with-pu-edge2.webp'
     },
     {
       id: 'atlas',
       name: 'Custom Atlas(S3)',
       description: 'Fine Mono with PU edge on side&back and thin skin front',
-      image: '/src/assets/images/base-design-atlas.png'
+      image: '/src/assets/images/customize/base-designs/s3-fine-mono-with-pu-perimeter2.webp'
     },
     {
       id: 'cosmos',
       name: 'Custom Cosmos(S2)',
       description: 'Fine welded mono all over',
-      image: '/src/assets/images/base-design-cosmos.png'
+      image: '/src/assets/images/customize/base-designs/s2-fine-welded-mono-lace-all-over2.webp'
     },
     {
       id: 'poseidon',
       name: 'Custom Poseidon(S12)',
       description: 'Thin skin with fine welded mono lace front (zia zaa',
-      image: '/src/assets/images/base-design-poseidon.png'
+      image: '/src/assets/images/customize/base-designs/s12-thin-skin-with-mono-lace-front2.webp'
     }
   ]
 
@@ -1758,7 +1752,7 @@ const HairCustomization = () => {
     }))
   }
 
-  // Handle Hair Color selection
+  // Handle Hair_Color selection
   const handleHairColorSelection = (option) => {
     if (option.hasModal) {
       setSelectedHairColorType(option.id)
@@ -1812,9 +1806,9 @@ const HairCustomization = () => {
 
   // Handle Haircut Main Option Selection
   const handleHaircutMainOptionSelection = (option) => {
+    // If no gender selected, default to the current haircutModalGender (defaults to 'men')
     if (!selectedHaircutGender) {
-      alert('Please select Men or Women first')
-      return
+      setSelectedHaircutGender(haircutModalGender)
     }
 
     if (option.hasModal) {
@@ -2460,8 +2454,8 @@ const HairCustomization = () => {
                     <Accordion.Header>
                       <div className="accordion-header-content">
                         <span>Gray Color</span>
-                        {customization.grayColor && (
-                          <span className="selected-option">{customization.grayColor}</span>
+                        {customization.greyHair && (
+                          <span className="selected-option">{customization.greyHair}</span>
                         )}
                       </div>
                     </Accordion.Header>
@@ -2470,10 +2464,14 @@ const HairCustomization = () => {
                         <p>Do you want to add grey hair to your hair system?</p>
                       </div>
                       <div className="gray-color-options">
-                        {grayColorOptions.map((option) => (
+                        {grayColorOptions.map((option) => {
+                          const isSelected = option.hasModal 
+                            ? customization.greyHairType === option.name || customization.greyHairType === 'I want Gray Hair'
+                            : customization.greyHair === option.name
+                          return (
                           <div 
                             key={option.id}
-                            className={`gray-color-option ${customization.grayColor === option.name ? 'selected' : ''}`}
+                            className={`gray-color-option ${isSelected ? 'selected' : ''}`}
                             onClick={() => handleGrayColorSelection(option)}
                           >
                             <div className="gray-color-info">
@@ -2488,8 +2486,9 @@ const HairCustomization = () => {
                               </div>
                             )}
                             </div>
-                          ))}
-                        </div>
+                          )
+                        })}
+                      </div>
                     </Accordion.Body>
                   </Accordion.Item>
 
@@ -2601,11 +2600,11 @@ const HairCustomization = () => {
                     </Accordion.Body>
                   </Accordion.Item>
 
-                  {/* Hair Color */}
+                  {/* Hair_Color */}
                   <Accordion.Item eventKey="hairColor">
                     <Accordion.Header>
                       <div className="accordion-header-content">
-                        <span>Hair Color</span>
+                        <span>Hair_Color</span>
                         {customization.hairColor && (
                           <span className="selected-option">{customization.hairColor}</span>
                         )}
@@ -3817,32 +3816,16 @@ const HairCustomization = () => {
               <div className="gray-color-area-section">
                 <h4 className="gray-color-area-title">{grayColorStepTitles[grayColorModalStep]}</h4>
                 <div className="head-diagram">
-                  <svg width="200" height="200" viewBox="0 0 200 200">
-                    <circle cx="100" cy="100" r="80" fill="#2c3e50" stroke="#34495e" strokeWidth="2"/>
-                    {grayColorModalStep === 1 && (
-                      <path d="M100 20 Q120 40 100 60 Q80 40 100 20" fill="#3182ce" opacity="0.7"/>
-                    )}
-                    {grayColorModalStep === 2 && (
-                      <path d="M100 60 Q120 80 100 100 Q80 80 100 60" fill="#3182ce" opacity="0.7"/>
-                    )}
-                    {grayColorModalStep === 3 && (
-                      <circle cx="100" cy="80" r="20" fill="#3182ce" opacity="0.7"/>
-                    )}
-                    {grayColorModalStep === 4 && (
-                      <path d="M100 140 Q120 160 100 180 Q80 160 100 140" fill="#3182ce" opacity="0.7"/>
-                    )}
-                    {grayColorModalStep === 5 && (
-                      <path d="M20 100 Q40 80 60 100 Q40 120 20 100" fill="#3182ce" opacity="0.7"/>
-                    )}
-                    {grayColorModalStep === 6 && (
-                      <path d="M140 100 Q160 80 180 100 Q160 120 140 100" fill="#3182ce" opacity="0.7"/>
-                    )}
-                    <line x1="100" y1="20" x2="100" y2="180" stroke="#ecf0f1" strokeWidth="1"/>
-                    <line x1="20" y1="100" x2="180" y2="100" stroke="#ecf0f1" strokeWidth="1"/>
-                    <text x="100" y="105" textAnchor="middle" fontSize="16" fill="white" fontWeight="bold">
-                      {grayColorModalStep}
-                    </text>
-                  </svg>
+                  <div className="head-illustration">
+                    <img 
+                      src={`/src/assets/images/order_hair_length/${grayColorStepTitles[grayColorModalStep]}.png`}
+                      alt={`${grayColorStepTitles[grayColorModalStep]} section`}
+                      className="head-section-image"
+                      onError={(e) => {
+                        e.target.src = '/src/assets/images/image_108.png'
+                      }}
+                    />
+                  </div>
                 </div>
                 <div className="gray-color-area-options">
                   {grayColorAreaOptions.map((option) => (
@@ -3926,10 +3909,10 @@ const HairCustomization = () => {
         </Modal.Footer>
       </Modal>
 
-      {/* Hair Color Selection Modal */}
+      {/* Hair_Color Selection Modal */}
       <Modal show={showHairColorModal} onHide={handleHairColorClose} size="lg" centered>
         <Modal.Header closeButton>
-          <Modal.Title className="modal-title">Hair Color</Modal.Title>
+          <Modal.Title className="modal-title">Hair_Color</Modal.Title>
         </Modal.Header>
         <Modal.Body className="hair-color-modal-body">
           {/* Gender Switch */}
@@ -3948,25 +3931,26 @@ const HairCustomization = () => {
             </div>
           </div>
 
-          {/* Hair Sample Preview */}
-          <div className="hair-sample-preview">
+          {/* Hair Color Preview Area */}
+          <div className="root-color-preview-area">
             {hairColorPreviewImage ? (
-              <img src={hairColorPreviewImage} alt="Hair color preview" />
+              <img src={hairColorPreviewImage} alt="Hair Color Preview" className="root-color-preview-image" />
             ) : (
-              <div className="preview-placeholder">
-                <p>Select below images to view large image</p>
+              <div className="root-color-preview-placeholder">
+                <p>Select below images to view large image.</p>
               </div>
             )}
           </div>
 
           {/* Color Categories */}
           {selectedHairColorGender && hairColorColorOptions[selectedHairColorGender] && (
-            <div className="hair-color-categories">
+            <div className="root-color-categories">
               {Object.entries(hairColorColorOptions[selectedHairColorGender]).map(([category, colors]) => (
                 <div key={category} className="color-category">
                   <h6 className="category-title">
                     {category === 'reddish' ? 'Redish' : category.charAt(0).toUpperCase() + category.slice(1)}
                     {category === 'brown' && selectedHairColorGender === 'women' ? '-8' : ''}
+                    :
                   </h6>
                   <div className="color-swatches">
                     {colors.map((color) => (
@@ -3975,8 +3959,10 @@ const HairCustomization = () => {
                         className={`color-swatch ${selectedHairColor?.id === color.id ? 'selected' : ''}`}
                         onClick={() => handleHairColorColorSelection(color)}
                       >
-                        <img src={color.smallImage} alt={color.name} />
-                        <span className="color-code">#{color.name}</span>
+                        <div className="color-image">
+                          <img src={color.smallImage} alt={color.name} />
+                        </div>
+                        <span className="color-label">{color.name}</span>
                       </div>
                     ))}
                   </div>
@@ -3985,7 +3971,7 @@ const HairCustomization = () => {
             </div>
           )}
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="root-color-modal-footer">
           <div className="modal-footer-content">
             {selectedHairColor && (
               <div className="selection-text">
@@ -4008,9 +3994,25 @@ const HairCustomization = () => {
       {/* Haircut Selection Modal */}
       <Modal show={showChooseHairstyleModal} onHide={handleChooseHairstyleClose} size="lg" centered>
         <Modal.Header closeButton>
-          <Modal.Title>Choose Your Haircut</Modal.Title>
+          <Modal.Title className="modal-title">Choose Your Haircut</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="choose-hairstyle-modal-body">
+          {/* Gender Switch */}
+          <div className="gender-switch">
+            <div 
+              className={`gender-option ${haircutModalGender === 'men' ? 'active' : ''}`}
+              onClick={() => handleHaircutGenderSelection('men')}
+            >
+              Men
+            </div>
+            <div 
+              className={`gender-option ${haircutModalGender === 'women' ? 'active' : ''}`}
+              onClick={() => handleHaircutGenderSelection('women')}
+            >
+              Women
+            </div>
+          </div>
+
           <div className="haircut-selection">
             <div className="haircut-grid">
               {hairstyleOptions[haircutModalGender]?.map((haircut) => (
@@ -4028,7 +4030,7 @@ const HairCustomization = () => {
                               src={image} 
                               alt={`${haircut.code} - ${index + 1}`}
                               onError={(e) => {
-                                e.target.src = '/src/assets/images/image 108.png'
+                                e.target.src = '/src/assets/images/image_108.png'
                               }}
                             />
                           </div>
@@ -4080,11 +4082,16 @@ const HairCustomization = () => {
             </div>
           </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleChooseHairstyleClose}>
+        <Modal.Footer className="root-color-modal-footer">
+          <Button variant="outline-secondary" onClick={handleChooseHairstyleClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleChooseHairstyleClose}>
+          <Button 
+            variant="dark" 
+            onClick={handleChooseHairstyleClose}
+            className="confirm-btn"
+            disabled={!customization.haircut}
+          >
             Select Haircut
           </Button>
         </Modal.Footer>
@@ -4099,10 +4106,10 @@ const HairCustomization = () => {
                 <FontAwesomeIcon icon={faChevronRight} style={{transform: 'rotate(180deg)'}} />
               </button>
             )}
-            <Modal.Title>I want to order my hair length</Modal.Title>
+            <Modal.Title className="modal-title">I want to order my hair length</Modal.Title>
           </div>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="hair-length-modal-body">
           <div className="hair-length-stepper">
             {/* Current Step Label */}
             <div className="step-label">
@@ -4117,7 +4124,7 @@ const HairCustomization = () => {
                   alt={`${hairLengthSteps[currentStep].label} section`}
                   className="head-section-image"
                   onError={(e) => {
-                    e.target.src = '/src/assets/images/image 108.png'
+                    e.target.src = '/src/assets/images/image_108.png'
                   }}
                 />
               </div>
@@ -4126,7 +4133,13 @@ const HairCustomization = () => {
             {/* Length Selection */}
             <div className="length-selection">
               <div className="current-length">
-                {hairLengths[hairLengthSteps[currentStep].key]} inch = {lengthOptions.find(opt => opt.inch === hairLengths[hairLengthSteps[currentStep].key])?.cm} cm
+                {hairLengths[hairLengthSteps[currentStep].key] ? (
+                  <>
+                    {hairLengths[hairLengthSteps[currentStep].key]}" inch = {lengthOptions.find(opt => opt.inch === hairLengths[hairLengthSteps[currentStep].key])?.cm} cm
+                  </>
+                ) : (
+                  'Select a length below'
+                )}
               </div>
               <div className="length-options">
                 {lengthOptions.map((option) => (
@@ -4135,24 +4148,34 @@ const HairCustomization = () => {
                     className={`length-option ${hairLengths[hairLengthSteps[currentStep].key] === option.inch ? 'selected' : ''}`}
                     onClick={() => handleHairLengthChange(hairLengthSteps[currentStep].key, option.inch)}
                   >
-                    <span className="inch">{option.inch}</span>
-                    <span className="cm">{option.cm}</span>
+                    <span className="inch">{option.inch}"</span>
+                    <span className="cm">({option.cm} cm)</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleHairLengthCancel}>
+        <Modal.Footer className="root-color-modal-footer">
+          <Button variant="outline-secondary" onClick={handleHairLengthCancel}>
             Cancel
           </Button>
           {currentStep < hairLengthSteps.length - 1 ? (
-            <Button variant="primary" onClick={handleNextStep}>
+            <Button 
+              variant="dark" 
+              onClick={handleNextStep}
+              className="next-step-btn"
+              disabled={!hairLengths[hairLengthSteps[currentStep].key]}
+            >
               Next Step
             </Button>
           ) : (
-            <Button variant="primary" onClick={handleHairLengthConfirm}>
+            <Button 
+              variant="dark" 
+              onClick={handleHairLengthConfirm}
+              className="confirm-btn"
+              disabled={!hairLengths[hairLengthSteps[currentStep].key]}
+            >
               Confirm
             </Button>
           )}
@@ -4337,7 +4360,7 @@ const HairCustomization = () => {
             
             {customization.hairColor && (
               <div className="review-item">
-                <h6>Hair Color</h6>
+                <h6>Hair_Color</h6>
                 <p>{customization.hairColor}</p>
               </div>
             )}

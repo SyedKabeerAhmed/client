@@ -139,6 +139,12 @@ export const API_CONFIG = {
 - **Responsive Design**: Mobile-first approach
 - **Component Styles**: Scoped CSS for each component
 
+### CSS Class Naming
+
+- Prefer `component-or-page-name__element` style classes (e.g. `product-section-title`, `cart-customization-title`) to avoid collisions across sections.
+- Keep truly global utilities (e.g. `.text-primary`, `.bg-primary`) inside `src/index.css` only.
+- When you must reuse a structural class, scope it with the parent container selector inside the CSS file rather than relying on a bare class name.
+
 ## 🔐 Authentication Flow
 
 1. **Registration**: User creates account with email verification

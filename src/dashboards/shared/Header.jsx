@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 import api from '../../config/api';
 import './Header.css';
 
@@ -30,10 +32,10 @@ const Header = ({ title, user, onLogout, userRole, activePage, onPageChange }) =
     };
   }, []);
 
-  // Fetch notifications function
+  // Fetch notifications function (for all dashboard roles)
   const fetchNotifications = useCallback(async () => {
-    if (!userRole || !user || !(userRole === 'admin' || userRole === 'subadmin' || userRole === 'factory')) return;
-    
+    if (!userRole || !user) return;
+
     try {
       setNotificationsLoading(true);
       const response = await api.get(`/${userRole}/notifications?limit=10`);
@@ -50,13 +52,13 @@ const Header = ({ title, user, onLogout, userRole, activePage, onPageChange }) =
 
   // Fetch notifications on mount and when userRole changes
   useEffect(() => {
-    if (userRole && (userRole === 'admin' || userRole === 'subadmin' || userRole === 'factory')) {
+    if (userRole && user) {
       fetchNotifications();
       // Refresh notifications every 30 seconds
       const interval = setInterval(fetchNotifications, 30000);
       return () => clearInterval(interval);
     }
-  }, [userRole, fetchNotifications]);
+  }, [userRole, user, fetchNotifications]);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -175,13 +177,14 @@ const Header = ({ title, user, onLogout, userRole, activePage, onPageChange }) =
       
       <div className="header-right">
         <div className="header-actions">
-          {(userRole === 'admin' || userRole === 'subadmin' || userRole === 'factory') && (
+          {userRole && (
             <div className="notification-wrapper" ref={notificationDropdownRef}>
               <button 
                 className="notification-btn" 
                 onClick={toggleNotificationDropdown}
+                title="Notifications"
               >
-                <i className="fas fa-bell"></i>
+                <FontAwesomeIcon icon={faBell} />
                 {unreadCount > 0 && (
                   <span className="notification-badge">{unreadCount > 99 ? '99+' : unreadCount}</span>
                 )}

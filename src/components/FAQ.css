@@ -3,18 +3,18 @@
   background-color: white;
 }
 
-.section-header {
+.faq-section-header {
   margin-bottom: 60px;
 }
 
-.section-title {
+.faq-section-title {
   font-size: 2.5rem;
   font-weight: 700;
   color: #1e3a8a;
   margin-bottom: 20px;
 }
 
-.section-subtitle {
+.faq-section-subtitle {
   font-size: 1.1rem;
   color: #6b7280;
   max-width: 600px;
@@ -133,11 +133,11 @@
     padding: 60px 0;
   }
   
-  .section-title {
+  .faq-section-title {
     font-size: 2rem;
   }
   
-  .section-subtitle {
+  .faq-section-subtitle {
     font-size: 1rem;
   }
   

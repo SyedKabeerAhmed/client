@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import './Banner.css'
-// import backgroundImage from '../assets/images/scandinavian-interior-mockup-wall-decal-background 2.png'
+// import backgroundImage from '../assets/images/scandinavian-interior-mockup-wall-decal-background_2.png'
 
 const Banner = ({ 
   badge,

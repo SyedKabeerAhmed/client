@@ -84,162 +84,162 @@ export const allHaircuts = [
     cutType: 'LD0011',
     description: 'Classic short fade with modern styling',
     images: [
-      'assets/images/Haircut Images/LD0011/LD0011-1.png',
-      'assets/images/Haircut Images/LD0011/LD0011-2.png',
-      'assets/images/Haircut Images/LD0011/LD0011-3.png',
-      'assets/images/Haircut Images/LD0011/LD0011-4.png',
-      'assets/images/Haircut Images/LD0011/LD0011-5.png'
+      '/src/assets/images/Haircut_Images/LD0011/LD0011-1.png',
+      '/src/assets/images/Haircut_Images/LD0011/LD0011-2.png',
+      '/src/assets/images/Haircut_Images/LD0011/LD0011-3.png',
+      '/src/assets/images/Haircut_Images/LD0011/LD0011-4.png',
+      '/src/assets/images/Haircut_Images/LD0011/LD0011-5.png'
     ]
   },
   {
     cutType: 'LD0026',
     description: 'Professional business cut with side part',
     images: [
-      'assets/images/Haircut Images/LD0026/LD0026-1.png',
-      'assets/images/Haircut Images/LD0026/LD0026-2.png',
-      'assets/images/Haircut Images/LD0026/LD0026-3.png',
-      'assets/images/Haircut Images/LD0026/LD0026-4.png'
+      '/src/assets/images/Haircut_Images/LD0026/LD0026-1.png',
+      '/src/assets/images/Haircut_Images/LD0026/LD0026-2.png',
+      '/src/assets/images/Haircut_Images/LD0026/LD0026-3.png',
+      '/src/assets/images/Haircut_Images/LD0026/LD0026-4.png'
     ]
   },
   {
     cutType: 'LD0035',
     description: 'Contemporary textured cut',
     images: [
-      'assets/images/Haircut Images/LD0035/LD0035-1.png',
-      'assets/images/Haircut Images/LD0035/LD0035-2.png',
-      'assets/images/Haircut Images/LD0035/LD0035-3.png',
-      'assets/images/Haircut Images/LD0035/LD0035-4.png'
+      '/src/assets/images/Haircut_Images/LD0035/LD0035-1.png',
+      '/src/assets/images/Haircut_Images/LD0035/LD0035-2.png',
+      '/src/assets/images/Haircut_Images/LD0035/LD0035-3.png',
+      '/src/assets/images/Haircut_Images/LD0035/LD0035-4.png'
     ]
   },
   {
     cutType: 'LD0037',
     description: 'Sleek modern style with volume',
     images: [
-      'assets/images/Haircut Images/LD0037/LD0037-1.png',
-      'assets/images/Haircut Images/LD0037/LD0037-2.png',
-      'assets/images/Haircut Images/LD0037/LD0037-3.png',
-      'assets/images/Haircut Images/LD0037/LD0037-4.png'
+      '/src/assets/images/Haircut_Images/LD0037/LD0037-1.png',
+      '/src/assets/images/Haircut_Images/LD0037/LD0037-2.png',
+      '/src/assets/images/Haircut_Images/LD0037/LD0037-3.png',
+      '/src/assets/images/Haircut_Images/LD0037/LD0037-4.png'
     ]
   },
   {
     cutType: 'LD0039',
     description: 'Textured crop with natural finish',
     images: [
-      'assets/images/Haircut Images/LD0039/LD0039-1.png',
-      'assets/images/Haircut Images/LD0039/LD0039-2.png',
-      'assets/images/Haircut Images/LD0039/LD0039-3.png',
-      'assets/images/Haircut Images/LD0039/LD0039-4.png',
-      'assets/images/Haircut Images/LD0039/LD0039-5.png'
+      '/src/assets/images/Haircut_Images/LD0039/LD0039-1.png',
+      '/src/assets/images/Haircut_Images/LD0039/LD0039-2.png',
+      '/src/assets/images/Haircut_Images/LD0039/LD0039-3.png',
+      '/src/assets/images/Haircut_Images/LD0039/LD0039-4.png',
+      '/src/assets/images/Haircut_Images/LD0039/LD0039-5.png'
     ]
   },
   {
     cutType: 'LD004',
     description: 'Traditional side part with comb over',
     images: [
-      'assets/images/Haircut Images/LD004/LD004-1.png',
-      'assets/images/Haircut Images/LD004/LD004-2.png',
-      'assets/images/Haircut Images/LD004/LD004-3.png',
-      'assets/images/Haircut Images/LD004/LD004-4.png',
-      'assets/images/Haircut Images/LD004/LD004-5.png'
+      '/src/assets/images/Haircut_Images/LD004/LD004-1.png',
+      '/src/assets/images/Haircut_Images/LD004/LD004-2.png',
+      '/src/assets/images/Haircut_Images/LD004/LD004-3.png',
+      '/src/assets/images/Haircut_Images/LD004/LD004-4.png',
+      '/src/assets/images/Haircut_Images/LD004/LD004-5.png'
     ]
   },
   {
     cutType: 'LD0042',
     description: 'Modern quiff style',
     images: [
-      'assets/images/Haircut Images/LD0042/LD0042-1.png',
-      'assets/images/Haircut Images/LD0042/LD0042-2.png',
-      'assets/images/Haircut Images/LD0042/LD0042-3.png',
-      'assets/images/Haircut Images/LD0042/LD0042-4.png'
+      '/src/assets/images/Haircut_Images/LD0042/LD0042-1.png',
+      '/src/assets/images/Haircut_Images/LD0042/LD0042-2.png',
+      '/src/assets/images/Haircut_Images/LD0042/LD0042-3.png',
+      '/src/assets/images/Haircut_Images/LD0042/LD0042-4.png'
     ]
   },
   {
     cutType: 'LD0043',
     description: 'Clean undercut style',
     images: [
-      'assets/images/Haircut Images/LD0043/LD0043-1.png',
-      'assets/images/Haircut Images/LD0043/LD0043-2.png',
-      'assets/images/Haircut Images/LD0043/LD0043-3.png'
+      '/src/assets/images/Haircut_Images/LD0043/LD0043-1.png',
+      '/src/assets/images/Haircut_Images/LD0043/LD0043-2.png',
+      '/src/assets/images/Haircut_Images/LD0043/LD0043-3.png'
     ]
   },
   {
     cutType: 'LD0046',
     description: 'Classic pompadour with fade',
     images: [
-      'assets/images/Haircut Images/LD0046/LD0046-1.png',
-      'assets/images/Haircut Images/LD0046/LD0046-2.png',
-      'assets/images/Haircut Images/LD0046/LD0046-3.png',
-      'assets/images/Haircut Images/LD0046/LD0046-4.png'
+      '/src/assets/images/Haircut_Images/LD0046/LD0046-1.png',
+      '/src/assets/images/Haircut_Images/LD0046/LD0046-2.png',
+      '/src/assets/images/Haircut_Images/LD0046/LD0046-3.png',
+      '/src/assets/images/Haircut_Images/LD0046/LD0046-4.png'
     ]
   },
   {
     cutType: 'LD0047',
     description: 'Textured fringe cut',
     images: [
-      'assets/images/Haircut Images/LD0047/LD0047-1.png',
-      'assets/images/Haircut Images/LD0047/LD0047-2.png',
-      'assets/images/Haircut Images/LD0047/LD0047-3.png',
-      'assets/images/Haircut Images/LD0047/LD0047-4.png'
+      '/src/assets/images/Haircut_Images/LD0047/LD0047-1.png',
+      '/src/assets/images/Haircut_Images/LD0047/LD0047-2.png',
+      '/src/assets/images/Haircut_Images/LD0047/LD0047-3.png',
+      '/src/assets/images/Haircut_Images/LD0047/LD0047-4.png'
     ]
   },
   {
     cutType: 'LD0048',
     description: 'Modern comb over with texture',
     images: [
-      'assets/images/Haircut Images/LD0048/LD0048-1.png',
-      'assets/images/Haircut Images/LD0048/LD0048-2.png',
-      'assets/images/Haircut Images/LD0048/LD0048-3.png',
-      'assets/images/Haircut Images/LD0048/LD0048-4.png'
+      '/src/assets/images/Haircut_Images/LD0048/LD0048-1.png',
+      '/src/assets/images/Haircut_Images/LD0048/LD0048-2.png',
+      '/src/assets/images/Haircut_Images/LD0048/LD0048-3.png',
+      '/src/assets/images/Haircut_Images/LD0048/LD0048-4.png'
     ]
   },
   {
     cutType: 'LD0049',
     description: 'Short textured crop',
     images: [
-      'assets/images/Haircut Images/LD0049/LD0049-1.png',
-      'assets/images/Haircut Images/LD0049/LD0049-2.png',
-      'assets/images/Haircut Images/LD0049/LD0049-3.png'
+      '/src/assets/images/Haircut_Images/LD0049/LD0049-1.png',
+      '/src/assets/images/Haircut_Images/LD0049/LD0049-2.png',
+      '/src/assets/images/Haircut_Images/LD0049/LD0049-3.png'
     ]
   },
   {
     cutType: 'LD005',
     description: 'Professional business style',
     images: [
-      'assets/images/Haircut Images/LD005/LD005-1.png',
-      'assets/images/Haircut Images/LD005/LD005-2.png',
-      'assets/images/Haircut Images/LD005/LD005-3.png',
-      'assets/images/Haircut Images/LD005/LD005-4.png',
-      'assets/images/Haircut Images/LD005/LD005-5.png'
+      '/src/assets/images/Haircut_Images/LD005/LD005-1.png',
+      '/src/assets/images/Haircut_Images/LD005/LD005-2.png',
+      '/src/assets/images/Haircut_Images/LD005/LD005-3.png',
+      '/src/assets/images/Haircut_Images/LD005/LD005-4.png',
+      '/src/assets/images/Haircut_Images/LD005/LD005-5.png'
     ]
   },
   {
     cutType: 'LD0051',
     description: 'Sleek side part style',
     images: [
-      'assets/images/Haircut Images/LD0051/LD0051-1.png',
-      'assets/images/Haircut Images/LD0051/LD0051-2.png',
-      'assets/images/Haircut Images/LD0051/LD0051-3.png',
-      'assets/images/Haircut Images/LD0051/LD0051-4.png'
+      '/src/assets/images/Haircut_Images/LD0051/LD0051-1.png',
+      '/src/assets/images/Haircut_Images/LD0051/LD0051-2.png',
+      '/src/assets/images/Haircut_Images/LD0051/LD0051-3.png',
+      '/src/assets/images/Haircut_Images/LD0051/LD0051-4.png'
     ]
   },
   {
     cutType: 'LD0052',
     description: 'Modern fade with textured top',
     images: [
-      'assets/images/Haircut Images/LD0052/LD0052-1.png',
-      'assets/images/Haircut Images/LD0052/LD0052-2.png',
-      'assets/images/Haircut Images/LD0052/LD0052-3.png',
-      'assets/images/Haircut Images/LD0052/LD0052-4.png'
+      '/src/assets/images/Haircut_Images/LD0052/LD0052-1.png',
+      '/src/assets/images/Haircut_Images/LD0052/LD0052-2.png',
+      '/src/assets/images/Haircut_Images/LD0052/LD0052-3.png',
+      '/src/assets/images/Haircut_Images/LD0052/LD0052-4.png'
     ]
   },
   {
     cutType: 'LD009',
     description: 'Classic crew cut style',
     images: [
-      'assets/images/Haircut Images/LD009/LD009-1.png',
-      'assets/images/Haircut Images/LD009/LD009-2.png',
-      'assets/images/Haircut Images/LD009/LD009-3.png',
-      'assets/images/Haircut Images/LD009/LD009-4.png'
+      '/src/assets/images/Haircut_Images/LD009/LD009-1.png',
+      '/src/assets/images/Haircut_Images/LD009/LD009-2.png',
+      '/src/assets/images/Haircut_Images/LD009/LD009-3.png',
+      '/src/assets/images/Haircut_Images/LD009/LD009-4.png'
     ]
   }
 ];

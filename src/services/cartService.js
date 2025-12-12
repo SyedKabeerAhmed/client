@@ -11,6 +11,12 @@ const handleResponse = async (response) => {
       data: data
     });
     
+    // Handle validation errors specifically
+    if (response.status === 400 && data.errors && Array.isArray(data.errors)) {
+      const errorMessages = data.errors.map(error => error.msg || error.message || error).join(', ');
+      throw new Error(errorMessages || data.message || 'Validation failed');
+    }
+    
     throw new Error(data.message || 'Something went wrong');
   }
   
@@ -126,8 +132,8 @@ class CartService {
     // Format customization object according to backend model
     const formattedCustomization = {
       hairColor: customization.hairColor || '',
-      haircut: customization.haircut || '',
-      cutToSize: customization.cutToSize || false,
+      haircut: customization.haircut || '', // 'None' is a valid value
+      cutToSize: customization.cutToSize !== undefined ? customization.cutToSize : false, // false = "No", true = "Yes"
       size: customization.size || '',
       additionalInfo: customization.additionalInfo || '',
       uploadedImages: customization.uploadedImages || []
@@ -176,9 +182,16 @@ class CartService {
       }
     }
 
-    // Add selected haircut if available
-    if (customization.haircut && customization.haircut !== 'None') {
-      if (customization.haircut === 'I want to order my hair length') {
+    // Add selected haircut if available (including 'None' as a valid option)
+    if (customization.haircut) {
+      // If 'None' is selected, include it in the payload
+      if (customization.haircut === 'None') {
+        cartData.selectedHairCut = {
+          hairCutCode: 'None',
+          hairCutImage: '',
+          price: 0
+        }
+      } else if (customization.haircut === 'I want to order my hair length') {
         cartData.selectedHairCut = {
           hairCutCode: 'CUSTOM_LENGTH',
           hairCutImage: 'custom_length.png',

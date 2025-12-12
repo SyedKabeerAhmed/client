@@ -187,7 +187,7 @@ const AdminCoupons = () => {
           onClick={() => handleDelete(coupon._id)}
           title="Delete"
         >
-          <i className="fas fa-trash"></i>
+          <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>
     )

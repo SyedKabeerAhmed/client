@@ -478,11 +478,11 @@ const Shop = () => {
                     <Card className="product-card">
                       <div className="product-image-container">
                         <img 
-                          src={product.productImages?.[0] || '/src/assets/images/image 108.png'} 
+                          src={product.productImages?.[0] || '/src/assets/images/image_108.png'} 
                           alt={product.productName}
                           className="product-image"
                           onError={(e) => {
-                            e.target.src = '/src/assets/images/image 108.png'
+                            e.target.src = '/src/assets/images/image_108.png'
                           }}
                         />
                         {product.bestSelling && (

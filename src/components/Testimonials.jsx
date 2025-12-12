@@ -1,9 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Container } from 'react-bootstrap'
 import './Testimonials.css'
-import avatar from '../assets/images/Ellipse 109.png'
-import productImage from '../assets/images/Rectangle 1.png'
-import testimonialImage from '../assets/images/Rectangle 2.png'
 
 const Testimonials = ({ 
   title = "What Our Clients Say",
@@ -20,55 +17,55 @@ const Testimonials = ({
       id: 1,
       name: "Harry Maquiro",
       role: "CEO, company",
-      avatar: avatar,
+      avatar: "/src/assets/images/Ellipse_109.png",
       rating: 5,
-      testimonialImage: testimonialImage,
+      testimonialImage: "/src/assets/images/Rectangle_2.png",
       quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur.",
-      productImage: productImage,
+      productImage: "/src/assets/images/Rectangle_1.png",
       productName: "Neo Hair System"
     },
     {
       id: 2,
       name: "John Smith",
       role: "Business Owner",
-      avatar: avatar,
+      avatar: "/src/assets/images/Ellipse_109.png",
       rating: 5,
-      testimonialImage: testimonialImage,
+      testimonialImage: "/src/assets/images/Rectangle_2.png",
       quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur.",
-      productImage: productImage,
+      productImage: "/src/assets/images/Rectangle_1.png",
       productName: "Neo Hair System"
     },
     {
       id: 3,
       name: "Mike Johnson",
       role: "Entrepreneur",
-      avatar: avatar,
+      avatar: "/src/assets/images/Ellipse_109.png",
       rating: 5,
-      testimonialImage: testimonialImage,
+      testimonialImage: "/src/assets/images/Rectangle_2.png",
       quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur.",
-      productImage: productImage,
+      productImage: "/src/assets/images/Rectangle_1.png",
       productName: "Neo Hair System"
     },
     {
       id: 4,
       name: "Mike Johnson",
       role: "Entrepreneur",
-      avatar: avatar,
+      avatar: "/src/assets/images/Ellipse_109.png",
       rating: 5,
-      testimonialImage: testimonialImage,
+      testimonialImage: "/src/assets/images/Rectangle_2.png",
       quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur.",
-      productImage: productImage,
+      productImage: "/src/assets/images/Rectangle_1.png",
       productName: "Neo Hair System"
     },
     {
       id: 5,
       name: "Mike Johnson",
       role: "Entrepreneur",
-      avatar: avatar,
+      avatar: "/src/assets/images/Ellipse_109.png",
       rating: 5,
-      testimonialImage: testimonialImage,
+      testimonialImage: "/src/assets/images/Rectangle_2.png",
       quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur.",
-      productImage: productImage,
+      productImage: "/src/assets/images/Rectangle_1.png",
       productName: "Neo Hair System"
     }
   ]
@@ -115,9 +112,9 @@ const Testimonials = ({
   return (
     <div className="testimonials-section">
       <Container>
-        <div className="section-header text-center mb-5">
-          <h2 className="section-title">{title}</h2>
-          <p className="section-subtitle">{subtitle}</p>
+        <div className="testimonials-section-header text-center mb-5">
+          <h2 className="testimonials-section-title">{title}</h2>
+          <p className="testimonials-section-subtitle">{subtitle}</p>
         </div>
         
         <div 
@@ -147,11 +144,11 @@ const Testimonials = ({
                         <p className="client-role">{testimonial.role}</p>
                       </div>
                     </div>
-                    <div className="rating">
+                    <div className="testimonial-rating">
                       {[...Array(5)].map((_, i) => (
                         <span 
                           key={i} 
-                          className={`star ${i < testimonial.rating ? 'filled' : ''}`}
+                          className={`testimonial-rating-star ${i < testimonial.rating ? 'filled' : ''}`}
                         >
                           ★
                         </span>
@@ -172,13 +169,13 @@ const Testimonials = ({
                   </div>
                   
                   <div className="testimonial-footer">
-                    <div className="product-info">
+                    <div className="testimonial-product-info">
                       <img 
                         src={testimonial.productImage} 
                         alt={testimonial.productName}
-                        className="product-image"
+                        className="testimonial-product-image"
                       />
-                      <span className="product-name">{testimonial.productName}</span>
+                      <span className="testimonial-product-name">{testimonial.productName}</span>
                     </div>
                     <button className="shop-now-btn">Shop Now</button>
                   </div>

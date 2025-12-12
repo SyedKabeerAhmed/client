@@ -16,6 +16,7 @@ import Profile from './pages/Profile'
 import Shop from './pages/Shop'
 import ProductDetail from './pages/ProductDetail'
 import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
 import HairCustomization from './pages/HairCustomization'
 import { ToastProvider } from './components/Toast'
 import './App.css'
@@ -44,6 +45,7 @@ function App() {
         <Route path="/shop" element={<Layout><Shop /></Layout>} />
         <Route path="/product/:id" element={<Layout><ProductDetail /></Layout>} />
         <Route path="/cart" element={<Layout><Cart /></Layout>} />
+        <Route path="/checkout" element={<Layout><Checkout /></Layout>} />
         <Route path="/hair-customization" element={<Layout><HairCustomization /></Layout>} />
         <Route path="*" element={<Layout><Home /></Layout>} />
       </Routes>

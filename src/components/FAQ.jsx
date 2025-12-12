@@ -50,9 +50,9 @@ const FAQ = ({
   return (
     <div className="faq-section">
       <Container>
-        <div className="section-header text-center mb-5">
-          <h2 className="section-title">{title}</h2>
-          <p className="section-subtitle">{subtitle}</p>
+        <div className="faq-section-header text-center mb-5">
+          <h2 className="faq-section-title">{title}</h2>
+          <p className="faq-section-subtitle">{subtitle}</p>
         </div>
         
         <Row className="justify-content-center">

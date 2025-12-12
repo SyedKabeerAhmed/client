@@ -5,23 +5,24 @@
 }
 
 /* Features Section */
-.features-section {
+.custom-hair-system-page .features-section {
   padding: 5rem 0;
   background: #ffffff;
 }
 
-.section-header {
+.custom-hair-system-page .section-header {
   margin-bottom: 3rem;
+  flex-direction: column;
 }
 
-.section-title {
+.custom-hair-system-page .section-title {
   font-size: 2.5rem;
   font-weight: 700;
   color: #2c3e50;
   margin-bottom: 1rem;
 }
 
-.section-subtitle {
+.custom-hair-system-page .section-subtitle {
   font-size: 1.1rem;
   color: #6c757d;
   max-width: 800px;
@@ -29,7 +30,7 @@
   line-height: 1.6;
 }
 
-.feature-card {
+.custom-hair-system-page .feature-card {
   background: #ffffff;
   border-radius: 16px;
   padding: 1rem;
@@ -40,12 +41,12 @@
   border: 1px solid #f8f9fa;
 }
 
-.feature-card:hover {
+.custom-hair-system-page .feature-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
-.feature-icon {
+.custom-hair-system-page .feature-icon {
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
@@ -53,7 +54,7 @@
   
 }
 
-.feature-icon img {
+.custom-hair-system-page .feature-icon img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
@@ -61,39 +62,39 @@
   height: auto;
 }
 
-.feature-title {
+.custom-hair-system-page .feature-title {
   font-size: 1.3rem;
   font-weight: 600;
   color: #2c3e50;
   margin-bottom: 1rem;
 }
 
-.feature-description {
+.custom-hair-system-page .feature-description {
   color: #6c757d;
   line-height: 1.6;
   margin: 0;
 }
 
 /* Design Section */
-.design-section {
+.custom-hair-system-page .design-section {
   padding: 4rem 0;
   background: #f8f9fa;
   border-radius: 20px 20px 0 0;
   margin-top: 2rem;
 }
 
-.design-banner {
+.custom-hair-system-page .design-banner {
   background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(0, 123, 255, 0.05) 100%);
   border-radius: 20px;
   padding: 3rem 3rem;
   box-shadow: 0 4px 20px rgba(0, 123, 255, 0.1);
 }
 
-.design-content {
+.custom-hair-system-page .design-content {
   padding: 1rem 0;
 }
 
-.design-title {
+.custom-hair-system-page .design-title {
   font-size: 2.5rem;
   font-weight: 700;
   text-align: left;
@@ -102,7 +103,7 @@
   line-height: 1.2;
 }
 
-.design-description {
+.custom-hair-system-page .design-description {
   text-align: left;
 
   font-size: 20px;
@@ -112,7 +113,7 @@
   max-width: 500px;
 }
 
-.design-btn {
+.custom-hair-system-page .design-btn {
   background: #054C73;
   border: none;
   padding: 1rem 2.5rem;
@@ -126,18 +127,18 @@
   letter-spacing: 0.5px;
 }
 
-.design-btn:hover {
+.custom-hair-system-page .design-btn:hover {
   background: #1a202c;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(45, 55, 72, 0.3);
 }
 
-.design-image {
+.custom-hair-system-page .design-image {
   text-align: center;
   padding: 1rem;
 }
 
-.design-image img {
+.custom-hair-system-page .design-image img {
   max-width: 100%;
   height: auto;
   border-radius: 15px;
@@ -145,17 +146,17 @@
   transition: transform 0.3s ease;
 }
 
-.design-image img:hover {
+.custom-hair-system-page .design-image img:hover {
   transform: scale(1.05);
 }
 
 /* Before After Section */
-.before-after-section {
+.custom-hair-system-page .before-after-section {
   padding: 5rem 0;
   background: #ffffff;
 }
 
-.before-after-card {
+.custom-hair-system-page .before-after-card {
   background: #ffffff;
   border-radius: 16px;
   overflow: hidden;
@@ -164,12 +165,12 @@
   padding: 0.5rem;
 }
 
-.before-after-card:hover {
+.custom-hair-system-page .before-after-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
-.before-after-card img {
+.custom-hair-system-page .before-after-card img {
   width: 100%;
   height: 250px;
   object-fit: cover;
@@ -178,93 +179,93 @@
 
 /* Responsive Design */
 @media (max-width: 992px) {
-  .section-title,
-  .design-title {
+  .custom-hair-system-page .section-title,
+  .custom-hair-system-page .design-title {
     font-size: 2.2rem;
   }
   
-  .design-banner {
+  .custom-hair-system-page .design-banner {
     padding: 2rem 1.5rem;
   }
   
-  .design-title {
+  .custom-hair-system-page .design-title {
     font-size: 2.2rem;
   }
 }
 
 @media (max-width: 768px) {
-  .section-title,
-  .design-title {
+  .custom-hair-system-page .section-title,
+  .custom-hair-system-page .design-title {
     font-size: 1.8rem;
   }
   
-  .features-section,
-  .design-section,
-  .before-after-section {
+  .custom-hair-system-page .features-section,
+  .custom-hair-system-page .design-section,
+  .custom-hair-system-page .before-after-section {
     padding: 3rem 0;
   }
   
-  .feature-card {
+  .custom-hair-system-page .feature-card {
     padding: 1.5rem;
     margin-bottom: 1rem;
   }
   
-  .before-after-card img {
+  .custom-hair-system-page .before-after-card img {
     height: 200px;
   }
   
-  .design-banner {
+  .custom-hair-system-page .design-banner {
     padding: 2rem 1rem;
   }
   
-  .design-title {
+  .custom-hair-system-page .design-title {
     font-size: 2rem;
   }
   
-  .design-description {
+  .custom-hair-system-page .design-description {
     font-size: 1rem;
   }
   
-  .design-btn {
+  .custom-hair-system-page .design-btn {
     width: 100%;
     padding: 1rem 2rem;
   }
 }
 
 @media (max-width: 576px) {
-  .section-title,
-  .design-title {
+  .custom-hair-system-page .section-title,
+  .custom-hair-system-page .design-title {
     font-size: 1.5rem;
   }
   
-  .design-btn {
+  .custom-hair-system-page .design-btn {
     width: 100%;
     padding: 0.875rem 1.5rem;
   }
   
-  .feature-card {
+  .custom-hair-system-page .feature-card {
     padding: 1rem;
   }
   
-  .before-after-card img {
+  .custom-hair-system-page .before-after-card img {
     height: 180px;
   }
   
-  .design-banner {
+  .custom-hair-system-page .design-banner {
     padding: 1.5rem 1rem;
   }
   
-  .design-title {
+  .custom-hair-system-page .design-title {
     font-size: 1.8rem;
   }
   
-  .design-description {
+  .custom-hair-system-page .design-description {
     font-size: 0.95rem;
   }
 }
 
 /* Template Modal Styles */
-.template-btn {
+.custom-hair-system-page .template-btn {
   margin-top: 1rem;
   padding: 1rem 2rem;
   font-size: 1.1rem;
@@ -273,7 +274,7 @@
   transition: all 0.3s ease;
 }
 
-.template-btn:hover {
+.custom-hair-system-page .template-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
 }
@@ -282,13 +283,13 @@
   padding: 2rem;
 }
 
-.template-options-grid {
+.custom-hair-system-page .template-options-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 }
 
-.template-option-card {
+.custom-hair-system-page .template-option-card {
   border: 1px solid #e9ecef;
   border-radius: 8px;
   padding: 1.5rem;
@@ -302,18 +303,18 @@
   justify-content: space-between;
 }
 
-.template-option-card:hover {
+.custom-hair-system-page .template-option-card:hover {
   border-color: #007bff;
   box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
 }
 
-.template-option-card.selected {
+.custom-hair-system-page .template-option-card.selected {
   border-color: #007bff;
   background: #f8f9ff;
   box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
 }
 
-.template-icon {
+.custom-hair-system-page .template-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -321,7 +322,7 @@
   height: 60px;
 }
 
-.template-info {
+.custom-hair-system-page .template-info {
   text-align: center;
   flex-grow: 1;
   display: flex;
@@ -329,14 +330,14 @@
   justify-content: space-between;
 }
 
-.template-name {
+.custom-hair-system-page .template-name {
   font-size: 1.2rem;
   font-weight: 600;
   color: #2c3e50;
   margin-bottom: 0.75rem;
 }
 
-.template-description {
+.custom-hair-system-page .template-description {
   font-size: 0.9rem;
   color: #6c757d;
   margin-bottom: 1rem;
@@ -344,7 +345,7 @@
   flex-grow: 1;
 }
 
-.template-price {
+.custom-hair-system-page .template-price {
   display: block;
   font-size: 1rem;
   font-weight: 600;
@@ -381,7 +382,7 @@
 
 /* Responsive Template Modal */
 @media (max-width: 768px) {
-  .template-options-grid {
+  .custom-hair-system-page .template-options-grid {
     grid-template-columns: 1fr;
   }
   
@@ -389,31 +390,31 @@
     padding: 1.5rem;
   }
   
-  .template-btn {
+  .custom-hair-system-page .template-btn {
     width: 100%;
     margin-top: 1rem;
   }
   
-  .template-option-card {
+  .custom-hair-system-page .template-option-card {
     min-height: 160px;
   }
 }
 
 @media (max-width: 576px) {
-  .template-option-card {
+  .custom-hair-system-page .template-option-card {
     padding: 1rem;
     min-height: 140px;
   }
   
-  .template-icon {
+  .custom-hair-system-page .template-icon {
     height: 50px;
   }
   
-  .template-name {
+  .custom-hair-system-page .template-name {
     font-size: 1.1rem;
   }
   
-  .template-description {
+  .custom-hair-system-page .template-description {
     font-size: 0.85rem;
   }
 }

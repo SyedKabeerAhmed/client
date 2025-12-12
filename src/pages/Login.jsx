@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './AuthPages.css'
-import barberImage from '../assets/images/Frame 221.png'
 import { useAuth } from '../contexts/AuthContext'
 
 const Login = () => {
@@ -52,7 +51,7 @@ const Login = () => {
         <div className="auth-image-section">
           <div className="image-container">
             <img 
-              src={barberImage} 
+              src="/src/assets/images/Frame_221.png" 
               alt="Barber Shop" 
               className="auth-image"
             />

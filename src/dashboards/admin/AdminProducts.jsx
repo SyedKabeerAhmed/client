@@ -34,7 +34,8 @@ const AdminProducts = () => {
       priceForIndividual: 0,
       discountedPriceForIndividual: 0,
       priceForBusiness: 0,
-      discountedPriceForBusiness: 0
+      discountedPriceForBusiness: 0,
+      actualBasePrice: 0
     },
     productDetails: {
       baseDesign: '',
@@ -78,22 +79,58 @@ const AdminProducts = () => {
   const [productImagesPreview, setProductImagesPreview] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedHaircuts, setSelectedHaircuts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [subcategories, setSubcategories] = useState([]);
+  const [categoriesLoading, setCategoriesLoading] = useState(false);
 
+  // Reset to page 1 when search or filter changes
+  useEffect(() => {
+    if (pagination.current !== 1) {
+      setPagination(prev => ({ ...prev, current: 1 }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery, isActiveFilter]);
+
+  // Fetch products when pagination, search, or filter changes
   useEffect(() => {
     fetchProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination.current, searchQuery, isActiveFilter]);
 
-  const fetchProducts = async () => {
+  // Fetch categories and subcategories for dynamic dropdowns
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setCategoriesLoading(true);
+        const response = await api.get('/categories', { params: { includeSubcategories: true } });
+        if (response.data?.success) {
+          const data = response.data.data || {};
+          setCategories(data.categories || []);
+          setSubcategories(data.subcategories || []);
+        }
+      } catch (error) {
+        console.error('Fetch categories error:', error);
+      } finally {
+        setCategoriesLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  const fetchProducts = async (forceRefresh = false) => {
     try {
       setLoading(true);
       const params = {
         page: pagination.current,
         limit: pagination.limit,
         ...(searchQuery && { search: searchQuery }),
-        ...(isActiveFilter !== '' && { isActive: isActiveFilter })
+        ...(isActiveFilter !== '' && { isActive: isActiveFilter }),
+        // Add timestamp to bust cache when force refresh
+        ...(forceRefresh && { _t: Date.now() })
       };
 
-      const response = await api.get('/admin/products', params);
+      const response = await api.get('/admin/products', { params });
       
       if (response.data.success) {
         setProducts(response.data.data.products);
@@ -126,7 +163,8 @@ const AdminProducts = () => {
         priceForIndividual: '',
         discountedPriceForIndividual: '',
         priceForBusiness: '',
-        discountedPriceForBusiness: ''
+        discountedPriceForBusiness: '',
+        actualBasePrice: ''
       },
       productDetails: {
         baseDesign: '',
@@ -189,7 +227,8 @@ const AdminProducts = () => {
         priceForIndividual: product.pricing?.priceForIndividual || 0,
         discountedPriceForIndividual: product.pricing?.discountedPriceForIndividual || 0,
         priceForBusiness: product.pricing?.priceForBusiness || 0,
-        discountedPriceForBusiness: product.pricing?.discountedPriceForBusiness || 0
+        discountedPriceForBusiness: product.pricing?.discountedPriceForBusiness || 0,
+        actualBasePrice: product.pricing?.actualBasePrice || 0
       },
       productDetails: {
         baseDesign: product.productDetails?.baseDesign || '',
@@ -281,10 +320,13 @@ const AdminProducts = () => {
 
   const handleMainCategoryChange = (e) => {
     const mainCategory = e.target.value;
+    const relatedSubcategories = subcategories.filter(
+      sc => sc.parentCategory && sc.parentCategory.name === mainCategory
+    );
     setProductFormData(prev => ({
       ...prev,
       mainCategory,
-      subCategory: mainCategory === 'Accessories' ? '' : 'Skin'
+      subCategory: relatedSubcategories[0]?.name || ''
     }));
   };
 
@@ -318,6 +360,12 @@ const AdminProducts = () => {
   const handleSubmitProduct = async (e) => {
     e.preventDefault();
     try {
+      const selectedMainCategory = categories.find(
+        cat => cat.name === productFormData.mainCategory
+      );
+      const mainCategorySlug = selectedMainCategory?.slug
+        || (productFormData.mainCategory === 'Hair Systems' ? 'hair-systems' : 'accessories');
+
       const formDataToSend = {
         ...productFormData,
         stock: parseInt(productFormData.stock) || 0,
@@ -325,7 +373,8 @@ const AdminProducts = () => {
           priceForIndividual: parseFloat(productFormData.pricing.priceForIndividual) || 0,
           discountedPriceForIndividual: parseFloat(productFormData.pricing.discountedPriceForIndividual) || 0,
           priceForBusiness: parseFloat(productFormData.pricing.priceForBusiness) || 0,
-          discountedPriceForBusiness: parseFloat(productFormData.pricing.discountedPriceForBusiness) || 0
+          discountedPriceForBusiness: parseFloat(productFormData.pricing.discountedPriceForBusiness) || 0,
+          actualBasePrice: parseFloat(productFormData.pricing.actualBasePrice) || 0
         },
         productBenefits: {
           durability: parseInt(productFormData.productBenefits.durability) || 5,
@@ -348,11 +397,11 @@ const AdminProducts = () => {
           productCode: productFormData.productCode
         },
         colors: selectedColors,
-        mainCategorySlug: productFormData.mainCategory === 'Hair Systems' ? 'hair-systems' : 'accessories'
+        mainCategorySlug
       };
 
       if (editingProduct) {
-        await api.put(`/admin/products/${editingProduct._id}`, formDataToSend);
+        const updateResponse = await api.put(`/admin/products/${editingProduct._id}`, formDataToSend);
         if (productImages.length > 0) {
           const uploadFormData = new FormData();
           productImages.forEach(file => {
@@ -362,7 +411,13 @@ const AdminProducts = () => {
             headers: { 'Content-Type': 'multipart/form-data' }
           });
         }
+        
         alert('Product updated successfully');
+        handleCloseProductModal();
+        
+        // Force refresh product list after successful update to get latest data
+        // Using cache-busting timestamp to ensure fresh data
+        await fetchProducts(true);
       } else {
         const response = await api.post('/admin/products', formDataToSend);
         if (productImages.length > 0) {
@@ -375,12 +430,21 @@ const AdminProducts = () => {
           });
         }
         alert('Product created successfully');
+        handleCloseProductModal();
+        // Refresh product list after successful create
+        await fetchProducts();
       }
-      
-      handleCloseProductModal();
-      fetchProducts();
     } catch (error) {
-      alert(error.response?.data?.message || 'Failed to save product');
+      const errorData = error.response?.data;
+      if (errorData?.errors) {
+        // Display all validation errors
+        const errorMessages = Object.entries(errorData.errors)
+          .map(([field, message]) => `${field}: ${message}`)
+          .join('\n');
+        alert(`Validation Errors:\n\n${errorMessages}`);
+      } else {
+        alert(errorData?.message || 'Failed to save product');
+      }
     }
   };
 
@@ -402,7 +466,9 @@ const AdminProducts = () => {
     { key: 'image', title: 'Image' },
     { key: 'name', title: 'Product Name' },
     { key: 'code', title: 'Code' },
-    { key: 'price', title: 'Price' },
+    { key: 'discountedPriceForIndividual', title: 'Discounted Price (Individual)' },
+    { key: 'discountedPriceForBusiness', title: 'Discounted Price (Business)' },
+    { key: 'actualBasePrice', title: 'Actual Base Price' },
     { key: 'stock', title: 'Stock' },
     { key: 'status', title: 'Status' },
     { key: 'actions', title: 'Actions' }
@@ -419,7 +485,9 @@ const AdminProducts = () => {
     ),
     name: product.productName,
     code: product.productDetails?.productCode || 'N/A',
-    price: `$${product.productPrice?.regular || 0}`,
+    discountedPriceForIndividual: `$${(product.pricing?.discountedPriceForIndividual || 0).toFixed(2)}`,
+    discountedPriceForBusiness: `$${(product.pricing?.discountedPriceForBusiness || 0).toFixed(2)}`,
+    actualBasePrice: `$${(product.pricing?.actualBasePrice || 0).toFixed(2)}`,
     stock: product.stock || 0,
     status: (
       <span className={`status-badge ${product.isActive ? 'active' : 'inactive'}`}>
@@ -440,7 +508,7 @@ const AdminProducts = () => {
           onClick={() => handleDelete(product._id)}
           title="Delete"
         >
-          <i className="fas fa-trash"></i>
+          <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>
     )
@@ -575,8 +643,18 @@ const AdminProducts = () => {
                       required
                       className="form-input"
                     >
-                      <option value="Hair Systems">Hair Systems</option>
-                      <option value="Accessories">Accessories</option>
+                    {categories.length > 0 ? (
+                      categories.map(cat => (
+                        <option key={cat._id} value={cat.name}>
+                          {cat.name}
+                        </option>
+                      ))
+                    ) : (
+                      <>
+                        <option value="Hair Systems">Hair Systems</option>
+                        <option value="Accessories">Accessories</option>
+                      </>
+                    )}
                     </select>
                   </div>
                   <div className="form-group">
@@ -588,21 +666,13 @@ const AdminProducts = () => {
                       required
                       className="form-input"
                     >
-                      {productFormData.mainCategory === 'Hair Systems' ? (
-                        <>
-                          <option value="Skin">Skin</option>
-                          <option value="French Mono">French Mono</option>
-                          <option value="Mono">Mono</option>
-                          <option value="Hybrid">Hybrid</option>
-                        </>
-                      ) : (
-                        <>
-                          <option value="Adhesives">Adhesives</option>
-                          <option value="Tapes">Tapes</option>
-                          <option value="Cleaning">Cleaning</option>
-                          <option value="Styling">Styling</option>
-                        </>
-                      )}
+                    {subcategories
+                      .filter(sc => sc.parentCategory && sc.parentCategory.name === productFormData.mainCategory)
+                      .map(sc => (
+                        <option key={sc._id} value={sc.name}>
+                          {sc.name}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -702,6 +772,22 @@ const AdminProducts = () => {
                     />
                   </div>
                 </div>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>Actual Base Price *</label>
+                    <input
+                      type="number"
+                      name="pricing.actualBasePrice"
+                      value={productFormData.pricing.actualBasePrice || ''}
+                      onChange={handleProductInputChange}
+                      min="0"
+                      step="0.01"
+                      required
+                      className="form-input"
+                      placeholder="Base manufacturing cost"
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* Flags */}
@@ -709,38 +795,38 @@ const AdminProducts = () => {
                 <h4>Flags & Status</h4>
                 <div className="form-row">
                   <div className="form-group">
-                    <label className="toggle-switch">
+                    <label htmlFor="bestSelling">
                       <input
                         type="checkbox"
+                        id="bestSelling"
                         name="bestSelling"
                         checked={productFormData.bestSelling}
                         onChange={handleProductInputChange}
                       />
-                      <span className="toggle-slider"></span>
                       Best Selling
                     </label>
                   </div>
                   <div className="form-group">
-                    <label className="toggle-switch">
+                    <label htmlFor="premiumProduct">
                       <input
                         type="checkbox"
+                        id="premiumProduct"
                         name="premiumProduct"
                         checked={productFormData.premiumProduct}
                         onChange={handleProductInputChange}
                       />
-                      <span className="toggle-slider"></span>
                       Premium Product
                     </label>
                   </div>
                   <div className="form-group">
-                    <label className="toggle-switch">
+                    <label htmlFor="isActive">
                       <input
                         type="checkbox"
+                        id="isActive"
                         name="isActive"
                         checked={productFormData.isActive}
                         onChange={handleProductInputChange}
                       />
-                      <span className="toggle-slider"></span>
                       Active
                     </label>
                   </div>
@@ -978,26 +1064,26 @@ const AdminProducts = () => {
                 <h4>Cut to Size Options</h4>
                 <div className="form-row">
                   <div className="form-group">
-                    <label className="toggle-switch">
+                    <label htmlFor="cutByStylist">
                       <input
                         type="checkbox"
+                        id="cutByStylist"
                         name="cutToSize.cutByStylist"
                         checked={productFormData.cutToSize.cutByStylist}
                         onChange={handleProductInputChange}
                       />
-                      <span className="toggle-slider"></span>
                       Cut by Stylist
                     </label>
                   </div>
                   <div className="form-group">
-                    <label className="toggle-switch">
+                    <label htmlFor="cutToMySize">
                       <input
                         type="checkbox"
+                        id="cutToMySize"
                         name="cutToSize.cutToMySize"
                         checked={productFormData.cutToSize.cutToMySize}
                         onChange={handleProductInputChange}
                       />
-                      <span className="toggle-slider"></span>
                       Cut to My Size
                     </label>
                   </div>
@@ -1047,26 +1133,26 @@ const AdminProducts = () => {
                   </div>
                   <div className="form-row">
                     <div className="form-group">
-                      <label className="toggle-switch">
+                      <label htmlFor="sendEmailToHairStore">
                         <input
                           type="checkbox"
+                          id="sendEmailToHairStore"
                           name="haircut.sendEmailToHairStore"
                           checked={productFormData.haircut.sendEmailToHairStore}
                           onChange={handleProductInputChange}
                         />
-                        <span className="toggle-slider"></span>
                         Send Email to Hair Store
                       </label>
                     </div>
                     <div className="form-group">
-                      <label className="toggle-switch">
+                      <label htmlFor="uploadImageHairStyle">
                         <input
                           type="checkbox"
+                          id="uploadImageHairStyle"
                           name="haircut.uploadImageHairStyle"
                           checked={productFormData.haircut.uploadImageHairStyle}
                           onChange={handleProductInputChange}
                         />
-                        <span className="toggle-slider"></span>
                         Upload Image Hair Style
                       </label>
                     </div>

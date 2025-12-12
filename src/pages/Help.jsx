@@ -2,7 +2,6 @@ import React from 'react'
 import Banner from '../components/Banner'
 import FAQ from '../components/FAQ'
 import Newsletter from '../components/Newsletter'
-import backgroundImage from '../assets/images/scandinavian-interior-mockup-wall-decal-background 2.png'
 
 const Help = () => {
   const helpFAQs = [
@@ -45,7 +44,7 @@ const Help = () => {
         badge="Help"
         title="How Can We Help You Today?"
         description="Find quick answers, step-by-step guides, and expert support everything you need in one place."
-        backgroundImage={backgroundImage}
+        backgroundImage="/src/assets/images/scandinavian-interior-mockup-wall-decal-background_2.png"
       />
       
       <FAQ 

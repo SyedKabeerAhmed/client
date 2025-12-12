@@ -88,12 +88,12 @@ const Cart = () => {
       return `/src/${product.productImages[0]}`
     }
     // Default image for custom hair systems or when product is null
-    return '/src/assets/images/image 108.png'
+    return '/src/assets/images/image_108.png'
   }
 
   const getColorImagePath = (selectedColor) => {
     if (selectedColor?.colorImage) {
-      return `/src/assets/images/Hair Color/all_colors/${selectedColor.colorImage}`
+      return `/src/assets/images/Hair_Color/all_colors/${selectedColor.colorImage}`
     }
     return null
   }
@@ -101,11 +101,11 @@ const Cart = () => {
   const getHaircutImagePath = (selectedHairCut) => {
     if (selectedHairCut?.hairCutImage) {
       if (selectedHairCut.hairCutCode === 'CUSTOM_LENGTH') {
-        return '/src/assets/images/image 108.png'
+        return '/src/assets/images/image_108.png'
       } else if (selectedHairCut.hairCutCode === 'CUSTOM_IMAGE') {
-        return '/src/assets/images/image 108.png'
+        return '/src/assets/images/image_108.png'
       } else {
-        return `/src/assets/images/Haircut Images/${selectedHairCut.hairCutCode}/${selectedHairCut.hairCutImage}`
+        return `/src/assets/images/Haircut_Images/${selectedHairCut.hairCutCode}/${selectedHairCut.hairCutImage}`
       }
     }
     return null
@@ -229,7 +229,7 @@ const Cart = () => {
                             src={getImagePath(item.product)} 
                             alt={item.product?.productName || 'Product'}
                             onError={(e) => {
-                              e.target.src = '/src/assets/images/image 108.png'
+                              e.target.src = '/src/assets/images/image_108.png'
                             }}
                           />
                         </div>
@@ -455,7 +455,7 @@ const Cart = () => {
               {/* HairCustomization Details */}
               {selectedCustomization.isCustomHairSystem && selectedCustomization.customHairSystem && (
                 <div className="customization-section">
-                  <h5 className="section-title">Custom Hair System Details</h5>
+                  <h5 className="cart-customization-title">Custom Hair System Details</h5>
                   {Object.entries(selectedCustomization.customHairSystem).map(([key, value]) => {
                     if (!value || value === '') return null
                     
@@ -477,7 +477,7 @@ const Cart = () => {
               {/* ProductDetail Customization */}
               {selectedCustomization.customization && (
                 <div className="customization-section">
-                  <h5 className="section-title">Product Customization Details</h5>
+                  <h5 className="cart-customization-title">Product Customization Details</h5>
                   {Object.entries(selectedCustomization.customization).map(([key, value]) => {
                     if (!value || key === 'hairLengths' || key === 'uploadedImages') return null
                     
@@ -513,7 +513,7 @@ const Cart = () => {
               {/* Additional Notes */}
               {selectedCustomization.additionalNotes && (
                 <div className="customization-section">
-                  <h5 className="section-title">Additional Notes</h5>
+                  <h5 className="cart-customization-title">Additional Notes</h5>
                   <div className="customization-item">
                     <p>{selectedCustomization.additionalNotes}</p>
                   </div>

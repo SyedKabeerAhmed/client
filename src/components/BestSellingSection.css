@@ -3,18 +3,18 @@
   background-color: white;
 }
 
-.section-header {
+.best-selling-section-header {
   margin-bottom: 60px;
 }
 
-.section-title {
+.best-selling-section-title {
   font-size: 2.5rem;
   font-weight: 700;
   color: #1e3a8a;
   margin-bottom: 20px;
 }
 
-.section-subtitle {
+.best-selling-section-subtitle {
   font-size: 1.1rem;
   color: #6b7280;
   max-width: 600px;
@@ -95,30 +95,30 @@
   margin-bottom: 20px;
 }
 
-.rating-item {
+.best-selling-rating-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
 }
 
-.rating-label {
+.best-selling-rating-label {
   font-size: 0.85rem;
   color: #6b7280;
   font-weight: 500;
 }
 
-.stars {
+.best-selling-rating-stars {
   display: flex;
 }
 
-.star {
+.best-selling-rating-star {
   color: #d1d5db;
   font-size: 0.9rem;
   margin-right: 2px;
 }
 
-.star.filled {
+.best-selling-rating-star.filled {
   color: #fbbf24;
 }
 
@@ -144,11 +144,11 @@
     padding: 60px 0;
   }
   
-  .section-title {
+  .best-selling-section-title {
     font-size: 2rem;
   }
   
-  .section-subtitle {
+  .best-selling-section-subtitle {
     font-size: 1rem;
   }
   

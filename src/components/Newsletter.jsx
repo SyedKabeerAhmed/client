@@ -33,7 +33,7 @@ const Newsletter = ({
 
   return (
     <div className="newsletter-section">
-      <div className="newsletter-container">
+      <Container className="newsletter-container">
         <Row className="align-items-center">
           <Col lg={6}>
             <div className="newsletter-content">
@@ -73,7 +73,7 @@ const Newsletter = ({
             </div>
           </Col>
         </Row>
-      </div>
+      </Container>
     </div>
   )
 }

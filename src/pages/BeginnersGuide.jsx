@@ -4,49 +4,48 @@ import FeaturesBar from '../components/FeaturesBar'
 import StylesSection from '../components/StylesSection'
 import ProductSection from '../components/ProductSection'
 import Newsletter from '../components/Newsletter'
-import backgroundImage from '../assets/images/scandinavian-interior-mockup-wall-decal-background 2.png'
 
 const BeginnersGuide = () => {
   const premiumSystems = [
     {
       name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       category: "Hair Systems",
-      image: "/src/assets/images/image 115.png",
+      image: "/src/assets/images/image_115.png",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       buttonText: "Explore More"
     },
     {
       name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       category: "Hair Systems",
-      image: "/src/assets/images/image 115.png",
+      image: "/src/assets/images/image_115.png",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       buttonText: "Explore More"
     },
     {
       name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       category: "Hair Systems",
-      image: "/src/assets/images/image 115.png",
+      image: "/src/assets/images/image_115.png",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       buttonText: "Explore More"
     },
     {
       name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       category: "Hair Systems",
-      image: "/src/assets/images/image 115.png",
+      image: "/src/assets/images/image_115.png",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       buttonText: "Explore More"
     },
     {
       name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       category: "Hair Systems",
-      image: "/src/assets/images/image 115.png",
+      image: "/src/assets/images/image_115.png",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       buttonText: "Explore More"
     },
     {
       name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       category: "Hair Systems",
-      image: "/src/assets/images/image 115.png",
+      image: "/src/assets/images/image_115.png",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       buttonText: "Explore More"
     }
@@ -59,7 +58,7 @@ const BeginnersGuide = () => {
         badge="Beginners Guide"
         title="New to Hair Systems? Start Here"
         description="Learn the basics of hair systems with simple guides, tips, and expert advice to help you start with confidence."
-        backgroundImage={backgroundImage}
+        backgroundImage="/src/assets/images/scandinavian-interior-mockup-wall-decal-background_2.png"
       />
       
       <FeaturesBar />

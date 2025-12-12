@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import './StylesSection.css'
-import image from '../assets/images/Frame 871.png'
 
 const StylesSection = () => {
   const [activeTab, setActiveTab] = useState(0)
@@ -11,7 +10,7 @@ const StylesSection = () => {
       number: "1",
       title: "Selecting Your Perfect Base",
       description: "Carefully select your perfect balance of style, comfort, and a natural look.",
-      image: image,
+      image: "/src/assets/images/Frame_871.png",
       mainTitle: "Selecting Your Perfect Base",
       mainDescription: "Carefully select your perfect balance of style, comfort, and a natural look."
     },
@@ -19,7 +18,7 @@ const StylesSection = () => {
       number: "2", 
       title: "Customizing Your Style",
       description: "Personalize your hair system to match your unique preferences and lifestyle needs.",
-      image: image,
+      image: "/src/assets/images/Frame_871.png",
       mainTitle: "Customizing Your Style",
       mainDescription: "Personalize your hair system to match your unique preferences and lifestyle needs."
     },
@@ -27,7 +26,7 @@ const StylesSection = () => {
       number: "3",
       title: "Professional Installation", 
       description: "Get expert guidance and professional installation for the perfect fit and natural look.",
-      image: image,
+      image: "/src/assets/images/Frame_871.png",
       mainTitle: "Professional Installation",
       mainDescription: "Get expert guidance and professional installation for the perfect fit and natural look."
     }
@@ -36,9 +35,9 @@ const StylesSection = () => {
   return (
     <div className="styles-section">
       <Container>
-        <div className="section-header text-center mb-5">
-          <h2 className="section-title">Styles That Redefine Confidence</h2>
-          <p className="section-subtitle">
+        <div className="styles-section-header text-center mb-5">
+          <h2 className="styles-section-title">Styles That Redefine Confidence</h2>
+          <p className="styles-section-subtitle">
             Explore Our Most Sought After Hair Systems, To Give You The Perfect Balance Of Style, Comfort, And A Natural Look.
           </p>
         </div>

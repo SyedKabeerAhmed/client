@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faTimes, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faTimes, faSave, faTrash } from '@fortawesome/free-solid-svg-icons';
 import api from '../../config/api';
 import DataTable from '../shared/DataTable';
 import './AdminUsers.css';
@@ -29,15 +29,14 @@ const AdminUsers = () => {
     email: '',
     phoneNumber: '',
     password: '',
-    role: 'subadmin',
-    userType: 'admin'
+    role: 'subadmin'
   });
 
   useEffect(() => {
     fetchUsers();
   }, [pagination.current, roleFilter, userTypeFilter, searchQuery, isActiveFilter]);
 
-  const fetchUsers = async () => {
+  const fetchUsers = async (forceRefresh = false) => {
     try {
       setLoading(true);
       setError(null);
@@ -48,10 +47,12 @@ const AdminUsers = () => {
         ...(roleFilter && { role: roleFilter }),
         ...(userTypeFilter && { userType: userTypeFilter }),
         ...(searchQuery && { search: searchQuery }),
-        ...(isActiveFilter !== '' && { isActive: isActiveFilter })
+        ...(isActiveFilter !== '' && { isActive: isActiveFilter }),
+        // Add timestamp to bust cache when force refresh
+        ...(forceRefresh && { _t: Date.now() })
       };
 
-      const response = await api.get('/admin/users', params);
+      const response = await api.get('/admin/users', { params });
       
       if (response.data.success) {
         setUsers(response.data.data.users);
@@ -76,7 +77,8 @@ const AdminUsers = () => {
       const response = await api.delete(`/admin/users/${userId}`);
       if (response.data.success) {
         alert('User deleted successfully');
-        fetchUsers();
+        // Force refresh user list after successful delete
+        await fetchUsers(true);
       } else {
         alert('Failed to delete user');
       }
@@ -86,20 +88,6 @@ const AdminUsers = () => {
     }
   };
 
-  const handleRoleChange = async (userId, newRole) => {
-    try {
-      const response = await api.put(`/admin/users/${userId}`, { role: newRole });
-      if (response.data.success) {
-        alert('User role updated successfully');
-        fetchUsers();
-      } else {
-        alert('Failed to update user role');
-      }
-    } catch (error) {
-      console.error('Update user role error:', error);
-      alert(error.response?.data?.message || 'Failed to update user role');
-    }
-  };
 
   const handleCreateUser = () => {
     setUserFormData({
@@ -107,8 +95,7 @@ const AdminUsers = () => {
       email: '',
       phoneNumber: '',
       password: '',
-      role: 'subadmin',
-      userType: 'admin'
+      role: 'subadmin'
     });
     setShowCreateModal(true);
   };
@@ -120,8 +107,7 @@ const AdminUsers = () => {
       email: '',
       phoneNumber: '',
       password: '',
-      role: 'subadmin',
-      userType: 'admin'
+      role: 'subadmin'
     });
   };
 
@@ -141,7 +127,8 @@ const AdminUsers = () => {
       if (response.data.success) {
         alert('User created successfully');
         handleCloseCreateModal();
-        fetchUsers();
+        // Force refresh user list after successful create
+        await fetchUsers(true);
       }
     } catch (error) {
       alert(error.response?.data?.message || 'Failed to create user');
@@ -162,18 +149,7 @@ const AdminUsers = () => {
     id: user._id,
     fullName: user.fullName,
     email: user.email,
-    role: (
-      <select 
-        value={user.role} 
-        onChange={(e) => handleRoleChange(user._id, e.target.value)}
-        className="role-select"
-      >
-        <option value="user">User</option>
-        <option value="business_user">Business</option>
-        <option value="individual_user">Individual</option>
-        <option value="admin">Admin</option>
-      </select>
-    ),
+    role: user.role || 'N/A',
     userType: user.userType || 'Consumer',
     status: (
       <span className={`status-badge ${user.isActive ? 'active' : 'inactive'}`}>
@@ -188,7 +164,7 @@ const AdminUsers = () => {
           onClick={() => handleDelete(user._id)}
           title="Delete User"
             >
-              <i className="fas fa-trash"></i>
+              <FontAwesomeIcon icon={faTrash} />
             </button>
         </div>
       )
@@ -386,22 +362,9 @@ const AdminUsers = () => {
                     required
                     className="form-input"
                   >
+                    <option value="factory">Factory User</option>
                     <option value="subadmin">Sub Admin</option>
                     <option value="admin">Admin</option>
-                    <option value="factory">Factory</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label>User Type</label>
-                  <select
-                    name="userType"
-                    value={userFormData.userType}
-                    onChange={handleUserInputChange}
-                    className="form-input"
-                  >
-                    <option value="admin">Admin</option>
-                    <option value="consumer">Consumer</option>
-                    <option value="business">Business</option>
                   </select>
                 </div>
               </div>

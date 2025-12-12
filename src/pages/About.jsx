@@ -6,32 +6,31 @@ import VisionSection from '../components/VisionSection'
 import PremiumSystemsSection from '../components/PremiumSystemsSection'
 import Testimonials from '../components/Testimonials'
 import Newsletter from '../components/Newsletter'
-import backgroundImage from '../assets/images/scandinavian-interior-mockup-wall-decal-background 2.png'
 
 const About = () => {
   const premiumSystems = [
     {
       name: "Skin",
       category: "Hair Systems",
-      image: "/src/assets/images/Rectangle 2.png",
+      image: "/src/assets/images/Rectangle_2.png",
       buttonText: "SHOP NOW"
     },
     {
       name: "Lace", 
       category: "Hair Systems",
-      image: "/src/assets/images/Rectangle 2.png",
+      image: "/src/assets/images/Rectangle_2.png",
       buttonText: "SHOP NOW"
     },
     {
       name: "Hybrid",
       category: "Hair Systems", 
-      image: "/src/assets/images/Rectangle 2.png",
+      image: "/src/assets/images/Rectangle_2.png",
       buttonText: "SHOP NOW"
     },
     {
       name: "Mono",
       category: "Hair Systems",
-      image: "/src/assets/images/Rectangle 2.png", 
+      image: "/src/assets/images/Rectangle_2.png", 
       buttonText: "SHOP NOW"
     }
   ]
@@ -41,33 +40,33 @@ const About = () => {
       id: 1,
       name: "Harry Maguire",
       role: "CEO, company",
-      avatar: "/src/assets/images/Ellipse 109.png",
+      avatar: "/src/assets/images/Ellipse_109.png",
       rating: 5,
-      testimonialImage: "/src/assets/images/Rectangle 2.png",
+      testimonialImage: "/src/assets/images/Rectangle_2.png",
       quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur.",
-      productImage: "/src/assets/images/Rectangle 1.png",
+      productImage: "/src/assets/images/Rectangle_1.png",
       productName: "Neo Hair System"
     },
     {
       id: 2,
       name: "John Smith",
       role: "Business Owner",
-      avatar: "/src/assets/images/Ellipse 109.png",
+      avatar: "/src/assets/images/Ellipse_109.png",
       rating: 5,
-      testimonialImage: "/src/assets/images/Rectangle 2.png",
+      testimonialImage: "/src/assets/images/Rectangle_2.png",
       quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur.",
-      productImage: "/src/assets/images/Rectangle 1.png",
+      productImage: "/src/assets/images/Rectangle_1.png",
       productName: "Neo Hair System"
     },
     {
       id: 3,
       name: "Mike Johnson",
       role: "Entrepreneur",
-      avatar: "/src/assets/images/Ellipse 109.png",
+      avatar: "/src/assets/images/Ellipse_109.png",
       rating: 5,
-      testimonialImage: "/src/assets/images/Rectangle 2.png",
+      testimonialImage: "/src/assets/images/Rectangle_2.png",
       quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur.",
-      productImage: "/src/assets/images/Rectangle 1.png",
+      productImage: "/src/assets/images/Rectangle_1.png",
       productName: "Neo Hair System"
     }
   ]
@@ -79,7 +78,7 @@ const About = () => {
         badge="About Us"
         title="Who We Are & What We Stand For"
         description="Discover our commitment to quality, innovation, and customer satisfaction in the hair systems industry."
-        backgroundImage={backgroundImage}
+        backgroundImage="/src/assets/images/scandinavian-interior-mockup-wall-decal-background_2.png"
       />
       
       <FeaturesBar />
@@ -88,7 +87,7 @@ const About = () => {
         badge="Our Mission"
         title="Empowering Authentic Confidence"
         description="We believe that everyone deserves to feel confident and authentic in their own skin. Our mission is to provide high-quality hair systems that not only look natural but also empower our clients to live their lives with renewed confidence and self-assurance. Through innovative technology, expert craftsmanship, and personalized service, we help individuals rediscover their best selves."
-        image={backgroundImage}
+        image="/src/assets/images/scandinavian-interior-mockup-wall-decal-background_2.png"
         reverse={false}
       />
       
