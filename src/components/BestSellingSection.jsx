@@ -1,14 +1,16 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import './BestSellingSection.css'
 
 const BestSellingSection = ({ 
-  title = "Our Best Selling Hair Systems",
-  subtitle = "Discover The Most Trusted And Popular Systems, Chosen By Clients For Their Natural Look, Comfort, And Durability.",
+  title,
+  subtitle,
   products = [],
   loading = false
 }) => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
 
   // Helper function to format price
@@ -81,11 +83,17 @@ const BestSellingSection = ({
       <div className="best-selling-section">
         <Container>
           <div className="best-selling-section-header text-center mb-5">
-            <h2 className="best-selling-section-title">{title}</h2>
-            <p className="best-selling-section-subtitle">{subtitle}</p>
+            <h2 className="best-selling-section-title">
+              {title || t('home.bestSelling.title')}
+            </h2>
+            <p className="best-selling-section-subtitle">
+              {subtitle || t('home.bestSelling.subtitle')}
+            </p>
           </div>
           <div className="text-center py-5">
-            <p>Loading best selling products...</p>
+            <p>
+              {t('common.loading')}
+            </p>
           </div>
         </Container>
       </div>
@@ -100,8 +108,12 @@ const BestSellingSection = ({
     <div className="best-selling-section">
       <Container>
         <div className="best-selling-section-header text-center mb-5">
-          <h2 className="best-selling-section-title">{title}</h2>
-          <p className="best-selling-section-subtitle">{subtitle}</p>
+          <h2 className="best-selling-section-title">
+            {title || t('home.bestSelling.title')}
+          </h2>
+          <p className="best-selling-section-subtitle">
+            {subtitle || t('home.bestSelling.subtitle')}
+          </p>
         </div>
         
         <Row className="g-4">
@@ -161,7 +173,9 @@ const BestSellingSection = ({
                     )}
                     
                     <button className="best-selling-button">
-                      {product.buttonText || "SHOP NOW"}
+                      <span>
+                        {product.buttonText || t('product.shopNow')}
+                      </span>
                     </button>
                   </div>
                 </div>

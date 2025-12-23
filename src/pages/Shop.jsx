@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, Card, Form, Button, Spinner, Alert } from 'react-bootstrap'
 import { useSearchParams, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { productService } from '../services/productService'
 import { categoryService } from '../services/categoryService'
 import './Shop.css'
 
 const Shop = () => {
+  const { t } = useTranslation()
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
   const [products, setProducts] = useState([])
@@ -23,37 +25,37 @@ const Shop = () => {
   // Helper function to get display name for category
   const getCategoryDisplayName = (categorySlug) => {
     const categoryNames = {
-      'all': 'Our Hair Systems & Accessories',
-      'hair-systems': 'Hair Systems',
-      'accessories': 'Accessories',
-      'skin': 'Skin Hair Systems',
-      'lace': 'Lace Hair Systems', 
-      'hybrid': 'Hybrid Hair Systems',
-      'mono': 'Mono Hair Systems',
-      'adhesive': 'Adhesives',
-      'glue': 'Glues',
-      'tools': 'Tools',
-      'care-products': 'Care Products'
+      'all': t('shop.ourHairSystems'),
+      'hair-systems': t('shop.hairSystems'),
+      'accessories': t('shop.accessories'),
+      'skin': t('shop.skinHairSystems'),
+      'lace': t('shop.laceHairSystems'), 
+      'hybrid': t('shop.hybridHairSystems'),
+      'mono': t('shop.monoHairSystems'),
+      'adhesive': t('shop.adhesives'),
+      'glue': t('shop.glues'),
+      'tools': t('shop.tools'),
+      'care-products': t('shop.careProducts')
     }
-    return categoryNames[categorySlug] || 'Our Hair Systems & Accessories'
+    return categoryNames[categorySlug] || t('shop.ourHairSystems')
   }
 
   // Helper function to get subtitle for category
   const getCategorySubtitle = (categorySlug) => {
     const subtitles = {
-      'all': 'Explore Our Most Sought-After Hair Systems, Carefully Selected To Give You The Perfect Balance Of Style, Comfort, And A Natural Look',
-      'hair-systems': 'Explore Our Complete Range Of Hair Systems, Designed To Provide The Perfect Balance Of Style, Comfort, And Natural Appearance',
-      'accessories': 'Discover Essential Accessories And Tools To Maintain And Style Your Hair Systems With Professional Results',
-      'skin': 'Experience The Ultimate In Comfort And Natural Appearance With Our Premium Skin Hair Systems',
-      'lace': 'Discover The Perfect Blend Of Breathability And Natural Look With Our High-Quality Lace Hair Systems',
-      'hybrid': 'Get The Best Of Both Worlds With Our Innovative Hybrid Hair Systems Combining Multiple Base Materials',
-      'mono': 'Enjoy Superior Durability And Easy Maintenance With Our Monofilament Hair Systems',
-      'adhesive': 'Professional-Grade Adhesives For Secure And Long-Lasting Hair System Attachment',
-      'glue': 'High-Quality Glues And Bonding Solutions For Reliable Hair System Installation',
-      'tools': 'Essential Tools And Equipment For Professional Hair System Application And Maintenance',
-      'care-products': 'Premium Care Products To Keep Your Hair Systems Looking Fresh And Natural'
+      'all': t('shop.exploreSubtitle'),
+      'hair-systems': t('shop.hairSystemsSubtitle'),
+      'accessories': t('shop.accessoriesSubtitle'),
+      'skin': t('shop.skinSubtitle'),
+      'lace': t('shop.laceSubtitle'),
+      'hybrid': t('shop.hybridSubtitle'),
+      'mono': t('shop.monoSubtitle'),
+      'adhesive': t('shop.adhesiveSubtitle'),
+      'glue': t('shop.glueSubtitle'),
+      'tools': t('shop.toolsSubtitle'),
+      'care-products': t('shop.careProductsSubtitle')
     }
-    return subtitles[categorySlug] || 'Explore Our Most Sought-After Hair Systems, Carefully Selected To Give You The Perfect Balance Of Style, Comfort, And A Natural Look'
+    return subtitles[categorySlug] || t('shop.exploreSubtitle')
   }
 
   // Helper function to get parent category for subcategories
@@ -349,8 +351,16 @@ const Shop = () => {
         <Container>
           {/* Page Header */}
           <div className="page-header">
-            <h1 className="page-title">{getCategoryDisplayName(filterCategory)}</h1>
-            <p className="page-subtitle">
+            <h1
+              className="page-title"
+             
+            >
+              {getCategoryDisplayName(filterCategory)}
+            </h1>
+            <p
+              className="page-subtitle"
+             
+            >
               {getCategorySubtitle(filterCategory)}
             </p>
           </div>
@@ -362,7 +372,7 @@ const Shop = () => {
                 <Col md={8}>
                       <Form.Control
                         type="text"
-                        placeholder="Search by product name or code (e.g., HS-SKIN-003)..."
+                        placeholder={t('common.searchPlaceholder') || "Search by product name or code (e.g., HS-SKIN-003)..."}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="search-input"
@@ -370,7 +380,9 @@ const Shop = () => {
                 </Col>
                 <Col md={4}>
                   <Button type="submit" className="search-button">
-                    Search
+                    <span>
+                      {t('common.search')}
+                    </span>
                   </Button>
                 </Col>
               </Row>
@@ -387,7 +399,9 @@ const Shop = () => {
                     onChange={handleFilterChange}
                     className="filter-select"
                   >
-                    <option value="all">All Categories</option>
+                    <option value="all">
+                      {t('shop.allCategories') || 'All Categories'}
+                    </option>
                     {categories && Array.isArray(categories) && categories.map((category) => (
                       <optgroup key={category._id} label={category.name}>
                         {category.subCategories && category.subCategories.length > 0 ? (
@@ -413,11 +427,21 @@ const Shop = () => {
                     onChange={handleSortChange}
                     className="sort-select"
                   >
-                    <option value="createdAt">Featured</option>
-                    <option value="pricing.priceForIndividual">Price: Low to High</option>
-                    <option value="pricing.priceForIndividual">Price: High to Low</option>
-                    <option value="createdAt">Newest</option>
-                    <option value="productReviews.averageReviewRating">Highest Rated</option>
+                    <option value="createdAt">
+                      {t('shop.featured')}
+                    </option>
+                    <option value="pricing.priceForIndividual">
+                      {t('shop.priceLowToHigh') || 'Price: Low to High'}
+                    </option>
+                    <option value="pricing.priceForIndividual">
+                      {t('shop.priceHighToLow') || 'Price: High to Low'}
+                    </option>
+                    <option value="createdAt">
+                      {t('shop.newest')}
+                    </option>
+                    <option value="productReviews.averageReviewRating">
+                      {t('shop.highestRated')}
+                    </option>
                   </Form.Select>
                 </div>
               </Col>
@@ -430,12 +454,21 @@ const Shop = () => {
                   <div className="alert alert-info d-flex justify-content-between align-items-center">
                     <div>
                       <i className="fas fa-search me-2"></i>
-                      <strong>Search Results:</strong> Found {searchInfo.totalResults} product{searchInfo.totalResults !== 1 ? 's' : ''} for "{searchInfo.query}"
+                      <strong>
+                        {t('shop.searchResults')}:
+                      </strong>{' '}
+                      <span>
+                        {t('shop.foundResults', { count: searchInfo.totalResults, query: searchInfo.query }) || `Found ${searchInfo.totalResults} product${searchInfo.totalResults !== 1 ? 's' : ''} for "${searchInfo.query}"`}
+                      </span>
                       {searchInfo.searchType === 'product_code' && (
-                        <span className="ms-2 badge bg-primary">Product Code Search</span>
+                        <span className="ms-2 badge bg-primary">
+                          {t('shop.productCodeSearch') || 'Product Code Search'}
+                        </span>
                       )}
                       {searchInfo.searchType === 'general' && (
-                        <span className="ms-2 badge bg-secondary">General Search</span>
+                        <span className="ms-2 badge bg-secondary">
+                          {t('shop.generalSearch') || 'General Search'}
+                        </span>
                       )}
                     </div>
                     <Button 
@@ -448,7 +481,9 @@ const Shop = () => {
                       }}
                     >
                       <i className="fas fa-times me-1"></i>
-                      Clear Search
+                      <span>
+                        {t('shop.clearSearch') || 'Clear Search'}
+                      </span>
                     </Button>
                   </div>
                 </div>
@@ -465,7 +500,9 @@ const Shop = () => {
           {loading && currentPage === 1 && (
             <div className="text-center py-5">
               <Spinner animation="border" variant="primary" />
-              <p className="mt-3">Loading products...</p>
+              <p className="mt-3">
+                {t('shop.loadingProducts') || 'Loading products...'}
+              </p>
             </div>
           )}
 
@@ -487,12 +524,12 @@ const Shop = () => {
                         />
                         {product.bestSelling && (
                           <div className="best-selling-badge">
-                            Best Selling
+                            {t('shop.bestSelling') || 'Best Selling'}
                           </div>
                         )}
                         {product.premiumProduct && (
                           <div className="premium-badge">
-                            Premium
+                            {t('shop.premium') || 'Premium'}
                           </div>
                         )}
                       </div>
@@ -553,7 +590,7 @@ const Shop = () => {
                               className="shop-now-button"
                               onClick={() => handleProductClick(product._id)}
                             >
-                              SHOP NOW
+                              {t('product.shopNow')}
                             </Button>
                       </Card.Body>
                     </Card>
@@ -566,8 +603,8 @@ const Shop = () => {
           {/* No Products Message */}
           {!loading && products.length === 0 && !error && (
             <div className="text-center py-5">
-              <h4>No products found</h4>
-              <p>Try adjusting your search or filter criteria</p>
+              <h4>{t('shop.noProducts')}</h4>
+              <p>{t('shop.tryAdjusting') || 'Try adjusting your search or filter criteria'}</p>
             </div>
           )}
 
@@ -580,7 +617,7 @@ const Shop = () => {
                 className="load-more-btn"
                 onClick={loadMoreProducts}
               >
-                Load More Products
+                {t('shop.loadMore')}
               </Button>
             </div>
           )}
@@ -589,7 +626,7 @@ const Shop = () => {
           {loading && currentPage > 1 && (
             <div className="text-center py-3">
               <Spinner animation="border" variant="primary" size="sm" />
-              <span className="ms-2">Loading more products...</span>
+              <span className="ms-2">{t('shop.loadingMore') || 'Loading more products...'}</span>
             </div>
           )}
         </Container>

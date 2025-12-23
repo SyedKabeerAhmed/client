@@ -45,6 +45,10 @@ const UserDashboard = () => {
   const [ordersPagination, setOrdersPagination] = useState({ current: 1, pages: 1, total: 0, limit: 10 });
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showOrderDetail, setShowOrderDetail] = useState(false);
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [orderToCancel, setOrderToCancel] = useState(null);
+  const [cancelReason, setCancelReason] = useState('');
+  const [cancelReasonError, setCancelReasonError] = useState('');
 
   // Wishlist page state
   const [wishlist, setWishlist] = useState([]);
@@ -149,19 +153,47 @@ const UserDashboard = () => {
     setShowOrderDetail(true);
   };
 
-  const handleCancelOrder = async (orderId) => {
-    if (!window.confirm('Are you sure you want to cancel this order?')) return;
-    
+  const handleCancelOrder = (orderId) => {
+    setOrderToCancel(orderId);
+    setCancelReason('');
+    setCancelReasonError('');
+    setShowCancelModal(true);
+  };
+
+  const handleCancelOrderConfirm = async () => {
+    // Validate reason
+    if (!cancelReason || cancelReason.trim() === '') {
+      setCancelReasonError('Please provide a reason for cancellation');
+      return;
+    }
+
+    if (cancelReason.trim().length < 10) {
+      setCancelReasonError('Reason must be at least 10 characters long');
+      return;
+    }
+
     try {
-      const response = await api.post(`/user/orders/${orderId}/cancel`);
+      const response = await api.post(`/user/orders/${orderToCancel}/cancel`, {
+        reason: cancelReason.trim()
+      });
       if (response.data.success) {
         alert('Order cancelled successfully');
         fetchOrders({ page: ordersPagination.current });
         setShowOrderDetail(false);
+        setShowCancelModal(false);
+        setCancelReason('');
+        setOrderToCancel(null);
       }
     } catch (error) {
       alert(error.response?.data?.message || 'Failed to cancel order');
     }
+  };
+
+  const handleCancelModalClose = () => {
+    setShowCancelModal(false);
+    setCancelReason('');
+    setCancelReasonError('');
+    setOrderToCancel(null);
   };
 
   const getStatusBadge = (status) => {
@@ -406,7 +438,7 @@ const UserDashboard = () => {
         <div className="stats-grid">
           <StatsCard
             title="Awaiting Payment"
-            value={`$${dashboardData.stats.awaitingPayment}`}
+            value={dashboardData.stats.awaitingPayment}
             icon="fas fa-dollar-sign"
             color="yellow"
           />
@@ -979,16 +1011,69 @@ const UserDashboard = () => {
   };
 
   return (
-    <Layout
-      activePage={activePage}
-      onPageChange={handlePageChange}
-      user={user}
-      userRole="user"
-      onLogout={handleLogout}
-      title={activePage.charAt(0).toUpperCase() + activePage.slice(1)}
-    >
-      {renderPage()}
-    </Layout>
+    <>
+      <Layout
+        activePage={activePage}
+        onPageChange={handlePageChange}
+        user={user}
+        userRole="user"
+        onLogout={handleLogout}
+        title={activePage.charAt(0).toUpperCase() + activePage.slice(1)}
+      >
+        {renderPage()}
+      </Layout>
+
+      {/* Cancel Order Modal */}
+      {showCancelModal && (
+        <div className="modal-overlay" onClick={handleCancelModalClose}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>Cancel Order</h3>
+              <button className="modal-close" onClick={handleCancelModalClose}>
+                <FontAwesomeIcon icon={faTimes} />
+              </button>
+            </div>
+            <div className="modal-body">
+              <p>Are you sure you want to cancel this order? Please provide a reason for cancellation.</p>
+              <div className="form-group">
+                <label htmlFor="cancelReason">
+                  Cancellation Reason <span style={{ color: '#ef4444' }}>*</span>
+                </label>
+                <textarea
+                  id="cancelReason"
+                  className={`form-control ${cancelReasonError ? 'error' : ''}`}
+                  rows="4"
+                  placeholder="Please explain why you want to cancel this order (minimum 10 characters)"
+                  value={cancelReason}
+                  onChange={(e) => {
+                    setCancelReason(e.target.value);
+                    if (cancelReasonError) {
+                      setCancelReasonError('');
+                    }
+                  }}
+                  required
+                />
+                {cancelReasonError && (
+                  <span className="error-message">{cancelReasonError}</span>
+                )}
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button className="btn-secondary" onClick={handleCancelModalClose}>
+                Cancel
+              </button>
+              <button 
+                className="btn-primary" 
+                onClick={handleCancelOrderConfirm}
+                style={{ backgroundColor: '#ef4444', color: 'white' }}
+              >
+                Confirm Cancellation
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

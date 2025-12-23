@@ -1,0 +1,57 @@
+.language-switcher {
+  position: relative;
+}
+
+.language-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #ddd;
+  background: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  min-width: 120px;
+}
+
+.language-toggle:hover {
+  background: #f8f9fa;
+}
+
+.language-flag {
+  font-size: 18px;
+}
+
+.language-name {
+  font-size: 14px;
+}
+
+.language-menu {
+  max-height: 400px;
+  overflow-y: auto;
+  min-width: 180px;
+}
+
+.language-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.language-item:hover {
+  background-color: #f8f9fa;
+}
+
+.language-item.active {
+  background-color: #e7f3ff;
+  font-weight: 500;
+}
+
+/* RTL support for Arabic */
+[dir="rtl"] .language-menu {
+  right: 0;
+  left: auto;
+}
+

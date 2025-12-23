@@ -2016,11 +2016,22 @@ const HairCustomization = () => {
       <Container>
         {/* Header */}
         <div className="customization-header">
-          <p className="breadcrumb">Mono Hair Type / Neo Hair System</p>
-          <h1>Customize A Hair System</h1>
+          <p
+            className="breadcrumb"
+           
+          >
+            Mono Hair Type / Neo Hair System
+          </p>
+          <h1>
+            Customize A Hair System
+          </h1>
           <div className="intro-text">
-            <p>Enjoy free express delivery</p>
-            <p>Want a hair system similar to/same as your previous orders? Visit your order history to quickly reorder a hair system similar to or the same as your previous orders. Changes to your order can be made from your shopping cart.</p>
+            <p>
+              Enjoy free express delivery
+            </p>
+            <p>
+              Want a hair system similar to/same as your previous orders? Visit your order history to quickly reorder a hair system similar to or the same as your previous orders. Changes to your order can be made from your shopping cart.
+            </p>
           </div>
         </div>
 
@@ -2902,7 +2913,9 @@ const HairCustomization = () => {
                   className="add-to-cart-btn w-100"
                   onClick={handleAddToCart}
                 >
-                  Add to Cart
+                  <span>
+                    Add to Cart
+                  </span>
                 </Button>
               </Card.Body>
             </Card>
@@ -3807,7 +3820,12 @@ const HairCustomization = () => {
       {/* Gray Color Selection Modal */}
       <Modal show={showGrayColorModal} onHide={handleGrayColorClose} size="lg" centered>
         <Modal.Header closeButton>
-          <Modal.Title className="modal-title">I want grey hair</Modal.Title>
+          <Modal.Title
+            className="modal-title"
+           
+          >
+            I want grey hair
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body className="gray-color-modal-body">
           {grayColorModalStep >= 1 && grayColorModalStep <= 6 ? (
@@ -3844,7 +3862,12 @@ const HairCustomization = () => {
             // Step 7: Hair Type Selection
             <>
               <div className="gray-hair-type-section">
-                <h4 className="gray-hair-type-title">Which type of grey hair you want?</h4>
+                <h4
+                  className="gray-hair-type-title"
+                 
+                >
+                  Which type of grey hair you want?
+                </h4>
                 <div className="gray-hair-type-options">
                   {grayHairTypeOptions.map((hairType) => (
                     <div 
@@ -3912,7 +3935,12 @@ const HairCustomization = () => {
       {/* Hair_Color Selection Modal */}
       <Modal show={showHairColorModal} onHide={handleHairColorClose} size="lg" centered>
         <Modal.Header closeButton>
-          <Modal.Title className="modal-title">Hair_Color</Modal.Title>
+          <Modal.Title
+            className="modal-title"
+           
+          >
+            Hair_Color
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body className="hair-color-modal-body">
           {/* Gender Switch */}
@@ -3921,13 +3949,17 @@ const HairCustomization = () => {
               className={`gender-option ${selectedHairColorGender === 'men' ? 'active' : ''}`}
               onClick={() => handleHairColorGenderChange('men')}
             >
-              Men
+              <span>
+                Men
+              </span>
             </div>
             <div 
               className={`gender-option ${selectedHairColorGender === 'women' ? 'active' : ''}`}
               onClick={() => handleHairColorGenderChange('women')}
             >
-              Women
+              <span>
+                Women
+              </span>
             </div>
           </div>
 
@@ -4003,13 +4035,17 @@ const HairCustomization = () => {
               className={`gender-option ${haircutModalGender === 'men' ? 'active' : ''}`}
               onClick={() => handleHaircutGenderSelection('men')}
             >
-              Men
+              <span>
+                Men
+              </span>
             </div>
             <div 
               className={`gender-option ${haircutModalGender === 'women' ? 'active' : ''}`}
               onClick={() => handleHaircutGenderSelection('women')}
             >
-              Women
+              <span>
+                Women
+              </span>
             </div>
           </div>
 
@@ -4400,14 +4436,21 @@ const HairCustomization = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowReviewModal(false)}>
-            Close
+          <Button
+            variant="secondary"
+            onClick={() => setShowReviewModal(false)}
+          >
+            <span>
+              Close
+            </span>
           </Button>
           <Button variant="primary" onClick={() => {
             setShowReviewModal(false)
             handleAddToCart()
           }}>
-            Add to Cart
+            <span>
+              Add to Cart
+            </span>
           </Button>
         </Modal.Footer>
       </Modal>

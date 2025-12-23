@@ -1,0 +1,216 @@
+{
+  "common": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "shop": "Tienda",
+    "cart": "Carrito",
+    "login": "Iniciar sesión",
+    "signup": "Registrarse",
+    "logout": "Cerrar sesión",
+    "profile": "Perfil",
+    "search": "Buscar",
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "submit": "Enviar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar",
+    "dashboard": "Panel",
+    "manageAccount": "Gestionar Cuenta",
+    "loginRegister": "Iniciar sesión/Registrarse",
+    "english": "Español",
+    "usd": "USD"
+  },
+  "nav": {
+    "hairSystems": "Sistemas de Cabello",
+    "allHairSystems": "Todos los Sistemas de Cabello",
+    "skinSystems": "Sistemas de Piel",
+    "laceSystems": "Sistemas de Encaje",
+    "hybridSystems": "Sistemas Híbridos",
+    "monoSystems": "Sistemas Mono",
+    "accessories": "Accesorios",
+    "allAccessories": "Todos los Accesorios",
+    "adhesives": "Adhesivos",
+    "glues": "Pegamentos",
+    "tools": "Herramientas",
+    "careProducts": "Productos de Cuidado",
+    "beginnersGuide": "Guía para Principiantes",
+    "customHairSystem": "Sistema de Cabello Personalizado",
+    "aboutUs": "Acerca de Nosotros",
+    "help": "Ayuda",
+    "brand": "Tienda de Cabello"
+  },
+  "home": {
+    "title": "Cabello Que Parece Real, Confianza Que Perdura",
+    "description": "Explora sistemas diseñados para comodidad, estilo y uso diario.",
+    "badge": "Nuevo Llegado",
+    "premiumSystems": {
+      "title": "Explora Nuestros Sistemas de Cabello Premium",
+      "subtitle": "Elige El Sistema Perfecto Adaptado A Tu Estilo de Vida, Comodidad Y Apariencia Natural."
+    },
+    "bestSelling": {
+      "title": "Nuestros Sistemas de Cabello Más Vendidos",
+      "subtitle": "Descubre Los Sistemas Más Confiables Y Populares, Elegidos Por Clientes Por Su Apariencia Natural, Comodidad Y Durabilidad."
+    }
+  },
+  "styles": {
+    "title": "Estilos Que Redefinen La Confianza",
+    "subtitle": "Explora Nuestros Sistemas de Cabello Más Buscados, Para Darte El Equilibrio Perfecto De Estilo, Comodidad Y Una Apariencia Natural."
+  },
+  "testimonials": {
+    "title": "Lo Que Dicen Nuestros Clientes",
+    "shopNow": "Comprar Ahora"
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes"
+  },
+  "cart": {
+    "title": "Carrito de Compras",
+    "empty": "Tu carrito está vacío",
+    "total": "Total",
+    "checkout": "Proceder al Pago",
+    "continueShopping": "Continuar Comprando"
+  },
+  "product": {
+    "addToCart": "Añadir al Carrito",
+    "buyNow": "Comprar Ahora",
+    "description": "Descripción",
+    "specifications": "Especificaciones",
+    "reviews": "Reseñas",
+    "explore": "Explorar"
+  },
+  "beginnersGuide": {
+    "badge": "Guía para Principiantes",
+    "title": "¿Nuevo en Sistemas de Cabello? Comienza Aquí",
+    "description": "Aprende los conceptos básicos de los sistemas de cabello con guías simples, consejos y asesoramiento experto para ayudarte a comenzar con confianza.",
+    "exploreMore": "Explorar Más"
+  },
+  "newsletter": {
+    "title": "Únete a Nuestra Lista de Correo",
+    "subtitle": "Regístrate para recibir inspiración, actualizaciones de productos y ofertas especiales de nuestro equipo.",
+    "placeholder": "ejemplo@gmail.com",
+    "buttonText": "Enviar",
+    "submitting": "Enviando...",
+    "thankYou": "¡Gracias por suscribirte!"
+  },
+  "shop": {
+    "ourHairSystems": "Nuestros Sistemas de Cabello y Accesorios",
+    "hairSystems": "Sistemas de Cabello",
+    "accessories": "Accesorios",
+    "skinHairSystems": "Sistemas de Cabello de Piel",
+    "laceHairSystems": "Sistemas de Cabello de Encaje",
+    "hybridHairSystems": "Sistemas de Cabello Híbridos",
+    "monoHairSystems": "Sistemas de Cabello Mono",
+    "adhesives": "Adhesivos",
+    "glues": "Pegamentos",
+    "tools": "Herramientas",
+    "careProducts": "Productos de Cuidado",
+    "exploreSubtitle": "Explora Nuestros Sistemas de Cabello Más Buscados, Cuidadosamente Seleccionados Para Darte El Equilibrio Perfecto De Estilo, Comodidad Y Una Apariencia Natural",
+    "hairSystemsSubtitle": "Explora Nuestra Gama Completa De Sistemas de Cabello, Diseñados Para Proporcionar El Equilibrio Perfecto De Estilo, Comodidad Y Apariencia Natural",
+    "accessoriesSubtitle": "Descubre Accesorios Y Herramientas Esenciales Para Mantener Y Estilizar Tus Sistemas de Cabello Con Resultados Profesionales",
+    "skinSubtitle": "Experimenta Lo Máximo En Comodidad Y Apariencia Natural Con Nuestros Sistemas de Cabello de Piel Premium",
+    "laceSubtitle": "Descubre La Mezcla Perfecta De Transpirabilidad Y Apariencia Natural Con Nuestros Sistemas de Cabello de Encaje De Alta Calidad",
+    "hybridSubtitle": "Obtén Lo Mejor De Ambos Mundos Con Nuestros Sistemas de Cabello Híbridos Innovadores Que Combinan Múltiples Materiales Base",
+    "monoSubtitle": "Disfruta De Durabilidad Superior Y Fácil Mantenimiento Con Nuestros Sistemas de Cabello Monofilamento",
+    "adhesiveSubtitle": "Adhesivos De Grado Profesional Para Una Fijación Segura Y Duradera Del Sistema de Cabello",
+    "glueSubtitle": "Pegamentos Y Soluciones De Unión De Alta Calidad Para Una Instalación Confiable Del Sistema de Cabello",
+    "toolsSubtitle": "Herramientas Y Equipos Esenciales Para La Aplicación Y Mantenimiento Profesional Del Sistema de Cabello",
+    "careProductsSubtitle": "Productos de Cuidado Premium Para Mantener Tus Sistemas de Cabello Luciendo Frescos Y Naturales",
+    "sortBy": "Ordenar Por",
+    "featured": "Destacados",
+    "price": "Precio",
+    "newest": "Más Recientes",
+    "highestRated": "Mejor Valorados",
+    "loadMore": "Cargar Más",
+    "noProducts": "No se encontraron productos",
+    "searchResults": "Resultados de Búsqueda",
+    "showingResults": "Mostrando resultados para",
+    "totalResults": "resultados totales"
+  },
+  "customHairSystem": {
+    "badge": "Sistema de Cabello Personalizado",
+    "title": "Haz Tu Sistema de Cabello Personalizado",
+    "featuresTitle": "Características de Nuestros Sistemas de Cabello Personalizados",
+    "featuresSubtitle": "Explora Nuestros Sistemas de Cabello Más Comprados, Cuidadosamente Seleccionados Para Darte El Equilibrio Perfecto De Estilo, Comodidad Y Una Apariencia Natural",
+    "feature1": {
+      "title": "Pedido Fácil Con Un Clic",
+      "description": "La producción comienza inmediatamente después del pago, sin confirmaciones, sin correos electrónicos, sin visitas al salón."
+    },
+    "feature2": {
+      "title": "Diseñado Para El Ajuste Perfecto",
+      "description": "Opciones diversas para adaptarse a todas las etnias, texturas de cabello y estilos de vida."
+    },
+    "feature3": {
+      "title": "Servicio Rápido Y Confiable",
+      "description": "Recibe tu pedido más rápido con nuestras opciones de procesamiento y entrega aceleradas."
+    },
+    "feature4": {
+      "title": "Arte Exquisito Anudado A Mano",
+      "description": "Cada pieza está experta y hábilmente anudada a mano por artesanos con más de 10 años de experiencia."
+    },
+    "designTitle": "Diseña Tu Sistema de Cabello Ideal",
+    "designDescription": "Más de 16 características personalizables para asegurar un sistema de cabello perfecto con bases personalizadas, diversas texturas de cabello y coincidencia precisa de colores.",
+    "createButton": "CREA TU SISTEMA DE CABELLO PERSONALIZADO",
+    "beforeAfterTitle": "Características de Nuestros Sistemas de Cabello Personalizados",
+    "beforeAfterSubtitle": "Explora Nuestros Sistemas de Cabello Más Comprados, Cuidadosamente Seleccionados Para Darte El Equilibrio Perfecto De Estilo, Comodidad Y Una Apariencia Natural",
+    "template": {
+      "partial": "Parcial",
+      "regular": "Regular",
+      "oversize": "Talla Grande",
+      "fullcap": "Gorra Completa",
+      "partialDesc": "(tamaño ≤ 7\"x10\", o área ≤ 70 pulgadas cuadradas)",
+      "regularDesc": "(7\"x10\" < tamaño ≤ 8\"x10\", o 70 pulgadas cuadradas < área ≤ 80 pulgadas cuadradas)",
+      "oversizeDesc": "(8\"x10\" < tamaño ≤ 10\"x10\", o 80 pulgadas cuadradas < área ≤ 100 pulgadas cuadradas)",
+      "fullcapDesc": "(tamaño > 10\"x10\", o área > 100 pulgadas cuadradas)"
+    }
+  },
+  "about": {
+    "badge": "Acerca de Nosotros",
+    "title": "Quiénes Somos Y Qué Representamos",
+    "description": "Descubre nuestro compromiso con la calidad, la innovación y la satisfacción del cliente en la industria de sistemas de cabello.",
+    "mission": {
+      "badge": "Nuestra Misión",
+      "title": "Empoderando La Confianza Auténtica",
+      "description": "Creemos que todos merecen sentirse seguros y auténticos en su propia piel. Nuestra misión es proporcionar sistemas de cabello de alta calidad que no solo se vean naturales, sino que también empoderen a nuestros clientes para vivir sus vidas con renovada confianza y seguridad. A través de tecnología innovadora, artesanía experta y servicio personalizado, ayudamos a las personas a redescubrir su mejor versión."
+    },
+    "vision": {
+      "badge": "Nuestra Visión",
+      "title": "Liderando El Camino En La Excelencia De Sistemas de Cabello",
+      "description": "Ser el líder global en innovación de sistemas de cabello, estableciendo nuevos estándares de calidad, comodidad y apariencia natural. Imaginamos un mundo donde la pérdida de cabello nunca limite la confianza o las oportunidades, donde nuestras soluciones se integren perfectamente en cada estilo de vida, y donde la experiencia excepcional del cliente sea la base de relaciones duraderas."
+    },
+    "testimonialsTitle": "Lo Que Dicen Nuestros Clientes",
+    "shopNow": "COMPRAR AHORA"
+  },
+  "help": {
+    "badge": "Ayuda",
+    "title": "¿Cómo Podemos Ayudarte Hoy?",
+    "description": "Encuentra respuestas rápidas, guías paso a paso y soporte experto, todo lo que necesitas en un solo lugar.",
+    "faqTitle": "Preguntas Frecuentes",
+    "trackOrder": {
+      "question": "¿Cómo rastreo mi pedido?",
+      "answer": "Puedes rastrear tu pedido iniciando sesión en tu cuenta y visitando la sección 'Mis Pedidos'. Recibirás información de seguimiento por correo electrónico una vez que tu pedido sea enviado. También puedes usar el número de seguimiento proporcionado en tu correo electrónico de confirmación de pedido."
+    },
+    "shipping": {
+      "question": "¿Cuál es su política de envío y entrega?",
+      "answer": "Ofrecemos envío gratis en todos los pedidos superiores a $50. El envío estándar tarda de 3 a 5 días hábiles, mientras que el envío express tarda de 1 a 2 días hábiles. Enviamos a los 50 estados y ofrecemos envío internacional a países seleccionados. Los tiempos de entrega pueden variar según la ubicación y el método de envío seleccionado."
+    },
+    "returns": {
+      "question": "¿Cuál es su política de devolución e intercambio?",
+      "answer": "Ofrecemos una política de devolución de 30 días para todos los artículos sin usar en su empaque original. Los sistemas de cabello personalizados tienen una ventana de devolución de 14 días. Las devoluciones son gratuitas dentro de los Estados Unidos continentales. Los intercambios se procesan dentro de 5 a 7 días hábiles después de recibir tu devolución."
+    },
+    "chooseSystem": {
+      "question": "¿Cómo elijo el sistema de cabello adecuado para mí?",
+      "answer": "Nuestros sistemas de cabello vienen en varios tipos de base (piel, encaje, híbrido, mono) y tipos de cabello. Considera tu estilo de vida, preferencias de comodidad y requisitos de mantenimiento. Nuestros expertos pueden ayudarte a elegir el sistema perfecto durante una consulta. También ofrecemos consultas virtuales y guías detalladas."
+    },
+    "care": {
+      "question": "¿Cómo cuido mi sistema de cabello?",
+      "answer": "El cuidado adecuado extiende la vida de tu sistema de cabello. Usa champús sin sulfatos, evita el peinado excesivo con calor y sigue nuestras instrucciones detalladas de cuidado. Proporcionamos guías de cuidado completas con cada compra y ofrecemos productos de mantenimiento para mantener tu sistema luciendo lo mejor posible."
+    },
+    "installation": {
+      "question": "¿Ofrecen servicios de instalación?",
+      "answer": "Sí, ofrecemos servicios de instalación profesional en nuestras ubicaciones de estudio. También proporcionamos guías de instalación detalladas y tutoriales en video para la instalación DIY. Nuestros estilistas certificados pueden ayudar con la configuración inicial y proporcionar consejos de mantenimiento continuo."
+    }
+  }
+}
+

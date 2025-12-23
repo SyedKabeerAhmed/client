@@ -1,19 +1,22 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 import './FeaturesBar.css'
 
 const FeaturesBar = () => {
+  const { t } = useTranslation()
+  
   const features = [
     {
-      title: "Free Delivery",
+      title: t('features.freeDelivery'),
       description: "Lorem ipsum dolor sit amet."
     },
     {
-      title: "Support 24/7",
+      title: t('features.support247'),
       description: "Lorem ipsum dolor sit amet."
     },
     {
-      title: "100% Authentic",
+      title: t('features.authentic'),
       description: "Lorem ipsum dolor sit amet."
     }
   ]
@@ -66,8 +69,12 @@ const FeaturesBar = () => {
                   )}
                 </div>
                 <div className="feature-content">
-                  <h4 className="feature-title">{feature.title}</h4>
-                  <p className="feature-description">{feature.description}</p>
+                  <h4 className="feature-title">
+                    {feature.title}
+                  </h4>
+                  <p className="feature-description">
+                    {feature.description}
+                  </p>
                 </div>
               </div>
             </Col>

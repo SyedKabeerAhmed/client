@@ -66,8 +66,18 @@ const Profile = () => {
       <div className="profile-content">
         <Container>
           <div className="page-header">
-            <h1 className="page-title">Manage Account</h1>
-            <p className="page-subtitle">Update your personal information and account settings</p>
+            <h1
+              className="page-title"
+             
+            >
+              Manage Account
+            </h1>
+            <p
+              className="page-subtitle"
+             
+            >
+              Update your personal information and account settings
+            </p>
           </div>
           
           <Row className="justify-content-center">
@@ -90,7 +100,9 @@ const Profile = () => {
                     <Row>
                       <Col md={6}>
                         <Form.Group className="mb-3">
-                          <Form.Label>Full Name</Form.Label>
+                          <Form.Label>
+                            Full Name
+                          </Form.Label>
                           <Form.Control
                             type="text"
                             name="fullName"
@@ -103,7 +115,9 @@ const Profile = () => {
                       
                       <Col md={6}>
                         <Form.Group className="mb-3">
-                          <Form.Label>Email</Form.Label>
+                          <Form.Label>
+                            Email
+                          </Form.Label>
                           <Form.Control
                             type="email"
                             name="email"
@@ -112,7 +126,9 @@ const Profile = () => {
                             className="disabled-field"
                           />
                           <Form.Text className="text-muted">
-                            Email cannot be changed
+                            <span>
+                              Email cannot be changed
+                            </span>
                           </Form.Text>
                         </Form.Group>
                       </Col>
@@ -121,7 +137,9 @@ const Profile = () => {
                     <Row>
                       <Col md={6}>
                         <Form.Group className="mb-3">
-                          <Form.Label>Phone Number</Form.Label>
+                          <Form.Label>
+                            Phone Number
+                          </Form.Label>
                           <Form.Control
                             type="tel"
                             name="phoneNumber"
@@ -134,15 +152,27 @@ const Profile = () => {
                       
                       <Col md={6}>
                         <Form.Group className="mb-3">
-                          <Form.Label>User Type</Form.Label>
+                          <Form.Label>
+                            User Type
+                          </Form.Label>
                           <Form.Select
                             name="userType"
                             value={formData.userType}
                             onChange={handleChange}
                             required
                           >
-                            <option value="consumer">Consumer</option>
-                            <option value="business">Business</option>
+                            <option
+                              value="consumer"
+                             
+                            >
+                              Consumer
+                            </option>
+                            <option
+                              value="business"
+                             
+                            >
+                              Business
+                            </option>
                           </Form.Select>
                         </Form.Group>
                       </Col>
@@ -156,7 +186,9 @@ const Profile = () => {
                         disabled={isLoading}
                         className="update-btn"
                       >
-                        {isLoading ? 'Updating...' : 'Update Profile'}
+                        <span>
+                          {isLoading ? 'Updating...' : 'Update Profile'}
+                        </span>
                       </Button>
                     </div>
                   </Form>

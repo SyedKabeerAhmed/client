@@ -1,0 +1,216 @@
+{
+  "common": {
+    "home": "Strona główna",
+    "about": "O nas",
+    "shop": "Sklep",
+    "cart": "Koszyk",
+    "login": "Zaloguj się",
+    "signup": "Zarejestruj się",
+    "logout": "Wyloguj się",
+    "profile": "Profil",
+    "search": "Szukaj",
+    "loading": "Ładowanie...",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "submit": "Wyślij",
+    "delete": "Usuń",
+    "edit": "Edytuj",
+    "close": "Zamknij",
+    "dashboard": "Panel",
+    "manageAccount": "Zarządzaj kontem",
+    "loginRegister": "Zaloguj się/Zarejestruj się",
+    "english": "Polski",
+    "usd": "USD"
+  },
+  "nav": {
+    "hairSystems": "Systemy włosów",
+    "allHairSystems": "Wszystkie systemy włosów",
+    "skinSystems": "Systemy skóry",
+    "laceSystems": "Systemy koronkowe",
+    "hybridSystems": "Systemy hybrydowe",
+    "monoSystems": "Systemy mono",
+    "accessories": "Akcesoria",
+    "allAccessories": "Wszystkie akcesoria",
+    "adhesives": "Kleje",
+    "glues": "Kleje",
+    "tools": "Narzędzia",
+    "careProducts": "Produkty do pielęgnacji",
+    "beginnersGuide": "Przewodnik dla początkujących",
+    "customHairSystem": "Niestandardowy system włosów",
+    "aboutUs": "O nas",
+    "help": "Pomoc",
+    "brand": "Sklep z włosami"
+  },
+  "home": {
+    "title": "Włosy wyglądające prawdziwie, pewność siebie, która trwa",
+    "description": "Odkryj systemy stworzone dla komfortu, stylu i codziennego noszenia.",
+    "badge": "Nowość",
+    "premiumSystems": {
+      "title": "Odkryj nasze premium systemy włosów",
+      "subtitle": "Wybierz Idealny System Dostosowany Do Twojego Stylu Życia, Komfortu I Naturalnego Wyglądu."
+    },
+    "bestSelling": {
+      "title": "Nasze najlepiej sprzedające się systemy włosów",
+      "subtitle": "Odkryj Najbardziej Godne Zaufania I Popularne Systemy, Wybrane Przez Klientów Ze Względu Na Ich Naturalny Wygląd, Komfort I Trwałość."
+    }
+  },
+  "styles": {
+    "title": "Style, Które Redefiniują Pewność Siebie",
+    "subtitle": "Odkryj Nasze Najbardziej Poszukiwane Systemy Włosów, Aby Dać Ci Idealną Równowagę Stylu, Komfortu I Naturalnego Wyglądu."
+  },
+  "testimonials": {
+    "title": "Co Mówią Nasi Klienci",
+    "shopNow": "Kup Teraz"
+  },
+  "faq": {
+    "title": "Często zadawane pytania"
+  },
+  "cart": {
+    "title": "Koszyk zakupów",
+    "empty": "Twój koszyk jest pusty",
+    "total": "Razem",
+    "checkout": "Przejdź do kasy",
+    "continueShopping": "Kontynuuj zakupy"
+  },
+  "product": {
+    "addToCart": "Dodaj do koszyka",
+    "buyNow": "Kup teraz",
+    "description": "Opis",
+    "specifications": "Specyfikacje",
+    "reviews": "Recenzje",
+    "explore": "Odkryj"
+  },
+  "beginnersGuide": {
+    "badge": "Przewodnik dla początkujących",
+    "title": "Nowy w Systemach Włosów? Zacznij Tutaj",
+    "description": "Poznaj podstawy systemów włosów dzięki prostym przewodnikom, wskazówkom i poradom ekspertów, które pomogą Ci rozpocząć z pewnością siebie.",
+    "exploreMore": "Odkryj Więcej"
+  },
+  "newsletter": {
+    "title": "Dołącz Do Naszej Listy Mailingowej",
+    "subtitle": "Zapisz się, aby otrzymywać inspiracje, aktualizacje produktów i specjalne oferty od naszego zespołu.",
+    "placeholder": "przyklad@gmail.com",
+    "buttonText": "Wyślij",
+    "submitting": "Wysyłanie...",
+    "thankYou": "Dziękujemy za zapisanie się!"
+  },
+  "shop": {
+    "ourHairSystems": "Nasze Systemy Włosów I Akcesoria",
+    "hairSystems": "Systemy Włosów",
+    "accessories": "Akcesoria",
+    "skinHairSystems": "Systemy Włosów Skórzane",
+    "laceHairSystems": "Systemy Włosów Koronkowe",
+    "hybridHairSystems": "Systemy Włosów Hybrydowe",
+    "monoHairSystems": "Systemy Włosów Mono",
+    "adhesives": "Kleje",
+    "glues": "Kleje",
+    "tools": "Narzędzia",
+    "careProducts": "Produkty Do Pielęgnacji",
+    "exploreSubtitle": "Odkryj Nasze Najbardziej Poszukiwane Systemy Włosów, Starannie Wybrane, Aby Dać Ci Idealną Równowagę Stylu, Komfortu I Naturalnego Wyglądu",
+    "hairSystemsSubtitle": "Odkryj Nasz Pełny Asortyment Systemów Włosów, Zaprojektowany, Aby Zapewnić Idealną Równowagę Stylu, Komfortu I Naturalnego Wyglądu",
+    "accessoriesSubtitle": "Odkryj Niezbędne Akcesoria I Narzędzia Do Utrzymania I Stylizacji Twoich Systemów Włosów Z Profesjonalnymi Rezultatami",
+    "skinSubtitle": "Doświadcz Najwyższego Komfortu I Naturalnego Wyglądu Z Naszymi Premium Systemami Włosów Skórzanymi",
+    "laceSubtitle": "Odkryj Idealną Mieszankę Oddychalności I Naturalnego Wyglądu Z Naszymi Wysokiej Jakości Systemami Włosów Koronkowymi",
+    "hybridSubtitle": "Otrzymaj To, Co Najlepsze Z Obu Światów Z Naszymi Innowacyjnymi Hybrydowymi Systemami Włosów Łączącymi Wiele Materiałów Bazowych",
+    "monoSubtitle": "Ciesz Się Wyższą Trwałością I Łatwą Konserwacją Z Naszymi Systemami Włosów Monofilamentowymi",
+    "adhesiveSubtitle": "Kleje Profesjonalne Do Bezpiecznego I Trwałego Mocowania Systemu Włosów",
+    "glueSubtitle": "Wysokiej Jakości Kleje I Rozwiązania Wiążące Do Niezawodnej Instalacji Systemu Włosów",
+    "toolsSubtitle": "Niezbędne Narzędzia I Sprzęt Do Profesjonalnej Aplikacji I Konserwacji Systemu Włosów",
+    "careProductsSubtitle": "Premium Produkty Do Pielęgnacji, Aby Utrzymać Twoje Systemy Włosów Świeże I Naturalne",
+    "sortBy": "Sortuj Według",
+    "featured": "Polecane",
+    "price": "Cena",
+    "newest": "Najnowsze",
+    "highestRated": "Najwyżej Oceniane",
+    "loadMore": "Załaduj Więcej",
+    "noProducts": "Nie Znaleziono Produktów",
+    "searchResults": "Wyniki Wyszukiwania",
+    "showingResults": "Wyświetlanie Wyników Dla",
+    "totalResults": "Wyniki Całkowite"
+  },
+  "customHairSystem": {
+    "badge": "Niestandardowy System Włosów",
+    "title": "Stwórz Swój Niestandardowy System Włosów",
+    "featuresTitle": "Cechy Naszych Niestandardowych Systemów Włosów",
+    "featuresSubtitle": "Odkryj Nasze Najczęściej Kupowane Systemy Włosów, Starannie Wybrane, Aby Dać Ci Idealną Równowagę Stylu, Komfortu I Naturalnego Wyglądu",
+    "feature1": {
+      "title": "Łatwe Zamawianie Jednym Kliknięciem",
+      "description": "Produkcja Zaczyna Się Natychmiast Po Płatności - Brak Potwierdzeń, Brak Emaili, Brak Wizyt W Salonie."
+    },
+    "feature2": {
+      "title": "Zaprojektowane Dla Idealnego Dopasowania",
+      "description": "Różnorodne Opcje, Aby Pasować Do Wszystkich Narodowości, Tekstur Włosów I Stylów Życia."
+    },
+    "feature3": {
+      "title": "Szybka I Niezawodna Usługa Ekspresowa",
+      "description": "Otrzymaj Swoje Zamówienie Szybciej Z Naszymi Opcjami Przyśpieszonego Przetwarzania I Dostawy."
+    },
+    "feature4": {
+      "title": "Wyszukana Sztuka Wiązania Ręcznego",
+      "description": "Każdy Kawałek Jest Ekspercko Wiązany Ręcznie Przez Rzemieślników Z Ponad 10-Letnim Doświadczeniem."
+    },
+    "designTitle": "Zaprojektuj Swój Idealny System Włosów",
+    "designDescription": "Ponad 16 Funkcji Do Dostosowania, Aby Zapewnić Idealny System Włosów Z Niestandardowymi Bazami, Różnorodnymi Teksturami Włosów I Dokładnym Dopasowaniem Kolorów.",
+    "createButton": "STWÓRZ SWÓJ NIESTANDARDOWY SYSTEM WŁOSÓW",
+    "beforeAfterTitle": "Cechy Naszych Niestandardowych Systemów Włosów",
+    "beforeAfterSubtitle": "Odkryj Nasze Najczęściej Kupowane Systemy Włosów, Starannie Wybrane, Aby Dać Ci Idealną Równowagę Stylu, Komfortu I Naturalnego Wyglądu",
+    "template": {
+      "partial": "Częściowy",
+      "regular": "Regularny",
+      "oversize": "Duży Rozmiar",
+      "fullcap": "Pełna Czapka",
+      "partialDesc": "(rozmiar ≤ 7\"x10\" lub powierzchnia ≤ 70 cali kwadratowych)",
+      "regularDesc": "(7\"x10\" < rozmiar ≤ 8\"x10\" lub 70 cali kwadratowych < powierzchnia ≤ 80 cali kwadratowych)",
+      "oversizeDesc": "(8\"x10\" < rozmiar ≤ 10\"x10\" lub 80 cali kwadratowych < powierzchnia ≤ 100 cali kwadratowych)",
+      "fullcapDesc": "(rozmiar > 10\"x10\" lub powierzchnia > 100 cali kwadratowych)"
+    }
+  },
+  "about": {
+    "badge": "O Nas",
+    "title": "Kim Jesteśmy I Czego Reprezentujemy",
+    "description": "Odkryj Nasze Zaangażowanie W Jakość, Innowacyjność I Satysfakcję Klienta W Branży Systemów Włosów.",
+    "mission": {
+      "badge": "Nasza Misja",
+      "title": "Wzmacnianie Autentycznej Pewności Siebie",
+      "description": "Wierzymy, Że Wszyscy Zasługują Na To, Aby Czuc Się Pewnie I Autentycznie We Własnej Skórze. Naszą Misją Jest Dostarczanie Wysokiej Jakości Systemów Włosów, Które Nie Tylko Wyglądają Naturalnie, Ale Również Umożliwiają Naszym Klientom Życie Z Odnowioną Pewnością Siebie I Pewnością. Poprzez Innowacyjną Technologię, Eksperckie Rzemiosło I Spersonalizowaną Obsługę, Pomagamy Ludziom Odkryć Ich Najlepsze Ja."
+    },
+    "vision": {
+      "badge": "Nasza Wizja",
+      "title": "Prowadzenie W Dziedzinie Doskonałości Systemów Włosów",
+      "description": "Być Globalnym Liderem W Innowacjach Systemów Włosów, Ustanawiając Nowe Standardy Jakości, Komfortu I Naturalnego Wyglądu. Wyobrażamy Sobie Świat, W Którym Utrata Włosów Nigdy Nie Ogranicza Pewności Siebie Lub Możliwości, Gdzie Nasze Rozwiązania Bezproblemowo Integrują Się Z Każdym Stylem Życia, I Gdzie Wyjątkowe Doświadczenie Klienta Jest Podstawą Trwałych Relacji."
+    },
+    "testimonialsTitle": "Co Mówią Nasi Klienci",
+    "shopNow": "KUP TERAZ"
+  },
+  "help": {
+    "badge": "Pomoc",
+    "title": "Jak Możemy Ci Dzisiaj Pomóc?",
+    "description": "Znajdź Szybkie Odpowiedzi, Przewodniki Krok Po Kroku I Wsparcie Ekspertów - Wszystko, Czego Potrzebujesz W Jednym Miejscu.",
+    "faqTitle": "Często Zadawane Pytania",
+    "trackOrder": {
+      "question": "Jak Mogę Śledzić Moje Zamówienie?",
+      "answer": "Możesz Śledzić Swoje Zamówienie, Logując Się Na Swoje Konto I Odwiedzając Sekcję 'Moje Zamówienia'. Otrzymasz Informacje Śledzące Przez Email, Gdy Twoje Zamówienie Zostanie Wysłane. Możesz Również Użyć Numeru Śledzenia Podanego W Twoim Emailu Potwierdzającym Zamówienie."
+    },
+    "shipping": {
+      "question": "Jaka Jest Wasza Polityka Wysyłki I Dostawy?",
+      "answer": "Oferujemy Darmową Wysyłkę Na Wszystkie Zamówienia Powyżej 50 $. Standardowa Wysyłka Trwa 3-5 Dni Roboczych, Podczas Gdy Wysyłka Ekspresowa Trwa 1-2 Dni Robocze. Wysyłamy Do Wszystkich 50 Stanów I Oferujemy Międzynarodową Wysyłkę Do Wybranych Krajów. Czasy Dostawy Mogą Się Różnić W Zależności Od Lokalizacji I Wybranej Metody Wysyłki."
+    },
+    "returns": {
+      "question": "Jaka Jest Wasza Polityka Zwrotów I Wymiany?",
+      "answer": "Oferujemy 30-Dniową Politykę Zwrotów Dla Wszystkich Nieużywanych Przedmiotów W Oryginalnym Opakowaniu. Niestandardowe Systemy Włosów Mają 14-Dniowe Okno Zwrotu. Zwroty Są Darmowe W Kontynentalnych Stanach Zjednoczonych. Wymiany Są Przetwarzane W Ciągu 5-7 Dni Roboczych Po Otrzymaniu Twojego Zwrotu."
+    },
+    "chooseSystem": {
+      "question": "Jak Wybrać Odpowiedni System Włosów Dla Siebie?",
+      "answer": "Nasze Systemy Włosów Są Dostępne W Różnych Typach Bazowych (Skóra, Koronka, Hybrydowy, Mono) I Typach Włosów. Rozważ Swój Styl Życia, Preferencje Komfortu I Wymagania Konserwacyjne. Nasi Eksperci Mogą Pomóc Ci Wybrać Idealny System Podczas Konsultacji. Oferujemy Również Wirtualne Konsultacje I Szczegółowe Przewodniki."
+    },
+    "care": {
+      "question": "Jak Dbać O Mój System Włosów?",
+      "answer": "Odpowiednia Pielęgnacja Przedłuża Życie Twojego Systemu Włosów. Używaj Szamponów Bez Siarczanów, Unikaj Nadmiernego Stylowania Ciepłem I Postępuj Zgodnie Z Naszymi Szczegółowymi Instrukcjami Pielęgnacji. Zapewniamy Kompleksowe Przewodniki Pielęgnacji Z Każdym Zakupem I Oferujemy Produkty Do Konserwacji, Aby Utrzymać Twój System W Najlepszym Stanie."
+    },
+    "installation": {
+      "question": "Czy Oferujecie Usługi Instalacji?",
+      "answer": "Tak, Oferujemy Profesjonalne Usługi Instalacji W Naszych Lokalizacjach Studio. Zapewniamy Również Szczegółowe Przewodniki Instalacji I Samouczki Wideo Dla Instalacji DIY. Nasi Certyfikowani Fryzjerzy Mogą Pomóc W Początkowym Ustawieniu I Zapewnić Ciągłe Wskazówki Dotyczące Konserwacji."
+    }
+  }
+}
+

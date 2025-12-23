@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 import './FAQ.css'
 
 const FAQ = ({ 
-  title = "Frequently Asked Questions",
-  subtitle = "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Ut Et Massa Mi. Aliquam In Hendrerit Urna.",
+  title,
+  subtitle,
   faqs = []
 }) => {
+  const { t } = useTranslation()
+  
   const defaultFAQs = [
     {
       id: 1,
@@ -51,8 +54,12 @@ const FAQ = ({
     <div className="faq-section">
       <Container>
         <div className="faq-section-header text-center mb-5">
-          <h2 className="faq-section-title">{title}</h2>
-          <p className="faq-section-subtitle">{subtitle}</p>
+          <h2 className="faq-section-title">
+            {title || t('faq.title')}
+          </h2>
+          <p className="faq-section-subtitle">
+            {subtitle || "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Ut Et Massa Mi. Aliquam In Hendrerit Urna."}
+          </p>
         </div>
         
         <Row className="justify-content-center">
@@ -68,7 +75,9 @@ const FAQ = ({
                       <span className="question-number">
                         {String(index + 1).padStart(2, '0')}
                       </span>
-                      <span className="question-text">{faq.question}</span>
+                      <span className="question-text">
+                        {faq.question}
+                      </span>
                     </div>
                     <div className="question-arrow">
                       <span className={`arrow ${expandedItem === faq.id ? 'rotated' : ''}`}>
@@ -79,7 +88,9 @@ const FAQ = ({
                   
                   {expandedItem === faq.id && (
                     <div className="faq-answer">
-                      <p>{faq.answer}</p>
+                      <p>
+                        {faq.answer}
+                      </p>
                     </div>
                   )}
                 </div>

@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 import './Newsletter.css'
 
 const Newsletter = ({ 
-  title = "Join Our Mailing List",
-  subtitle = "Sign up to receive inspiration, product updates, and special offers from our team.",
-  placeholder = "example@gmail.com",
-  buttonText = "Submit"
+  title,
+  subtitle,
+  placeholder,
+  buttonText
 }) => {
+  const { t } = useTranslation()
   const [email, setEmail] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -37,8 +39,12 @@ const Newsletter = ({
         <Row className="align-items-center">
           <Col lg={6}>
             <div className="newsletter-content">
-              <h2 className="newsletter-title">{title}</h2>
-              <p className="newsletter-subtitle">{subtitle}</p>
+              <h2 className="newsletter-title">
+                {title || t('newsletter.title')}
+              </h2>
+              <p className="newsletter-subtitle">
+                {subtitle || t('newsletter.subtitle')}
+              </p>
             </div>
           </Col>
           
@@ -51,7 +57,7 @@ const Newsletter = ({
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder={placeholder}
+                      placeholder={placeholder || t('newsletter.placeholder')}
                       className="newsletter-input"
                       required
                     />
@@ -60,14 +66,18 @@ const Newsletter = ({
                       className="newsletter-button"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? 'Submitting...' : buttonText}
+                      <span>
+                        {isSubmitting ? t('newsletter.submitting') : (buttonText || t('newsletter.buttonText'))}
+                      </span>
                     </button>
                   </div>
                 </form>
               ) : (
                 <div className="success-message">
                   <div className="success-icon">✓</div>
-                  <p>Thank you for subscribing!</p>
+                  <p>
+                    {t('newsletter.thankYou')}
+                  </p>
                 </div>
               )}
             </div>

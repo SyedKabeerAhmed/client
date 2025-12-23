@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import './AuthPages.css'
 import { useAuth } from '../contexts/AuthContext'
 import { formatPhoneNumber } from '../utils/phoneFormatter'
 
 const Signup = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const { register } = useAuth()
   const [formData, setFormData] = useState({
@@ -36,7 +38,7 @@ const Signup = () => {
 
     // Validate password confirmation
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match')
+      setError(t('auth.passwordsDoNotMatch'))
       setIsLoading(false)
       return
     }
@@ -56,7 +58,7 @@ const Signup = () => {
       // Redirect to home page
       navigate('/')
     } catch (error) {
-      setError(error.message || 'Registration failed. Please try again.')
+      setError(error.message || t('auth.registrationFailed'))
     } finally {
       setIsLoading(false)
     }
@@ -76,9 +78,11 @@ const Signup = () => {
             <div className="image-overlay">
               <div className="overlay-content">
                 <p className="overlay-text">
-                  Sign in to your account to discover exclusive deals and manage your orders.
+                  {t('auth.signInToAccount')}
                 </p>
-                <p className="overlay-author">-- Mathew</p>
+                <p className="overlay-author">
+                  {t('auth.author')}
+                </p>
               </div>
             </div>
           </div>
@@ -89,11 +93,13 @@ const Signup = () => {
           <div className="form-container">
             <div className="form-header">
               <Link to="/" className="back-arrow">←</Link>
-              <h1 className="form-title">Sign up</h1>
+              <h1 className="form-title">
+                {t('auth.signUp')}
+              </h1>
             </div>
             
             <p className="form-description">
-              Sign in to your account to discover exclusive deals and manage your orders.
+              {t('auth.signInToAccount')}
             </p>
 
             {error && (
@@ -105,7 +111,10 @@ const Signup = () => {
             <form onSubmit={handleSubmit} className="auth-form">
               <div className="form-group">
                 <label htmlFor="fullName" className="form-label">
-                  Full Name <span className="required">*</span>
+                  <span>
+                    {t('auth.fullName')}
+                  </span>{' '}
+                  <span className="required">*</span>
                 </label>
                 <input
                   type="text"
@@ -113,7 +122,7 @@ const Signup = () => {
                   name="fullName"
                   value={formData.fullName}
                   onChange={handleChange}
-                  placeholder="Enter your full name"
+                  placeholder={t('auth.fullNamePlaceholder')}
                   className="form-input"
                   required
                 />
@@ -121,7 +130,10 @@ const Signup = () => {
 
               <div className="form-group">
                 <label htmlFor="userType" className="form-label">
-                  User Type <span className="required">*</span>
+                  <span>
+                    {t('auth.userType')}
+                  </span>{' '}
+                  <span className="required">*</span>
                 </label>
                 <select
                   id="userType"
@@ -131,14 +143,21 @@ const Signup = () => {
                   className="form-input"
                   required
                 >
-                  <option value="Individual User">Individual User</option>
-                  <option value="Business User">Business User</option>
+                  <option value="Individual User">
+                    {t('auth.individualUser')}
+                  </option>
+                  <option value="Business User">
+                    {t('auth.businessUser')}
+                  </option>
                 </select>
               </div>
 
               <div className="form-group">
                 <label htmlFor="email" className="form-label">
-                  Email <span className="required">*</span>
+                  <span>
+                    {t('auth.email')}
+                  </span>{' '}
+                  <span className="required">*</span>
                 </label>
                 <input
                   type="email"
@@ -146,7 +165,7 @@ const Signup = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="Please enter your email address"
+                  placeholder={t('auth.emailPlaceholder')}
                   className="form-input"
                   required
                 />
@@ -154,7 +173,10 @@ const Signup = () => {
 
               <div className="form-group">
                 <label htmlFor="phoneNumber" className="form-label">
-                  Phone Number <span className="required">*</span>
+                  <span>
+                    {t('auth.phoneNumber')}
+                  </span>{' '}
+                  <span className="required">*</span>
                 </label>
                 <input
                   type="tel"
@@ -162,7 +184,7 @@ const Signup = () => {
                   name="phoneNumber"
                   value={formData.phoneNumber}
                   onChange={handleChange}
-                  placeholder="03142070876 (will be formatted to +923142070876)"
+                  placeholder={t('auth.phonePlaceholder')}
                   className="form-input"
                   required
                 />
@@ -170,7 +192,10 @@ const Signup = () => {
 
               <div className="form-group">
                 <label htmlFor="password" className="form-label">
-                  Password <span className="required">*</span>
+                  <span>
+                    {t('auth.password')}
+                  </span>{' '}
+                  <span className="required">*</span>
                 </label>
                 <input
                   type="password"
@@ -178,7 +203,7 @@ const Signup = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder="Please enter your password"
+                  placeholder={t('auth.passwordPlaceholder')}
                   className="form-input"
                   required
                 />
@@ -186,7 +211,10 @@ const Signup = () => {
 
               <div className="form-group">
                 <label htmlFor="confirmPassword" className="form-label">
-                  Confirm Password <span className="required">*</span>
+                  <span>
+                    {t('auth.confirmPassword')}
+                  </span>{' '}
+                  <span className="required">*</span>
                 </label>
                 <input
                   type="password"
@@ -194,7 +222,7 @@ const Signup = () => {
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  placeholder="Please enter your password"
+                  placeholder={t('auth.passwordPlaceholder')}
                   className="form-input"
                   required
                 />
@@ -209,22 +237,37 @@ const Signup = () => {
                     onChange={handleChange}
                     className="checkbox-input"
                   />
-                  <span className="checkbox-label">Remember me</span>
+                  <span className="checkbox-label">
+                    {t('auth.rememberMe')}
+                  </span>
                 </label>
                 
-                <Link to="/forgot-password" className="forgot-link">
-                  Forgot Password?
+                <Link
+                  to="/forgot-password"
+                  className="forgot-link"
+                >
+                  {t('auth.forgotPassword')}
                 </Link>
               </div>
 
               <button type="submit" className="auth-button" disabled={isLoading}>
-                {isLoading ? 'Creating Account...' : 'Sign Up'}
+                <span>
+                  {isLoading ? t('auth.creatingAccount') : t('auth.signUpButton')}
+                </span>
               </button>
             </form>
 
             <div className="form-footer">
               <p className="footer-text">
-                Already have an account yet? <Link to="/login" className="footer-link">Login</Link>
+                <span>
+                  {t('auth.alreadyHaveAccount')}
+                </span>{' '}
+                <Link
+                  to="/login"
+                  className="footer-link"
+                >
+                  {t('auth.login')}
+                </Link>
               </p>
             </div>
           </div>

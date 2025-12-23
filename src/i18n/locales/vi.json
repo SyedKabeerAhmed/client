@@ -1,0 +1,216 @@
+{
+  "common": {
+    "home": "Trang chủ",
+    "about": "Giới thiệu",
+    "shop": "Cửa hàng",
+    "cart": "Giỏ hàng",
+    "login": "Đăng nhập",
+    "signup": "Đăng ký",
+    "logout": "Đăng xuất",
+    "profile": "Hồ sơ",
+    "search": "Tìm kiếm",
+    "loading": "Đang tải...",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "submit": "Gửi",
+    "delete": "Xóa",
+    "edit": "Chỉnh sửa",
+    "close": "Đóng",
+    "dashboard": "Bảng điều khiển",
+    "manageAccount": "Quản lý tài khoản",
+    "loginRegister": "Đăng nhập/Đăng ký",
+    "english": "Tiếng Việt",
+    "usd": "USD"
+  },
+  "nav": {
+    "hairSystems": "Hệ thống tóc",
+    "allHairSystems": "Tất cả hệ thống tóc",
+    "skinSystems": "Hệ thống da",
+    "laceSystems": "Hệ thống ren",
+    "hybridSystems": "Hệ thống lai",
+    "monoSystems": "Hệ thống mono",
+    "accessories": "Phụ kiện",
+    "allAccessories": "Tất cả phụ kiện",
+    "adhesives": "Chất kết dính",
+    "glues": "Keo",
+    "tools": "Công cụ",
+    "careProducts": "Sản phẩm chăm sóc",
+    "beginnersGuide": "Hướng dẫn cho người mới",
+    "customHairSystem": "Hệ thống tóc tùy chỉnh",
+    "aboutUs": "Về chúng tôi",
+    "help": "Trợ giúp",
+    "brand": "Cửa hàng tóc"
+  },
+  "home": {
+    "title": "Tóc trông thật, tự tin bền lâu",
+    "description": "Khám phá các hệ thống được thiết kế cho sự thoải mái, phong cách và sử dụng hàng ngày.",
+    "badge": "Hàng mới về",
+    "premiumSystems": {
+      "title": "Khám phá hệ thống tóc cao cấp của chúng tôi",
+      "subtitle": "Chọn Hệ Thống Hoàn Hảo Được Điều Chỉnh Theo Phong Cách Sống, Sự Thoải Mái Và Vẻ Ngoài Tự Nhiên Của Bạn."
+    },
+    "bestSelling": {
+      "title": "Hệ thống tóc bán chạy nhất của chúng tôi",
+      "subtitle": "Khám Phá Các Hệ Thống Đáng Tin Cậy Và Phổ Biến Nhất, Được Khách Hàng Chọn Vì Vẻ Ngoài Tự Nhiên, Sự Thoải Mái Và Độ Bền."
+    }
+  },
+  "styles": {
+    "title": "Phong Cách Định Nghĩa Lại Sự Tự Tin",
+    "subtitle": "Khám Phá Các Hệ Thống Tóc Được Tìm Kiếm Nhiều Nhất Của Chúng Tôi, Để Mang Đến Cho Bạn Sự Cân Bằng Hoàn Hảo Giữa Phong Cách, Sự Thoải Mái Và Vẻ Ngoài Tự Nhiên."
+  },
+  "testimonials": {
+    "title": "Khách Hàng Của Chúng Tôi Nói Gì",
+    "shopNow": "Mua Ngay"
+  },
+  "faq": {
+    "title": "Câu hỏi thường gặp"
+  },
+  "cart": {
+    "title": "Giỏ hàng",
+    "empty": "Giỏ hàng của bạn trống",
+    "total": "Tổng cộng",
+    "checkout": "Thanh toán",
+    "continueShopping": "Tiếp tục mua sắm"
+  },
+  "product": {
+    "addToCart": "Thêm vào giỏ hàng",
+    "buyNow": "Mua ngay",
+    "description": "Mô tả",
+    "specifications": "Thông số kỹ thuật",
+    "reviews": "Đánh giá",
+    "explore": "Khám phá"
+  },
+  "beginnersGuide": {
+    "badge": "Hướng dẫn cho người mới",
+    "title": "Mới với Hệ thống Tóc? Bắt đầu Tại Đây",
+    "description": "Tìm hiểu những điều cơ bản về hệ thống tóc với các hướng dẫn đơn giản, mẹo và lời khuyên của chuyên gia để giúp bạn bắt đầu với sự tự tin.",
+    "exploreMore": "Khám Phá Thêm"
+  },
+  "newsletter": {
+    "title": "Tham Gia Danh Sách Gửi Thư Của Chúng Tôi",
+    "subtitle": "Đăng ký để nhận cảm hứng, cập nhật sản phẩm và ưu đãi đặc biệt từ nhóm của chúng tôi.",
+    "placeholder": "example@gmail.com",
+    "buttonText": "Gửi",
+    "submitting": "Đang gửi...",
+    "thankYou": "Cảm ơn bạn đã đăng ký!"
+  },
+  "shop": {
+    "ourHairSystems": "Hệ Thống Tóc Và Phụ Kiện Của Chúng Tôi",
+    "hairSystems": "Hệ Thống Tóc",
+    "accessories": "Phụ Kiện",
+    "skinHairSystems": "Hệ Thống Tóc Da",
+    "laceHairSystems": "Hệ Thống Tóc Ren",
+    "hybridHairSystems": "Hệ Thống Tóc Lai",
+    "monoHairSystems": "Hệ Thống Tóc Mono",
+    "adhesives": "Chất Kết Dính",
+    "glues": "Keo",
+    "tools": "Công Cụ",
+    "careProducts": "Sản Phẩm Chăm Sóc",
+    "exploreSubtitle": "Khám Phá Các Hệ Thống Tóc Được Tìm Kiếm Nhiều Nhất Của Chúng Tôi, Được Chọn Lọc Cẩn Thận Để Mang Đến Cho Bạn Sự Cân Bằng Hoàn Hảo Giữa Phong Cách, Sự Thoải Mái Và Vẻ Ngoài Tự Nhiên",
+    "hairSystemsSubtitle": "Khám Phá Toàn Bộ Phạm Vi Hệ Thống Tóc Của Chúng Tôi, Được Thiết Kế Để Cung Cấp Sự Cân Bằng Hoàn Hảo Giữa Phong Cách, Sự Thoải Mái Và Vẻ Ngoài Tự Nhiên",
+    "accessoriesSubtitle": "Khám Phá Các Phụ Kiện Và Công Cụ Thiết Yếu Để Duy Trì Và Tạo Kiểu Cho Hệ Thống Tóc Của Bạn Với Kết Quả Chuyên Nghiệp",
+    "skinSubtitle": "Trải Nghiệm Sự Thoải Mái Tối Đa Và Vẻ Ngoài Tự Nhiên Với Hệ Thống Tóc Da Cao Cấp Của Chúng Tôi",
+    "laceSubtitle": "Khám Phá Sự Kết Hợp Hoàn Hảo Giữa Khả Năng Thở Và Vẻ Ngoài Tự Nhiên Với Hệ Thống Tóc Ren Chất Lượng Cao Của Chúng Tôi",
+    "hybridSubtitle": "Nhận Được Điều Tốt Nhất Của Cả Hai Thế Giới Với Hệ Thống Tóc Lai Sáng Tạo Của Chúng Tôi Kết Hợp Nhiều Vật Liệu Cơ Sở",
+    "monoSubtitle": "Tận Hưởng Độ Bền Vượt Trội Và Bảo Trì Dễ Dàng Với Hệ Thống Tóc Monofilament Của Chúng Tôi",
+    "adhesiveSubtitle": "Chất Kết Dính Cấp Chuyên Nghiệp Để Gắn Kết Hệ Thống Tóc An Toàn Và Lâu Dài",
+    "glueSubtitle": "Keo Và Giải Pháp Liên Kết Chất Lượng Cao Để Lắp Đặt Hệ Thống Tóc Đáng Tin Cậy",
+    "toolsSubtitle": "Công Cụ Và Thiết Bị Thiết Yếu Để Ứng Dụng Và Bảo Trì Hệ Thống Tóc Chuyên Nghiệp",
+    "careProductsSubtitle": "Sản Phẩm Chăm Sóc Cao Cấp Để Giữ Cho Hệ Thống Tóc Của Bạn Trông Tươi Mới Và Tự Nhiên",
+    "sortBy": "Sắp Xếp Theo",
+    "featured": "Nổi Bật",
+    "price": "Giá",
+    "newest": "Mới Nhất",
+    "highestRated": "Được Đánh Giá Cao Nhất",
+    "loadMore": "Tải Thêm",
+    "noProducts": "Không tìm thấy sản phẩm",
+    "searchResults": "Kết Quả Tìm Kiếm",
+    "showingResults": "Hiển thị kết quả cho",
+    "totalResults": "tổng kết quả"
+  },
+  "customHairSystem": {
+    "badge": "Hệ Thống Tóc Tùy Chỉnh",
+    "title": "Tạo Hệ Thống Tóc Tùy Chỉnh Của Bạn",
+    "featuresTitle": "Tính Năng Của Hệ Thống Tóc Tùy Chỉnh Của Chúng Tôi",
+    "featuresSubtitle": "Khám Phá Các Hệ Thống Tóc Được Mua Nhiều Nhất Của Chúng Tôi, Được Chọn Lọc Cẩn Thận Để Mang Đến Cho Bạn Sự Cân Bằng Hoàn Hảo Giữa Phong Cách, Sự Thoải Mái Và Vẻ Ngoài Tự Nhiên",
+    "feature1": {
+      "title": "Đặt Hàng Dễ Dàng Một Cú Nhấp",
+      "description": "Sản Xuất Bắt Đầu Ngay Sau Khi Thanh Toán - Không Xác Nhận, Không Email, Không Đến Salon."
+    },
+    "feature2": {
+      "title": "Thiết Kế Cho Sự Vừa Vặn Hoàn Hảo",
+      "description": "Các Tùy Chọn Đa Dạng Để Phù Hợp Với Tất Cả Các Dân Tộc, Kết Cấu Tóc Và Lối Sống."
+    },
+    "feature3": {
+      "title": "Dịch Vụ Nhanh Chóng Và Đáng Tin Cậy",
+      "description": "Nhận Đơn Hàng Của Bạn Nhanh Hơn Với Các Tùy Chọn Xử Lý Và Giao Hàng Gấp Rút Của Chúng Tôi."
+    },
+    "feature4": {
+      "title": "Nghệ Thuật Buộc Tay Tinh Tế",
+      "description": "Mỗi Mảnh Được Buộc Tay Chuyên Nghiệp Bởi Các Thợ Thủ Công Có Hơn 10 Năm Kinh Nghiệm."
+    },
+    "designTitle": "Thiết Kế Hệ Thống Tóc Lý Tưởng Của Bạn",
+    "designDescription": "Hơn 16 Tính Năng Có Thể Tùy Chỉnh Để Đảm Bảo Một Hệ Thống Tóc Hoàn Hảo Với Các Cơ Sở Tùy Chỉnh, Kết Cấu Tóc Đa Dạng Và Khớp Màu Chính Xác.",
+    "createButton": "TẠO HỆ THỐNG TÓC TÙY CHỈNH CỦA BẠN",
+    "beforeAfterTitle": "Tính Năng Của Hệ Thống Tóc Tùy Chỉnh Của Chúng Tôi",
+    "beforeAfterSubtitle": "Khám Phá Các Hệ Thống Tóc Được Mua Nhiều Nhất Của Chúng Tôi, Được Chọn Lọc Cẩn Thận Để Mang Đến Cho Bạn Sự Cân Bằng Hoàn Hảo Giữa Phong Cách, Sự Thoải Mái Và Vẻ Ngoài Tự Nhiên",
+    "template": {
+      "partial": "Một Phần",
+      "regular": "Thường",
+      "oversize": "Cỡ Lớn",
+      "fullcap": "Mũ Đầy",
+      "partialDesc": "(kích thước ≤ 7\"x10\" hoặc diện tích ≤ 70 inch vuông)",
+      "regularDesc": "(7\"x10\" < kích thước ≤ 8\"x10\" hoặc 70 inch vuông < diện tích ≤ 80 inch vuông)",
+      "oversizeDesc": "(8\"x10\" < kích thước ≤ 10\"x10\" hoặc 80 inch vuông < diện tích ≤ 100 inch vuông)",
+      "fullcapDesc": "(kích thước > 10\"x10\" hoặc diện tích > 100 inch vuông)"
+    }
+  },
+  "about": {
+    "badge": "Về Chúng Tôi",
+    "title": "Chúng Tôi Là Ai Và Chúng Tôi Đại Diện Cho Điều Gì",
+    "description": "Khám Phá Cam Kết Của Chúng Tôi Về Chất Lượng, Đổi Mới Và Sự Hài Lòng Của Khách Hàng Trong Ngành Hệ Thống Tóc.",
+    "mission": {
+      "badge": "Sứ Mệnh Của Chúng Tôi",
+      "title": "Tăng Cường Sự Tự Tin Chân Thực",
+      "description": "Chúng Tôi Tin Rằng Mọi Người Đều Xứng Đáng Cảm Thấy Tự Tin Và Chân Thực Trong Làn Da Của Chính Mình. Sứ Mệnh Của Chúng Tôi Là Cung Cấp Các Hệ Thống Tóc Chất Lượng Cao Không Chỉ Trông Tự Nhiên Mà Còn Trao Quyền Cho Khách Hàng Của Chúng Tôi Để Sống Cuộc Sống Của Họ Với Sự Tự Tin Và Tự Tin Được Đổi Mới. Thông Qua Công Nghệ Đổi Mới, Nghề Thủ Công Chuyên Nghiệp Và Dịch Vụ Cá Nhân Hóa, Chúng Tôi Giúp Các Cá Nhân Khám Phá Lại Bản Thân Tốt Nhất Của Họ."
+    },
+    "vision": {
+      "badge": "Tầm Nhìn Của Chúng Tôi",
+      "title": "Dẫn Đầu Trong Sự Xuất Sắc Của Hệ Thống Tóc",
+      "description": "Trở Thành Nhà Lãnh Đạo Toàn Cầu Trong Đổi Mới Hệ Thống Tóc, Thiết Lập Các Tiêu Chuẩn Mới Về Chất Lượng, Sự Thoải Mái Và Vẻ Ngoài Tự Nhiên. Chúng Tôi Hình Dung Một Thế Giới Nơi Rụng Tóc Không Bao Giờ Giới Hạn Sự Tự Tin Hoặc Cơ Hội, Nơi Các Giải Pháp Của Chúng Tôi Tích Hợp Liền Mạch Vào Mọi Lối Sống, Và Nơi Trải Nghiệm Khách Hàng Xuất Sắc Là Nền Tảng Của Các Mối Quan Hệ Lâu Dài."
+    },
+    "testimonialsTitle": "Khách Hàng Của Chúng Tôi Nói Gì",
+    "shopNow": "MUA NGAY"
+  },
+  "help": {
+    "badge": "Trợ Giúp",
+    "title": "Chúng Tôi Có Thể Giúp Bạn Hôm Nay Như Thế Nào?",
+    "description": "Tìm Câu Trả Lời Nhanh, Hướng Dẫn Từng Bước Và Hỗ Trợ Chuyên Gia - Tất Cả Những Gì Bạn Cần Ở Một Nơi.",
+    "faqTitle": "Câu Hỏi Thường Gặp",
+    "trackOrder": {
+      "question": "Làm Thế Nào Để Tôi Theo Dõi Đơn Hàng Của Mình?",
+      "answer": "Bạn Có Thể Theo Dõi Đơn Hàng Của Mình Bằng Cách Đăng Nhập Vào Tài Khoản Của Bạn Và Truy Cập Phần 'Đơn Hàng Của Tôi'. Bạn Sẽ Nhận Được Thông Tin Theo Dõi Qua Email Khi Đơn Hàng Của Bạn Được Gửi. Bạn Cũng Có Thể Sử Dụng Số Theo Dõi Được Cung Cấp Trong Email Xác Nhận Đơn Hàng Của Bạn."
+    },
+    "shipping": {
+      "question": "Chính Sách Vận Chuyển Và Giao Hàng Của Bạn Là Gì?",
+      "answer": "Chúng Tôi Cung Cấp Vận Chuyển Miễn Phí Cho Tất Cả Các Đơn Hàng Trên $50. Vận Chuyển Tiêu Chuẩn Mất 3-5 Ngày Làm Việc, Trong Khi Vận Chuyển Nhanh Mất 1-2 Ngày Làm Việc. Chúng Tôi Giao Hàng Đến Tất Cả 50 Tiểu Bang Và Cung Cấp Vận Chuyển Quốc Tế Đến Các Quốc Gia Được Chọn. Thời Gian Giao Hàng Có Thể Thay Đổi Dựa Trên Vị Trí Và Phương Thức Vận Chuyển Được Chọn."
+    },
+    "returns": {
+      "question": "Chính Sách Trả Lại Và Đổi Của Bạn Là Gì?",
+      "answer": "Chúng Tôi Cung Cấp Chính Sách Trả Lại 30 Ngày Cho Tất Cả Các Mặt Hàng Chưa Sử Dụng Trong Bao Bì Gốc Của Chúng. Hệ Thống Tóc Tùy Chỉnh Có Cửa Sổ Trả Lại 14 Ngày. Việc Trả Lại Miễn Phí Trong Lục Địa Hoa Kỳ. Việc Đổi Được Xử Lý Trong Vòng 5-7 Ngày Làm Việc Sau Khi Chúng Tôi Nhận Được Việc Trả Lại Của Bạn."
+    },
+    "chooseSystem": {
+      "question": "Làm Thế Nào Để Tôi Chọn Hệ Thống Tóc Phù Hợp Cho Mình?",
+      "answer": "Hệ Thống Tóc Của Chúng Tôi Có Nhiều Loại Cơ Sở (Da, Ren, Lai, Mono) Và Loại Tóc. Hãy Xem Xét Lối Sống, Sở Thích Thoải Mái Và Yêu Cầu Bảo Trì Của Bạn. Các Chuyên Gia Của Chúng Tôi Có Thể Giúp Bạn Chọn Hệ Thống Hoàn Hảo Trong Một Cuộc Tư Vấn. Chúng Tôi Cũng Cung Cấp Tư Vấn Ảo Và Hướng Dẫn Chi Tiết."
+    },
+    "care": {
+      "question": "Làm Thế Nào Để Tôi Chăm Sóc Hệ Thống Tóc Của Mình?",
+      "answer": "Chăm Sóc Đúng Cách Kéo Dài Tuổi Thọ Của Hệ Thống Tóc Của Bạn. Sử Dụng Dầu Gội Không Chứa Sulfate, Tránh Tạo Kiểu Quá Nhiều Nhiệt Và Làm Theo Hướng Dẫn Chăm Sóc Chi Tiết Của Chúng Tôi. Chúng Tôi Cung Cấp Hướng Dẫn Chăm Sóc Toàn Diện Với Mỗi Lần Mua Và Cung Cấp Sản Phẩm Bảo Trì Để Giữ Cho Hệ Thống Của Bạn Trông Tốt Nhất."
+    },
+    "installation": {
+      "question": "Bạn Có Cung Cấp Dịch Vụ Lắp Đặt Không?",
+      "answer": "Có, Chúng Tôi Cung Cấp Dịch Vụ Lắp Đặt Chuyên Nghiệp Tại Các Vị Trí Studio Của Chúng Tôi. Chúng Tôi Cũng Cung Cấp Hướng Dẫn Lắp Đặt Chi Tiết Và Hướng Dẫn Video Cho Việc Lắp Đặt DIY. Các Nhà Tạo Mẫu Được Chứng Nhận Của Chúng Tôi Có Thể Giúp Với Việc Thiết Lập Ban Đầu Và Cung Cấp Mẹo Bảo Trì Liên Tục."
+    }
+  }
+}
+

@@ -1,0 +1,216 @@
+{
+  "common": {
+    "home": "Kezdőlap",
+    "about": "Rólunk",
+    "shop": "Bolt",
+    "cart": "Kosár",
+    "login": "Bejelentkezés",
+    "signup": "Regisztráció",
+    "logout": "Kijelentkezés",
+    "profile": "Profil",
+    "search": "Keresés",
+    "loading": "Betöltés...",
+    "save": "Mentés",
+    "cancel": "Mégse",
+    "submit": "Küldés",
+    "delete": "Törlés",
+    "edit": "Szerkesztés",
+    "close": "Bezárás",
+    "dashboard": "Irányítópult",
+    "manageAccount": "Fiók Kezelése",
+    "loginRegister": "Bejelentkezés/Regisztráció",
+    "english": "Magyar",
+    "usd": "USD"
+  },
+  "nav": {
+    "hairSystems": "Hajrendszerek",
+    "allHairSystems": "Összes Hajrendszer",
+    "skinSystems": "Bőr Rendszerek",
+    "laceSystems": "Csipke Rendszerek",
+    "hybridSystems": "Hibrid Rendszerek",
+    "monoSystems": "Mono Rendszerek",
+    "accessories": "Kiegészítők",
+    "allAccessories": "Összes Kiegészítő",
+    "adhesives": "Ragasztóanyagok",
+    "glues": "Ragasztók",
+    "tools": "Eszközök",
+    "careProducts": "Ápolási Termékek",
+    "beginnersGuide": "Kezdők Útmutatója",
+    "customHairSystem": "Egyedi Hajrendszer",
+    "aboutUs": "Rólunk",
+    "help": "Segítség",
+    "brand": "Hajbolt"
+  },
+  "home": {
+    "title": "Valódi Kinézetű Haj, Tartós Önbizalom",
+    "description": "Fedezzen fel rendszereket, amelyek kényelemre, stílusra és mindennapi viselésre készültek.",
+    "badge": "Új Termék",
+    "premiumSystems": {
+      "title": "Fedezze Fel Prémium Hajrendszereinket",
+      "subtitle": "Válassza Ki A Tökéletes Rendszert, Amely Az Ön Életstílusához, Kényelméhez És Természetes Megjelenéséhez Igazodik."
+    },
+    "bestSelling": {
+      "title": "Legkelendőbb Hajrendszereink",
+      "subtitle": "Fedezze Fel A Legmegbízhatóbb És Legnépszerűbb Rendszereket, Amelyeket Az Ügyfelek Természetes Megjelenésük, Kényelmük És Tartósságuk Miatt Választottak."
+    }
+  },
+  "styles": {
+    "title": "Stílusok, Amelyek Újradefiniálják Az Önbizalmat",
+    "subtitle": "Fedezze Fel Legkeresettebb Hajrendszereinket, Hogy Tökéletes Egyensúlyt Nyújtsunk Önnek Stílus, Kényelem És Természetes Megjelenés Tekintetében."
+  },
+  "testimonials": {
+    "title": "Mit Mondanak Ügyfeleink",
+    "shopNow": "Vásárlás Most"
+  },
+  "faq": {
+    "title": "Gyakran Ismételt Kérdések"
+  },
+  "cart": {
+    "title": "Bevásárlókosár",
+    "empty": "A kosara üres",
+    "total": "Összesen",
+    "checkout": "Tovább a Fizetéshez",
+    "continueShopping": "Vásárlás Folytatása"
+  },
+  "product": {
+    "addToCart": "Kosárba",
+    "buyNow": "Vásárlás",
+    "description": "Leírás",
+    "specifications": "Specifikációk",
+    "reviews": "Értékelések",
+    "explore": "Felfedezés"
+  },
+  "beginnersGuide": {
+    "badge": "Kezdők Útmutatója",
+    "title": "Új A Hajrendszerekben? Kezdje Itt",
+    "description": "Tanulja meg a hajrendszerek alapjait egyszerű útmutatókkal, tippekkel és szakértői tanácsokkal, hogy magabiztosan kezdhessen.",
+    "exploreMore": "Több Felfedezése"
+  },
+  "newsletter": {
+    "title": "Csatlakozzon Hírlevelünkhöz",
+    "subtitle": "Iratkozzon fel, hogy inspirációt, termékfrissítéseket és különleges ajánlatokat kapjon csapatunktól.",
+    "placeholder": "pelda@gmail.com",
+    "buttonText": "Küldés",
+    "submitting": "Küldés...",
+    "thankYou": "Köszönjük a feliratkozást!"
+  },
+  "shop": {
+    "ourHairSystems": "Hajrendszereink És Kiegészítőink",
+    "hairSystems": "Hajrendszerek",
+    "accessories": "Kiegészítők",
+    "skinHairSystems": "Bőr Hajrendszerek",
+    "laceHairSystems": "Csipke Hajrendszerek",
+    "hybridHairSystems": "Hibrid Hajrendszerek",
+    "monoHairSystems": "Mono Hajrendszerek",
+    "adhesives": "Ragasztóanyagok",
+    "glues": "Ragasztók",
+    "tools": "Eszközök",
+    "careProducts": "Ápolási Termékek",
+    "exploreSubtitle": "Fedezze Fel Legkeresettebb Hajrendszereinket, Gondosan Kiválasztva, Hogy Tökéletes Egyensúlyt Nyújtsunk Önnek Stílus, Kényelem És Természetes Megjelenés Tekintetében",
+    "hairSystemsSubtitle": "Fedezze Fel Teljes Hajrendszer Kínálatunkat, Úgy Tervezve, Hogy Tökéletes Egyensúlyt Nyújtsunk Stílus, Kényelem És Természetes Megjelenés Tekintetében",
+    "accessoriesSubtitle": "Fedezzen Fel Alapvető Kiegészítőket És Eszközöket, Hogy Professzionális Eredményekkel Karbantartsa És Stílusba Hozza Hajrendszereit",
+    "skinSubtitle": "Tapasztalja Meg A Végső Kényelmet És Természetes Megjelenést Prémium Bőr Hajrendszereinkkel",
+    "laceSubtitle": "Fedezze Fel A Légzésképesség És Természetes Megjelenés Tökéletes Keverékét Magas Minőségű Csipke Hajrendszereinkkel",
+    "hybridSubtitle": "Szerezze Meg A Legjobbat Mindkét Világból Innovatív Hibrid Hajrendszereinkkel, Amelyek Több Alapanyagot Összekapcsolnak",
+    "monoSubtitle": "Élvezze A Felsőbbrendű Tartósságot És Könnyű Karbantartást Monofilament Hajrendszereinkkel",
+    "adhesiveSubtitle": "Professzionális Minőségű Ragasztóanyagok A Biztonságos És Tartós Hajrendszer Rögzítéshez",
+    "glueSubtitle": "Magas Minőségű Ragasztók És Kötőanyag Megoldások A Megbízható Hajrendszer Telepítéshez",
+    "toolsSubtitle": "Alapvető Eszközök És Felszerelések A Professzionális Hajrendszer Alkalmazáshoz És Karbantartáshoz",
+    "careProductsSubtitle": "Prémium Ápolási Termékek, Hogy Hajrendszereit Frissen És Természetesen Tartsa",
+    "sortBy": "Rendezés",
+    "featured": "Kiemelt",
+    "price": "Ár",
+    "newest": "Legújabb",
+    "highestRated": "Legjobbra Értékelt",
+    "loadMore": "Több Betöltése",
+    "noProducts": "Nem Találhatók Termékek",
+    "searchResults": "Keresési Eredmények",
+    "showingResults": "Eredmények Megjelenítése",
+    "totalResults": "Összes Eredmény"
+  },
+  "customHairSystem": {
+    "badge": "Egyedi Hajrendszer",
+    "title": "Készítse El Egyedi Hajrendszerét",
+    "featuresTitle": "Egyedi Hajrendszereink Jellemzői",
+    "featuresSubtitle": "Fedezze Fel Legtöbbet Vásárolt Hajrendszereinket, Gondosan Kiválasztva, Hogy Tökéletes Egyensúlyt Nyújtsunk Önnek Stílus, Kényelem És Természetes Megjelenés Tekintetében",
+    "feature1": {
+      "title": "Egyszerű Egy Kattintásos Rendelés",
+      "description": "A Termelés Azonnal Elindul A Fizetés Után - Nincs Megerősítés, Nincs Email, Nincs Szalon Látogatás."
+    },
+    "feature2": {
+      "title": "Tökéletes Illeszkedésre Tervezve",
+      "description": "Különféle Opciók, Hogy Minden Etnikumhoz, Hajtextúrához És Életstílushoz Illeszkedjen."
+    },
+    "feature3": {
+      "title": "Gyors És Megbízható Sürgős Szolgáltatás",
+      "description": "Szerezze Meg Rendelését Gyorsabban Gyorsított Feldolgozási És Szállítási Opcióinkkal."
+    },
+    "feature4": {
+      "title": "Kiváló Kézi Kötött Művészet",
+      "description": "Minden Darabot Szakértői Kézi Kötéssel Készítenek 10+ Éves Tapasztalattal Rendelkező Mesterek."
+    },
+    "designTitle": "Tervezze Meg Ideális Hajrendszerét",
+    "designDescription": "Több Mint 16 Testreszabható Funkció, Hogy Tökéletes Hajrendszert Biztosítsunk Egyedi Alapokkal, Különféle Hajtextúrákkal És Pontos Színillesztéssel.",
+    "createButton": "HOZZA LÉTRE EGYEDI HAJRENDSZERÉT",
+    "beforeAfterTitle": "Egyedi Hajrendszereink Jellemzői",
+    "beforeAfterSubtitle": "Fedezze Fel Legtöbbet Vásárolt Hajrendszereinket, Gondosan Kiválasztva, Hogy Tökéletes Egyensúlyt Nyújtsunk Önnek Stílus, Kényelem És Természetes Megjelenés Tekintetében",
+    "template": {
+      "partial": "Részleges",
+      "regular": "Rendszeres",
+      "oversize": "Nagy Méret",
+      "fullcap": "Teljes Sapka",
+      "partialDesc": "(méret ≤ 7\"x10\", vagy terület ≤ 70 négyzet hüvelyk)",
+      "regularDesc": "(7\"x10\" < méret ≤ 8\"x10\", vagy 70 négyzet hüvelyk < terület ≤ 80 négyzet hüvelyk)",
+      "oversizeDesc": "(8\"x10\" < méret ≤ 10\"x10\", vagy 80 négyzet hüvelyk < terület ≤ 100 négyzet hüvelyk)",
+      "fullcapDesc": "(méret > 10\"x10\", vagy terület > 100 négyzet hüvelyk)"
+    }
+  },
+  "about": {
+    "badge": "Rólunk",
+    "title": "Kik Vagyunk És Mit Képviselünk",
+    "description": "Fedezze Fel Elkötelezettségünket A Minőség, Az Innováció És Az Ügyfél Elégedettség Iránt A Hajrendszer Iparágban.",
+    "mission": {
+      "badge": "Küldetésünk",
+      "title": "Valódi Önbizalom Erősítése",
+      "description": "Úgy Véljük, Hogy Mindenki Megérdemli, Hogy Magabiztos És Valódi Legyen A Saját Bőrében. Küldetésünk, Hogy Magas Minőségű Hajrendszereket Biztosítsunk, Amelyek Nemcsak Természetesnek Tűnnek, Hanem Újraélesztett Önbizalommal És Önbizalommal Élni Teszik Lehetővé Ügyfeleink Életét. Innovatív Technológia, Szakértői Kézműves Művészet És Személyre Szabott Szolgáltatás Által Segítünk Az Embereknek Újra Felfedezni Legjobb Énjüket."
+    },
+    "vision": {
+      "badge": "Víziónk",
+      "title": "Útmutatás A Hajrendszer Kiválóságban",
+      "description": "A Hajrendszer Innováció Világvezetőjének Lenni, Új Minőségi, Kényelmi És Természetes Megjelenési Szabványokat Megállapítva. Olyan Világot Képzelünk El, Ahol A Hajvesztés Soha Nem Korlátozza Az Önbizalmat Vagy A Lehetőségeket, Ahol Megoldásaink Zökkenőmentesen Integrálódnak Minden Életstílusba, És Ahol A Kivételes Ügyfélélmény A Tartós Kapcsolatok Alapja."
+    },
+    "testimonialsTitle": "Mit Mondanak Ügyfeleink",
+    "shopNow": "VÁSÁROLJON MOST"
+  },
+  "help": {
+    "badge": "Segítség",
+    "title": "Hogyan Segíthetünk Ma?",
+    "description": "Keressen Gyors Válaszokat, Lépésről Lépésre Útmutatókat És Szakértői Támogatást - Mindent, Amire Szüksége Van Egy Helyen.",
+    "faqTitle": "Gyakran Ismételt Kérdések",
+    "trackOrder": {
+      "question": "Hogyan Követhetem Nyomon Rendelésemet?",
+      "answer": "Rendelését Nyomon Követheti, Ha Bejelentkezik Fiókjába És Meglátogatja A 'Rendeléseim' Részt. Nyomkövetési Információkat Emailben Fog Kapni, Miután Rendelése Feladásra Került. Használhatja A Rendelés Megerősítő Emailben Megadott Nyomkövetési Számot Is."
+    },
+    "shipping": {
+      "question": "Mi A Szállítási És Kézbesítési Szabályzatuk?",
+      "answer": "Ingyenes Szállítást Kínálunk Minden 50 Dollár Feletti Rendelésre. A Szabványos Szállítás 3-5 Munkanapot Vesz Igénybe, Míg A Expressz Szállítás 1-2 Munkanapot Vesz Igénybe. Mind Az 50 Államba Szállítunk, És Nemzetközi Szállítást Kínálunk Kiválasztott Országokba. A Kézbesítési Idők Változhatnak A Helyszín És A Választott Szállítási Módszer Alapján."
+    },
+    "returns": {
+      "question": "Mi A Visszaküldési És Csere Szabályzatuk?",
+      "answer": "30 Napos Visszaküldési Szabályzatot Kínálunk Minden Használaton Kívüli Tételre Eredeti Csomagolásában. Az Egyedi Hajrendszerek 14 Napos Visszaküldési Ablakkal Rendelkeznek. A Visszaküldések Ingyenesek A Kontinentális USA-N Belül. A Cserék 5-7 Munkanapon Belül Feldolgozásra Kerülnek, Miután Megkaptuk Visszaküldését."
+    },
+    "chooseSystem": {
+      "question": "Hogyan Válasszam Ki A Megfelelő Hajrendszert?",
+      "answer": "Hajrendszereink Különféle Alaptípusokban (Bőr, Csipke, Hibrid, Mono) És Hajtípusokban Elérhetők. Fontolja Meg Életstílusát, Kényelmi Preferenciáit És Karbantartási Követelményeit. Szakértőink Segíthetnek Kiválasztani A Tökéletes Rendszert Egy Konzultáció Során. Virtuális Konzultációkat És Részletes Útmutatókat Is Kínálunk."
+    },
+    "care": {
+      "question": "Hogyan Gondozzam Hajrendszeremet?",
+      "answer": "A Megfelelő Gondozás Meghosszabbítja Hajrendszere Élettartamát. Használjon Szulfátmentes Shampókat, Kerülje A Túlságos Hővel Való Stílusba Hozást, És Kövesse Részletes Gondozási Útmutatásainkat. Minden Vásárlással Átfogó Gondozási Útmutatókat Biztosítunk, És Karbantartási Termékeket Kínálunk, Hogy Hajrendszere A Legjobban Nézzen Ki."
+    },
+    "installation": {
+      "question": "Kínálnak Telepítési Szolgáltatásokat?",
+      "answer": "Igen, Professzionális Telepítési Szolgáltatásokat Kínálunk Stúdió Helyszíneinken. Részletes Telepítési Útmutatókat És Videó Oktatóanyagokat Is Biztosítunk DIY Telepítéshez. Tanúsított Stílusistáink Segíthetnek A Kezdeti Beállításban És Folyamatos Karbantartási Tippeket Adhatnak."
+    }
+  }
+}
+

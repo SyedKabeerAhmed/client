@@ -1,18 +1,24 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 import './PremiumSystemsSection.css'
 
 const PremiumSystemsSection = ({ 
-  title = "Explore Our Premium Hair Systems",
-  subtitle = "Choose The Perfect System Tailored To Your Lifestyle, Comfort, And Natural Look.",
+  title,
+  subtitle,
   products = []
 }) => {
+  const { t } = useTranslation()
   return (
     <div className="premium-systems-section">
       <Container>
         <div className="premium-section-header text-center mb-5">
-          <h2 className="premium-section-title">{title}</h2>
-          <p className="premium-section-subtitle">{subtitle}</p>
+          <h2 className="premium-section-title">
+            {title || t('home.premiumSystems.title')}
+          </h2>
+          <p className="premium-section-subtitle">
+            {subtitle || t('home.premiumSystems.subtitle')}
+          </p>
         </div>
         
         <Row className="g-4">

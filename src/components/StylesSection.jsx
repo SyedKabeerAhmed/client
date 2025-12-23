@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 import './StylesSection.css'
 
 const StylesSection = () => {
+  const { t } = useTranslation()
   const [activeTab, setActiveTab] = useState(0)
 
   const steps = [
@@ -10,25 +12,19 @@ const StylesSection = () => {
       number: "1",
       title: "Selecting Your Perfect Base",
       description: "Carefully select your perfect balance of style, comfort, and a natural look.",
-      image: "/src/assets/images/Frame_871.png",
-      mainTitle: "Selecting Your Perfect Base",
-      mainDescription: "Carefully select your perfect balance of style, comfort, and a natural look."
+      image: "/src/assets/images/Frame_871.png"
     },
     {
       number: "2", 
       title: "Customizing Your Style",
       description: "Personalize your hair system to match your unique preferences and lifestyle needs.",
-      image: "/src/assets/images/Frame_871.png",
-      mainTitle: "Customizing Your Style",
-      mainDescription: "Personalize your hair system to match your unique preferences and lifestyle needs."
+      image: "/src/assets/images/Frame_871.png"
     },
     {
       number: "3",
       title: "Professional Installation", 
       description: "Get expert guidance and professional installation for the perfect fit and natural look.",
-      image: "/src/assets/images/Frame_871.png",
-      mainTitle: "Professional Installation",
-      mainDescription: "Get expert guidance and professional installation for the perfect fit and natural look."
+      image: "/src/assets/images/Frame_871.png"
     }
   ]
 
@@ -36,9 +32,11 @@ const StylesSection = () => {
     <div className="styles-section">
       <Container>
         <div className="styles-section-header text-center mb-5">
-          <h2 className="styles-section-title">Styles That Redefine Confidence</h2>
+          <h2 className="styles-section-title">
+            {t('styles.title')}
+          </h2>
           <p className="styles-section-subtitle">
-            Explore Our Most Sought After Hair Systems, To Give You The Perfect Balance Of Style, Comfort, And A Natural Look.
+            {t('styles.subtitle')}
           </p>
         </div>
         
@@ -61,8 +59,12 @@ const StylesSection = () => {
                       />
                     </div>
                     <div className="step-text">
-                      <h4 className="step-title">{step.title}</h4>
-                      <p className="step-description">{step.description}</p>
+                      <h4 className="step-title">
+                        {step.title}
+                      </h4>
+                      <p className="step-description">
+                        {step.description}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -83,9 +85,17 @@ const StylesSection = () => {
                 </div>
               </div>
               <div className="main-text">
-                <h4 className="main-title">{steps[activeTab].mainTitle}</h4>
-                <p className="main-description">
-                  {steps[activeTab].mainDescription}
+                <h4
+                  className="main-title"
+                 
+                >
+                  {steps[activeTab].title}
+                </h4>
+                <p
+                  className="main-description"
+                 
+                >
+                  {steps[activeTab].description}
                 </p>
               </div>
             </div>

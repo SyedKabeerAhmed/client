@@ -240,7 +240,12 @@ const Checkout = () => {
       <div className="checkout-page">
         <Container>
           <Alert variant="warning">
-            Your cart is empty. <a href="/cart">Return to cart</a>
+            <span>
+              Your cart is empty.
+            </span>{' '}
+            <a href="/cart">
+              Return to cart
+            </a>
           </Alert>
         </Container>
       </div>
@@ -255,13 +260,19 @@ const Checkout = () => {
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <a href="/">Home</a>
+                <a href="/">
+                  Home
+                </a>
               </li>
               <li className="breadcrumb-item">
-                <a href="/cart">Cart</a>
+                <a href="/cart">
+                  Cart
+                </a>
               </li>
               <li className="breadcrumb-item active" aria-current="page">
-                Checkout
+                <span>
+                  Checkout
+                </span>
               </li>
             </ol>
           </nav>
@@ -279,12 +290,20 @@ const Checkout = () => {
           <Col lg={7}>
             <Card className="billing-details-card">
               <Card.Body>
-                <h2 className="billing-title">Billing Details</h2>
+                <h2
+                  className="billing-title"
+                 
+                >
+                  Billing Details
+                </h2>
                 
                 <Form onSubmit={handlePlaceOrder}>
                   <Form.Group className="mb-3">
                     <Form.Label>
-                      First Name <span className="required">*</span>
+                      <span>
+                        First Name
+                      </span>{' '}
+                      <span className="required">*</span>
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -300,7 +319,9 @@ const Checkout = () => {
                   </Form.Group>
 
                   <Form.Group className="mb-3">
-                    <Form.Label>Company Name</Form.Label>
+                    <Form.Label>
+                      Company Name
+                    </Form.Label>
                     <Form.Control
                       type="text"
                       name="companyName"
@@ -311,7 +332,10 @@ const Checkout = () => {
 
                   <Form.Group className="mb-3">
                     <Form.Label>
-                      Street Address <span className="required">*</span>
+                      <span>
+                        Street Address
+                      </span>{' '}
+                      <span className="required">*</span>
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -327,7 +351,9 @@ const Checkout = () => {
                   </Form.Group>
 
                   <Form.Group className="mb-3">
-                    <Form.Label>Apartment, floor, etc. (optional)</Form.Label>
+                    <Form.Label>
+                      Apartment, floor, etc. (optional)
+                    </Form.Label>
                     <Form.Control
                       type="text"
                       name="apartment"
@@ -338,7 +364,10 @@ const Checkout = () => {
 
                   <Form.Group className="mb-3">
                     <Form.Label>
-                      Town/City <span className="required">*</span>
+                      <span>
+                        Town/City
+                      </span>{' '}
+                      <span className="required">*</span>
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -355,7 +384,10 @@ const Checkout = () => {
 
                   <Form.Group className="mb-3">
                     <Form.Label>
-                      Phone Number <span className="required">*</span>
+                      <span>
+                        Phone Number
+                      </span>{' '}
+                      <span className="required">*</span>
                     </Form.Label>
                     <Form.Control
                       type="tel"
@@ -372,7 +404,10 @@ const Checkout = () => {
 
                   <Form.Group className="mb-3">
                     <Form.Label>
-                      Email Address <span className="required">*</span>
+                      <span>
+                        Email Address
+                      </span>{' '}
+                      <span className="required">*</span>
                     </Form.Label>
                     <Form.Control
                       type="email"
@@ -405,7 +440,12 @@ const Checkout = () => {
           <Col lg={5}>
             <Card className="order-summary-card">
               <Card.Body>
-                <h5 className="order-summary-title">Order Summary</h5>
+                <h5
+                  className="order-summary-title"
+                 
+                >
+                  Order Summary
+                </h5>
                 
                 {/* Product List */}
                 <div className="order-products">
@@ -469,21 +509,29 @@ const Checkout = () => {
                 {/* Cost Breakdown */}
                 <div className="cost-breakdown">
                   <div className="cost-row">
-                    <span>Subtotal:</span>
+                    <span>
+                      Subtotal:
+                    </span>
                     <span>{formatPrice(cart.subtotal)}</span>
                   </div>
                   <div className="cost-row">
-                    <span>Shipping:</span>
+                    <span>
+                      Shipping:
+                    </span>
                     <span>{formatPrice(cart.shipping)}</span>
                   </div>
                   {cart.discount > 0 && (
                     <div className="cost-row discount">
-                      <span>Discount:</span>
+                      <span>
+                        Discount:
+                      </span>
                       <span>-{formatPrice(cart.discount)}</span>
                     </div>
                   )}
                   <div className="cost-row total">
-                    <span>Total:</span>
+                    <span>
+                      Total:
+                    </span>
                     <span>{formatPrice(cart.total)}</span>
                   </div>
                 </div>
@@ -584,10 +632,14 @@ const Checkout = () => {
                   {orderLoading ? (
                     <>
                       <Spinner animation="border" size="sm" className="me-2" />
-                      Placing Order...
+                      <span>
+                        Placing Order...
+                      </span>
                     </>
                   ) : (
-                    'Place Order'
+                    <span>
+                      Place Order
+                    </span>
                   )}
                 </Button>
               </Card.Body>

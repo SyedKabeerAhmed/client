@@ -100,10 +100,18 @@ const OTPVerification = () => {
             />
             <div className="image-overlay">
               <div className="overlay-content">
-                <p className="overlay-text">
+                <p
+                  className="overlay-text"
+                 
+                >
                   Sign in to your account to discover exclusive deals and manage your orders.
                 </p>
-                <p className="overlay-author">-- Mathew</p>
+                <p
+                  className="overlay-author"
+                 
+                >
+                  -- Mathew
+                </p>
               </div>
             </div>
           </div>
@@ -114,11 +122,22 @@ const OTPVerification = () => {
           <div className="form-container">
             <div className="form-header">
               <Link to="/forgot-password" className="back-arrow">←</Link>
-              <h1 className="form-title">Verify OTP</h1>
+              <h1
+                className="form-title"
+               
+              >
+                Verify OTP
+              </h1>
             </div>
             
             <p className="form-description">
-              We've sent a 6-digit verification code to <strong>{email}</strong>. Please enter the code below.
+              <span>
+                We've sent a 6-digit verification code to
+              </span>{' '}
+              <strong>{email}</strong>
+              <span>
+                . Please enter the code below.
+              </span>
             </p>
 
             {error && (
@@ -130,7 +149,10 @@ const OTPVerification = () => {
             <form onSubmit={handleSubmit} className="auth-form">
               <div className="form-group">
                 <label className="form-label">
-                  Verification Code <span className="required">*</span>
+                  <span>
+                    Verification Code
+                  </span>{' '}
+                  <span className="required">*</span>
                 </label>
                 <div className="otp-container">
                   {otp.map((digit, index) => (
@@ -150,18 +172,34 @@ const OTPVerification = () => {
               </div>
 
               <button type="submit" className="auth-button" disabled={isLoading}>
-                {isLoading ? 'Verifying...' : 'Verify Code'}
+                <span>
+                  {isLoading ? 'Verifying...' : 'Verify Code'}
+                </span>
               </button>
             </form>
 
             <div className="form-footer">
               <p className="footer-text">
-                Didn't receive the code? <button onClick={handleResend} className="footer-link" disabled={isLoading}>
+                <span>
+                  Didn't receive the code?
+                </span>{' '}
+                <button
+                  onClick={handleResend}
+                  className="footer-link"
+                  disabled={isLoading}
+                 
+                >
                   {isLoading ? 'Sending...' : 'Resend Code'}
                 </button>
               </p>
               <p className="footer-text">
-                <Link to="/login" className="footer-link">Back to Sign In</Link>
+                <Link
+                  to="/login"
+                  className="footer-link"
+                 
+                >
+                  Back to Sign In
+                </Link>
               </p>
             </div>
           </div>

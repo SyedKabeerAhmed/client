@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import Banner from '../components/Banner'
 import FeaturesBar from '../components/FeaturesBar'
 import PremiumSystemsSection from '../components/PremiumSystemsSection'
@@ -10,6 +11,7 @@ import Newsletter from '../components/Newsletter'
 import { productService } from '../services/productService'
 
 const Home = () => {
+  const { t } = useTranslation()
   const [bestSellingProducts, setBestSellingProducts] = useState([])
   const [loadingBestSelling, setLoadingBestSelling] = useState(true)
 
@@ -19,25 +21,25 @@ const Home = () => {
       name: "Skin",
       category: "Hair Systems",
       image: "/src/assets/images/image_108.png",
-      buttonText: "Explore"
+      buttonText: t('product.explore')
     },
     {
       name: "Lace", 
       category: "Hair Systems",
       image: "/src/assets/images/image_108.png",
-      buttonText: "Explore"
+      buttonText: t('product.explore')
     },
     {
       name: "Hybrid",
       category: "Hair Systems", 
       image: "/src/assets/images/image_108.png",
-      buttonText: "Explore"
+      buttonText: t('product.explore')
     },
     {
       name: "Mono",
       category: "Hair Systems",
       image: "/src/assets/images/image_108.png", 
-      buttonText: "Explore"
+      buttonText: t('product.explore')
     }
   ]
 
@@ -72,23 +74,23 @@ const Home = () => {
     <div className="home-page">
       
       <Banner 
-        badge="New Arrival"
-        title="Hair That Looks Real Confidence That Lasts"
-        description="Explore systems made for comfort, style, and everyday wear."
+        badge={t('home.badge')}
+        title={t('home.title')}
+        description={t('home.description')}
         backgroundImage="/src/assets/images/scandinavian-interior-mockup-wall-decal-background_2.png"
       />
       
       <FeaturesBar />
       
       <PremiumSystemsSection 
-        title="Explore Our Premium Hair Systems"
-        subtitle="Choose The Perfect System Tailored To Your Lifestyle, Comfort, And Natural Look."
+        title={t('home.premiumSystems.title')}
+        subtitle={t('home.premiumSystems.subtitle')}
         products={premiumSystems}
       />
       
       <BestSellingSection 
-        title="Our Best Selling Hair Systems"
-        subtitle="Discover The Most Trusted And Popular Systems, Chosen By Clients For Their Natural Look, Comfort, And Durability."
+        title={t('home.bestSelling.title')}
+        subtitle={t('home.bestSelling.subtitle')}
         products={bestSellingProducts}
         loading={loadingBestSelling}
       />

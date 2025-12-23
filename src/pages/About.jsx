@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import Banner from '../components/Banner'
 import FeaturesBar from '../components/FeaturesBar'
 import AboutSection from '../components/AboutSection'
@@ -8,30 +9,32 @@ import Testimonials from '../components/Testimonials'
 import Newsletter from '../components/Newsletter'
 
 const About = () => {
+  const { t } = useTranslation()
+  
   const premiumSystems = [
     {
       name: "Skin",
-      category: "Hair Systems",
+      category: t('nav.hairSystems'),
       image: "/src/assets/images/Rectangle_2.png",
-      buttonText: "SHOP NOW"
+      buttonText: t('product.shopNow')
     },
     {
       name: "Lace", 
-      category: "Hair Systems",
+      category: t('nav.hairSystems'),
       image: "/src/assets/images/Rectangle_2.png",
-      buttonText: "SHOP NOW"
+      buttonText: t('product.shopNow')
     },
     {
       name: "Hybrid",
-      category: "Hair Systems", 
+      category: t('nav.hairSystems'), 
       image: "/src/assets/images/Rectangle_2.png",
-      buttonText: "SHOP NOW"
+      buttonText: t('product.shopNow')
     },
     {
       name: "Mono",
-      category: "Hair Systems",
+      category: t('nav.hairSystems'),
       image: "/src/assets/images/Rectangle_2.png", 
-      buttonText: "SHOP NOW"
+      buttonText: t('product.shopNow')
     }
   ]
 
@@ -75,36 +78,36 @@ const About = () => {
     <div className="about-page">
       
       <Banner 
-        badge="About Us"
-        title="Who We Are & What We Stand For"
-        description="Discover our commitment to quality, innovation, and customer satisfaction in the hair systems industry."
+        badge={t('about.badge')}
+        title={t('about.title')}
+        description={t('about.description')}
         backgroundImage="/src/assets/images/scandinavian-interior-mockup-wall-decal-background_2.png"
       />
       
       <FeaturesBar />
       
       <AboutSection 
-        badge="Our Mission"
-        title="Empowering Authentic Confidence"
-        description="We believe that everyone deserves to feel confident and authentic in their own skin. Our mission is to provide high-quality hair systems that not only look natural but also empower our clients to live their lives with renewed confidence and self-assurance. Through innovative technology, expert craftsmanship, and personalized service, we help individuals rediscover their best selves."
+        badge={t('about.mission.badge')}
+        title={t('about.mission.title')}
+        description={t('about.mission.description')}
         image="/src/assets/images/scandinavian-interior-mockup-wall-decal-background_2.png"
         reverse={false}
       />
       
       <VisionSection 
-        badge="Our Vision"
-        title="Leading the Way in Hair System Excellence"
-        description="To be the global leader in hair system innovation, setting new standards for quality, comfort, and natural appearance. We envision a world where hair loss never limits confidence or opportunities, where our solutions seamlessly integrate into every lifestyle, and where exceptional customer experience is the foundation of lasting relationships."
+        badge={t('about.vision.badge')}
+        title={t('about.vision.title')}
+        description={t('about.vision.description')}
       />
       
       <PremiumSystemsSection 
-        title="Explore Our Premium Hair Systems"
-        subtitle="Choose The Perfect System Tailored To Your Lifestyle, Comfort, And Natural Look."
+        title={t('home.premiumSystems.title')}
+        subtitle={t('home.premiumSystems.subtitle')}
         products={premiumSystems}
       />
       
       <Testimonials 
-        title="What Our Clients Say"
+        title={t('about.testimonialsTitle')}
         subtitle="Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Ut Et Massa Mi. Aliquam In Hendrerit Urna."
         testimonials={testimonials}
       />

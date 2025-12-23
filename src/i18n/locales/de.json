@@ -1,0 +1,215 @@
+{
+  "common": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "shop": "Shop",
+    "cart": "Warenkorb",
+    "login": "Anmelden",
+    "signup": "Registrieren",
+    "logout": "Abmelden",
+    "profile": "Profil",
+    "search": "Suchen",
+    "loading": "Laden...",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "submit": "Absenden",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "close": "Schließen",
+    "dashboard": "Dashboard",
+    "manageAccount": "Konto verwalten",
+    "loginRegister": "Anmelden/Registrieren",
+    "english": "Deutsch",
+    "usd": "USD"
+  },
+  "nav": {
+    "hairSystems": "Haarsysteme",
+    "allHairSystems": "Alle Haarsysteme",
+    "skinSystems": "Hautsysteme",
+    "laceSystems": "Spitzensysteme",
+    "hybridSystems": "Hybridsysteme",
+    "monoSystems": "Monosysteme",
+    "accessories": "Zubehör",
+    "allAccessories": "Alle Zubehörteile",
+    "adhesives": "Klebstoffe",
+    "glues": "Kleber",
+    "tools": "Werkzeuge",
+    "careProducts": "Pflegeprodukte",
+    "beginnersGuide": "Anfängerleitfaden",
+    "customHairSystem": "Individuelles Haarsystem",
+    "aboutUs": "Über uns",
+    "help": "Hilfe",
+    "brand": "Haarladen"
+  },
+  "home": {
+    "title": "Haare, die echt aussehen, Selbstvertrauen, das anhält",
+    "description": "Entdecken Sie Systeme, die für Komfort, Stil und täglichen Gebrauch gemacht sind.",
+    "badge": "Neu eingetroffen",
+    "premiumSystems": {
+      "title": "Entdecken Sie unsere Premium-Haarsysteme",
+      "subtitle": "Wählen Sie Das Perfekte System, Angepasst An Ihren Lebensstil, Komfort Und Natürliches Aussehen."
+    },
+    "bestSelling": {
+      "title": "Unsere Bestseller-Haarsysteme",
+      "subtitle": "Entdecken Sie Die Vertrauenswürdigsten Und Beliebtesten Systeme, Ausgewählt Von Kunden Für Ihr Natürliches Aussehen, Komfort Und Langlebigkeit."
+    }
+  },
+  "styles": {
+    "title": "Stile, die Selbstvertrauen neu definieren",
+    "subtitle": "Entdecken Sie Unsere Meist Gesuchten Haarsysteme, Um Ihnen Das Perfekte Gleichgewicht Aus Stil, Komfort Und Natürlichem Aussehen Zu Bieten."
+  },
+  "testimonials": {
+    "title": "Was Unsere Kunden Sagen",
+    "shopNow": "Jetzt Einkaufen"
+  },
+  "faq": {
+    "title": "Häufig gestellte Fragen"
+  },
+  "cart": {
+    "title": "Warenkorb",
+    "empty": "Ihr Warenkorb ist leer",
+    "total": "Gesamt",
+    "checkout": "Zur Kasse",
+    "continueShopping": "Einkauf fortsetzen"
+  },
+  "product": {
+    "addToCart": "In den Warenkorb",
+    "buyNow": "Jetzt kaufen",
+    "description": "Beschreibung",
+    "specifications": "Spezifikationen",
+    "reviews": "Bewertungen",
+    "explore": "Erkunden"
+  },
+  "beginnersGuide": {
+    "badge": "Anfängerleitfaden",
+    "title": "Neu bei Haarsystemen? Hier beginnen",
+    "description": "Lernen Sie die Grundlagen von Haarsystemen mit einfachen Anleitungen, Tipps und Expertenratschlägen, um Ihnen zu helfen, mit Vertrauen zu beginnen.",
+    "exploreMore": "Mehr Erkunden"
+  },
+  "newsletter": {
+    "title": "Treten Sie Unserer Mailingliste Bei",
+    "subtitle": "Melden Sie sich an, um Inspiration, Produkt-Updates und Sonderangebote von unserem Team zu erhalten.",
+    "placeholder": "beispiel@gmail.com",
+    "buttonText": "Absenden",
+    "submitting": "Wird gesendet...",
+    "thankYou": "Vielen Dank für Ihr Abonnement!"
+  },
+  "shop": {
+    "ourHairSystems": "Unsere Haarsysteme & Zubehör",
+    "hairSystems": "Haarsysteme",
+    "accessories": "Zubehör",
+    "skinHairSystems": "Haut-Haarsysteme",
+    "laceHairSystems": "Spitzen-Haarsysteme",
+    "hybridHairSystems": "Hybrid-Haarsysteme",
+    "monoHairSystems": "Mono-Haarsysteme",
+    "adhesives": "Klebstoffe",
+    "glues": "Kleber",
+    "tools": "Werkzeuge",
+    "careProducts": "Pflegeprodukte",
+    "exploreSubtitle": "Entdecken Sie Unsere Meist Gesuchten Haarsysteme, Sorgfältig Ausgewählt, Um Ihnen Das Perfekte Gleichgewicht Aus Stil, Komfort Und Natürlichem Aussehen Zu Bieten",
+    "hairSystemsSubtitle": "Entdecken Sie Unser Vollständiges Sortiment An Haarsystemen, Entwickelt, Um Das Perfekte Gleichgewicht Aus Stil, Komfort Und Natürlichem Aussehen Zu Bieten",
+    "accessoriesSubtitle": "Entdecken Sie Wesentliche Accessoires Und Werkzeuge, Um Ihre Haarsysteme Mit Professionellen Ergebnissen Zu Pflegen Und Zu Stylen",
+    "skinSubtitle": "Erleben Sie Das Ultimative An Komfort Und Natürlichem Aussehen Mit Unseren Premium-Haut-Haarsystemen",
+    "laceSubtitle": "Entdecken Sie Die Perfekte Mischung Aus Atmungsaktivität Und Natürlichem Aussehen Mit Unseren Hochwertigen Spitzen-Haarsystemen",
+    "hybridSubtitle": "Erhalten Sie Das Beste Aus Beiden Welten Mit Unseren Innovativen Hybrid-Haarsystemen, Die Mehrere Basismaterialien Kombinieren",
+    "monoSubtitle": "Genießen Sie Überlegene Haltbarkeit Und Einfache Wartung Mit Unseren Monofilament-Haarsystemen",
+    "adhesiveSubtitle": "Klebstoffe In Profiqualität Für Sichere Und Langanhaltende Befestigung Des Haarsystems",
+    "glueSubtitle": "Hochwertige Kleber Und Bindemittel Für Zuverlässige Installation Des Haarsystems",
+    "toolsSubtitle": "Wesentliche Werkzeuge Und Ausrüstung Für Professionelle Anwendung Und Wartung Des Haarsystems",
+    "careProductsSubtitle": "Premium-Pflegeprodukte, Um Ihre Haarsysteme Frisch Und Natürlich Aussehen Zu Lassen",
+    "sortBy": "Sortieren Nach",
+    "featured": "Empfohlen",
+    "price": "Preis",
+    "newest": "Neueste",
+    "highestRated": "Am Besten Bewertet",
+    "loadMore": "Mehr Laden",
+    "noProducts": "Keine Produkte gefunden",
+    "searchResults": "Suchergebnisse",
+    "showingResults": "Zeige Ergebnisse für",
+    "totalResults": "Gesamtergebnisse"
+  },
+  "customHairSystem": {
+    "badge": "Individuelles Haarsystem",
+    "title": "Erstellen Sie Ihr Individuelles Haarsystem",
+    "featuresTitle": "Merkmale Unserer Individuellen Haarsysteme",
+    "featuresSubtitle": "Entdecken Sie Unsere Meist Gekauften Haarsysteme, Sorgfältig Ausgewählt, Um Ihnen Das Perfekte Gleichgewicht Aus Stil, Komfort Und Natürlichem Aussehen Zu Bieten",
+    "feature1": {
+      "title": "Einfache Bestellung Mit Einem Klick",
+      "description": "Die Produktion beginnt sofort nach der Zahlung - keine Bestätigungen, keine E-Mails, keine Salonbesuche."
+    },
+    "feature2": {
+      "title": "Entworfen Für Die Perfekte Passform",
+      "description": "Vielfältige Optionen, die für alle Ethnien, Haartexturen und Lebensstile geeignet sind."
+    },
+    "feature3": {
+      "title": "Schneller Und Zuverlässiger Express-Service",
+      "description": "Erhalten Sie Ihre Bestellung schneller mit unseren beschleunigten Bearbeitungs- und Lieferoptionen."
+    },
+    "feature4": {
+      "title": "Exquisite Handgeknüpfte Kunstfertigkeit",
+      "description": "Jedes Stück wird fachmännisch von Hand geknüpft von Handwerkern mit über 10 Jahren Erfahrung."
+    },
+    "designTitle": "Gestalten Sie Ihr Ideales Haarsystem",
+    "designDescription": "Über 16 Anpassbare Funktionen, Um Ein Perfektes Haarsystem Mit Individuellen Basen, Vielfältigen Haartexturen Und Genauer Farbabstimmung Zu Gewährleisten.",
+    "createButton": "ERSTELLEN SIE IHR INDIVIDUELLES HAARSYSTEM",
+    "beforeAfterTitle": "Merkmale Unserer Individuellen Haarsysteme",
+    "beforeAfterSubtitle": "Entdecken Sie Unsere Meist Gekauften Haarsysteme, Sorgfältig Ausgewählt, Um Ihnen Das Perfekte Gleichgewicht Aus Stil, Komfort Und Natürlichem Aussehen Zu Bieten",
+    "template": {
+      "partial": "Teilweise",
+      "regular": "Regulär",
+      "oversize": "Übergröße",
+      "fullcap": "Vollkappe",
+      "partialDesc": "(Größe ≤ 7\"x10\", oder Fläche ≤ 70 Quadratzoll)",
+      "regularDesc": "(7\"x10\" < Größe ≤ 8\"x10\", oder 70 Quadratzoll < Fläche ≤ 80 Quadratzoll)",
+      "oversizeDesc": "(8\"x10\" < Größe ≤ 10\"x10\", oder 80 Quadratzoll < Fläche ≤ 100 Quadratzoll)",
+      "fullcapDesc": "(Größe > 10\"x10\", oder Fläche > 100 Quadratzoll)"
+    }
+  },
+  "about": {
+    "badge": "Über Uns",
+    "title": "Wer Wir Sind Und Wofür Wir Stehen",
+    "description": "Entdecken Sie Unser Engagement Für Qualität, Innovation Und Kundenzufriedenheit In Der Haarsystem-Industrie.",
+    "mission": {
+      "badge": "Unsere Mission",
+      "title": "Echte Selbstvertrauen Stärken",
+      "description": "Wir glauben, dass jeder das Recht hat, sich in seiner eigenen Haut selbstbewusst und authentisch zu fühlen. Unsere Mission ist es, hochwertige Haarsysteme bereitzustellen, die nicht nur natürlich aussehen, sondern auch unseren Kunden ermöglichen, ihr Leben mit erneuerter Selbstvertrauen und Selbstsicherheit zu leben. Durch innovative Technologie, fachmännische Handwerkskunst und personalisierten Service helfen wir Einzelpersonen, ihr bestes Selbst wiederzuentdecken."
+    },
+    "vision": {
+      "badge": "Unsere Vision",
+      "title": "Führend Im Bereich Haarsystem-Exzellenz",
+      "description": "Der globale Marktführer in der Haarsystem-Innovation zu sein und neue Standards für Qualität, Komfort und natürliches Aussehen zu setzen. Wir stellen uns eine Welt vor, in der Haarausfall niemals Selbstvertrauen oder Möglichkeiten einschränkt, in der unsere Lösungen nahtlos in jeden Lebensstil integriert werden und in der außergewöhnliche Kundenerfahrung die Grundlage für dauerhafte Beziehungen ist."
+    },
+    "testimonialsTitle": "Was Unsere Kunden Sagen",
+    "shopNow": "JETZT EINKAUFEN"
+  },
+  "help": {
+    "badge": "Hilfe",
+    "title": "Wie Können Wir Ihnen Heute Helfen?",
+    "description": "Finden Sie Schnelle Antworten, Schritt-Für-Schritt-Anleitungen Und Expertenunterstützung - Alles, Was Sie An Einem Ort Benötigen.",
+    "faqTitle": "Häufig Gestellte Fragen",
+    "trackOrder": {
+      "question": "Wie verfolge ich meine Bestellung?",
+      "answer": "Sie können Ihre Bestellung verfolgen, indem Sie sich in Ihr Konto einloggen und den Bereich 'Meine Bestellungen' besuchen. Sie erhalten Versandinformationen per E-Mail, sobald Ihre Bestellung versandt wurde. Sie können auch die Versandnummer verwenden, die in Ihrer Bestellbestätigungs-E-Mail angegeben ist."
+    },
+    "shipping": {
+      "question": "Wie ist Ihre Versand- und Lieferrichtlinie?",
+      "answer": "Wir bieten kostenlosen Versand für alle Bestellungen über 50 $. Der Standardversand dauert 3-5 Werktage, während der Expressversand 1-2 Werktage dauert. Wir versenden in alle 50 Bundesstaaten und bieten internationalen Versand in ausgewählte Länder an. Die Lieferzeiten können je nach Standort und gewählter Versandmethode variieren."
+    },
+    "returns": {
+      "question": "Wie ist Ihre Rückgabe- und Umtauschrichtlinie?",
+      "answer": "Wir bieten eine 30-tägige Rückgaberichtlinie für alle unbenutzten Artikel in ihrer Originalverpackung. Individuelle Haarsysteme haben ein 14-tägiges Rückgabefenster. Rückgaben sind innerhalb der kontinentalen USA kostenlos. Umtausche werden innerhalb von 5-7 Werktagen nach Erhalt Ihrer Rückgabe bearbeitet."
+    },
+    "chooseSystem": {
+      "question": "Wie wähle ich das richtige Haarsystem für mich?",
+      "answer": "Unsere Haarsysteme sind in verschiedenen Basistypen (Haut, Spitze, Hybrid, Mono) und Haartypen erhältlich. Berücksichtigen Sie Ihren Lebensstil, Komfortpräferenzen und Wartungsanforderungen. Unsere Experten können Ihnen bei der Auswahl des perfekten Systems während einer Beratung helfen. Wir bieten auch virtuelle Beratungen und detaillierte Anleitungen an."
+    },
+    "care": {
+      "question": "Wie pflege ich mein Haarsystem?",
+      "answer": "Die richtige Pflege verlängert die Lebensdauer Ihres Haarsystems. Verwenden Sie sulfatfreie Shampoos, vermeiden Sie übermäßiges Hitzestyling und befolgen Sie unsere detaillierten Pflegeanweisungen. Wir bieten umfassende Pflegeanleitungen mit jedem Kauf und bieten Wartungsprodukte an, um Ihr System optimal aussehen zu lassen."
+    },
+    "installation": {
+      "question": "Bieten Sie Installationsdienste an?",
+      "answer": "Ja, wir bieten professionelle Installationsdienste an unseren Studio-Standorten an. Wir bieten auch detaillierte Installationsanleitungen und Video-Tutorials für die DIY-Installation. Unsere zertifizierten Stylisten können bei der anfänglichen Einrichtung helfen und laufende Wartungstipps geben."
+    }
+  }
+}

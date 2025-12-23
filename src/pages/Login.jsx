@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import './AuthPages.css'
 import { useAuth } from '../contexts/AuthContext'
 
 const Login = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const { login } = useAuth()
   const [formData, setFormData] = useState({
@@ -38,7 +40,7 @@ const Login = () => {
       // Redirect to home page
       navigate('/')
     } catch (error) {
-      setError(error.message || 'Login failed. Please try again.')
+      setError(error.message || t('auth.loginFailed'))
     } finally {
       setIsLoading(false)
     }
@@ -58,9 +60,11 @@ const Login = () => {
             <div className="image-overlay">
               <div className="overlay-content">
                 <p className="overlay-text">
-                  Sign in to your account to discover exclusive deals and manage your orders.
+                  {t('auth.signInToAccount')}
                 </p>
-                <p className="overlay-author">-- Mathew</p>
+                <p className="overlay-author">
+                  {t('auth.author')}
+                </p>
               </div>
             </div>
           </div>
@@ -71,11 +75,13 @@ const Login = () => {
           <div className="form-container">
             <div className="form-header">
               <Link to="/" className="back-arrow">←</Link>
-              <h1 className="form-title">Sign in</h1>
+              <h1 className="form-title">
+                {t('auth.signIn')}
+              </h1>
             </div>
             
             <p className="form-description">
-              Sign in to your account to discover exclusive deals and manage your orders.
+              {t('auth.signInToAccount')}
             </p>
 
             {error && (
@@ -87,7 +93,10 @@ const Login = () => {
             <form onSubmit={handleSubmit} className="auth-form">
               <div className="form-group">
                 <label htmlFor="email" className="form-label">
-                  Email <span className="required">*</span>
+                  <span>
+                    {t('auth.email')}
+                  </span>{' '}
+                  <span className="required">*</span>
                 </label>
                 <input
                   type="email"
@@ -95,7 +104,7 @@ const Login = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="Please enter your email address"
+                  placeholder={t('auth.emailPlaceholder')}
                   className="form-input"
                   required
                 />
@@ -103,7 +112,10 @@ const Login = () => {
 
               <div className="form-group">
                 <label htmlFor="password" className="form-label">
-                  Password <span className="required">*</span>
+                  <span>
+                    {t('auth.password')}
+                  </span>{' '}
+                  <span className="required">*</span>
                 </label>
                 <input
                   type="password"
@@ -111,7 +123,7 @@ const Login = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder="Please enter your password"
+                  placeholder={t('auth.passwordPlaceholder')}
                   className="form-input"
                   required
                 />
@@ -126,22 +138,37 @@ const Login = () => {
                     onChange={handleChange}
                     className="checkbox-input"
                   />
-                  <span className="checkbox-label">Remember me</span>
+                  <span className="checkbox-label">
+                    {t('auth.rememberMe')}
+                  </span>
                 </label>
                 
-                <Link to="/forgot-password" className="forgot-link">
-                  Forgot Password?
+                <Link
+                  to="/forgot-password"
+                  className="forgot-link"
+                >
+                  {t('auth.forgotPassword')}
                 </Link>
               </div>
 
               <button type="submit" className="auth-button" disabled={isLoading}>
-                {isLoading ? 'Signing In...' : 'Sign In'}
+                <span>
+                  {isLoading ? t('auth.signingIn') : t('auth.signInButton')}
+                </span>
               </button>
             </form>
 
             <div className="form-footer">
               <p className="footer-text">
-                Don't have an account yet? <Link to="/signup" className="footer-link">Register</Link>
+                <span>
+                  {t('auth.dontHaveAccount')}
+                </span>{' '}
+                <Link
+                  to="/signup"
+                  className="footer-link"
+                >
+                  {t('auth.register')}
+                </Link>
               </p>
             </div>
           </div>

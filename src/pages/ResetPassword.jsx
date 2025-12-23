@@ -98,10 +98,18 @@ const ResetPassword = () => {
           <div className="form-container">
             <div className="form-header">
               <Link to="/otp-verification" className="back-arrow">←</Link>
-              <h1 className="form-title">Reset Password</h1>
+              <h1
+                className="form-title"
+               
+              >
+                Reset Password
+              </h1>
             </div>
             
-            <p className="form-description">
+            <p
+              className="form-description"
+             
+            >
               Enter your new password below. Make sure it's strong and secure.
             </p>
 
@@ -114,7 +122,10 @@ const ResetPassword = () => {
             <form onSubmit={handleSubmit} className="auth-form">
               <div className="form-group">
                 <label htmlFor="password" className="form-label">
-                  New Password <span className="required">*</span>
+                  <span>
+                    New Password
+                  </span>{' '}
+                  <span className="required">*</span>
                 </label>
                 <div className="password-input-container">
                   <input
@@ -139,7 +150,10 @@ const ResetPassword = () => {
 
               <div className="form-group">
                 <label htmlFor="confirmPassword" className="form-label">
-                  Confirm Password <span className="required">*</span>
+                  <span>
+                    Confirm Password
+                  </span>{' '}
+                  <span className="required">*</span>
                 </label>
                 <div className="password-input-container">
                   <input
@@ -163,13 +177,24 @@ const ResetPassword = () => {
               </div>
 
               <button type="submit" className="auth-button" disabled={isLoading}>
-                {isLoading ? 'Resetting Password...' : 'Reset Password'}
+                <span>
+                  {isLoading ? 'Resetting Password...' : 'Reset Password'}
+                </span>
               </button>
             </form>
 
             <div className="form-footer">
               <p className="footer-text">
-                Remember your password? <Link to="/login" className="footer-link">Sign In</Link>
+                <span>
+                  Remember your password?
+                </span>{' '}
+                <Link
+                  to="/login"
+                  className="footer-link"
+                 
+                >
+                  Sign In
+                </Link>
               </p>
             </div>
           </div>

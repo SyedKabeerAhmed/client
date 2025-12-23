@@ -17,7 +17,6 @@ const TopBar = () => {
               <span className="shopping-bag me-3">
                 <i className="fas fa-shopping-bag"></i>
               </span>
-              <span className="login-register">Login/Register</span>
             </div>
           </Col>
         </Row>

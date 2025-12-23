@@ -1,0 +1,216 @@
+{
+  "common": {
+    "home": "Accueil",
+    "about": "À propos",
+    "shop": "Boutique",
+    "cart": "Panier",
+    "login": "Connexion",
+    "signup": "S'inscrire",
+    "logout": "Déconnexion",
+    "profile": "Profil",
+    "search": "Rechercher",
+    "loading": "Chargement...",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "submit": "Soumettre",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "close": "Fermer",
+    "dashboard": "Tableau de bord",
+    "manageAccount": "Gérer le compte",
+    "loginRegister": "Connexion/Inscription",
+    "english": "Français",
+    "usd": "USD"
+  },
+  "nav": {
+    "hairSystems": "Systèmes capillaires",
+    "allHairSystems": "Tous les systèmes capillaires",
+    "skinSystems": "Systèmes de peau",
+    "laceSystems": "Systèmes de dentelle",
+    "hybridSystems": "Systèmes hybrides",
+    "monoSystems": "Systèmes mono",
+    "accessories": "Accessoires",
+    "allAccessories": "Tous les accessoires",
+    "adhesives": "Adhésifs",
+    "glues": "Colles",
+    "tools": "Outils",
+    "careProducts": "Produits de soins",
+    "beginnersGuide": "Guide du débutant",
+    "customHairSystem": "Système capillaire personnalisé",
+    "aboutUs": "À propos de nous",
+    "help": "Aide",
+    "brand": "Magasin de cheveux"
+  },
+  "home": {
+    "title": "Des cheveux qui ont l'air vrais, une confiance qui dure",
+    "description": "Explorez des systèmes conçus pour le confort, le style et le port quotidien.",
+    "badge": "Nouvelle arrivée",
+    "premiumSystems": {
+      "title": "Explorez nos systèmes capillaires premium",
+      "subtitle": "Choisissez Le Système Parfait Adapté À Votre Style De Vie, Confort Et Apparence Naturelle."
+    },
+    "bestSelling": {
+      "title": "Nos systèmes capillaires les plus vendus",
+      "subtitle": "Découvrez Les Systèmes Les Plus Fiables Et Populaires, Choisis Par Les Clients Pour Leur Apparence Naturelle, Confort Et Durabilité."
+    }
+  },
+  "styles": {
+    "title": "Des styles qui redéfinissent la confiance",
+    "subtitle": "Explorez Nos Systèmes Capillaires Les Plus Recherchés, Pour Vous Offrir L'Équilibre Parfait Entre Style, Confort Et Apparence Naturelle."
+  },
+  "testimonials": {
+    "title": "Ce Que Disent Nos Clients",
+    "shopNow": "Acheter Maintenant"
+  },
+  "faq": {
+    "title": "Questions fréquemment posées"
+  },
+  "cart": {
+    "title": "Panier d'achat",
+    "empty": "Votre panier est vide",
+    "total": "Total",
+    "checkout": "Passer à la caisse",
+    "continueShopping": "Continuer les achats"
+  },
+  "product": {
+    "addToCart": "Ajouter au panier",
+    "buyNow": "Acheter maintenant",
+    "description": "Description",
+    "specifications": "Spécifications",
+    "reviews": "Avis",
+    "explore": "Explorer"
+  },
+  "beginnersGuide": {
+    "badge": "Guide du débutant",
+    "title": "Nouveau dans les systèmes capillaires? Commencez ici",
+    "description": "Apprenez les bases des systèmes capillaires avec des guides simples, des conseils et des conseils d'experts pour vous aider à commencer en toute confiance.",
+    "exploreMore": "Explorer Plus"
+  },
+  "newsletter": {
+    "title": "Rejoignez Notre Liste de Diffusion",
+    "subtitle": "Inscrivez-vous pour recevoir de l'inspiration, des mises à jour de produits et des offres spéciales de notre équipe.",
+    "placeholder": "exemple@gmail.com",
+    "buttonText": "Soumettre",
+    "submitting": "Envoi en cours...",
+    "thankYou": "Merci de vous être abonné!"
+  },
+  "shop": {
+    "ourHairSystems": "Nos Systèmes Capillaires et Accessoires",
+    "hairSystems": "Systèmes Capillaires",
+    "accessories": "Accessoires",
+    "skinHairSystems": "Systèmes Capillaires en Peau",
+    "laceHairSystems": "Systèmes Capillaires en Dentelle",
+    "hybridHairSystems": "Systèmes Capillaires Hybrides",
+    "monoHairSystems": "Systèmes Capillaires Mono",
+    "adhesives": "Adhésifs",
+    "glues": "Colles",
+    "tools": "Outils",
+    "careProducts": "Produits de Soins",
+    "exploreSubtitle": "Explorez Nos Systèmes Capillaires Les Plus Recherchés, Soigneusement Sélectionnés Pour Vous Offrir L'Équilibre Parfait Entre Style, Confort Et Apparence Naturelle",
+    "hairSystemsSubtitle": "Explorez Notre Gamme Complète De Systèmes Capillaires, Conçus Pour Offrir L'Équilibre Parfait Entre Style, Confort Et Apparence Naturelle",
+    "accessoriesSubtitle": "Découvrez Les Accessoires Et Outils Essentiels Pour Maintenir Et Styliser Vos Systèmes Capillaires Avec Des Résultats Professionnels",
+    "skinSubtitle": "Découvrez Le Maximum De Confort Et D'Apparence Naturelle Avec Nos Systèmes Capillaires En Peau Premium",
+    "laceSubtitle": "Découvrez Le Mélange Parfait De Respirabilité Et D'Apparence Naturelle Avec Nos Systèmes Capillaires En Dentelle De Haute Qualité",
+    "hybridSubtitle": "Obtenez Le Meilleur Des Deux Mondes Avec Nos Systèmes Capillaires Hybrides Innovants Combinant Plusieurs Matériaux De Base",
+    "monoSubtitle": "Profitez D'Une Durabilité Supérieure Et D'Un Entretien Facile Avec Nos Systèmes Capillaires Monofilament",
+    "adhesiveSubtitle": "Adhésifs De Qualité Professionnelle Pour Une Fixation Sûre Et Durable Du Système Capillaire",
+    "glueSubtitle": "Colles Et Solutions De Liaison De Haute Qualité Pour Une Installation Fiable Du Système Capillaire",
+    "toolsSubtitle": "Outils Et Équipements Essentiels Pour L'Application Et L'Entretien Professionnel Du Système Capillaire",
+    "careProductsSubtitle": "Produits De Soins Premium Pour Garder Vos Systèmes Capillaires Frais Et Naturels",
+    "sortBy": "Trier Par",
+    "featured": "En Vedette",
+    "price": "Prix",
+    "newest": "Plus Récent",
+    "highestRated": "Mieux Noté",
+    "loadMore": "Charger Plus",
+    "noProducts": "Aucun produit trouvé",
+    "searchResults": "Résultats de Recherche",
+    "showingResults": "Affichage des résultats pour",
+    "totalResults": "résultats au total"
+  },
+  "customHairSystem": {
+    "badge": "Système Capillaire Personnalisé",
+    "title": "Créez Votre Système Capillaire Personnalisé",
+    "featuresTitle": "Caractéristiques De Nos Systèmes Capillaires Personnalisés",
+    "featuresSubtitle": "Explorez Nos Systèmes Capillaires Les Plus Achetés, Soigneusement Sélectionnés Pour Vous Offrir L'Équilibre Parfait Entre Style, Confort Et Apparence Naturelle",
+    "feature1": {
+      "title": "Commande Facile En Un Clic",
+      "description": "La production commence immédiatement après le paiement - pas de confirmations, pas d'emails, pas de visites au salon."
+    },
+    "feature2": {
+      "title": "Conçu Pour L'Ajustement Parfait",
+      "description": "Options diverses pour s'adapter à toutes les ethnies, textures de cheveux et modes de vie."
+    },
+    "feature3": {
+      "title": "Service Rapide Et Fiable",
+      "description": "Recevez votre commande plus rapidement avec nos options de traitement et de livraison accélérées."
+    },
+    "feature4": {
+      "title": "Artisanat Exquis Noué À La Main",
+      "description": "Chaque pièce est expertement nouée à la main par des artisans ayant plus de 10 ans d'expérience."
+    },
+    "designTitle": "Concevez Votre Système Capillaire Idéal",
+    "designDescription": "Plus de 16 caractéristiques personnalisables pour assurer un système capillaire parfait avec des bases personnalisées, diverses textures de cheveux et correspondance précise des couleurs.",
+    "createButton": "CRÉEZ VOTRE SYSTÈME CAPILLAIRE PERSONNALISÉ",
+    "beforeAfterTitle": "Caractéristiques De Nos Systèmes Capillaires Personnalisés",
+    "beforeAfterSubtitle": "Explorez Nos Systèmes Capillaires Les Plus Achetés, Soigneusement Sélectionnés Pour Vous Offrir L'Équilibre Parfait Entre Style, Confort Et Apparence Naturelle",
+    "template": {
+      "partial": "Partiel",
+      "regular": "Régulier",
+      "oversize": "Grande Taille",
+      "fullcap": "Casque Complet",
+      "partialDesc": "(taille ≤ 7\"x10\", ou surface ≤ 70 pouces carrés)",
+      "regularDesc": "(7\"x10\" < taille ≤ 8\"x10\", ou 70 pouces carrés < surface ≤ 80 pouces carrés)",
+      "oversizeDesc": "(8\"x10\" < taille ≤ 10\"x10\", ou 80 pouces carrés < surface ≤ 100 pouces carrés)",
+      "fullcapDesc": "(taille > 10\"x10\", ou surface > 100 pouces carrés)"
+    }
+  },
+  "about": {
+    "badge": "À Propos de Nous",
+    "title": "Qui Nous Sommes Et Ce Que Nous Représentons",
+    "description": "Découvrez Notre Engagement Envers La Qualité, L'Innovation Et La Satisfaction Client Dans L'Industrie Des Systèmes Capillaires.",
+    "mission": {
+      "badge": "Notre Mission",
+      "title": "Renforcer La Confiance Authentique",
+      "description": "Nous croyons que chacun mérite de se sentir confiant et authentique dans sa propre peau. Notre mission est de fournir des systèmes capillaires de haute qualité qui non seulement ont l'air naturels, mais aussi permettent à nos clients de vivre leur vie avec une confiance et une assurance renouvelées. Grâce à une technologie innovante, un savoir-faire expert et un service personnalisé, nous aidons les individus à redécouvrir leur meilleur moi."
+    },
+    "vision": {
+      "badge": "Notre Vision",
+      "title": "Pionnier De L'Excellence Des Systèmes Capillaires",
+      "description": "Être le leader mondial de l'innovation en systèmes capillaires, établissant de nouvelles normes de qualité, de confort et d'apparence naturelle. Nous envisageons un monde où la perte de cheveux ne limite jamais la confiance ou les opportunités, où nos solutions s'intègrent parfaitement dans chaque mode de vie, et où l'expérience client exceptionnelle est le fondement de relations durables."
+    },
+    "testimonialsTitle": "Ce Que Disent Nos Clients",
+    "shopNow": "ACHETER MAINTENANT"
+  },
+  "help": {
+    "badge": "Aide",
+    "title": "Comment Pouvons-Nous Vous Aider Aujourd'hui?",
+    "description": "Trouvez Des Réponses Rapides, Des Guides Étape Par Étape Et Un Support Expert - Tout Ce Dont Vous Avez Besoin En Un Seul Endroit.",
+    "faqTitle": "Questions Fréquemment Posées",
+    "trackOrder": {
+      "question": "Comment puis-je suivre ma commande?",
+      "answer": "Vous pouvez suivre votre commande en vous connectant à votre compte et en visitant la section 'Mes Commandes'. Vous recevrez des informations de suivi par email une fois votre commande expédiée. Vous pouvez également utiliser le numéro de suivi fourni dans votre email de confirmation de commande."
+    },
+    "shipping": {
+      "question": "Quelle est votre politique d'expédition et de livraison?",
+      "answer": "Nous offrons la livraison gratuite sur toutes les commandes de plus de 50 $. L'expédition standard prend 3 à 5 jours ouvrables, tandis que l'expédition express prend 1 à 2 jours ouvrables. Nous expédions dans les 50 états et offrons l'expédition internationale vers certains pays. Les délais de livraison peuvent varier selon l'emplacement et la méthode d'expédition sélectionnée."
+    },
+    "returns": {
+      "question": "Quelle est votre politique de retour et d'échange?",
+      "answer": "Nous offrons une politique de retour de 30 jours pour tous les articles non utilisés dans leur emballage d'origine. Les systèmes capillaires personnalisés ont une fenêtre de retour de 14 jours. Les retours sont gratuits dans les États-Unis continentaux. Les échanges sont traités dans les 5 à 7 jours ouvrables après réception de votre retour."
+    },
+    "chooseSystem": {
+      "question": "Comment choisir le bon système capillaire pour moi?",
+      "answer": "Nos systèmes capillaires sont disponibles en différents types de base (peau, dentelle, hybride, mono) et types de cheveux. Tenez compte de votre mode de vie, de vos préférences de confort et de vos exigences de maintenance. Nos experts peuvent vous aider à choisir le système parfait lors d'une consultation. Nous offrons également des consultations virtuelles et des guides détaillés."
+    },
+    "care": {
+      "question": "Comment prendre soin de mon système capillaire?",
+      "answer": "Un entretien approprié prolonge la durée de vie de votre système capillaire. Utilisez des shampooings sans sulfate, évitez le coiffage excessif à la chaleur et suivez nos instructions d'entretien détaillées. Nous fournissons des guides d'entretien complets avec chaque achat et offrons des produits d'entretien pour garder votre système à son meilleur."
+    },
+    "installation": {
+      "question": "Offrez-vous des services d'installation?",
+      "answer": "Oui, nous offrons des services d'installation professionnelle dans nos emplacements de studio. Nous fournissons également des guides d'installation détaillés et des tutoriels vidéo pour l'installation DIY. Nos stylistes certifiés peuvent aider avec la configuration initiale et fournir des conseils d'entretien continus."
+    }
+  }
+}
+

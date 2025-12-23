@@ -107,7 +107,9 @@ const AdminLogin = () => {
 
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
-            <label htmlFor="role">Role</label>
+            <label htmlFor="role">
+              Role
+            </label>
             <select
               id="role"
               name="role"
@@ -116,14 +118,22 @@ const AdminLogin = () => {
               className="form-control"
               required
             >
-              <option value="admin">Super Admin</option>
-              <option value="subadmin">Sub Admin</option>
-              <option value="factory">Factory User</option>
+              <option value="admin">
+                Super Admin
+              </option>
+              <option value="subadmin">
+                Sub Admin
+              </option>
+              <option value="factory">
+                Factory User
+              </option>
             </select>
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email">
+              Email Address
+            </label>
             <div className="input-group">
               <div className="input-icon">
                 <FontAwesomeIcon icon={faUser} />
@@ -142,7 +152,9 @@ const AdminLogin = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">
+              Password
+            </label>
             <div className="input-group">
               <div className="input-icon">
                 <FontAwesomeIcon icon={faLock} />
@@ -189,46 +201,62 @@ const AdminLogin = () => {
             {loading ? (
               <>
                 <i className="fas fa-spinner fa-spin"></i>
-                Signing In...
+                <span>
+                  Signing In...
+                </span>
               </>
             ) : (
               <>
                 <i className="fas fa-sign-in-alt"></i>
-                Sign In
+                <span>
+                  Sign In
+                </span>
               </>
             )}
           </button>
         </form>
 
         <div className="test-credentials">
-          <h4>Test Credentials</h4>
+          <h4>
+            Test Credentials
+          </h4>
           <div className="credential-buttons">
             <button
               type="button"
               className="cred-btn admin"
               onClick={() => fillTestCredentials('admin')}
             >
-              Super Admin
+              <span>
+                Super Admin
+              </span>
             </button>
             <button
               type="button"
               className="cred-btn subadmin"
               onClick={() => fillTestCredentials('subadmin')}
             >
-              Sub Admin
+              <span>
+                Sub Admin
+              </span>
             </button>
             <button
               type="button"
               className="cred-btn factory"
               onClick={() => fillTestCredentials('factory')}
             >
-              Factory User
+              <span>
+                Factory User
+              </span>
             </button>
           </div>
         </div>
 
         <div className="login-footer">
-          <Link to="/login" className="back-to-login">
+          <Link
+            to="/login"
+            className="back-to-login"
+           
+          >
             <i className="fas fa-arrow-left"></i>
             Back to Customer Login
           </Link>

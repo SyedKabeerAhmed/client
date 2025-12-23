@@ -11,13 +11,22 @@ const VisionSection = ({
     <div className="vision-section">
       <Container>
         <div className="vision-content">
-          <div className="vision-badge">
+          <div
+            className="vision-badge"
+           
+          >
             {badge}
           </div>
-          <h2 className="vision-title">
+          <h2
+            className="vision-title"
+           
+          >
             {title}
           </h2>
-          <p className="vision-description">
+          <p
+            className="vision-description"
+           
+          >
             {description}
           </p>
         </div>

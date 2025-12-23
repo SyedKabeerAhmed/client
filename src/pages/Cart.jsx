@@ -117,10 +117,16 @@ const Cart = () => {
         <Container>
           <div className="cart-empty">
             <FontAwesomeIcon icon={faShoppingCart} className="empty-cart-icon" />
-            <h3>Please login to view your cart</h3>
-            <p>You need to be logged in to access your shopping cart.</p>
+            <h3>
+              Please login to view your cart
+            </h3>
+            <p>
+              You need to be logged in to access your shopping cart.
+            </p>
             <Button variant="primary" onClick={() => navigate('/login')}>
-              Login
+              <span>
+                Login
+              </span>
             </Button>
           </div>
         </Container>
@@ -134,7 +140,12 @@ const Cart = () => {
         <Container>
           <div className="cart-loading">
             <Spinner animation="border" variant="primary" />
-            <p className="mt-3">Loading your cart...</p>
+            <p
+              className="mt-3"
+             
+            >
+              Loading your cart...
+            </p>
           </div>
         </Container>
       </div>
@@ -149,10 +160,14 @@ const Cart = () => {
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
-                  <a href="/">Home</a>
+                  <a href="/">
+                    Home
+                  </a>
                 </li>
                 <li className="breadcrumb-item active" aria-current="page">
-                  Cart
+                  <span>
+                    Cart
+                  </span>
                 </li>
               </ol>
             </nav>
@@ -160,10 +175,16 @@ const Cart = () => {
 
           <div className="cart-empty">
             <FontAwesomeIcon icon={faShoppingCart} className="empty-cart-icon" />
-            <h3>Your cart is empty</h3>
-            <p>Looks like you haven't added any items to your cart yet.</p>
+            <h3>
+              Your cart is empty
+            </h3>
+            <p>
+              Looks like you haven't added any items to your cart yet.
+            </p>
             <Button variant="primary" onClick={() => navigate('/shop')}>
-              Continue Shopping
+              <span>
+                Continue Shopping
+              </span>
             </Button>
           </div>
         </Container>
@@ -179,10 +200,14 @@ const Cart = () => {
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <a href="/">Home</a>
+                <a href="/">
+                  Home
+                </a>
               </li>
               <li className="breadcrumb-item active" aria-current="page">
-                Cart
+                <span>
+                  Cart
+                </span>
               </li>
             </ol>
           </nav>
@@ -201,24 +226,48 @@ const Cart = () => {
             <Card className="cart-items-card">
               <Card.Body>
                 <div className="cart-header">
-                  <h4>Shopping Cart</h4>
+                  <h4>
+                    Shopping Cart
+                  </h4>
                   <Button 
                     variant="outline-danger" 
                     size="sm" 
                     onClick={handleClearCart}
                     disabled={loading}
                   >
-                    Clear Cart
+                    <span>
+                      Clear Cart
+                    </span>
                   </Button>
                 </div>
 
                 {/* Cart Items Table */}
                 <div className="cart-items-table">
                   <div className="cart-table-header">
-                    <div className="col-product">PRODUCT</div>
-                    <div className="col-price">PRICE</div>
-                    <div className="col-quantity">QUANTITY</div>
-                    <div className="col-subtotal">SUBTOTAL</div>
+                    <div
+                      className="col-product"
+                     
+                    >
+                      PRODUCT
+                    </div>
+                    <div
+                      className="col-price"
+                     
+                    >
+                      PRICE
+                    </div>
+                    <div
+                      className="col-quantity"
+                     
+                    >
+                      QUANTITY
+                    </div>
+                    <div
+                      className="col-subtotal"
+                     
+                    >
+                      SUBTOTAL
+                    </div>
                   </div>
 
                   {cart.items.map((item) => (
@@ -242,15 +291,27 @@ const Cart = () => {
                             {/* Only show basic info, detailed customization will be in modal */}
                             {item.isCustomHairSystem && (
                               <div className="option-item">
-                                <span className="option-label">Type:</span>
-                                <span>Custom Hair System</span>
+                                <span
+                                  className="option-label"
+                                 
+                                >
+                                  Type:
+                                </span>
+                                <span>
+                                  Custom Hair System
+                                </span>
                               </div>
                             )}
                             
                             {/* Show only essential ProductDetail options */}
                             {item.selectedColor && (
                               <div className="option-item">
-                                <span className="option-label">Color:</span>
+                                <span
+                                  className="option-label"
+                                 
+                                >
+                                  Color:
+                                </span>
                                 <div className="color-option">
                                   {getColorImagePath(item.selectedColor) && (
                                     <img 
@@ -267,7 +328,12 @@ const Cart = () => {
                             
                             {item.selectedHairCut && (
                               <div className="option-item">
-                                <span className="option-label">Haircut:</span>
+                                <span
+                                  className="option-label"
+                                 
+                                >
+                                  Haircut:
+                                </span>
                                 <div className="haircut-option">
                                   {getHaircutImagePath(item.selectedHairCut) && (
                                     <img 
@@ -292,14 +358,16 @@ const Cart = () => {
                               onClick={() => handleViewCustomization(item)}
                             >
                               <FontAwesomeIcon icon={faEye} className="me-2" />
-                              View Customization Details
+                              <span>
+                                View Customization Details
+                              </span>
                             </Button>
                           )}
                         </div>
                       </div>
 
                       <div className="item-price">
-                        {formatPrice(item.itemPrice)}
+                        {formatPrice(item.unitPrice || item.itemPrice || 0)}
                       </div>
 
                       <div className="item-quantity">
@@ -349,29 +417,44 @@ const Cart = () => {
           <Col lg={4}>
             <Card className="bill-summary-card">
               <Card.Body>
-                <h5 className="bill-summary-title">Bill Summary</h5>
+                <h5
+                  className="bill-summary-title"
+                 
+                >
+                  Bill Summary
+                </h5>
                 
                 <div className="bill-details">
                   <div className="bill-row">
-                    <span>Subtotal:</span>
+                    <span>
+                      Subtotal:
+                    </span>
                     <span>{formatPrice(cart.subtotal)}</span>
                   </div>
                   <div className="bill-row">
-                    <span>GST:</span>
+                    <span>
+                      GST:
+                    </span>
                     <span>{formatPrice(cart.tax)}</span>
                   </div>
                   <div className="bill-row">
-                    <span>Shipping Fee:</span>
+                    <span>
+                      Shipping Fee:
+                    </span>
                     <span>{formatPrice(cart.shipping)}</span>
                   </div>
                   {cart.discount > 0 && (
                     <div className="bill-row discount">
-                      <span>Discount:</span>
+                      <span>
+                        Discount:
+                      </span>
                       <span>-{formatPrice(cart.discount)}</span>
                     </div>
                   )}
                   <div className="bill-row total">
-                    <span>Total:</span>
+                    <span>
+                      Total:
+                    </span>
                     <span>{formatPrice(cart.total)}</span>
                   </div>
                 </div>
@@ -397,10 +480,14 @@ const Cart = () => {
                       {discountLoading ? (
                         <>
                           <Spinner animation="border" size="sm" className="me-2" />
-                          Applying...
+                          <span>
+                            Applying...
+                          </span>
                         </>
                       ) : (
-                        'Apply Coupon'
+                        <span>
+                          Apply Coupon
+                        </span>
                       )}
                     </Button>
                   </Form>
@@ -426,7 +513,9 @@ const Cart = () => {
                   onClick={handleCheckout}
                   disabled={loading}
                 >
-                  Checkout
+                  <span>
+                    Checkout
+                  </span>
                 </Button>
 
                 {/* Continue Shopping */}
@@ -436,7 +525,9 @@ const Cart = () => {
                   onClick={() => navigate('/shop')}
                 >
                   <FontAwesomeIcon icon={faArrowLeft} className="me-2" />
-                  Continue Shopping
+                  <span>
+                    Continue Shopping
+                  </span>
                 </Button>
               </Card.Body>
             </Card>
@@ -447,7 +538,9 @@ const Cart = () => {
       {/* Customization Details Modal */}
       <Modal show={showCustomizationModal} onHide={() => setShowCustomizationModal(false)} size="lg" centered>
         <Modal.Header closeButton>
-          <Modal.Title>Customization Details</Modal.Title>
+          <Modal.Title>
+            Customization Details
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body className="customization-modal-body">
           {selectedCustomization && (
@@ -455,7 +548,12 @@ const Cart = () => {
               {/* HairCustomization Details */}
               {selectedCustomization.isCustomHairSystem && selectedCustomization.customHairSystem && (
                 <div className="customization-section">
-                  <h5 className="cart-customization-title">Custom Hair System Details</h5>
+                  <h5
+                    className="cart-customization-title"
+                   
+                  >
+                    Custom Hair System Details
+                  </h5>
                   {Object.entries(selectedCustomization.customHairSystem).map(([key, value]) => {
                     if (!value || value === '') return null
                     
@@ -477,7 +575,12 @@ const Cart = () => {
               {/* ProductDetail Customization */}
               {selectedCustomization.customization && (
                 <div className="customization-section">
-                  <h5 className="cart-customization-title">Product Customization Details</h5>
+                  <h5
+                    className="cart-customization-title"
+                   
+                  >
+                    Product Customization Details
+                  </h5>
                   {Object.entries(selectedCustomization.customization).map(([key, value]) => {
                     if (!value || key === 'hairLengths' || key === 'uploadedImages') return null
                     
@@ -496,7 +599,9 @@ const Cart = () => {
                   
                   {selectedCustomization.customization.hairLengths && (
                     <div className="customization-item">
-                      <h6>Hair Lengths</h6>
+                      <h6>
+                        Hair Lengths
+                      </h6>
                       <div className="hair-lengths-grid">
                         {Object.entries(selectedCustomization.customization.hairLengths).map(([part, length]) => (
                           <div key={part} className="length-item">
@@ -513,7 +618,12 @@ const Cart = () => {
               {/* Additional Notes */}
               {selectedCustomization.additionalNotes && (
                 <div className="customization-section">
-                  <h5 className="cart-customization-title">Additional Notes</h5>
+                  <h5
+                    className="cart-customization-title"
+                   
+                  >
+                    Additional Notes
+                  </h5>
                   <div className="customization-item">
                     <p>{selectedCustomization.additionalNotes}</p>
                   </div>
@@ -522,7 +632,7 @@ const Cart = () => {
               
               <div className="customization-item total-price-item">
                 <h6>Total Price</h6>
-                <p className="total-price">{formatPrice(selectedCustomization.totalPrice || selectedCustomization.itemPrice)}</p>
+                <p className="total-price">{formatPrice(selectedCustomization.totalPrice || selectedCustomization.unitPrice || selectedCustomization.itemPrice || 0)}</p>
               </div>
             </div>
           )}

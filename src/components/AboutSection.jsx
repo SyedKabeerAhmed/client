@@ -7,7 +7,7 @@ const AboutSection = ({
   title, 
   description,
   image,
-  imageAlt = "About Image",
+  imageAlt,
   reverse = false
 }) => {
   return (
@@ -16,13 +16,22 @@ const AboutSection = ({
         <Row className={`align-items-center ${reverse ? 'flex-row-reverse' : ''}`}>
           <Col lg={6}>
             <div className="about-content">
-              <div className="about-badge">
+              <div
+                className="about-badge"
+               
+              >
                 {badge}
               </div>
-              <h2 className="about-title">
+              <h2
+                className="about-title"
+               
+              >
                 {title}
               </h2>
-              <p className="about-description">
+              <p
+                className="about-description"
+               
+              >
                 {description}
               </p>
             </div>

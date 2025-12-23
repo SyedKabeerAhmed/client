@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Container, Row, Col, Button, Modal } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 import Banner from '../components/Banner'
 import Newsletter from '../components/Newsletter'
 import { useNavigate } from 'react-router-dom'
 import './CustomHairSystem.css'
 
 const CustomHairSystem = () => {
+  const { t } = useTranslation()
   // Modal state for template selection
   const [showTemplateModal, setShowTemplateModal] = useState(false)
   const [selectedTemplate, setSelectedTemplate] = useState('')
@@ -14,31 +16,31 @@ const CustomHairSystem = () => {
   const templateOptions = [
     {
       id: 'partial',
-      name: 'Partial',
-      description: '(size ≤ 7"x10", or area ≤ 70 square inches)',
+      name: t('customHairSystem.template.partial'),
+      description: t('customHairSystem.template.partialDesc'),
       price: 0,
-      image: '/src/assets/images/template-partial.png' // Placeholder - will be replaced later
+      image: '/src/assets/images/template-partial.png'
     },
     {
       id: 'regular',
-      name: 'Regular',
-      description: '(7"x10" < size ≤ 8"x10", or 70 square inches < area ≤ 80 square inches)',
+      name: t('customHairSystem.template.regular'),
+      description: t('customHairSystem.template.regularDesc'),
       price: 40,
-      image: '/src/assets/images/template-regular.png' // Placeholder - will be replaced later
+      image: '/src/assets/images/template-regular.png'
     },
     {
       id: 'oversize',
-      name: 'Oversize',
-      description: '(8"x10" < size ≤ 10"x10", or 80 square inches < area ≤ 100 square inches)',
+      name: t('customHairSystem.template.oversize'),
+      description: t('customHairSystem.template.oversizeDesc'),
       price: 90,
-      image: '/src/assets/images/template-oversize.png' // Placeholder - will be replaced later
+      image: '/src/assets/images/template-oversize.png'
     },
     {
       id: 'fullcap',
-      name: 'Full cap',
-      description: '(size > 10"x10", or area > 100 square inches)',
+      name: t('customHairSystem.template.fullcap'),
+      description: t('customHairSystem.template.fullcapDesc'),
       price: 150,
-      image: '/src/assets/images/template-fullcap.png' // Placeholder - will be replaced later
+      image: '/src/assets/images/template-fullcap.png'
     }
   ]
 
@@ -53,23 +55,23 @@ const CustomHairSystem = () => {
 
   const features = [
     {
-      title: 'Easy One-Click Ordering',
-      description: 'Production starts immediately after payment—no confirmations, no emails, no salon visits.',
+      title: t('customHairSystem.feature1.title'),
+      description: t('customHairSystem.feature1.description'),
       image: '/src/assets/images/Frame_97.png'
     },
     {
-      title: 'Designed for the Perfect Fit',
-      description: 'Diverse options to suit all ethnicities, hair textures, and lifestyles.',
+      title: t('customHairSystem.feature2.title'),
+      description: t('customHairSystem.feature2.description'),
       image: '/src/assets/images/Frame_2147226869.png'
     },
     {
-      title: 'Fast and Reliable Rush Service',
-      description: 'Get your order faster with our expedited processing and delivery options.',
+      title: t('customHairSystem.feature3.title'),
+      description: t('customHairSystem.feature3.description'),
       image: '/src/assets/images/Frame_97_(1).png'
     },
     {
-      title: 'Exquisite Hand-Knotted Artistry',
-      description: 'Each piece is expertly hand-knotted by artisans with 10+ years of experience.',
+      title: t('customHairSystem.feature4.title'),
+      description: t('customHairSystem.feature4.description'),
       image: '/src/assets/images/Frame_97_(1).png'
     }
   ]
@@ -83,8 +85,8 @@ const CustomHairSystem = () => {
       
       {/* Hero Section */}
       <Banner 
-        badge="Custom Hair System"
-        title="Make Your Custom Hair System"
+        badge={t('customHairSystem.badge')}
+        title={t('customHairSystem.title')}
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis."
         backgroundImage="/src/assets/images/scandinavian-interior-mockup-wall-decal-background_2.png"
       />
@@ -93,9 +95,11 @@ const CustomHairSystem = () => {
       <section className="features-section">
         <Container>
           <div className="section-header text-center mb-5">
-            <h2 className="section-title">Our Custom Hair Systems Features</h2>
+            <h2 className="section-title">
+              {t('customHairSystem.featuresTitle')}
+            </h2>
             <p className="section-subtitle">
-              Explore Our Most Bought After Hair Systems, Carefully Selected To Give You The Perfect Balance Of Style, Comfort, And A Natural Look
+              {t('customHairSystem.featuresSubtitle')}
             </p>
           </div>
           
@@ -106,7 +110,9 @@ const CustomHairSystem = () => {
                   <div className="feature-icon">
                     <img src={feature.image} alt={feature.title} />
                   </div>
-                  <h4 className="feature-title">{feature.title}</h4>
+                  <h4 className="feature-title">
+                    {feature.title}
+                  </h4>
                   <p className="feature-description">
                     {feature.description}
                   </p>
@@ -124,12 +130,16 @@ const CustomHairSystem = () => {
             <Row className="align-items-center">
               <Col lg={6}>
                 <div className="design-content">
-                  <h2 className="design-title">Design Your Ideal Hair System</h2>
+                  <h2 className="design-title">
+                    {t('customHairSystem.designTitle')}
+                  </h2>
                   <p className="design-description">
-                    Over 16 customizable features to ensure a perfect hair system with custom bases, diverse hair textures, and accurate color matching.
+                    {t('customHairSystem.designDescription')}
                   </p>
                   <Button variant="primary" size="lg" className="design-btn" onClick={() => routeToCustomizeHairSystem()}>
-                    CREATE YOUR CUSTOM HAIR SYSTEM
+                    <span>
+                      {t('customHairSystem.createButton')}
+                    </span>
                   </Button>
                 </div>
               </Col>
@@ -147,9 +157,11 @@ const CustomHairSystem = () => {
       <section className="before-after-section">
         <Container>
           <div className="section-header text-center mb-5">
-            <h2 className="section-title">Our Custom Hair Systems Features</h2>
+            <h2 className="section-title">
+              {t('customHairSystem.beforeAfterTitle')}
+            </h2>
             <p className="section-subtitle">
-              Explore Our Most Bought After Hair Systems, Carefully Selected To Give You The Perfect Balance Of Style, Comfort, And A Natural Look
+              {t('customHairSystem.beforeAfterSubtitle')}
             </p>
           </div>
           

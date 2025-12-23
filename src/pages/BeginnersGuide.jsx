@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import Banner from '../components/Banner'
 import FeaturesBar from '../components/FeaturesBar'
 import StylesSection from '../components/StylesSection'
@@ -6,48 +7,50 @@ import ProductSection from '../components/ProductSection'
 import Newsletter from '../components/Newsletter'
 
 const BeginnersGuide = () => {
+  const { t } = useTranslation()
+  
   const premiumSystems = [
     {
       name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      category: "Hair Systems",
+      category: t('nav.hairSystems'),
       image: "/src/assets/images/image_115.png",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      buttonText: "Explore More"
+      buttonText: t('beginnersGuide.exploreMore')
     },
     {
       name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      category: "Hair Systems",
+      category: t('nav.hairSystems'),
       image: "/src/assets/images/image_115.png",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      buttonText: "Explore More"
+      buttonText: t('beginnersGuide.exploreMore')
     },
     {
       name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      category: "Hair Systems",
+      category: t('nav.hairSystems'),
       image: "/src/assets/images/image_115.png",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      buttonText: "Explore More"
+      buttonText: t('beginnersGuide.exploreMore')
     },
     {
       name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      category: "Hair Systems",
+      category: t('nav.hairSystems'),
       image: "/src/assets/images/image_115.png",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      buttonText: "Explore More"
+      buttonText: t('beginnersGuide.exploreMore')
     },
     {
       name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      category: "Hair Systems",
+      category: t('nav.hairSystems'),
       image: "/src/assets/images/image_115.png",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      buttonText: "Explore More"
+      buttonText: t('beginnersGuide.exploreMore')
     },
     {
       name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      category: "Hair Systems",
+      category: t('nav.hairSystems'),
       image: "/src/assets/images/image_115.png",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      buttonText: "Explore More"
+      buttonText: t('beginnersGuide.exploreMore')
     }
   ]
 
@@ -55,9 +58,9 @@ const BeginnersGuide = () => {
     <div className="beginners-guide-page">
       
       <Banner 
-        badge="Beginners Guide"
-        title="New to Hair Systems? Start Here"
-        description="Learn the basics of hair systems with simple guides, tips, and expert advice to help you start with confidence."
+        badge={t('beginnersGuide.badge')}
+        title={t('beginnersGuide.title')}
+        description={t('beginnersGuide.description')}
         backgroundImage="/src/assets/images/scandinavian-interior-mockup-wall-decal-background_2.png"
       />
       
@@ -66,13 +69,13 @@ const BeginnersGuide = () => {
       <StylesSection />
       
       <ProductSection 
-        title="Explore Our Premium Hair Systems"
-        subtitle="Choose The Perfect System Tailored To Your Lifestyle, Comfort, And Natural Look."
+        title={t('home.premiumSystems.title')}
+        subtitle={t('home.premiumSystems.subtitle')}
         products={premiumSystems}
         showRatings={false}
         showPrice={false}
         beginnersGuide={true}
-        buttonText="Explore More"
+        buttonText={t('beginnersGuide.exploreMore')}
       />
       
       <Newsletter />

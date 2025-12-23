@@ -60,10 +60,18 @@ const ForgotPassword = () => {
             />
             <div className="image-overlay">
               <div className="overlay-content">
-                <p className="overlay-text">
+                <p
+                  className="overlay-text"
+                 
+                >
                   Sign in to your account to discover exclusive deals and manage your orders.
                 </p>
-                <p className="overlay-author">-- Mathew</p>
+                <p
+                  className="overlay-author"
+                 
+                >
+                  -- Mathew
+                </p>
               </div>
             </div>
           </div>
@@ -74,10 +82,18 @@ const ForgotPassword = () => {
           <div className="form-container">
             <div className="form-header">
               <Link to="/login" className="back-arrow">←</Link>
-              <h1 className="form-title">Forgot Password</h1>
+              <h1
+                className="form-title"
+               
+              >
+                Forgot Password
+              </h1>
             </div>
             
-            <p className="form-description">
+            <p
+              className="form-description"
+             
+            >
               Enter your email address and we'll send you a verification code to reset your password.
             </p>
 
@@ -89,14 +105,19 @@ const ForgotPassword = () => {
 
             {success && (
               <div className="success-message">
-                OTP sent successfully! Redirecting to verification page...
+                <span>
+                  OTP sent successfully! Redirecting to verification page...
+                </span>
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="auth-form">
               <div className="form-group">
                 <label htmlFor="email" className="form-label">
-                  Email <span className="required">*</span>
+                  <span>
+                    Email
+                  </span>{' '}
+                  <span className="required">*</span>
                 </label>
                 <input
                   type="email"
@@ -111,13 +132,24 @@ const ForgotPassword = () => {
               </div>
 
               <button type="submit" className="auth-button" disabled={isLoading || success}>
-                {isLoading ? 'Sending...' : 'Send Verification Code'}
+                <span>
+                  {isLoading ? 'Sending...' : 'Send Verification Code'}
+                </span>
               </button>
             </form>
 
             <div className="form-footer">
               <p className="footer-text">
-                Remember your password? <Link to="/login" className="footer-link">Sign In</Link>
+                <span>
+                  Remember your password?
+                </span>{' '}
+                <Link
+                  to="/login"
+                  className="footer-link"
+                 
+                >
+                  Sign In
+                </Link>
               </p>
             </div>
           </div>

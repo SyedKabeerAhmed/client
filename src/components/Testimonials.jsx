@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Container } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 import './Testimonials.css'
 
 const Testimonials = ({ 
-  title = "What Our Clients Say",
-  subtitle = "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Ut Et Massa Mi. Aliquam In Hendrerit Urna.",
+  title,
+  subtitle,
   testimonials = []
 }) => {
+  const { t } = useTranslation()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
   const [startX, setStartX] = useState(0)
@@ -113,8 +115,12 @@ const Testimonials = ({
     <div className="testimonials-section">
       <Container>
         <div className="testimonials-section-header text-center mb-5">
-          <h2 className="testimonials-section-title">{title}</h2>
-          <p className="testimonials-section-subtitle">{subtitle}</p>
+          <h2 className="testimonials-section-title">
+            {title || t('testimonials.title')}
+          </h2>
+          <p className="testimonials-section-subtitle">
+            {subtitle || "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Ut Et Massa Mi. Aliquam In Hendrerit Urna."}
+          </p>
         </div>
         
         <div 
@@ -163,7 +169,10 @@ const Testimonials = ({
                     />
                   </div>
                   <div className="testimonial-content">
-                    <blockquote className="testimonial-quote">
+                    <blockquote
+                      className="testimonial-quote"
+                     
+                    >
                       "{testimonial.quote}"
                     </blockquote>
                   </div>
@@ -177,7 +186,11 @@ const Testimonials = ({
                       />
                       <span className="testimonial-product-name">{testimonial.productName}</span>
                     </div>
-                    <button className="shop-now-btn">Shop Now</button>
+                    <button className="shop-now-btn">
+                      <span>
+                        {t('testimonials.shopNow')}
+                      </span>
+                    </button>
                   </div>
                 </div>
               </div>

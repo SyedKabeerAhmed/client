@@ -16,8 +16,18 @@ const ProductSection = ({
     <div className="product-section">
       <Container>
         <div className="product-section-header text-center mb-5">
-          <h2 className="product-section-title">{title}</h2>
-          <p className="product-section-subtitle">{subtitle}</p>
+          <h2
+            className="product-section-title"
+           
+          >
+            {title}
+          </h2>
+          <p
+            className="product-section-subtitle"
+           
+          >
+            {subtitle}
+          </p>
         </div>
         
         <Row className="g-4">
@@ -32,11 +42,17 @@ const ProductSection = ({
                   />
                 </div>
                 <div className="product-section-content">
-                  <h4 className="product-section-name">{product.name}</h4>
-                  <p className="product-section-category">{product.category}</p>
+                  <h4 className="product-section-name">
+                    {product.name}
+                  </h4>
+                  <p className="product-section-category">
+                    {product.category}
+                  </p>
                   
                   {product.description && (
-                    <p className="product-section-description">{product.description}</p>
+                    <p className="product-section-description">
+                      {product.description}
+                    </p>
                   )}
                   
                   {showPrice && (
@@ -64,7 +80,11 @@ const ProductSection = ({
                   )}
                   
                   <button className="product-section-button">
-                    {product.buttonText || buttonText}
+                    <span
+                     
+                    >
+                      {product.buttonText || buttonText}
+                    </span>
                     {!beginnersGuide && (
                       <span className="product-section-button-arrow">↗</span>
                     )}
