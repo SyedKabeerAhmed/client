@@ -4,10 +4,13 @@ import { useSearchParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { productService } from '../services/productService'
 import { categoryService } from '../services/categoryService'
+import { useAuth } from '../contexts/AuthContext'
+import { getBasePriceForUser, getDiscountedPriceForUser } from '../utils/pricingUtils'
 import './Shop.css'
 
 const Shop = () => {
   const { t } = useTranslation()
+  const { user } = useAuth()
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
   const [products, setProducts] = useState([])
@@ -538,10 +541,10 @@ const Shop = () => {
                         <h5 className="product-name">{product.productName}</h5>
                         <p className="product-short-title">{product.productShortTitle}</p>
                         <p className="product-price">
-                          £{product.pricing?.priceForIndividual || product.pricing?.actualBasePrice || 'N/A'}
-                          {product.pricing?.discountedPriceForIndividual && (
+                          £{getBasePriceForUser(product.pricing, user) || 'N/A'}
+                          {getDiscountedPriceForUser(product.pricing, user) && (
                             <span className="discounted-price">
-                              £{product.pricing.discountedPriceForIndividual}
+                              £{getDiscountedPriceForUser(product.pricing, user)}
                             </span>
                           )}
                         </p>

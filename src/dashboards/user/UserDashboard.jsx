@@ -20,6 +20,7 @@ import StatsCard from '../shared/StatsCard';
 import DataTable from '../shared/DataTable';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { getBasePriceForUser } from '../../utils/pricingUtils';
 import api from '../../config/api';
 import './UserDashboard.css';
 
@@ -744,7 +745,7 @@ const UserDashboard = () => {
             <span>{product.productName || 'Product'}</span>
           </div>
         ),
-        price: product.pricing ? `$${(product.pricing.priceForIndividual || 0).toFixed(2)}` : 'N/A',
+        price: product.pricing ? `$${getBasePriceForUser(product.pricing, user).toFixed(2)}` : 'N/A',
         added: new Date(item.addedAt || item.createdAt).toLocaleDateString(),
         actions: (
           <div className="actions-cell">

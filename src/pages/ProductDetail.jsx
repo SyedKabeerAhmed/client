@@ -6,6 +6,7 @@ import { faStar, faChevronRight, faCheck, faLock, faSignInAlt, faPaperPlane, faC
 import { productService } from '../services/productService'
 import { useAuth } from '../contexts/AuthContext'
 import { useCart } from '../contexts/CartContext'
+import { getBasePriceForUser, getDiscountedPriceForUser } from '../utils/pricingUtils'
 import './ProductDetail.css'
 
 const ProductDetail = () => {
@@ -73,8 +74,8 @@ const ProductDetail = () => {
   const calculateTotalPrice = () => {
     if (!product) return 0
     
-    // Base product price
-    const basePrice = product.pricing?.priceForIndividual || product.pricing?.actualBasePrice || 75
+    // Base product price - use user-specific pricing
+    const basePrice = getBasePriceForUser(product.pricing, user)
     
     let totalPrice = basePrice
     
@@ -609,7 +610,12 @@ const ProductDetail = () => {
                 {/* Product Price */}
                 <div className="product-price-section">
                   <div className="price-main">
-                    £{product.pricing?.priceForIndividual || product.pricing?.actualBasePrice || '75'}
+                    £{getBasePriceForUser(product.pricing, user) || '75'}
+                    {getDiscountedPriceForUser(product.pricing, user) && (
+                      <span className="discounted-price ms-2">
+                        £{getDiscountedPriceForUser(product.pricing, user)}
+                      </span>
+                    )}
                   </div>
                   <div className="availability">
                     <span className="in-stock">In Stock</span>
@@ -1532,7 +1538,7 @@ const ProductDetail = () => {
             <div className="price-breakdown">
               <div className="price-item">
                 <span className="price-label">Product Price:</span>
-                <span className="price-value">£{product?.pricing?.priceForIndividual || product?.pricing?.actualBasePrice || 75}</span>
+                <span className="price-value">£{getBasePriceForUser(product?.pricing, user) || 75}</span>
               </div>
               
               {customization.haircut && customization.haircut !== 'None' && (

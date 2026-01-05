@@ -2,6 +2,8 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useAuth } from '../contexts/AuthContext'
+import { getBasePriceForUser, getDiscountedPriceForUser } from '../utils/pricingUtils'
 import './BestSellingSection.css'
 
 const BestSellingSection = ({ 
@@ -11,6 +13,7 @@ const BestSellingSection = ({
   loading = false
 }) => {
   const { t } = useTranslation()
+  const { user } = useAuth()
   const navigate = useNavigate()
 
   // Helper function to format price
@@ -43,11 +46,16 @@ const BestSellingSection = ({
 
   // Helper function to get price
   const getPrice = (product) => {
-    if (product.pricing?.discountedPriceForIndividual) {
-      return formatPrice(product.pricing.discountedPriceForIndividual)
-    }
-    if (product.pricing?.priceForIndividual) {
-      return formatPrice(product.pricing.priceForIndividual)
+    if (product.pricing) {
+      // Use user-specific pricing
+      const discountedPrice = getDiscountedPriceForUser(product.pricing, user)
+      if (discountedPrice) {
+        return formatPrice(discountedPrice)
+      }
+      const basePrice = getBasePriceForUser(product.pricing, user)
+      if (basePrice) {
+        return formatPrice(basePrice)
+      }
     }
     return product.price || null
   }
