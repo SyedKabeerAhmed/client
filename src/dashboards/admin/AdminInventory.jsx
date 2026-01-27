@@ -21,7 +21,7 @@ const AdminInventory = () => {
   // Base inventory state
   const [baseInventory, setBaseInventory] = useState([]);
   const [baseLoading, setBaseLoading] = useState(false);
-  const [baseUpdates, setBaseUpdates] = useState({});
+  const [sizeUpdates, setSizeUpdates] = useState({}); // Changed from baseUpdates to sizeUpdates
   const [baseSaving, setBaseSaving] = useState(false);
   const { showToast } = useToast();
 
@@ -94,29 +94,33 @@ const AdminInventory = () => {
     }
   };
 
-  const handleBaseMaxChange = (subCategoryId, value) => {
+  const handleSizeQuantityChange = (sizeId, value) => {
     const numValue = parseInt(value, 10);
     if (Number.isNaN(numValue) || numValue < 0) return;
 
-    setBaseUpdates(prev => ({
+    setSizeUpdates(prev => ({
       ...prev,
-      [subCategoryId]: numValue
+      [sizeId]: numValue
     }));
   };
 
   const handleSaveBaseInventory = async () => {
     if (!baseInventory || baseInventory.length === 0) return;
 
-    const updates = baseInventory.map(base => {
-      const updatedValue = baseUpdates[base._id];
-      const effectiveValue = updatedValue !== undefined ? updatedValue : (base.maxBaseQuantity ?? 0);
-      return {
-        subCategoryId: base._id,
-        maxBaseQuantity: effectiveValue
-      };
-    }).filter(update => {
-      const original = baseInventory.find(b => b._id === update.subCategoryId);
-      return original && (original.maxBaseQuantity ?? 0) !== update.maxBaseQuantity;
+    // Collect all size updates
+    const updates = [];
+    baseInventory.forEach(baseType => {
+      if (baseType.sizes && baseType.sizes.length > 0) {
+        baseType.sizes.forEach(size => {
+          const updatedValue = sizeUpdates[size.id];
+          if (updatedValue !== undefined && updatedValue !== size.totalQuantity) {
+            updates.push({
+              sizeId: size.id,
+              totalQuantity: updatedValue
+            });
+          }
+        });
+      }
     });
 
     if (updates.length === 0) {
@@ -126,15 +130,22 @@ const AdminInventory = () => {
 
     try {
       setBaseSaving(true);
-      const response = await api.put('/admin/inventory/bases', { baseUpdates: updates });
+      const response = await api.put('/admin/inventory/bases', { sizeUpdates: updates });
       if (response.data.success) {
         showToast(response.data.message || 'Base inventory updated successfully', 'success');
-        setBaseUpdates({});
+        setSizeUpdates({});
         fetchBaseInventory();
       }
     } catch (error) {
       const errorData = error.response?.data;
-      showToast(errorData?.message || 'Failed to update base inventory', 'error');
+      if (errorData?.errors && Array.isArray(errorData.errors)) {
+        // Show validation errors
+        errorData.errors.forEach(err => {
+          showToast(err, 'error');
+        });
+      } else {
+        showToast(errorData?.message || 'Failed to update base inventory', 'error');
+      }
     } finally {
       setBaseSaving(false);
     }
@@ -200,11 +211,11 @@ const AdminInventory = () => {
     return color.qty_total || 0;
   };
 
-  const getBaseMaxValue = (base) => {
-    if (baseUpdates[base._id] !== undefined) {
-      return baseUpdates[base._id];
+  const getSizeQuantity = (size) => {
+    if (sizeUpdates[size.id] !== undefined) {
+      return sizeUpdates[size.id];
     }
-    return base.maxBaseQuantity ?? 0;
+    return size.totalQuantity ?? 0;
   };
 
   const columns = [
@@ -319,16 +330,33 @@ const AdminInventory = () => {
       return <div className="error-banner">No base inventory data available</div>;
     }
 
+    // Detect old API format (no per-size data: items have "name" but no "sizes" array)
+    const isOldFormat = baseInventory.some(b => !Array.isArray(b.sizes));
+    if (isOldFormat) {
+      return (
+        <div className="color-inventory-section">
+          <div className="header-info">
+            <h3>Base Size Inventory Management</h3>
+            <div className="error-banner" style={{ marginTop: '1rem' }}>
+              <strong>Backend needs a restart.</strong> The Base Size Inventory API has been updated.
+              Restart your backend server (e.g. <code>npm run dev</code> in the <code>server</code> folder), then refresh this page.
+              After restart, if you have run the base sizes seeder, the size rows will appear.
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="color-inventory-section">
         <div className="color-inventory-header">
           <div className="header-info">
-            <h3>Base Inventory Management</h3>
-            <p>Manage maximum allowed stock per base type (subcategory) across all products.</p>
+            <h3>Base Size Inventory Management</h3>
+            <p>Manage inventory quantities per base type and size. Each base type has multiple sizes (height x width).</p>
             <p className="info-text">
               <i className="fas fa-info-circle"></i>
               {' '}
-              When creating or updating products or inventory, total stock per base cannot exceed the configured max.
+              You cannot set totalQuantity below reservedQuantity. Reservations expire after 3 days.
             </p>
           </div>
           <div className="header-actions">
@@ -338,51 +366,89 @@ const AdminInventory = () => {
               disabled={baseSaving}
             >
               {baseSaving ? <i className="fas fa-spinner fa-spin"></i> : <i className="fas fa-save"></i>}
-              {' '}Save Base Limits
+              {' '}Save Changes
             </button>
           </div>
         </div>
 
         <div className="color-inventory-table-container">
-          <table className="color-inventory-table">
-            <thead>
-              <tr>
-                <th>Base Type</th>
-                <th>Main Category</th>
-                <th>Max Quantity</th>
-                <th>Current Total Stock</th>
-                <th>Remaining Capacity</th>
-                <th>Products</th>
-              </tr>
-            </thead>
-            <tbody>
-              {baseInventory.map((base) => {
-                const maxValue = getBaseMaxValue(base);
-                const remaining = base.remainingCapacity ?? Math.max(0, maxValue - (base.currentTotalStock || 0));
-
-                return (
-                  <tr key={base._id}>
-                    <td className="color-category">{base.name}</td>
-                    <td className="color-subcategory">{base.parentName || 'N/A'}</td>
-                    <td>
-                      <input
-                        type="number"
-                        min="0"
-                        className="quantity-input"
-                        value={maxValue}
-                        onChange={(e) => handleBaseMaxChange(base._id, e.target.value)}
-                      />
-                    </td>
-                    <td className="total-qty">{base.currentTotalStock || 0}</td>
-                    <td className={remaining === 0 ? 'zero-qty' : ''}>
-                      {remaining}
-                    </td>
-                    <td>{base.productCount || 0}</td>
+          {baseInventory.map((baseType) => (
+            <div key={baseType.baseType} className="base-type-section" style={{ marginBottom: '2rem' }}>
+              <h4 style={{ marginBottom: '1rem', padding: '0.5rem', background: '#f5f5f5', borderRadius: '4px' }}>
+                {baseType.baseType} Base Type
+                <span style={{ marginLeft: '1rem', fontSize: '0.9rem', color: '#666' }}>
+                  Total: {baseType.totalQuantity} | Reserved: {baseType.reservedQuantity} | Available: {baseType.availableQuantity}
+                </span>
+              </h4>
+              <table className="color-inventory-table">
+                <thead>
+                  <tr>
+                    <th>Size</th>
+                    <th>Total Quantity</th>
+                    <th>Reserved</th>
+                    <th>Available</th>
+                    <th>Actions</th>
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                </thead>
+                <tbody>
+                  {baseType.sizes && baseType.sizes.length > 0 ? (
+                    <>
+                      {baseType.sizes.map((size) => {
+                        const currentQty = getSizeQuantity(size);
+                        const isOutOfStock = size.availableQuantity === 0;
+                        const isLowStock = size.availableQuantity > 0 && size.availableQuantity <= 5;
+
+                        return (
+                          <tr 
+                            key={size.id} 
+                            className={isOutOfStock ? 'zero-stock' : isLowStock ? 'low-stock-row' : ''}
+                          >
+                            <td className="color-code" style={{ fontWeight: 'bold' }}>{size.label}</td>
+                            <td>
+                              <input
+                                type="number"
+                                min={size.reservedQuantity}
+                                className="quantity-input"
+                                value={currentQty}
+                                onChange={(e) => handleSizeQuantityChange(size.id, e.target.value)}
+                                title={`Cannot be less than reserved quantity (${size.reservedQuantity})`}
+                              />
+                            </td>
+                            <td className="total-qty">{size.reservedQuantity}</td>
+                            <td className={isOutOfStock ? 'zero-qty' : ''}>
+                              {size.availableQuantity}
+                              {isOutOfStock && <span style={{ marginLeft: '0.5rem', color: '#dc3545' }}>(Out of Stock)</span>}
+                            </td>
+                            <td>
+                              {currentQty !== size.totalQuantity && (
+                                <span style={{ color: '#ffc107', fontSize: '0.85rem' }}>
+                                  <i className="fas fa-edit"></i> Modified
+                                </span>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                      {/* Summary row */}
+                      <tr style={{ background: '#f8f9fa', fontWeight: 'bold' }}>
+                        <td>Total</td>
+                        <td>{baseType.totalQuantity}</td>
+                        <td>{baseType.reservedQuantity}</td>
+                        <td>{baseType.availableQuantity}</td>
+                        <td></td>
+                      </tr>
+                    </>
+                  ) : (
+                    <tr>
+                      <td colSpan="5" style={{ textAlign: 'center', color: '#999' }}>
+                        No sizes configured for this base type
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          ))}
         </div>
       </div>
     );

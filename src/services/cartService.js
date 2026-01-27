@@ -115,7 +115,8 @@ class CartService {
   }
 
   // Helper method to format cart data for API
-  formatCartData(productId, customization, quantity = 1, totalPrice = 0, isCustomHairSystem = false) {
+  formatCartData(productId, customization, quantity = 1, totalPrice = 0, additionalData = {}) {
+    const isCustomHairSystem = additionalData.isCustomHairSystem || false;
     if (isCustomHairSystem) {
       // For HairCustomization
       return {
@@ -136,7 +137,9 @@ class CartService {
       cutToSize: customization.cutToSize !== undefined ? customization.cutToSize : false, // false = "No", true = "Yes"
       size: customization.size || '',
       additionalInfo: customization.additionalInfo || '',
-      uploadedImages: customization.uploadedImages || []
+      uploadedImages: customization.uploadedImages || [],
+      stockBaseSizeId: customization.stockBaseSizeId || additionalData.stockBaseSizeId || '',
+      stockBaseSizeLabel: customization.stockBaseSizeLabel || additionalData.stockBaseSizeLabel || ''
     }
 
     // Only include hairLengths if it exists and is not null
@@ -156,7 +159,9 @@ class CartService {
       quantity,
       customization: formattedCustomization,
       totalPrice,
-      isCustomized: true
+      isCustomized: true,
+      stockBaseSizeId: additionalData.stockBaseSizeId || customization.stockBaseSizeId || '',
+      stockBaseSizeLabel: additionalData.stockBaseSizeLabel || customization.stockBaseSizeLabel || ''
     }
 
     // Add selected color if available

@@ -115,7 +115,7 @@ export const CartProvider = ({ children }) => {
     }
   }, [isAuthenticated, user, loadCart])
 
-  const addToCart = async (productIdOrCartData, customization, quantity = 1, totalPrice = 0) => {
+  const addToCart = async (productIdOrCartData, customization, quantity = 1, totalPrice = 0, additionalData = {}) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true })
       
@@ -125,8 +125,8 @@ export const CartProvider = ({ children }) => {
         // HairCustomization case - productIdOrCartData is actually cartData
         cartData = productIdOrCartData
       } else {
-        // ProductDetail case - format the data using cartService
-        cartData = cartService.formatCartData(productIdOrCartData, customization, quantity, totalPrice)
+        // ProductDetail case - format the data using cartService (additionalData: stockBaseSizeId, stockBaseSizeLabel, etc.)
+        cartData = cartService.formatCartData(productIdOrCartData, customization, quantity, totalPrice, additionalData)
       }
       
       const response = await cartService.addToCart(cartData)

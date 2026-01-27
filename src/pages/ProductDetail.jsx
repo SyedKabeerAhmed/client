@@ -25,7 +25,9 @@ const ProductDetail = () => {
     cutToSize: undefined, // undefined = not selected, false = "No", true = "Yes"
     size: '',
     additionalInfo: '',
-    uploadedImages: []
+    uploadedImages: [],
+    stockBaseSizeId: '',
+    stockBaseSizeLabel: ''
   })
   
   // Modal states
@@ -389,6 +391,13 @@ const ProductDetail = () => {
       validationErrors.push('Cut to Size (select a size)')
     }
 
+    // Validate Stock Base Size for hair systems
+    const isHairSystem = product?.mainCategorySlug === 'hair-systems' && 
+                         ['Skin', 'Mono', 'Lace', 'Hybrid'].includes(product?.subCategory);
+    if (isHairSystem && (!customization.stockBaseSizeId || customization.stockBaseSizeId.trim() === '')) {
+      validationErrors.push('Stock Base Size')
+    }
+
     if (validationErrors.length > 0) {
       alert(`Please select the mandatory option: ${validationErrors.join(', ')}`)
       return
@@ -400,7 +409,12 @@ const ProductDetail = () => {
       setAddToCartError('')
       
       const totalPrice = calculateTotalPrice()
-      await addToCart(id, customization, 1, totalPrice)
+      // Include stockBaseSizeId and stockBaseSizeLabel for hair systems
+      await addToCart(id, customization, 1, totalPrice, {
+        stockBaseSizeId: customization.stockBaseSizeId,
+        stockBaseSizeLabel: customization.stockBaseSizeLabel,
+        isCustomHairSystem: false
+      })
       
       setAddToCartSuccess('Product added to cart successfully!')
       setTimeout(() => {
@@ -823,6 +837,64 @@ const ProductDetail = () => {
                         </div>
                       </Accordion.Body>
                     </Accordion.Item>
+
+                    {/* Stock Base Size - Only for hair systems */}
+                    {product?.mainCategorySlug === 'hair-systems' && 
+                     ['Skin', 'Mono', 'Lace', 'Hybrid'].includes(product?.subCategory) && 
+                     product?.baseSizeOptions && product.baseSizeOptions.length > 0 && (
+                      <Accordion.Item eventKey="stockBaseSize">
+                        <Accordion.Header>
+                          <div className="accordion-header-content">
+                            <span>Stock Base Size</span>
+                            {customization.stockBaseSizeLabel && (
+                              <span className="selected-option">
+                                {customization.stockBaseSizeLabel}
+                                {(() => {
+                                  const selectedSize = product.baseSizeOptions.find(s => s.id === customization.stockBaseSizeId);
+                                  return selectedSize && selectedSize.availableQuantity > 0 
+                                    ? ` (${selectedSize.availableQuantity} available)`
+                                    : ' (Out of stock)';
+                                })()}
+                              </span>
+                            )}
+                          </div>
+                        </Accordion.Header>
+                        <Accordion.Body>
+                          <div className="base-size-options">
+                            {product.baseSizeOptions.map((size) => {
+                              const isSelected = customization.stockBaseSizeId === size.id;
+                              const isOutOfStock = size.availableQuantity === 0;
+                              
+                              return (
+                                <div
+                                  key={size.id}
+                                  className={`base-size-option ${isSelected ? 'selected' : ''} ${isOutOfStock ? 'out-of-stock' : ''}`}
+                                  onClick={() => {
+                                    if (!isOutOfStock) {
+                                      handleCustomizationChange('stockBaseSizeId', size.id);
+                                      handleCustomizationChange('stockBaseSizeLabel', size.label);
+                                    }
+                                  }}
+                                >
+                                  <div className="base-size-info">
+                                    <span className="base-size-label">{size.label}</span>
+                                    <span className={`base-size-stock ${isOutOfStock ? 'out-of-stock-text' : ''}`}>
+                                      {isOutOfStock ? 'Out of stock' : `${size.availableQuantity} available`}
+                                    </span>
+                                  </div>
+                                  {isSelected && !isOutOfStock && (
+                                    <FontAwesomeIcon icon={faCheck} className="ms-2" />
+                                  )}
+                                </div>
+                              );
+                            })}
+                          </div>
+                          <div className="info-note">
+                            <small>Please select a base size. This determines the physical dimensions of your hair system base.</small>
+                          </div>
+                        </Accordion.Body>
+                      </Accordion.Item>
+                    )}
 
                     {/* Cut to Size */}
                     <Accordion.Item eventKey="cutToSize">

@@ -347,6 +347,21 @@ const Cart = () => {
                                 </div>
                               </div>
                             )}
+                            
+                            {/* Stock Base Size for hair systems */}
+                            {(item.customization?.stockBaseSizeLabel || item.stockBaseSizeLabel) && (
+                              <div className="option-item">
+                                <span
+                                  className="option-label"
+                                 
+                                >
+                                  Stock Base Size:
+                                </span>
+                                <span>
+                                  {item.customization?.stockBaseSizeLabel || item.stockBaseSizeLabel}
+                                </span>
+                              </div>
+                            )}
                           </div>
                           
                           {/* View Customization Button */}
@@ -582,13 +597,37 @@ const Cart = () => {
                     Product Customization Details
                   </h5>
                   {Object.entries(selectedCustomization.customization).map(([key, value]) => {
-                    if (!value || key === 'hairLengths' || key === 'uploadedImages') return null
-                    
+                    // Skip: Stock Base Size Id, Size (merged into Cut to Size), hairLengths, uploadedImages
+                    if (key === 'hairLengths' || key === 'uploadedImages' || key === 'stockBaseSizeId' || key === 'size') return null
+                    if (!value && key !== 'cutToSize') return null
+
+                    const cust = selectedCustomization.customization
+
+                    // Cut to Size: show "No", or the size value under it (size row removed)
+                    if (key === 'cutToSize') {
+                      let displayValue = 'No'
+                      if (value === true) {
+                        const sz = cust.size
+                        if (sz) {
+                          const num = parseFloat(String(sz))
+                          displayValue = !Number.isNaN(num) ? `${sz} inch = ${(num * 2.54).toFixed(2)} cm` : `${sz} inch`
+                        } else {
+                          displayValue = 'Yes'
+                        }
+                      }
+                      return (
+                        <div key={key} className="customization-item">
+                          <h6>Cut to Size</h6>
+                          <p>{displayValue}</p>
+                        </div>
+                      )
+                    }
+
                     // Format the key to be more readable
                     const formattedKey = key
                       .replace(/([A-Z])/g, ' $1')
                       .replace(/^./, str => str.toUpperCase())
-                    
+
                     return (
                       <div key={key} className="customization-item">
                         <h6>{formattedKey}</h6>

@@ -82,6 +82,9 @@ const AdminProducts = () => {
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [categoriesLoading, setCategoriesLoading] = useState(false);
+  const [allowedBaseSizeIds, setAllowedBaseSizeIds] = useState([]);
+  const [availableBaseSizes, setAvailableBaseSizes] = useState([]);
+  const [baseSizesLoading, setBaseSizesLoading] = useState(false);
 
   // Reset to page 1 when search or filter changes
   useEffect(() => {
@@ -96,6 +99,8 @@ const AdminProducts = () => {
     fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination.current, searchQuery, isActiveFilter]);
+
+  const HAIR_BASE_TYPES = ['Skin', 'Mono', 'Lace', 'Hybrid'];
 
   // Fetch categories and subcategories for dynamic dropdowns
   useEffect(() => {
@@ -117,6 +122,33 @@ const AdminProducts = () => {
 
     fetchCategories();
   }, []);
+
+  // Fetch base sizes for hair system products when subCategory is a base type
+  useEffect(() => {
+    const sub = productFormData.subCategory;
+    if (productFormData.mainCategory !== 'Hair Systems' || !HAIR_BASE_TYPES.includes(sub)) {
+      setAvailableBaseSizes([]);
+      return;
+    }
+    const fetchBaseSizes = async () => {
+      try {
+        setBaseSizesLoading(true);
+        const response = await api.get('/admin/inventory/bases');
+        if (response.data?.success) {
+          const baseInventory = response.data.data?.baseInventory || [];
+          const typeData = baseInventory.find(b => b.baseType === sub);
+          const sizes = typeData?.sizes || [];
+          setAvailableBaseSizes(sizes);
+        }
+      } catch (error) {
+        console.error('Fetch base sizes error:', error);
+        setAvailableBaseSizes([]);
+      } finally {
+        setBaseSizesLoading(false);
+      }
+    };
+    fetchBaseSizes();
+  }, [productFormData.mainCategory, productFormData.subCategory]);
 
   const fetchProducts = async (forceRefresh = false) => {
     try {
@@ -207,6 +239,7 @@ const AdminProducts = () => {
     setProductImagesPreview([]);
     setSelectedColors([...allColors]);
     setSelectedHaircuts([...allHaircuts]);
+    setAllowedBaseSizeIds([]);
     setShowProductModal(true);
   };
 
@@ -271,6 +304,8 @@ const AdminProducts = () => {
     setProductImagesPreview(product.productImages || []);
     setSelectedColors(product.colors || []);
     setSelectedHaircuts(product.hairCut?.chooseYourHairStyle || []);
+    const ids = (product.allowedBaseSizes || []).map(s => (typeof s === 'object' && s?._id ? s._id : s));
+    setAllowedBaseSizeIds(ids);
     setShowProductModal(true);
   };
 
@@ -281,6 +316,22 @@ const AdminProducts = () => {
     setProductImagesPreview([]);
     setSelectedColors([]);
     setSelectedHaircuts([]);
+    setAllowedBaseSizeIds([]);
+    setAvailableBaseSizes([]);
+  };
+
+  const handleAllowedBaseSizeToggle = (sizeId) => {
+    setAllowedBaseSizeIds(prev =>
+      prev.includes(sizeId) ? prev.filter(id => id !== sizeId) : [...prev, sizeId]
+    );
+  };
+
+  const handleSelectAllBaseSizes = () => {
+    if (allowedBaseSizeIds.length === availableBaseSizes.length) {
+      setAllowedBaseSizeIds([]);
+    } else {
+      setAllowedBaseSizeIds(availableBaseSizes.map(s => s.id));
+    }
   };
 
   const handleProductInputChange = (e) => {
@@ -399,6 +450,10 @@ const AdminProducts = () => {
         colors: selectedColors,
         mainCategorySlug
       };
+
+      if (mainCategorySlug === 'hair-systems' && HAIR_BASE_TYPES.includes(productFormData.subCategory)) {
+        formDataToSend.allowedBaseSizeIds = allowedBaseSizeIds;
+      }
 
       if (editingProduct) {
         const updateResponse = await api.put(`/admin/products/${editingProduct._id}`, formDataToSend);
@@ -676,6 +731,60 @@ const AdminProducts = () => {
                     </select>
                   </div>
                 </div>
+                {productFormData.mainCategory === 'Hair Systems' && HAIR_BASE_TYPES.includes(productFormData.subCategory) && (
+                  <div className="form-group" style={{ marginTop: '1rem' }}>
+                    <label>Allowed Base Sizes</label>
+                    <p className="form-hint" style={{ fontSize: '0.85rem', color: '#666', marginBottom: '0.5rem' }}>
+                      Choose which base sizes (height x width) this product can use. Leave empty to allow all sizes for this base type.
+                    </p>
+                    {baseSizesLoading ? (
+                      <span>Loading sizes...</span>
+                    ) : availableBaseSizes.length > 0 ? (
+                      <div>
+                        <button
+                          type="button"
+                          className="btn-secondary"
+                          style={{ marginBottom: '0.5rem', fontSize: '0.9rem' }}
+                          onClick={handleSelectAllBaseSizes}
+                        >
+                          {allowedBaseSizeIds.length === availableBaseSizes.length ? 'Deselect All' : 'Select All'}
+                        </button>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                          {availableBaseSizes.map((size) => (
+                            <label
+                              key={size.id}
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: '0.35rem 0.6rem',
+                                border: '1px solid #ddd',
+                                borderRadius: '4px',
+                                cursor: 'pointer',
+                                background: allowedBaseSizeIds.includes(size.id) ? '#e8f4fd' : '#fff'
+                              }}
+                            >
+                              <input
+                                type="checkbox"
+                                checked={allowedBaseSizeIds.includes(size.id)}
+                                onChange={() => handleAllowedBaseSizeToggle(size.id)}
+                              />
+                              <span style={{ marginLeft: '0.4rem' }}>
+                                {size.label}
+                                {size.availableQuantity !== undefined && (
+                                  <span style={{ marginLeft: '0.25rem', color: '#888', fontSize: '0.85rem' }}>
+                                    ({size.availableQuantity} avail)
+                                  </span>
+                                )}
+                              </span>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <span style={{ color: '#888' }}>No base sizes found for {productFormData.subCategory}. Seed base sizes first.</span>
+                    )}
+                  </div>
+                )}
                 <div className="form-row">
                   <div className="form-group">
                     <label>Product Code *</label>
