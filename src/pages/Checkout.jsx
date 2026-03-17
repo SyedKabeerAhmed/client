@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Row, Col, Card, Button, Form, Alert, Spinner } from 'react-bootstrap'
+import { Container, Row, Col, Card, Button, Form, Alert, Spinner, Modal } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinus, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faMinus, faPlus, faTimes, faCreditCard, faLock } from '@fortawesome/free-solid-svg-icons'
 import { useCart } from '../contexts/CartContext'
 import { useAuth } from '../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { orderService } from '../services/orderService'
 import { cartService } from '../services/cartService'
+import { installmentService } from '../services/installmentService'
 import Newsletter from '../components/Newsletter'
 import './Checkout.css'
 
@@ -14,7 +15,7 @@ const Checkout = () => {
   const { cart, loading: cartLoading, applyDiscount, refreshCart, updateCartItem, removeFromCart } = useCart()
   const { user, isAuthenticated } = useAuth()
   const navigate = useNavigate()
-  
+
   const [formData, setFormData] = useState({
     firstName: user?.fullName?.split(' ')[0] || '',
     companyName: '',
@@ -26,8 +27,9 @@ const Checkout = () => {
     email: user?.email || '',
     saveInfo: true
   })
-  
+
   const [paymentMethod, setPaymentMethod] = useState('cash_on_delivery')
+  const [installmentMonths, setInstallmentMonths] = useState(12) // Default 12 months
   const [couponCode, setCouponCode] = useState('')
   const [discountLoading, setDiscountLoading] = useState(false)
   const [discountError, setDiscountError] = useState('')
@@ -36,12 +38,22 @@ const Checkout = () => {
   const [orderError, setOrderError] = useState('')
   const [formErrors, setFormErrors] = useState({})
 
+  // Simulated Payment State
+  const [showPaymentModal, setShowPaymentModal] = useState(false)
+  const [paymentData, setPaymentData] = useState({
+    cardNumber: '4242 4242 4242 4242',
+    expiry: '12/26',
+    cvc: '123',
+    nameOnCard: user?.fullName || ''
+  })
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false)
+
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/login')
       return
     }
-    
+
     if (cart.items.length === 0 && !cartLoading) {
       navigate('/cart')
     }
@@ -65,7 +77,7 @@ const Checkout = () => {
 
   const validateForm = () => {
     const errors = {}
-    
+
     if (!formData.firstName.trim()) {
       errors.firstName = 'First name is required'
     }
@@ -85,7 +97,7 @@ const Checkout = () => {
     } else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(formData.email)) {
       errors.email = 'Please enter a valid email address'
     }
-    
+
     setFormErrors(errors)
     return Object.keys(errors).length === 0
   }
@@ -111,7 +123,7 @@ const Checkout = () => {
 
   const handlePlaceOrder = async (e) => {
     e.preventDefault()
-    
+
     if (!validateForm()) {
       return
     }
@@ -122,19 +134,24 @@ const Checkout = () => {
     }
 
     try {
-      setOrderLoading(true)
-      setOrderError('')
-
       // Prepare shipping address
       const shippingAddress = {
         fullName: formData.firstName,
         address: formData.streetAddress,
         city: formData.townCity,
-        state: formData.townCity, // Use townCity as state
-        zipCode: '00000', // Default zipCode
+        state: formData.townCity,
+        zipCode: '00000',
         country: formData.country || 'United States',
         phoneNumber: formData.phoneNumber
       }
+
+      if (paymentMethod === 'installment') {
+        setShowPaymentModal(true)
+        return
+      }
+
+      setOrderLoading(true)
+      setOrderError('')
 
       // Prepare order data
       const orderData = {
@@ -142,13 +159,10 @@ const Checkout = () => {
         paymentMethod,
         notes: formData.apartment ? `Apartment/Floor: ${formData.apartment}` : ''
       }
-
-      // Create order
       const response = await orderService.createOrder(orderData)
-      
+
       if (response.success) {
-        // Redirect to order confirmation or dashboard
-        navigate(`/dashboard?order=${response.data.order.orderNumber}`)
+        navigate('/dashboard?tab=orders')
       } else {
         setOrderError(response.message || 'Failed to place order')
       }
@@ -159,6 +173,154 @@ const Checkout = () => {
       setOrderLoading(false)
     }
   }
+
+  const handleMockPaymentSubmit = async (e) => {
+    e.preventDefault()
+    setIsProcessingPayment(true)
+    setOrderError('')
+
+    try {
+      // Prepare shipping address
+      const shippingAddress = {
+        fullName: formData.firstName,
+        address: formData.streetAddress,
+        city: formData.townCity,
+        state: formData.townCity,
+        zipCode: '00000',
+        country: formData.country || 'United States',
+        phoneNumber: formData.phoneNumber
+      }
+
+      const installmentData = {
+        items: cart.items.map(item => {
+          // Robust mapping: handle populated object or plain ID string
+          const prodObj = typeof item.product === 'object' ? item.product : null;
+          const prodId = prodObj?._id || (typeof item.product === 'string' ? item.product : item.productId);
+
+          // Final fallback to ensure validation doesn't fail on backend
+          const resolvedProductId = prodId || (item.isCustomHairSystem ? '507f1f77bcf86cd799439011' : '000000000000000000000000');
+
+          return {
+            ...item,
+            product: resolvedProductId,
+            productName: prodObj?.productName || item.product?.productName || item.productName || (item.isCustomHairSystem ? 'Custom Hair System' : 'Regular Product'),
+            productCode: prodObj?.productDetails?.productCode || item.product?.productDetails?.productCode || item.productCode || (item.isCustomHairSystem ? 'CHS-CUSTOM' : 'SKU-GEN'),
+            unitPrice: item.unitPrice || item.itemPrice || (item.totalPrice / (item.quantity || 1)) || 0,
+            totalPrice: item.totalPrice,
+            quantity: item.quantity
+          };
+        }),
+        shippingAddress,
+        billingAddress: shippingAddress,
+        paymentMethod: 'installment',
+        totalInstallments: installmentMonths,
+        totalAmount: cart.total
+      }
+
+      // 1. Create the plan
+      const response = await installmentService.createInstallmentOrder(installmentData)
+
+      if (response.success) {
+        // 2. Automatically record the 1st payment to simulate "Initial Payment during checkout"
+        const planId = response.data.plan._id
+        const firstPaymentAmount = response.data.plan.installmentAmount
+
+        await installmentService.recordPayment({
+          planId,
+          amount: firstPaymentAmount
+        })
+
+        setShowPaymentModal(false)
+        navigate('/dashboard?tab=orders')
+      } else {
+        setOrderError(response.message || 'Failed to create installment plan')
+        setShowPaymentModal(false)
+      }
+    } catch (error) {
+      console.error('Payment Simulation Error:', error)
+      setOrderError(error.message || 'Payment failed. Please try again.')
+      setShowPaymentModal(false)
+    } finally {
+      setIsProcessingPayment(false)
+    }
+  }
+
+  const renderPaymentModal = () => (
+    <Modal show={showPaymentModal} onHide={() => !isProcessingPayment && setShowPaymentModal(false)} centered>
+      <Modal.Header closeButton={!isProcessingPayment}>
+        <Modal.Title>Complete Initial Payment</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="payment-simulation-box p-3">
+          <Alert variant="info" className="mb-4">
+            <FontAwesomeIcon icon={faLock} className="me-2" />
+            This is a <strong>simulated payment</strong> for development purposes. Total Due Now: <strong>{formatPrice(cart.total / installmentMonths)}</strong>
+          </Alert>
+
+          <Form onSubmit={handleMockPaymentSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Name on Card</Form.Label>
+              <Form.Control
+                type="text"
+                value={paymentData.nameOnCard}
+                onChange={(e) => setPaymentData({ ...paymentData, nameOnCard: e.target.value })}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Card Number</Form.Label>
+              <div className="position-relative">
+                <Form.Control
+                  type="text"
+                  value={paymentData.cardNumber}
+                  onChange={(e) => setPaymentData({ ...paymentData, cardNumber: e.target.value })}
+                  required
+                />
+                <FontAwesomeIcon icon={faCreditCard} className="position-absolute" style={{ right: '10px', top: '12px', color: '#666' }} />
+              </div>
+            </Form.Group>
+
+            <Row>
+              <Col>
+                <Form.Group className="mb-3">
+                  <Form.Label>Expiry</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="MM/YY"
+                    value={paymentData.expiry}
+                    onChange={(e) => setPaymentData({ ...paymentData, expiry: e.target.value })}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3">
+                  <Form.Label>CVC</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="123"
+                    value={paymentData.cvc}
+                    onChange={(e) => setPaymentData({ ...paymentData, cvc: e.target.value })}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <Button
+              variant="primary"
+              type="submit"
+              className="w-100 py-2 mt-3"
+              disabled={isProcessingPayment}
+            >
+              {isProcessingPayment ? <Spinner animation="border" size="sm" /> : `Pay ${formatPrice(cart.total / installmentMonths)}`}
+            </Button>
+          </Form>
+        </div>
+      </Modal.Body>
+    </Modal>
+  )
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('en-US', {
@@ -179,13 +341,13 @@ const Checkout = () => {
     if (item.isCustomHairSystem) {
       return {
         type: 'Custom Hair System',
-        name: item.customHairSystem?.baseDesign 
-          ? `Custom ${item.customHairSystem.baseDesign}` 
+        name: item.customHairSystem?.baseDesign
+          ? `Custom ${item.customHairSystem.baseDesign}`
           : 'Custom Hair System',
         price: item.itemPrice || item.unitPrice || item.totalPrice
       }
     }
-    
+
     // Handle regular products
     if (item.product) {
       return {
@@ -194,7 +356,7 @@ const Checkout = () => {
         price: item.itemPrice || item.unitPrice || item.totalPrice
       }
     }
-    
+
     // Fallback for items without product reference
     return {
       type: 'Hair System',
@@ -292,11 +454,11 @@ const Checkout = () => {
               <Card.Body>
                 <h2
                   className="billing-title"
-                 
+
                 >
                   Billing Details
                 </h2>
-                
+
                 <Form onSubmit={handlePlaceOrder}>
                   <Form.Group className="mb-3">
                     <Form.Label>
@@ -442,11 +604,11 @@ const Checkout = () => {
               <Card.Body>
                 <h5
                   className="order-summary-title"
-                 
+
                 >
                   Order Summary
                 </h5>
-                
+
                 {/* Product List */}
                 <div className="order-products">
                   {cart.items.map((item) => {
@@ -454,8 +616,8 @@ const Checkout = () => {
                     return (
                       <div key={item._id} className="order-product-item">
                         <div className="product-image-wrapper">
-                          <img 
-                            src={getImagePath(item.product)} 
+                          <img
+                            src={getImagePath(item.product)}
                             alt={productInfo.name}
                             className="product-image"
                             onError={(e) => {
@@ -468,40 +630,40 @@ const Checkout = () => {
                           <p className="product-name">{productInfo.name}</p>
                           <p className="product-price">{formatPrice(productInfo.price)}</p>
                         </div>
-                      <div className="product-quantity-controls">
-                        <div className="quantity-selector">
-                          <span className="quantity-value">{item.quantity}</span>
-                          <div className="quantity-arrows">
-                            <button 
-                              type="button"
-                              className="quantity-arrow-btn up"
-                              onClick={() => handleQuantityChange(item._id, item.quantity + 1)}
-                              disabled={cartLoading}
-                              aria-label="Increase quantity"
-                            >
-                              <FontAwesomeIcon icon={faPlus} />
-                            </button>
-                            <button 
-                              type="button"
-                              className="quantity-arrow-btn down"
-                              onClick={() => handleQuantityChange(item._id, item.quantity - 1)}
-                              disabled={cartLoading || item.quantity <= 1}
-                              aria-label="Decrease quantity"
-                            >
-                              <FontAwesomeIcon icon={faMinus} />
-                            </button>
+                        <div className="product-quantity-controls">
+                          <div className="quantity-selector">
+                            <span className="quantity-value">{item.quantity}</span>
+                            <div className="quantity-arrows">
+                              <button
+                                type="button"
+                                className="quantity-arrow-btn up"
+                                onClick={() => handleQuantityChange(item._id, item.quantity + 1)}
+                                disabled={cartLoading}
+                                aria-label="Increase quantity"
+                              >
+                                <FontAwesomeIcon icon={faPlus} />
+                              </button>
+                              <button
+                                type="button"
+                                className="quantity-arrow-btn down"
+                                onClick={() => handleQuantityChange(item._id, item.quantity - 1)}
+                                disabled={cartLoading || item.quantity <= 1}
+                                aria-label="Decrease quantity"
+                              >
+                                <FontAwesomeIcon icon={faMinus} />
+                              </button>
+                            </div>
                           </div>
                         </div>
+                        <button
+                          type="button"
+                          className="remove-item-btn"
+                          onClick={() => handleRemoveItem(item._id)}
+                          disabled={cartLoading}
+                        >
+                          <FontAwesomeIcon icon={faTimes} />
+                        </button>
                       </div>
-                      <button 
-                        type="button"
-                        className="remove-item-btn"
-                        onClick={() => handleRemoveItem(item._id)}
-                        disabled={cartLoading}
-                      >
-                        <FontAwesomeIcon icon={faTimes} />
-                      </button>
-                    </div>
                     )
                   })}
                 </div>
@@ -551,8 +713,8 @@ const Checkout = () => {
                         className="payment-radio"
                       />
                       <div className="payment-logos-container">
-                        <img 
-                          src="/src/assets/images/payment-modes.png" 
+                        <img
+                          src="/src/assets/images/payment-modes.png"
                           alt="Payment Methods"
                           className="payment-modes-image"
                           onError={(e) => {
@@ -579,6 +741,49 @@ const Checkout = () => {
                   </Form.Group>
                 </div>
 
+                {/* Installment Option for All Users */}
+                {user && (
+                  <div className={`payment-option-item ${paymentMethod === 'installment' ? 'selected' : ''}`} style={{ marginTop: '1rem', padding: '15px', border: '1px solid #ddd', borderRadius: '8px' }}>
+                    <Form.Check
+                      type="radio"
+                      name="paymentMethod"
+                      id="installment-plan"
+                      label={
+                        <span>
+                          Installment Plan <span style={{ fontSize: '0.8em', color: '#666' }}>(Release per payment)</span>
+                        </span>
+                      }
+                      value="installment"
+                      checked={paymentMethod === 'installment'}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                      className="payment-radio"
+                    />
+
+                    {paymentMethod === 'installment' && (
+                      <div className="installment-details mt-3 ms-4">
+                        <Form.Label>Select Duration:</Form.Label>
+                        <Form.Select
+                          value={installmentMonths}
+                          onChange={(e) => setInstallmentMonths(parseInt(e.target.value))}
+                          className="mb-2"
+                        >
+                          <option value="2">2 Months</option>
+                          <option value="4">4 Months</option>
+                          <option value="8">8 Months</option>
+                          <option value="12">12 Months</option>
+                        </Form.Select>
+                        <div className="installment-summary p-2 bg-light rounded">
+                          <small>
+                            Monthly Payment: <strong>{formatPrice(cart.total / installmentMonths)}</strong>
+                            <br />
+                            Total Payments: {installmentMonths}
+                          </small>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 {/* Coupon Code */}
                 <div className="coupon-section">
                   <Form onSubmit={handleApplyCoupon}>
@@ -591,9 +796,9 @@ const Checkout = () => {
                         disabled={discountLoading}
                       />
                     </Form.Group>
-                    <Button 
-                      type="submit" 
-                      variant="outline-primary" 
+                    <Button
+                      type="submit"
+                      variant="outline-primary"
                       className="w-100"
                       disabled={discountLoading || !couponCode.trim()}
                     >
@@ -607,13 +812,13 @@ const Checkout = () => {
                       )}
                     </Button>
                   </Form>
-                  
+
                   {discountError && (
                     <Alert variant="danger" className="mt-2 mb-0" style={{ fontSize: '0.875rem' }}>
                       {discountError}
                     </Alert>
                   )}
-                  
+
                   {discountSuccess && (
                     <Alert variant="success" className="mt-2 mb-0" style={{ fontSize: '0.875rem' }}>
                       {discountSuccess}
@@ -622,9 +827,9 @@ const Checkout = () => {
                 </div>
 
                 {/* Place Order Button */}
-                <Button 
-                  variant="primary" 
-                  size="lg" 
+                <Button
+                  variant="primary"
+                  size="lg"
                   className="place-order-btn w-100"
                   onClick={handlePlaceOrder}
                   disabled={orderLoading}
@@ -652,6 +857,7 @@ const Checkout = () => {
           <Newsletter />
         </div>
       </Container>
+      {renderPaymentModal()}
     </div>
   )
 }

@@ -64,3 +64,89 @@
   font-size: 0.875rem;
   margin-top: 4px;
 }
+
+/* Motion System */
+:root {
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-fast: 180ms;
+  --motion-medium: 280ms;
+  --motion-lift: -3px;
+}
+
+.main-content :is(button, .btn, a[class*='btn']) {
+  transition:
+    transform var(--motion-fast) var(--motion-ease),
+    box-shadow var(--motion-medium) var(--motion-ease),
+    filter var(--motion-fast) var(--motion-ease);
+  will-change: transform;
+}
+
+.main-content :is(button, .btn, a[class*='btn']):hover {
+  transform: translateY(var(--motion-lift));
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.18);
+  filter: saturate(1.03);
+}
+
+.main-content :is(button, .btn, a[class*='btn']):active {
+  transform: translateY(0);
+}
+
+.main-content :is(.card, .faq-item, .region-card, .haircut-card, .testimonial-item, .product-card) {
+  transition:
+    transform var(--motion-medium) var(--motion-ease),
+    box-shadow var(--motion-medium) var(--motion-ease);
+  will-change: transform;
+}
+
+.main-content :is(.card, .faq-item, .region-card, .haircut-card, .testimonial-item, .product-card):hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.14);
+}
+
+.main-content img {
+  transition: transform 380ms var(--motion-ease), filter 260ms var(--motion-ease);
+}
+
+.main-content :is(.card, .thumbnail-item, .main-image, .slider-slide, .hmc-placeholder):hover img {
+  transform: scale(1.04);
+}
+
+.main-content .slider-slide {
+  transition: opacity 280ms var(--motion-ease), transform 280ms var(--motion-ease);
+}
+
+.main-content .slider-slide.active {
+  transform: translateX(0);
+}
+
+.main-content .slider-slide:not(.active) {
+  transform: translateX(8px);
+}
+
+/* Scroll reveal */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 520ms var(--motion-ease), transform 520ms var(--motion-ease);
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main-content :is(button, .btn, a[class*='btn']),
+  .main-content :is(.card, .faq-item, .region-card, .haircut-card, .testimonial-item, .product-card),
+  .main-content img,
+  .main-content .slider-slide,
+  .scroll-reveal {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .scroll-reveal {
+    opacity: 1 !important;
+  }
+}

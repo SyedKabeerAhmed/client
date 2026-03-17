@@ -23,7 +23,7 @@ const Navigation = () => {
   const dropdownRef = useRef(null)
 
   // Check if we're on a dashboard route
-  const isDashboardRoute = 
+  const isDashboardRoute =
     location.pathname.startsWith('/dashboard') ||
     location.pathname.startsWith('/admin/dashboard') ||
     location.pathname.startsWith('/subadmin/dashboard') ||
@@ -144,44 +144,44 @@ const Navigation = () => {
               </Link>
             </div>
           </Col>
-              <Col xs={isMobileNav ? 2 : 4} className="text-end">
-                <div className="user-actions">
-                  {/* Hide cart in dashboard routes */}
-                  {!isDashboardRoute && (
-                    <Link to="/cart" className="shopping-cart me-3">
-                      <FontAwesomeIcon icon={faShoppingCart} />
-                      {loading ? (
-                        <span className="cart-loading"></span>
-                      ) : itemCount > 0 ? (
-                        <span className="cart-count">{itemCount}</span>
-                      ) : null}
-                    </Link>
-                  )}
-                  
-                  {isAuthenticated ? (
-                    !isMobileNav ? userDropdown : null
-                  ) : (
-                    <Link
-                      to="/login"
-                      className="login-register"
-                    >
-                      {t('common.loginRegister')}
-                    </Link>
-                  )}
-                </div>
-              </Col>
+          <Col xs={isMobileNav ? 2 : 4} className="text-end">
+            <div className="user-actions">
+              {/* Hide cart in dashboard routes */}
+              {!isDashboardRoute && (
+                <Link to="/cart" className="shopping-cart me-3">
+                  <FontAwesomeIcon icon={faShoppingCart} />
+                  {loading ? (
+                    <span className="cart-loading"></span>
+                  ) : itemCount > 0 ? (
+                    <span className="cart-count">{itemCount}</span>
+                  ) : null}
+                </Link>
+              )}
+
+              {isAuthenticated ? (
+                !isMobileNav ? userDropdown : null
+              ) : (
+                <Link
+                  to="/login"
+                  className="login-register"
+                >
+                  {t('common.loginRegister')}
+                </Link>
+              )}
+            </div>
+          </Col>
         </Row>
-        
+
         {/* Bottom Row - Navigation Menu */}
         <Row>
           <Col>
             <Navbar expand="lg" className="custom-navbar" expanded={expanded}>
-              <Navbar.Toggle 
-                aria-controls="basic-navbar-nav" 
+              <Navbar.Toggle
+                aria-controls="basic-navbar-nav"
                 onClick={() => setExpanded(expanded ? false : true)}
                 className="custom-toggler"
               />
-              
+
               <Navbar.Collapse id="basic-navbar-nav">
                 {isMobileNav ? (
                   <div className="mobile-language-currency">
@@ -194,110 +194,143 @@ const Navigation = () => {
                   </div>
                 ) : null}
                 <Nav className="mx-auto">
-                      <NavDropdown
-                        title={<span>{t('nav.hairSystems')}</span>}
-                        id="hair-systems-dropdown"
-                      >
-                        <NavDropdown.Item
-                          as={Link}
-                          to="/shop?category=hair-systems"
-                        >
-                          {t('nav.allHairSystems')}
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item
-                          as={Link}
-                          to="/shop?category=skin"
-                        >
-                          {t('nav.skinSystems')}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          as={Link}
-                          to="/shop?category=lace"
-                        >
-                          {t('nav.laceSystems')}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          as={Link}
-                          to="/shop?category=hybrid"
-                        >
-                          {t('nav.hybridSystems')}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          as={Link}
-                          to="/shop?category=mono"
-                        >
-                          {t('nav.monoSystems')}
-                        </NavDropdown.Item>
-                      </NavDropdown>
-                  
-                      <NavDropdown
-                        title={<span>{t('nav.accessories')}</span>}
-                        id="accessories-dropdown"
-                      >
-                        <NavDropdown.Item
-                          as={Link}
-                          to="/shop?category=accessories"
-                        >
-                          {t('nav.allAccessories')}
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item
-                          as={Link}
-                          to="/shop?category=adhesive"
-                        >
-                          {t('nav.adhesives')}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          as={Link}
-                          to="/shop?category=glue"
-                        >
-                          {t('nav.glues')}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          as={Link}
-                          to="/shop?category=tools"
-                        >
-                          {t('nav.tools')}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          as={Link}
-                          to="/shop?category=care-products"
-                        >
-                          {t('nav.careProducts')}
-                        </NavDropdown.Item>
-                      </NavDropdown>
-                  
-                      <Nav.Link
-                        as={Link}
-                        to="/shop"
-                      >
-                        {t('common.shop')}
-                      </Nav.Link>
-                      <Nav.Link
-                        as={Link}
-                        to="/beginners-guide"
-                      >
-                        {t('nav.beginnersGuide')}
-                      </Nav.Link>
-                      <Nav.Link
-                        as={Link}
-                        to="/custom-hair-system"
-                      >
-                        {t('nav.customHairSystem')}
-                      </Nav.Link>
-                      <Nav.Link
-                        as={Link}
-                        to="/about"
-                      >
-                        {t('nav.aboutUs')}
-                      </Nav.Link>
-                      <Nav.Link
-                        as={Link}
-                        to="/help"
-                      >
-                        {t('nav.help')}
-                      </Nav.Link>
+                  <NavDropdown
+                    title={<span>{t('nav.hairSystems')}</span>}
+                    id="hair-systems-dropdown"
+                    className="hair-systems-dropdown"
+                  >
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/shop?category=hair-systems"
+                      className="all-hair-systems-item"
+                      active={true}
+                    >
+                      {t('nav.allHairSystems')}
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Header className="menu-heading">
+                      {t('nav.chooseBy')}
+                    </NavDropdown.Header>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/shop?filter=base-type"
+                    >
+                      {t('nav.byBaseType')}
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/shop?filter=hairstyle"
+                    >
+                      {t('nav.byHairstyle')}
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/shop?filter=lifestyle"
+                    >
+                      {t('nav.byLifestyle')}
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/shop?filter=hair-loss-areas"
+                    >
+                      {t('nav.byHairLossAreas')}
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/consultation"
+                    >
+                      {t('nav.byConsultation')}
+                    </NavDropdown.Item>
+                  </NavDropdown>
+
+                  <NavDropdown
+                    title={<span>{t('nav.accessories')}</span>}
+                    id="accessories-dropdown"
+                  >
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/shop?category=accessories"
+                    >
+                      {t('nav.allAccessories')}
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/shop?category=adhesive"
+                    >
+                      {t('nav.adhesives')}
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/shop?category=glue"
+                    >
+                      {t('nav.glues')}
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/shop?category=tools"
+                    >
+                      {t('nav.tools')}
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/shop?category=care-products"
+                    >
+                      {t('nav.careProducts')}
+                    </NavDropdown.Item>
+                  </NavDropdown>
+
+                  <Nav.Link
+                    as={Link}
+                    to="/shop"
+                  >
+                    {t('common.shop')}
+                  </Nav.Link>
+                  <NavDropdown
+                    title={<span>{t('nav.beginnersGuide')}</span>}
+                    id="beginners-guide-dropdown"
+                    className="beginners-guide-dropdown"
+                  >
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/beginners-guide"
+                      active={location.pathname === '/beginners-guide'}
+                    >
+                      {t('nav.beginnersGuide')}
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/help-me-choose"
+                      active={location.pathname === '/help-me-choose'}
+                    >
+                      Help Me Choose
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/book-appointment"
+                      active={location.pathname === '/book-appointment'}
+                    >
+                      Book Appointment
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                  <Nav.Link
+                    as={Link}
+                    to="/custom-hair-system"
+                  >
+                    {t('nav.customHairSystem')}
+                  </Nav.Link>
+                  <Nav.Link
+                    as={Link}
+                    to="/about"
+                  >
+                    {t('nav.aboutUs')}
+                  </Nav.Link>
+                  <Nav.Link
+                    as={Link}
+                    to="/help"
+                  >
+                    {t('nav.help')}
+                  </Nav.Link>
                 </Nav>
               </Navbar.Collapse>
             </Navbar>

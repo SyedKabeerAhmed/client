@@ -1,10 +1,12 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 import Banner from '../components/Banner'
 import FeaturesBar from '../components/FeaturesBar'
 import StylesSection from '../components/StylesSection'
 import ProductSection from '../components/ProductSection'
 import Newsletter from '../components/Newsletter'
+import './BeginnersGuide.css'
 
 const BeginnersGuide = () => {
   const { t } = useTranslation()
@@ -77,6 +79,14 @@ const BeginnersGuide = () => {
         beginnersGuide={true}
         buttonText={t('beginnersGuide.exploreMore')}
       />
+
+      <section className="beginners-cta-section">
+        <div className="beginners-cta-container">
+          <h2>Need help choosing?</h2>
+          <p>Book a free consultation with our team and get a personalized recommendation.</p>
+          <Link to="/book-appointment" className="beginners-cta-btn">Book Appointment</Link>
+        </div>
+      </section>
       
       <Newsletter />
     </div>

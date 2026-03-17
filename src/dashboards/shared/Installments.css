@@ -1,0 +1,81 @@
+/* Installments Shared Styles */
+.installment-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 1.5rem;
+}
+
+.installment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.installment-progress .progress {
+    height: 12px;
+    border-radius: 6px;
+    background-color: #f0f2f5;
+}
+
+.installment-progress .progress-bar {
+    background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+    border-radius: 6px;
+}
+
+.schedule-table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.schedule-table thead {
+    background-color: #f8f9fa;
+    color: #1e3a8a;
+    font-weight: 600;
+}
+
+.schedule-table tr.table-success {
+    background-color: rgba(40, 167, 69, 0.05) !important;
+}
+
+.badge-installment {
+    padding: 0.5em 0.8em;
+    border-radius: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+}
+
+.alert-inventory {
+    border-left: 4px solid #ffc107;
+    background: #fffbef;
+}
+
+.action-btn-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.summary-card {
+    background: linear-gradient(135deg, #fff9e6 0%, #ffffff 100%);
+    border: 1px solid #ffeeba;
+}
+
+/* Animations */
+.fade-up {
+    animation: fadeUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

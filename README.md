@@ -39,6 +39,7 @@ Create a `.env` file in the root directory:
 
 ```env
 VITE_API_BASE_URL=http://localhost:5000
+VITE_CALENDLY_EVENT_URL=https://calendly.com/your-username/your-event
 ```
 
 ### 2. Backend Configuration
@@ -131,6 +132,7 @@ export const API_CONFIG = {
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `VITE_API_BASE_URL` | Backend API base URL | `http://localhost:5000` |
+| `VITE_CALENDLY_EVENT_URL` | Calendly event URL for appointment booking | `https://calendly.com/your-username/your-event` |
 
 ## 🎨 Styling
 

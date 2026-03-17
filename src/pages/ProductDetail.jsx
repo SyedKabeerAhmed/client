@@ -17,7 +17,8 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  
+  const [quantity, setQuantity] = useState(1) // Default quantity 1
+
   // Customization state
   const [customization, setCustomization] = useState({
     hairColor: '',
@@ -29,13 +30,13 @@ const ProductDetail = () => {
     stockBaseSizeId: '',
     stockBaseSizeLabel: ''
   })
-  
+
   // Modal states
   const [showSizeModal, setShowSizeModal] = useState(false)
   const [showHaircutModal, setShowHaircutModal] = useState(false)
   const [showImageUploadModal, setShowImageUploadModal] = useState(false)
   const [showHairLengthModal, setShowHairLengthModal] = useState(false)
-  
+
   // Hair length stepper states
   const [currentStep, setCurrentStep] = useState(0)
   const [hairLengths, setHairLengths] = useState({
@@ -46,18 +47,18 @@ const ProductDetail = () => {
     temples: '1.00',
     sides: '1.00'
   })
-  
+
   // Image upload states
   const [uploadedImages, setUploadedImages] = useState([])
   const [uploadError, setUploadError] = useState('')
   const [isUploading, setIsUploading] = useState(false)
-  
+
   // Accordion states
   const [activeAccordion, setActiveAccordion] = useState('hairColor')
-  
+
   // Tab states
   const [activeTab, setActiveTab] = useState('overview')
-  
+
   // Review form states
   const [reviewForm, setReviewForm] = useState({
     rating: 0,
@@ -72,25 +73,28 @@ const ProductDetail = () => {
   const [addToCartSuccess, setAddToCartSuccess] = useState('')
   const [addToCartError, setAddToCartError] = useState('')
 
+  // Selected image state for gallery
+  const [selectedImage, setSelectedImage] = useState(0)
+
   // Price calculation
   const calculateTotalPrice = () => {
     if (!product) return 0
-    
+
     // Base product price - use user-specific pricing
     const basePrice = getBasePriceForUser(product.pricing, user)
-    
+
     let totalPrice = basePrice
-    
+
     // Add haircut price if selected
     if (customization.haircut && customization.haircut !== 'None') {
-      totalPrice += 35.49
+      totalPrice += product.hairCut?.price || 35.49
     }
-    
+
     // Add cut to size price if selected
     if (customization.cutToSize) {
       totalPrice += 13.31
     }
-    
+
     return totalPrice
   }
 
@@ -114,9 +118,9 @@ const ProductDetail = () => {
     try {
       setLoading(true)
       setError('')
-      
+
       const response = await productService.getProductById(id)
-      
+
       if (response.success && response.data) {
         setProduct(response.data.product)
       } else {
@@ -285,7 +289,7 @@ const ProductDetail = () => {
 
   const processImageFiles = (files) => {
     setUploadError('')
-    
+
     // Validate file count - only allow 1 image
     if (uploadedImages.length > 0) {
       setUploadError('Only 1 image is allowed. Please remove the existing image first.')
@@ -331,7 +335,7 @@ const ProductDetail = () => {
       setUploadError('Please upload an image')
       return
     }
-    
+
     // Clear all previous haircut-related data and set upload option
     setCustomization(prev => {
       const newCustomization = {
@@ -363,12 +367,12 @@ const ProductDetail = () => {
 
     // Validate mandatory selections
     const validationErrors = []
-    
+
     // Validate hair color
     if (!customization.hairColor || customization.hairColor.trim() === '') {
       validationErrors.push('Hair Color')
     }
-    
+
     // Validate haircut - 'None' is a valid option
     if (!customization.haircut || customization.haircut.trim() === '') {
       validationErrors.push('Haircut')
@@ -382,7 +386,7 @@ const ProductDetail = () => {
         validationErrors.push('Haircut (select a hairstyle)')
       }
     }
-    
+
     // Validate cut to size - must select either "No" (false) or "Yes" (true with size)
     // cutToSize can be false (No) or true (Yes with size), but must be explicitly set
     if (customization.cutToSize === undefined || customization.cutToSize === null) {
@@ -392,8 +396,8 @@ const ProductDetail = () => {
     }
 
     // Validate Stock Base Size for hair systems
-    const isHairSystem = product?.mainCategorySlug === 'hair-systems' && 
-                         ['Skin', 'Mono', 'Lace', 'Hybrid'].includes(product?.subCategory);
+    const isHairSystem = product?.mainCategorySlug === 'hair-systems' &&
+      ['Skin', 'Mono', 'Lace', 'Hybrid'].includes(product?.subCategory);
     if (isHairSystem && (!customization.stockBaseSizeId || customization.stockBaseSizeId.trim() === '')) {
       validationErrors.push('Stock Base Size')
     }
@@ -407,20 +411,20 @@ const ProductDetail = () => {
       setAddToCartLoading(true)
       setAddToCartSuccess('')
       setAddToCartError('')
-      
+
       const totalPrice = calculateTotalPrice()
       // Include stockBaseSizeId and stockBaseSizeLabel for hair systems
-      await addToCart(id, customization, 1, totalPrice, {
+      await addToCart(id, customization, quantity, totalPrice, {
         stockBaseSizeId: customization.stockBaseSizeId,
         stockBaseSizeLabel: customization.stockBaseSizeLabel,
         isCustomHairSystem: false
       })
-      
+
       setAddToCartSuccess('Product added to cart successfully!')
       setTimeout(() => {
         setAddToCartSuccess('')
       }, 3000)
-      
+
     } catch (error) {
       console.error('Failed to add to cart:', error)
       const errorMessage = error.message || 'Failed to add product to cart'
@@ -437,7 +441,7 @@ const ProductDetail = () => {
   // Handle review form submission
   const handleReviewSubmit = async (e) => {
     e.preventDefault()
-    
+
     if (!isAuthenticated) {
       setReviewError('Please login to submit a review')
       return
@@ -472,10 +476,10 @@ const ProductDetail = () => {
       if (response.success) {
         setReviewSuccess('Review submitted successfully!')
         setReviewForm({ rating: 0, reviewDescription: '' })
-        
+
         // Reload product to get updated reviews
         await loadProduct()
-        
+
         // Clear success message after 3 seconds
         setTimeout(() => {
           setReviewSuccess('')
@@ -506,9 +510,9 @@ const ProductDetail = () => {
     const stars = []
     for (let i = 0; i < 5; i++) {
       stars.push(
-        <FontAwesomeIcon 
-          key={i} 
-          icon={faStar} 
+        <FontAwesomeIcon
+          key={i}
+          icon={faStar}
           className={`star ${i < rating ? 'filled' : ''}`}
         />
       )
@@ -560,8 +564,22 @@ const ProductDetail = () => {
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
-                  <a href="/shop">Mono Hair Type</a>
+                  <a href="/shop">Shop</a>
                 </li>
+                {product.mainCategory && (
+                  <li className="breadcrumb-item">
+                    <a href={`/shop?category=${product.mainCategorySlug || 'hair-systems'}`}>
+                      {product.mainCategory.name}
+                    </a>
+                  </li>
+                )}
+                {product.subCategory && (
+                  <li className="breadcrumb-item">
+                    <a href={`/shop?category=${product.mainCategorySlug || 'hair-systems'}&subcategory=${product.subCategory.toLowerCase()}`}>
+                      {product.subCategory}
+                    </a>
+                  </li>
+                )}
                 <li className="breadcrumb-item active" aria-current="page">
                   {product.productName}
                 </li>
@@ -574,8 +592,8 @@ const ProductDetail = () => {
             <Col lg={6}>
               <div className="product-images">
                 <div className="main-image">
-                  <img 
-                    src={product.productImages?.[0] || '/src/assets/images/image_108.png'} 
+                  <img
+                    src={product.productImages?.[selectedImage] || '/src/assets/images/image_108.png'}
                     alt={product.productName}
                     className="product-main-image"
                     onError={(e) => {
@@ -593,24 +611,30 @@ const ProductDetail = () => {
                     </div>
                   )}
                 </div>
-                
+
                 {/* Thumbnail Gallery */}
                 <div className="thumbnail-gallery">
-                  <div className="thumbnail-item active">
-                    <img src={product.productImages?.[0] || '/src/assets/images/image_108.png'} alt="Main view" />
-                  </div>
-                  <div className="thumbnail-item">
-                    <img src="/src/assets/images/image_108.png" alt="Base view" />
-                  </div>
-                  <div className="thumbnail-item">
-                    <img src="/src/assets/images/image_108.png" alt="Style 1" />
-                  </div>
-                  <div className="thumbnail-item">
-                    <img src="/src/assets/images/image_108.png" alt="Style 2" />
-                  </div>
-                  <div className="thumbnail-item">
-                    <img src="/src/assets/images/image_108.png" alt="Style 3" />
-                  </div>
+                  {product.productImages && product.productImages.length > 0 ? (
+                    product.productImages.map((image, index) => (
+                      <div
+                        key={index}
+                        className={`thumbnail-item ${selectedImage === index ? 'active' : ''}`}
+                        onClick={() => setSelectedImage(index)}
+                      >
+                        <img
+                          src={image}
+                          alt={`${product.productName} - ${index + 1}`}
+                          onError={(e) => {
+                            e.target.src = '/src/assets/images/image_108.png'
+                          }}
+                        />
+                      </div>
+                    ))
+                  ) : (
+                    <div className="thumbnail-item active">
+                      <img src="/src/assets/images/image_108.png" alt="Placeholder" />
+                    </div>
+                  )}
                 </div>
               </div>
             </Col>
@@ -620,7 +644,7 @@ const ProductDetail = () => {
               <div className="product-info">
                 <h1 className="product-title">{product.productName || 'Neo Hair System'}</h1>
                 <p className="product-subtitle">{product.productShortTitle || 'Premium Antimicrobial Hair Systems for Long Lasting Comfort'}</p>
-                
+
                 {/* Product Price */}
                 <div className="product-price-section">
                   <div className="price-main">
@@ -679,7 +703,7 @@ const ProductDetail = () => {
               <Card className="customization-card">
                 <Card.Body>
                   <h4 className="customization-title mb-4">Customize Your Hair System</h4>
-                  
+
                   <Accordion activeKey={activeAccordion} onSelect={(e) => setActiveAccordion(e)}>
                     {/* Hair_Color */}
                     <Accordion.Item eventKey="hairColor">
@@ -705,15 +729,15 @@ const ProductDetail = () => {
                             ).map(([category, colors]) => (
                               <div key={category} className="color-category">
                                 <h6>{category}</h6>
-                              <div className="color-grid">
+                                <div className="color-grid">
                                   {colors.map((color) => (
-                                    <div 
+                                    <div
                                       key={color._id}
                                       className={`color-option ${customization.hairColor === color.hair_color ? 'selected' : ''}`}
                                       onClick={() => handleCustomizationChange('hairColor', color.hair_color)}
                                     >
                                       <div className="color-circle-container">
-                                        <img 
+                                        <img
                                           src={`/src/assets/images/Hair_Color/all_colors/${color.hair_color.replace('#', '')}.png`}
                                           alt={color.hair_color}
                                           className="color-circle"
@@ -722,21 +746,21 @@ const ProductDetail = () => {
                                             e.target.nextSibling.style.display = 'block'
                                           }}
                                         />
-                                        <div 
+                                        <div
                                           className={`color-circle-fallback color-${color.hair_color.replace('#', '').toLowerCase()}`}
-                                          style={{display: 'none'}}
+                                          style={{ display: 'none' }}
                                         ></div>
                                       </div>
                                       <span className="color-code">{color.hair_color}</span>
                                       <span className="color-subcategory">{color.subcategory}</span>
-                                      <span className="color-stock">Stock: {color.qty_total}</span>
-                                  </div>
-                                ))}
+                                      <span className="color-stock">{color.qty_total > 0 ? 'In stock' : 'Out of stock'}</span>
+                                    </div>
+                                  ))}
+                                </div>
                               </div>
-                                  </div>
-                                ))}
+                            ))}
                           </div>
-                          
+
                           <div className="color-help-text">
                             <small>Need help choosing a color? <a href="#">Find the perfect match for your hair color.</a></small>
                           </div>
@@ -744,6 +768,7 @@ const ProductDetail = () => {
                       </Accordion.Body>
                     </Accordion.Item>
 
+                    {/* Haircut */}
                     {/* Haircut */}
                     <Accordion.Item eventKey="haircut">
                       <Accordion.Header>
@@ -768,37 +793,45 @@ const ProductDetail = () => {
                       </Accordion.Header>
                       <Accordion.Body>
                         <div className="haircut-options">
-                           <div className="haircut-option" onClick={() => setShowHaircutModal(true)}>
-                             <span>Choose your hairstyles</span>
-                             <span className="price">$35.49</span>
-                             <FontAwesomeIcon icon={faChevronRight} />
-                           </div>
+                          <div className="haircut-option" onClick={() => setShowHaircutModal(true)}>
+                            <span>Choose your hairstyles</span>
+                            <span className="price">${product.hairCut?.price || '35.49'}</span>
+                            <FontAwesomeIcon icon={faChevronRight} />
+                          </div>
+
                           <div className="haircut-option" onClick={handleHairLengthOpen}>
                             <span>I want to order my hair length</span>
-                            <span className="price">$35.49</span>
+                            <span className="price">${product.hairCut?.price || '35.49'}</span>
                             <FontAwesomeIcon icon={faChevronRight} />
                           </div>
-                          <div className="haircut-option" onClick={() => {
-                            setCustomization(prev => {
-                              const newCustomization = {
-                                ...prev,
-                                haircut: "I'll send email to hair store",
-                                uploadedImages: []
-                              }
-                              delete newCustomization.hairLengths
-                              delete newCustomization.selectedHairstyle
-                              return newCustomization
-                            })
-                          }}>
-                            <span>I'll send email to hair store</span>
-                            <span className="price">$35.49</span>
-                            <FontAwesomeIcon icon={faChevronRight} />
-                          </div>
-                          <div className="haircut-option" onClick={handleImageUpload}>
-                            <span>Upload hairstyle images you want</span>
-                            <span className="price">$35.49</span>
-                            <FontAwesomeIcon icon={faChevronRight} />
-                          </div>
+
+                          {product.hairCut?.sendEmailToHairStore && (
+                            <div className="haircut-option" onClick={() => {
+                              setCustomization(prev => {
+                                const newCustomization = {
+                                  ...prev,
+                                  haircut: "I'll send email to hair store",
+                                  uploadedImages: []
+                                }
+                                delete newCustomization.hairLengths
+                                delete newCustomization.selectedHairstyle
+                                return newCustomization
+                              })
+                            }}>
+                              <span>I'll send email to hair store</span>
+                              <span className="price">${product.hairCut?.price || '35.49'}</span>
+                              <FontAwesomeIcon icon={faChevronRight} />
+                            </div>
+                          )}
+
+                          {product.hairCut?.uploadImageHairStyle && (
+                            <div className="haircut-option" onClick={handleImageUpload}>
+                              <span>Upload hairstyle images you want</span>
+                              <span className="price">${product.hairCut?.price || '35.49'}</span>
+                              <FontAwesomeIcon icon={faChevronRight} />
+                            </div>
+                          )}
+
                           <div className="haircut-option" onClick={() => {
                             setCustomization(prev => {
                               const newCustomization = {
@@ -814,7 +847,7 @@ const ProductDetail = () => {
                             <span>None</span>
                           </div>
                         </div>
-                        
+
                         {/* Display Selected Hair Lengths */}
                         {customization.hairLengths && (
                           <div className="selected-hair-lengths">
@@ -839,109 +872,118 @@ const ProductDetail = () => {
                     </Accordion.Item>
 
                     {/* Stock Base Size - Only for hair systems */}
-                    {product?.mainCategorySlug === 'hair-systems' && 
-                     ['Skin', 'Mono', 'Lace', 'Hybrid'].includes(product?.subCategory) && 
-                     product?.baseSizeOptions && product.baseSizeOptions.length > 0 && (
-                      <Accordion.Item eventKey="stockBaseSize">
+                    {product?.mainCategorySlug === 'hair-systems' &&
+                      ['Skin', 'Mono', 'Lace', 'Hybrid'].includes(product?.subCategory) &&
+                      product?.baseSizeOptions && product.baseSizeOptions.length > 0 && (
+                        <Accordion.Item eventKey="stockBaseSize">
+                          <Accordion.Header>
+                            <div className="accordion-header-content">
+                              <span>Stock Base Size</span>
+                              {customization.stockBaseSizeLabel && (
+                                <span className="selected-option">
+                                  {customization.stockBaseSizeLabel}
+                                  {(() => {
+                                    const selectedSize = product.baseSizeOptions.find(s => s.id === customization.stockBaseSizeId);
+                                    return selectedSize && selectedSize.availableQuantity > 0
+                                      ? ' (In stock)'
+                                      : ' (Out of stock)';
+                                  })()}
+                                </span>
+                              )}
+                            </div>
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <div className="base-size-options">
+                              {product.baseSizeOptions.map((size) => {
+                                const isSelected = customization.stockBaseSizeId === size.id;
+                                const isOutOfStock = size.availableQuantity === 0;
+
+                                return (
+                                  <div
+                                    key={size.id}
+                                    className={`base-size-option ${isSelected ? 'selected' : ''} ${isOutOfStock ? 'out-of-stock' : ''}`}
+                                    onClick={() => {
+                                      if (!isOutOfStock) {
+                                        handleCustomizationChange('stockBaseSizeId', size.id);
+                                        handleCustomizationChange('stockBaseSizeLabel', size.label);
+                                      }
+                                    }}
+                                  >
+                                    <div className="base-size-info">
+                                      <span className="base-size-label">{size.label}</span>
+                                      <span className={`base-size-stock ${isOutOfStock ? 'out-of-stock-text' : ''}`}>
+                                        {isOutOfStock ? 'Out of stock' : 'In stock'}
+                                      </span>
+                                    </div>
+                                    {isSelected && !isOutOfStock && (
+                                      <FontAwesomeIcon icon={faCheck} className="ms-2" />
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                            <div className="info-note">
+                              <small>Please select a base size. This determines the physical dimensions of your hair system base.</small>
+                            </div>
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      )}
+
+
+                    {/* Cut to Size */}
+                    {/* Cut to Size */}
+                    {(product.cutToSize?.cutByStylist || product.cutToSize?.cutToMySize) && (
+                      <Accordion.Item eventKey="cutToSize">
                         <Accordion.Header>
                           <div className="accordion-header-content">
-                            <span>Stock Base Size</span>
-                            {customization.stockBaseSizeLabel && (
+                            <span>Cut to size</span>
+                            {customization.cutToSize === true && customization.size && (
                               <span className="selected-option">
-                                {customization.stockBaseSizeLabel}
-                                {(() => {
-                                  const selectedSize = product.baseSizeOptions.find(s => s.id === customization.stockBaseSizeId);
-                                  return selectedSize && selectedSize.availableQuantity > 0 
-                                    ? ` (${selectedSize.availableQuantity} available)`
-                                    : ' (Out of stock)';
-                                })()}
+                                {customization.size} inch = {sizeOptions.find(opt => opt.inch === customization.size)?.cm} cm
                               </span>
+                            )}
+                            {customization.cutToSize === true && !customization.size && (
+                              <span className="selected-option">Yes, cut to my size</span>
+                            )}
+                            {customization.cutToSize === false && (
+                              <span className="selected-option">No I will have it cut by my stylist</span>
                             )}
                           </div>
                         </Accordion.Header>
                         <Accordion.Body>
-                          <div className="base-size-options">
-                            {product.baseSizeOptions.map((size) => {
-                              const isSelected = customization.stockBaseSizeId === size.id;
-                              const isOutOfStock = size.availableQuantity === 0;
-                              
-                              return (
-                                <div
-                                  key={size.id}
-                                  className={`base-size-option ${isSelected ? 'selected' : ''} ${isOutOfStock ? 'out-of-stock' : ''}`}
-                                  onClick={() => {
-                                    if (!isOutOfStock) {
-                                      handleCustomizationChange('stockBaseSizeId', size.id);
-                                      handleCustomizationChange('stockBaseSizeLabel', size.label);
-                                    }
-                                  }}
-                                >
-                                  <div className="base-size-info">
-                                    <span className="base-size-label">{size.label}</span>
-                                    <span className={`base-size-stock ${isOutOfStock ? 'out-of-stock-text' : ''}`}>
-                                      {isOutOfStock ? 'Out of stock' : `${size.availableQuantity} available`}
-                                    </span>
-                                  </div>
-                                  {isSelected && !isOutOfStock && (
-                                    <FontAwesomeIcon icon={faCheck} className="ms-2" />
-                                  )}
-                                </div>
-                              );
-                            })}
+                          <div className="cut-to-size-options">
+                            {product.cutToSize?.cutByStylist && (
+                              <div
+                                className={`cut-option ${customization.cutToSize === false ? 'selected' : ''}`}
+                                onClick={() => {
+                                  handleCustomizationChange('cutToSize', false)
+                                  handleCustomizationChange('size', '') // Clear size when selecting "No"
+                                }}
+                              >
+                                <span>No I will have it cut by my stylist</span>
+                                {customization.cutToSize === false && (
+                                  <FontAwesomeIcon icon={faCheck} className="ms-2" />
+                                )}
+                              </div>
+                            )}
+
+                            {product.cutToSize?.cutToMySize && (
+                              <div
+                                className={`cut-option ${customization.cutToSize === true ? 'selected' : ''}`}
+                                onClick={() => setShowSizeModal(true)}
+                              >
+                                <span>Yes, cut to my size</span>
+                                <span className="price">$13.31</span>
+                                <FontAwesomeIcon icon={faChevronRight} />
+                              </div>
+                            )}
                           </div>
                           <div className="info-note">
-                            <small>Please select a base size. This determines the physical dimensions of your hair system base.</small>
+                            <small>Orders requiring our cutting services will also have the excess front edge cut. We require an additional 2-3 days for shipping on these orders.</small>
                           </div>
                         </Accordion.Body>
                       </Accordion.Item>
                     )}
-
-                    {/* Cut to Size */}
-                    <Accordion.Item eventKey="cutToSize">
-                      <Accordion.Header>
-                        <div className="accordion-header-content">
-                          <span>Cut to size</span>
-                          {customization.cutToSize === true && customization.size && (
-                            <span className="selected-option">
-                              {customization.size} inch = {sizeOptions.find(opt => opt.inch === customization.size)?.cm} cm
-                            </span>
-                          )}
-                          {customization.cutToSize === true && !customization.size && (
-                            <span className="selected-option">Yes, cut to my size</span>
-                          )}
-                          {customization.cutToSize === false && (
-                            <span className="selected-option">No I will have it cut by my stylist</span>
-                          )}
-                        </div>
-                      </Accordion.Header>
-                      <Accordion.Body>
-                        <div className="cut-to-size-options">
-                          <div 
-                            className={`cut-option ${customization.cutToSize === false ? 'selected' : ''}`} 
-                            onClick={() => {
-                              handleCustomizationChange('cutToSize', false)
-                              handleCustomizationChange('size', '') // Clear size when selecting "No"
-                            }}
-                          >
-                            <span>No I will have it cut by my stylist</span>
-                            {customization.cutToSize === false && (
-                              <FontAwesomeIcon icon={faCheck} className="ms-2" />
-                            )}
-                          </div>
-                           <div 
-                             className={`cut-option ${customization.cutToSize === true ? 'selected' : ''}`} 
-                             onClick={() => setShowSizeModal(true)}
-                           >
-                             <span>Yes, cut to my size</span>
-                             <span className="price">$13.31</span>
-                             <FontAwesomeIcon icon={faChevronRight} />
-                           </div>
-                        </div>
-                        <div className="info-note">
-                          <small>Orders requiring our cutting services will also have the excess front edge cut. We require an additional 2-3 days for shipping on these orders.</small>
-                        </div>
-                      </Accordion.Body>
-                    </Accordion.Item>
 
                     {/* Additional Information */}
                     <Accordion.Item eventKey="additionalInfo">
@@ -983,9 +1025,9 @@ const ProductDetail = () => {
                   {/* Action Buttons */}
                   <div className="submit-section mt-4">
                     <div className="action-buttons">
-                    <Button 
-                      variant="primary" 
-                        size="lg" 
+                      <Button
+                        variant="primary"
+                        size="lg"
                         className="add-to-cart-button"
                         onClick={handleAddToCart}
                         disabled={addToCartLoading || cartLoading}
@@ -1016,20 +1058,20 @@ const ProductDetail = () => {
                 <Card.Body>
                   <div className="specifications-tabs">
                     <div className="tab-buttons">
-                      <button 
+                      <button
                         className={`tab-button ${activeTab === 'overview' ? 'active' : ''}`}
                         onClick={() => setActiveTab('overview')}
                       >
                         Overview
                       </button>
-                      <button 
+                      <button
                         className={`tab-button ${activeTab === 'reviews' ? 'active' : ''}`}
                         onClick={() => setActiveTab('reviews')}
                       >
                         Reviews ({product.productReviews?.totalReviewers || 0})
                       </button>
                     </div>
-                    
+
                     <div className="tab-content">
                       {/* Overview Tab */}
                       {activeTab === 'overview' && (
@@ -1084,12 +1126,12 @@ const ProductDetail = () => {
                           </div>
                         </div>
                       )}
-                      
+
                       {/* Reviews Tab */}
                       {activeTab === 'reviews' && (
                         <div className="reviews-section">
                           <h4 className="reviews-title mb-4">Product Reviews</h4>
-                          
+
                           {product.productReviews ? (
                             <>
                               {/* Rating Summary */}
@@ -1110,12 +1152,12 @@ const ProductDetail = () => {
                                     {[5, 4, 3, 2, 1].map((star) => {
                                       const count = product.productReviews.reviews?.filter(review => review.rating === star).length || 0;
                                       const percentage = product.productReviews.totalReviewers > 0 ? (count / product.productReviews.totalReviewers) * 100 : 0;
-                                      
+
                                       return (
                                         <div key={star} className="rating-bar">
                                           <span className="rating-label">{star} star{star !== 1 ? 's' : ''}</span>
                                           <div className="rating-bar-container">
-                                            <div className="rating-bar-fill" style={{width: `${percentage}%`}}></div>
+                                            <div className="rating-bar-fill" style={{ width: `${percentage}%` }}></div>
                                           </div>
                                           <span className="rating-count">{count}</span>
                                         </div>
@@ -1124,7 +1166,7 @@ const ProductDetail = () => {
                                   </div>
                                 </div>
                               </div>
-                              
+
                               {/* Individual Reviews */}
                               <div className="individual-reviews">
                                 {product.productReviews.reviews && product.productReviews.reviews.length > 0 ? (
@@ -1161,17 +1203,17 @@ const ProductDetail = () => {
                                   </div>
                                 )}
                               </div>
-                              
+
                               {/* Add Review Form - Only for logged in users */}
                               {!authLoading && isAuthenticated && (
                                 <div className="add-review-section mt-5">
                                   <Card className="add-review-card">
                                     <Card.Body>
-                                       <h5 className="add-review-title mb-4">
-                                         <FontAwesomeIcon icon={faStar} className="me-2" />
-                                         Write a Review
-                                       </h5>
-                                      
+                                      <h5 className="add-review-title mb-4">
+                                        <FontAwesomeIcon icon={faStar} className="me-2" />
+                                        Write a Review
+                                      </h5>
+
                                       {/* Success Message */}
                                       {reviewSuccess && (
                                         <Alert variant="success" className="mb-3">
@@ -1179,7 +1221,7 @@ const ProductDetail = () => {
                                           {reviewSuccess}
                                         </Alert>
                                       )}
-                                      
+
                                       {/* Error Message */}
                                       {reviewError && (
                                         <Alert variant="danger" className="mb-3">
@@ -1187,7 +1229,7 @@ const ProductDetail = () => {
                                           {reviewError}
                                         </Alert>
                                       )}
-                                      
+
                                       <Form onSubmit={handleReviewSubmit}>
                                         {/* Rating Selection */}
                                         <Form.Group className="mb-4">
@@ -1214,11 +1256,11 @@ const ProductDetail = () => {
                                             </div>
                                             <div className="rating-text-container">
                                               <span className="rating-text">
-                                                {reviewForm.rating === 0 ? 'Select a rating' : 
-                                                 reviewForm.rating === 1 ? 'Poor' :
-                                                 reviewForm.rating === 2 ? 'Fair' :
-                                                 reviewForm.rating === 3 ? 'Good' :
-                                                 reviewForm.rating === 4 ? 'Very Good' : 'Excellent'}
+                                                {reviewForm.rating === 0 ? 'Select a rating' :
+                                                  reviewForm.rating === 1 ? 'Poor' :
+                                                    reviewForm.rating === 2 ? 'Fair' :
+                                                      reviewForm.rating === 3 ? 'Good' :
+                                                        reviewForm.rating === 4 ? 'Very Good' : 'Excellent'}
                                               </span>
                                               {reviewForm.rating > 0 && (
                                                 <span className="rating-number">({reviewForm.rating}/5)</span>
@@ -1226,7 +1268,7 @@ const ProductDetail = () => {
                                             </div>
                                           </div>
                                         </Form.Group>
-                                        
+
                                         {/* Review Description */}
                                         <Form.Group className="mb-4">
                                           <Form.Label className="review-text-label">
@@ -1245,7 +1287,7 @@ const ProductDetail = () => {
                                             Minimum 10 characters required
                                           </Form.Text>
                                         </Form.Group>
-                                        
+
                                         {/* Submit Button */}
                                         <div className="review-submit-section">
                                           <Button
@@ -1260,12 +1302,12 @@ const ProductDetail = () => {
                                                 <Spinner animation="border" size="sm" className="me-2" />
                                                 Submitting...
                                               </>
-                                             ) : (
-                                               <>
-                                                 <FontAwesomeIcon icon={faPaperPlane} className="me-2" />
-                                                 Submit Review
-                                               </>
-                                             )}
+                                            ) : (
+                                              <>
+                                                <FontAwesomeIcon icon={faPaperPlane} className="me-2" />
+                                                Submit Review
+                                              </>
+                                            )}
                                           </Button>
                                         </div>
                                       </Form>
@@ -1273,15 +1315,15 @@ const ProductDetail = () => {
                                   </Card>
                                 </div>
                               )}
-                              
+
                               {/* Login Prompt for non-authenticated users */}
                               {!authLoading && !isAuthenticated && (
                                 <div className="login-prompt-section mt-5">
                                   <Card className="login-prompt-card">
                                     <Card.Body className="text-center">
-                                       <div className="login-prompt-content">
-                                         <FontAwesomeIcon icon={faLock} className="login-prompt-icon mb-3" />
-                                         <h5 className="login-prompt-title">Want to share your experience?</h5>
+                                      <div className="login-prompt-content">
+                                        <FontAwesomeIcon icon={faLock} className="login-prompt-icon mb-3" />
+                                        <h5 className="login-prompt-title">Want to share your experience?</h5>
                                         <p className="login-prompt-text mb-4">
                                           Login to write a review and help other customers make informed decisions.
                                         </p>
@@ -1297,17 +1339,17 @@ const ProductDetail = () => {
                                               window.location.href = '/login'
                                             }
                                           }}
-                                           className="login-prompt-btn"
-                                         >
-                                           <FontAwesomeIcon icon={faSignInAlt} className="me-2" />
-                                           Login to Review
-                                         </Button>
+                                          className="login-prompt-btn"
+                                        >
+                                          <FontAwesomeIcon icon={faSignInAlt} className="me-2" />
+                                          Login to Review
+                                        </Button>
                                       </div>
                                     </Card.Body>
                                   </Card>
                                 </div>
                               )}
-                              
+
                               {/* Loading state for auth */}
                               {authLoading && (
                                 <div className="auth-loading-section mt-5">
@@ -1348,7 +1390,7 @@ const ProductDetail = () => {
             </div>
             <div className="length-options">
               {sizeOptions.map((size) => (
-                <div 
+                <div
                   key={size.inch}
                   className={`length-option ${customization.size === size.inch ? 'selected' : ''}`}
                   onClick={() => handleSizeSelection(size.inch)}
@@ -1379,7 +1421,7 @@ const ProductDetail = () => {
           <div className="haircut-selection">
             <div className="haircut-grid">
               {product.hairCut?.chooseYourHairStyle?.map((haircut) => (
-                <div 
+                <div
                   key={haircut._id}
                   className={`haircut-card ${customization.haircut === haircut.cutType ? 'selected' : ''}`}
                   onClick={() => handleHaircutSelection(haircut.cutType)}
@@ -1389,8 +1431,8 @@ const ProductDetail = () => {
                       <div className="slider-track">
                         {haircut.images.map((image, index) => (
                           <div key={index} className={`slider-slide ${index === 0 ? 'active' : ''}`}>
-                            <img 
-                              src={`/src/${image}`} 
+                            <img
+                              src={`/src/${image}`}
                               alt={`${haircut.cutType} - ${index + 1}`}
                               onError={(e) => {
                                 e.target.src = '/src/assets/images/image_108.png'
@@ -1408,11 +1450,11 @@ const ProductDetail = () => {
                             const currentSlide = track.querySelector('.slider-slide.active')
                             const currentIndex = Array.from(slides).indexOf(currentSlide)
                             const prevIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1
-                            
+
                             slides.forEach(slide => slide.classList.remove('active'))
                             slides[prevIndex].classList.add('active')
                           }}>
-                            <FontAwesomeIcon icon={faChevronRight} style={{transform: 'rotate(180deg)'}} />
+                            <FontAwesomeIcon icon={faChevronRight} style={{ transform: 'rotate(180deg)' }} />
                           </button>
                           <button className="slider-nav slider-next" onClick={(e) => {
                             e.stopPropagation()
@@ -1421,7 +1463,7 @@ const ProductDetail = () => {
                             const currentSlide = track.querySelector('.slider-slide.active')
                             const currentIndex = Array.from(slides).indexOf(currentSlide)
                             const nextIndex = currentIndex === slides.length - 1 ? 0 : currentIndex + 1
-                            
+
                             slides.forEach(slide => slide.classList.remove('active'))
                             slides[nextIndex].classList.add('active')
                           }}>
@@ -1431,10 +1473,10 @@ const ProductDetail = () => {
                       )}
                     </div>
                     {customization.haircut === haircut.cutType && (
-                       <div className="selection-checkmark">
-                         <FontAwesomeIcon icon={faCheck} />
-                       </div>
-                     )}
+                      <div className="selection-checkmark">
+                        <FontAwesomeIcon icon={faCheck} />
+                      </div>
+                    )}
                   </div>
                   <div className="haircut-info">
                     <div className="haircut-id">{haircut.cutType}</div>
@@ -1462,7 +1504,7 @@ const ProductDetail = () => {
           <div className="hair-length-header">
             {currentStep > 0 && (
               <button className="back-arrow-btn" onClick={handlePrevStep}>
-                <FontAwesomeIcon icon={faChevronRight} style={{transform: 'rotate(180deg)'}} />
+                <FontAwesomeIcon icon={faChevronRight} style={{ transform: 'rotate(180deg)' }} />
               </button>
             )}
             <Modal.Title>I want to order my hair length</Modal.Title>
@@ -1474,11 +1516,11 @@ const ProductDetail = () => {
             <div className="step-label">
               <h4>{hairLengthSteps[currentStep].label}</h4>
             </div>
-            
+
             {/* Head Diagram */}
             <div className="head-diagram">
               <div className="head-illustration">
-                <img 
+                <img
                   src={`/src/assets/images/order_hair_length/${hairLengthSteps[currentStep].label}.png`}
                   alt={`${hairLengthSteps[currentStep].label} section`}
                   className="head-section-image"
@@ -1488,7 +1530,7 @@ const ProductDetail = () => {
                 />
               </div>
             </div>
-            
+
             {/* Length Selection */}
             <div className="length-selection">
               <div className="current-length">
@@ -1496,7 +1538,7 @@ const ProductDetail = () => {
               </div>
               <div className="length-options">
                 {lengthOptions.map((option) => (
-                  <div 
+                  <div
                     key={option.inch}
                     className={`length-option ${hairLengths[hairLengthSteps[currentStep].key] === option.inch ? 'selected' : ''}`}
                     onClick={() => handleHairLengthChange(hairLengthSteps[currentStep].key, option.inch)}
@@ -1533,7 +1575,7 @@ const ProductDetail = () => {
         <Modal.Body>
           <div className="image-upload-container">
             {/* Upload Area */}
-            <div 
+            <div
               className="upload-area"
               onDrop={handleImageDrop}
               onDragOver={handleDragOver}
@@ -1541,7 +1583,7 @@ const ProductDetail = () => {
             >
               <div className="upload-content">
                 <div className="upload-icon">
-                  <FontAwesomeIcon icon={faChevronRight} style={{transform: 'rotate(-90deg)'}} />
+                  <FontAwesomeIcon icon={faChevronRight} style={{ transform: 'rotate(-90deg)' }} />
                 </div>
                 <div className="upload-text">Upload</div>
                 <div className="upload-instructions">
@@ -1549,7 +1591,7 @@ const ProductDetail = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* Hidden file input */}
             <input
               id="image-file-input"
@@ -1558,7 +1600,7 @@ const ProductDetail = () => {
               onChange={handleImageFileSelect}
               style={{ display: 'none' }}
             />
-            
+
             {/* Error Message */}
             {uploadError && (
               <div className="upload-error">
@@ -1566,7 +1608,7 @@ const ProductDetail = () => {
                 {uploadError}
               </div>
             )}
-            
+
             {/* Image Preview */}
             {uploadedImages.length > 0 && (
               <div className="image-previews">
@@ -1574,7 +1616,7 @@ const ProductDetail = () => {
                 <div className="single-image-preview">
                   <div className="image-preview-item">
                     <img src={uploadedImages[0].preview} alt="Preview" />
-                    <button 
+                    <button
                       className="remove-image-btn"
                       onClick={(e) => {
                         e.stopPropagation()
@@ -1612,14 +1654,14 @@ const ProductDetail = () => {
                 <span className="price-label">Product Price:</span>
                 <span className="price-value">£{getBasePriceForUser(product?.pricing, user) || 75}</span>
               </div>
-              
+
               {customization.haircut && customization.haircut !== 'None' && (
                 <div className="price-item">
                   <span className="price-label">Haircut:</span>
                   <span className="price-value">+£35.49</span>
                 </div>
               )}
-              
+
               {customization.cutToSize && (
                 <div className="price-item">
                   <span className="price-label">Cut to Size:</span>
@@ -1627,16 +1669,29 @@ const ProductDetail = () => {
                 </div>
               )}
             </div>
-            
+
             <div className="total-price-section">
               <div className="total-price">
                 <span className="total-label">Total Price:</span>
-                <span className="total-value">£{calculateTotalPrice().toFixed(2)}</span>
+                <span className="total-value">£{(calculateTotalPrice() * quantity).toFixed(2)}</span>
               </div>
-              
-              <Button 
-                variant="primary" 
-                size="lg" 
+
+              <div className="quantity-selector-container me-3">
+                <Form.Select
+                  value={quantity}
+                  onChange={(e) => setQuantity(parseInt(e.target.value))}
+                  className="quantity-select"
+                  style={{ width: '80px', display: 'inline-block' }}
+                >
+                  {[...Array(12).keys()].map(i => (
+                    <option key={i + 1} value={i + 1}>{i + 1}</option>
+                  ))}
+                </Form.Select>
+              </div>
+
+              <Button
+                variant="primary"
+                size="lg"
                 className="add-to-cart-sticky-btn"
                 onClick={handleAddToCart}
                 disabled={addToCartLoading || cartLoading}
@@ -1656,8 +1711,8 @@ const ProductDetail = () => {
             </div>
           </div>
         </Container>
-      </div>
-    </div>
+      </div >
+    </div >
   )
 }
 

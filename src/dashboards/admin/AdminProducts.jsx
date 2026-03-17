@@ -13,7 +13,7 @@ const AdminProducts = () => {
   const [pagination, setPagination] = useState({ current: 1, pages: 1, total: 0, limit: 10 });
   const [showProductModal, setShowProductModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
-  
+
   // Filters
   const [searchQuery, setSearchQuery] = useState('');
   const [isActiveFilter, setIsActiveFilter] = useState('');
@@ -60,7 +60,8 @@ const AdminProducts = () => {
       cutByStylist: false,
       cutToMySize: true
     },
-    haircut: {
+    choseBy: 'byBaseType',
+    hairCut: {
       price: '',
       sendEmailToHairStore: true,
       uploadImageHairStyle: true,
@@ -163,7 +164,7 @@ const AdminProducts = () => {
       };
 
       const response = await api.get('/admin/products', { params });
-      
+
       if (response.data.success) {
         setProducts(response.data.data.products);
         setPagination(response.data.data.pagination);
@@ -221,7 +222,8 @@ const AdminProducts = () => {
         cutByStylist: false,
         cutToMySize: true
       },
-      haircut: {
+      choseBy: 'byBaseType',
+      hairCut: {
         price: 0,
         sendEmailToHairStore: true,
         uploadImageHairStyle: true,
@@ -286,7 +288,8 @@ const AdminProducts = () => {
         cutByStylist: product.cutToSize?.cutByStylist || false,
         cutToMySize: product.cutToSize?.cutToMySize || true
       },
-      haircut: {
+      choseBy: product.choseBy || 'byBaseType',
+      hairCut: {
         price: product.hairCut?.price || 0,
         sendEmailToHairStore: product.hairCut?.sendEmailToHairStore || true,
         uploadImageHairStyle: product.hairCut?.uploadImageHairStyle || true,
@@ -336,7 +339,7 @@ const AdminProducts = () => {
 
   const handleProductInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    
+
     if (name.includes('.')) {
       const parts = name.split('.');
       if (parts.length === 2) {
@@ -383,12 +386,12 @@ const AdminProducts = () => {
 
   const handleImageSelect = (e) => {
     const files = Array.from(e.target.files);
-    if (files.length + productImages.length + productImagesPreview.length > 5) {
-      alert('Maximum 5 images allowed');
+    if (files.length + productImages.length + productImagesPreview.length > 10) {
+      alert('Maximum 10 images allowed');
       return;
     }
     setProductImages([...productImages, ...files]);
-    
+
     files.forEach(file => {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -433,12 +436,12 @@ const AdminProducts = () => {
           appearance: parseInt(productFormData.productBenefits.appearance) || 5,
           maintenance: parseInt(productFormData.productBenefits.maintenance) || 4
         },
-        haircut: {
-          ...productFormData.haircut,
-          price: parseFloat(productFormData.haircut.price) || 0,
+        hairCut: {
+          ...productFormData.hairCut,
+          price: parseFloat(productFormData.hairCut.price) || 0,
           orderHairLength: {
-            height: parseInt(productFormData.haircut.orderHairLength.height) || 8,
-            width: parseInt(productFormData.haircut.orderHairLength.width) || 6
+            height: parseInt(productFormData.hairCut.orderHairLength.height) || 8,
+            width: parseInt(productFormData.hairCut.orderHairLength.width) || 6
           },
           chooseYourHairStyle: selectedHaircuts
         },
@@ -466,10 +469,10 @@ const AdminProducts = () => {
             headers: { 'Content-Type': 'multipart/form-data' }
           });
         }
-        
+
         alert('Product updated successfully');
         handleCloseProductModal();
-        
+
         // Force refresh product list after successful update to get latest data
         // Using cache-busting timestamp to ensure fresh data
         await fetchProducts(true);
@@ -532,8 +535,8 @@ const AdminProducts = () => {
   const tableData = products.map(product => ({
     id: product._id,
     image: (
-      <img 
-        src={product.productImages?.[0] || '/placeholder.jpg'} 
+      <img
+        src={product.productImages?.[0] || '/placeholder.jpg'}
         alt={product.productName}
         className="product-thumb"
       />
@@ -551,15 +554,15 @@ const AdminProducts = () => {
     ),
     actions: (
       <div className="actions-cell">
-        <button 
-          className="btn-icon btn-primary" 
+        <button
+          className="btn-icon btn-primary"
           onClick={() => handleEditProduct(product)}
           title="Edit"
         >
           <FontAwesomeIcon icon={faEdit} />
         </button>
-        <button 
-          className="btn-icon btn-danger" 
+        <button
+          className="btn-icon btn-danger"
           onClick={() => handleDelete(product._id)}
           title="Delete"
         >
@@ -688,6 +691,21 @@ const AdminProducts = () => {
                     placeholder="Detailed product description..."
                   />
                 </div>
+                <div className="form-group">
+                  <label>Chose By (Categorization)</label>
+                  <select
+                    name="choseBy"
+                    value={productFormData.choseBy}
+                    onChange={handleProductInputChange}
+                    className="form-input"
+                  >
+                    <option value="byBaseType">By Base Type</option>
+                    <option value="byHairstyle">By Hairstyle</option>
+                    <option value="byLifestyle">By Lifestyle</option>
+                    <option value="byHairLossAreas">By Hair Loss Areas</option>
+                    <option value="byConsultation">By Consultation</option>
+                  </select>
+                </div>
                 <div className="form-row">
                   <div className="form-group">
                     <label>Main Category *</label>
@@ -698,118 +716,54 @@ const AdminProducts = () => {
                       required
                       className="form-input"
                     >
-                    {categories.length > 0 ? (
-                      categories.map(cat => (
-                        <option key={cat._id} value={cat.name}>
-                          {cat.name}
-                        </option>
-                      ))
-                    ) : (
-                      <>
-                        <option value="Hair Systems">Hair Systems</option>
-                        <option value="Accessories">Accessories</option>
-                      </>
-                    )}
+                      {categories.length > 0 ? (
+                        categories.map(cat => (
+                          <option key={cat._id} value={cat.name}>
+                            {cat.name}
+                          </option>
+                        ))
+                      ) : (
+                        <>
+                          <option value="Hair Systems">Hair Systems</option>
+                          <option value="Accessories">Accessories</option>
+                        </>
+                      )}
                     </select>
                   </div>
-                  <div className="form-group">
-                    <label>Sub Category *</label>
-                    <select
-                      name="subCategory"
-                      value={productFormData.subCategory}
-                      onChange={handleProductInputChange}
-                      required
-                      className="form-input"
-                    >
-                    {subcategories
-                      .filter(sc => sc.parentCategory && sc.parentCategory.name === productFormData.mainCategory)
-                      .map(sc => (
-                        <option key={sc._id} value={sc.name}>
-                          {sc.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                {productFormData.mainCategory === 'Hair Systems' && HAIR_BASE_TYPES.includes(productFormData.subCategory) && (
-                  <div className="form-group" style={{ marginTop: '1rem' }}>
-                    <label>Allowed Base Sizes</label>
-                    <p className="form-hint" style={{ fontSize: '0.85rem', color: '#666', marginBottom: '0.5rem' }}>
-                      Choose which base sizes (height x width) this product can use. Leave empty to allow all sizes for this base type.
-                    </p>
-                    {baseSizesLoading ? (
-                      <span>Loading sizes...</span>
-                    ) : availableBaseSizes.length > 0 ? (
-                      <div>
-                        <button
-                          type="button"
-                          className="btn-secondary"
-                          style={{ marginBottom: '0.5rem', fontSize: '0.9rem' }}
-                          onClick={handleSelectAllBaseSizes}
-                        >
-                          {allowedBaseSizeIds.length === availableBaseSizes.length ? 'Deselect All' : 'Select All'}
-                        </button>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                          {availableBaseSizes.map((size) => (
-                            <label
-                              key={size.id}
-                              style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                padding: '0.35rem 0.6rem',
-                                border: '1px solid #ddd',
-                                borderRadius: '4px',
-                                cursor: 'pointer',
-                                background: allowedBaseSizeIds.includes(size.id) ? '#e8f4fd' : '#fff'
-                              }}
-                            >
-                              <input
-                                type="checkbox"
-                                checked={allowedBaseSizeIds.includes(size.id)}
-                                onChange={() => handleAllowedBaseSizeToggle(size.id)}
-                              />
-                              <span style={{ marginLeft: '0.4rem' }}>
-                                {size.label}
-                                {size.availableQuantity !== undefined && (
-                                  <span style={{ marginLeft: '0.25rem', color: '#888', fontSize: '0.85rem' }}>
-                                    ({size.availableQuantity} avail)
-                                  </span>
-                                )}
-                              </span>
-                            </label>
+                  {productFormData.choseBy === 'byBaseType' && (
+                    <div className="form-group">
+                      <label>Sub Category *</label>
+                      <select
+                        name="subCategory"
+                        value={productFormData.subCategory}
+                        onChange={handleProductInputChange}
+                        required
+                        className="form-input"
+                      >
+                        {subcategories
+                          .filter(sc => sc.parentCategory && sc.parentCategory.name === productFormData.mainCategory)
+                          .map(sc => (
+                            <option key={sc._id} value={sc.name}>
+                              {sc.name}
+                            </option>
                           ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <span style={{ color: '#888' }}>No base sizes found for {productFormData.subCategory}. Seed base sizes first.</span>
-                    )}
-                  </div>
-                )}
-                <div className="form-row">
-                  <div className="form-group">
-                    <label>Product Code *</label>
-                    <input
-                      type="text"
-                      name="productCode"
-                      value={productFormData.productCode}
-                      onChange={handleProductInputChange}
-                      required
-                      className="form-input"
-                      placeholder="e.g., HS-SKIN-001"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Stock Quantity *</label>
-                    <input
-                      type="number"
-                      name="stock"
-                      value={productFormData.stock}
-                      onChange={handleProductInputChange}
-                      min="0"
-                      required
-                      className="form-input"
-                    />
-                  </div>
+                      </select>
+                    </div>
+                  )}
+                </div>
+
+
+                <div className="form-group">
+                  <label>Product Code *</label>
+                  <input
+                    type="text"
+                    name="productCode"
+                    value={productFormData.productCode}
+                    onChange={handleProductInputChange}
+                    required
+                    className="form-input"
+                    placeholder="e.g., HS-SKIN-001"
+                  />
                 </div>
                 <div className="form-group">
                   <label>Tags (comma-separated)</label>
@@ -944,7 +898,7 @@ const AdminProducts = () => {
 
               {/* Product Images */}
               <div className="form-section">
-                <h4>Product Images (Max 5)</h4>
+                <h4>Product Images (Max 10)</h4>
                 <div className="image-upload-area">
                   <label className="file-label">
                     <FontAwesomeIcon icon={faUpload} /> Choose Images
@@ -1208,8 +1162,8 @@ const AdminProducts = () => {
                       <label>Haircut Price</label>
                       <input
                         type="number"
-                        name="haircut.price"
-                        value={productFormData.haircut.price || ''}
+                        name="hairCut.price"
+                        value={productFormData.hairCut.price || ''}
                         onChange={handleProductInputChange}
                         min="0"
                         step="0.01"
@@ -1217,28 +1171,7 @@ const AdminProducts = () => {
                         placeholder="e.g., 35.49"
                       />
                     </div>
-                    <div className="form-group">
-                      <label>Order Hair Length Height (inches)</label>
-                      <input
-                        type="number"
-                        name="haircut.orderHairLength.height"
-                        value={productFormData.haircut.orderHairLength.height || ''}
-                        onChange={handleProductInputChange}
-                        min="1"
-                        className="form-input"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Order Hair Length Width (inches)</label>
-                      <input
-                        type="number"
-                        name="haircut.orderHairLength.width"
-                        value={productFormData.haircut.orderHairLength.width || ''}
-                        onChange={handleProductInputChange}
-                        min="1"
-                        className="form-input"
-                      />
-                    </div>
+
                   </div>
                   <div className="form-row">
                     <div className="form-group">
@@ -1246,8 +1179,8 @@ const AdminProducts = () => {
                         <input
                           type="checkbox"
                           id="sendEmailToHairStore"
-                          name="haircut.sendEmailToHairStore"
-                          checked={productFormData.haircut.sendEmailToHairStore}
+                          name="hairCut.sendEmailToHairStore"
+                          checked={productFormData.hairCut.sendEmailToHairStore}
                           onChange={handleProductInputChange}
                         />
                         Send Email to Hair Store
@@ -1258,8 +1191,8 @@ const AdminProducts = () => {
                         <input
                           type="checkbox"
                           id="uploadImageHairStyle"
-                          name="haircut.uploadImageHairStyle"
-                          checked={productFormData.haircut.uploadImageHairStyle}
+                          name="hairCut.uploadImageHairStyle"
+                          checked={productFormData.hairCut.uploadImageHairStyle}
                           onChange={handleProductInputChange}
                         />
                         Upload Image Hair Style

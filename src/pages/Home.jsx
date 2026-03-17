@@ -20,25 +20,25 @@ const Home = () => {
     {
       name: "Skin",
       category: "Hair Systems",
-      image: "/src/assets/images/image_108.png",
+      image: "/src/assets/images/basetype_skin.png",
       buttonText: t('product.explore')
     },
     {
       name: "Lace", 
       category: "Hair Systems",
-      image: "/src/assets/images/image_108.png",
+      image: "/src/assets/images/basetype_lace.png",
       buttonText: t('product.explore')
     },
     {
       name: "Hybrid",
       category: "Hair Systems", 
-      image: "/src/assets/images/image_108.png",
+      image: "/src/assets/images/basetype_hybrid.png",
       buttonText: t('product.explore')
     },
     {
       name: "Mono",
       category: "Hair Systems",
-      image: "/src/assets/images/image_108.png", 
+      image: "/src/assets/images/basetype_mono.png", 
       buttonText: t('product.explore')
     }
   ]

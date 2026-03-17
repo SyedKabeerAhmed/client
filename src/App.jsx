@@ -4,6 +4,10 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Help from './pages/Help'
 import BeginnersGuide from './pages/BeginnersGuide'
+import HelpMeChoose from './pages/HelpMeChoose'
+import Contact from './pages/Contact'
+import BookAppointment from './pages/BookAppointment'
+import AppointmentThankYou from './pages/AppointmentThankYou'
 import CustomHairSystem from './pages/CustomHairSystem'
 import Login from './pages/Login'
 import AdminLogin from './pages/AdminLogin'
@@ -30,6 +34,10 @@ function App() {
         <Route path="/about" element={<Layout><About /></Layout>} />
         <Route path="/help" element={<Layout><Help /></Layout>} />
         <Route path="/beginners-guide" element={<Layout><BeginnersGuide /></Layout>} />
+        <Route path="/help-me-choose" element={<Layout><HelpMeChoose /></Layout>} />
+        <Route path="/contact" element={<Layout><Contact /></Layout>} />
+        <Route path="/book-appointment" element={<Layout><BookAppointment /></Layout>} />
+        <Route path="/appointment-thank-you" element={<Layout><AppointmentThankYou /></Layout>} />
         <Route path="/custom-hair-system" element={<Layout><CustomHairSystem /></Layout>} />
         <Route path="/login" element={<Layout><Login /></Layout>} />
         <Route path="/admin-login" element={<AdminLogin />} />

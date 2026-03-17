@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faEdit, 
-  faTrash, 
-  faEye, 
-  faCheck, 
-  faTimes, 
-  faSyncAlt, 
+import {
+  faEdit,
+  faTrash,
+  faEye,
+  faCheck,
+  faTimes,
+  faSyncAlt,
   faExclamationCircle,
   faExclamationTriangle,
   faPlus,
@@ -26,6 +26,7 @@ import DataTable from '../shared/DataTable';
 import { useAuth } from '../../contexts/AuthContext';
 import api from '../../config/api';
 import { allColors, allHaircuts } from '../../utils/productConstants';
+import AdminInstallments from '../admin/AdminInstallments';
 import './SubAdminDashboard.css';
 
 const SubAdminDashboard = () => {
@@ -34,26 +35,26 @@ const SubAdminDashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   // Orders page state
   const [orders, setOrders] = useState([]);
   const [ordersLoading, setOrdersLoading] = useState(false);
   const [ordersError, setOrdersError] = useState(null);
-  const [orderFilters, setOrderFilters] = useState({ 
-    status: 'all', 
-    paymentMethod: 'all', 
-    search: '', 
-    dateFrom: '', 
-    dateTo: '' 
+  const [orderFilters, setOrderFilters] = useState({
+    status: 'all',
+    paymentMethod: 'all',
+    search: '',
+    dateFrom: '',
+    dateTo: ''
   });
   const [pagination, setPagination] = useState({ current: 1, pages: 1, total: 0, limit: 10 });
-  
+
   // Order detail drawer state
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showOrderDrawer, setShowOrderDrawer] = useState(false);
   const [statusHistory, setStatusHistory] = useState([]);
   const [statusHistoryLoading, setStatusHistoryLoading] = useState(false);
-  
+
   // Products page state
   const [products, setProducts] = useState([]);
   const [productsLoading, setProductsLoading] = useState(false);
@@ -67,7 +68,7 @@ const SubAdminDashboard = () => {
     search: ''
   });
   const [productsPagination, setProductsPagination] = useState({ current: 1, pages: 1, total: 0, limit: 10 });
-  
+
   // Product modal state
   const [showProductModal, setShowProductModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
@@ -117,15 +118,16 @@ const SubAdminDashboard = () => {
       cutToMySize: false
     },
     // Haircut
-    haircut: {
+    hairCut: {
       price: 0,
       sendEmailToHairStore: false,
       orderHairLength: {
-        height: 8,
-        width: 6
+        height: '',
+        width: ''
       },
       uploadImageHairStyle: false
     },
+    choseBy: 'byBaseType',
     // Additional & SEO
     additionalInformation: '',
     seoTitle: '',
@@ -135,7 +137,7 @@ const SubAdminDashboard = () => {
   const [productImagesPreview, setProductImagesPreview] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedHaircuts, setSelectedHaircuts] = useState([]);
-  
+
   // Categories page state
   const [categories, setCategories] = useState([]);
   const [categoriesLoading, setCategoriesLoading] = useState(false);
@@ -145,7 +147,7 @@ const SubAdminDashboard = () => {
     search: ''
   });
   const [categoriesPagination, setCategoriesPagination] = useState({ current: 1, pages: 1, total: 0, limit: 10 });
-  
+
   // Category modal state
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null);
@@ -204,14 +206,14 @@ const SubAdminDashboard = () => {
       const params = new URLSearchParams();
       params.append('page', page);
       params.append('limit', pagination.limit);
-      
+
       // Use provided values or current filter state
       const filterSearch = search !== undefined ? search : orderFilters.search;
       const filterStatus = status !== undefined ? status : orderFilters.status;
       const filterPaymentMethod = paymentMethod !== undefined ? paymentMethod : orderFilters.paymentMethod;
       const filterDateFrom = dateFrom !== undefined ? dateFrom : orderFilters.dateFrom;
       const filterDateTo = dateTo !== undefined ? dateTo : orderFilters.dateTo;
-      
+
       if (filterSearch) params.append('search', filterSearch);
       if (filterStatus && filterStatus !== 'all') params.append('status', filterStatus);
       if (filterPaymentMethod && filterPaymentMethod !== 'all') params.append('paymentMethod', filterPaymentMethod);
@@ -318,7 +320,7 @@ const SubAdminDashboard = () => {
       'ready_to_ship': { class: 'ready_to_ship', label: 'Ready to Ship' },
       'shipped': { class: 'shipped', label: 'Shipped' }
     };
-    
+
     const statusInfo = statusMap[status] || { class: 'pending', label: status };
     return (
       <span className={`status-badge ${statusInfo.class}`}>
@@ -328,7 +330,7 @@ const SubAdminDashboard = () => {
   };
 
   // ============ PRODUCTS MANAGEMENT FUNCTIONS ============
-  
+
   // Fetch products with filters
   const fetchProducts = async ({ page = 1, mainCategory, subCategory, isActive, bestSelling, premiumProduct, search } = {}) => {
     try {
@@ -337,14 +339,14 @@ const SubAdminDashboard = () => {
       const params = new URLSearchParams();
       params.append('page', page);
       params.append('limit', productsPagination.limit);
-      
+
       const filterSearch = search !== undefined ? search : productFilters.search;
       const filterMainCategory = mainCategory !== undefined ? mainCategory : productFilters.mainCategory;
       const filterSubCategory = subCategory !== undefined ? subCategory : productFilters.subCategory;
       const filterIsActive = isActive !== undefined ? isActive : productFilters.isActive;
       const filterBestSelling = bestSelling !== undefined ? bestSelling : productFilters.bestSelling;
       const filterPremiumProduct = premiumProduct !== undefined ? premiumProduct : productFilters.premiumProduct;
-      
+
       if (filterSearch) params.append('search', filterSearch);
       if (filterMainCategory && filterMainCategory !== 'all') params.append('mainCategory', filterMainCategory);
       if (filterSubCategory && filterSubCategory !== 'all') params.append('subCategory', filterSubCategory);
@@ -422,15 +424,16 @@ const SubAdminDashboard = () => {
         cutByStylist: false,
         cutToMySize: false
       },
-      haircut: {
+      hairCut: {
         price: 0,
         sendEmailToHairStore: false,
         orderHairLength: {
-          height: 8,
-          width: 6
+          height: '',
+          width: ''
         },
         uploadImageHairStyle: false
       },
+      choseBy: 'byBaseType',
       additionalInformation: '',
       seoTitle: '',
       seoDescription: ''
@@ -488,15 +491,16 @@ const SubAdminDashboard = () => {
         cutByStylist: product.cutToSize?.cutByStylist || false,
         cutToMySize: product.cutToSize?.cutToMySize || false
       },
-      haircut: {
+      hairCut: {
         price: product.hairCut?.price || 0,
         sendEmailToHairStore: product.hairCut?.sendEmailToHairStore || false,
         orderHairLength: {
-          height: product.hairCut?.orderHairLength?.height || 8,
-          width: product.hairCut?.orderHairLength?.width || 6
+          height: product.hairCut?.orderHairLength?.height || '',
+          width: product.hairCut?.orderHairLength?.width || ''
         },
         uploadImageHairStyle: product.hairCut?.uploadImageHairStyle || false
       },
+      choseBy: product.choseBy || 'byBaseType',
       additionalInformation: product.additionalInformation || '',
       seoTitle: product.seoTitle || '',
       seoDescription: product.seoDescription || ''
@@ -566,12 +570,12 @@ const SubAdminDashboard = () => {
   // Handle image selection
   const handleImageSelect = (e) => {
     const files = Array.from(e.target.files);
-    if (files.length + productImages.length + productImagesPreview.length > 5) {
-      alert('Maximum 5 images allowed');
+    if (files.length + productImages.length + productImagesPreview.length > 10) {
+      alert('Maximum 10 images allowed');
       return;
     }
     setProductImages([...productImages, ...files]);
-    
+
     // Create previews
     files.forEach(file => {
       const reader = new FileReader();
@@ -609,7 +613,7 @@ const SubAdminDashboard = () => {
         },
         colors: selectedColors,
         hairCut: {
-          ...productFormData.haircut,
+          ...productFormData.hairCut,
           chooseYourHairStyle: selectedHaircuts
         },
         mainCategorySlug: productFormData.mainCategory === 'Hair Systems' ? 'hair-systems' : 'accessories'
@@ -618,7 +622,7 @@ const SubAdminDashboard = () => {
       if (editingProduct) {
         // Update existing product
         await api.put(`/subadmin/products/${editingProduct._id}`, formDataToSend);
-        
+
         // Upload new images if any
         if (productImages.length > 0) {
           const uploadFormData = new FormData();
@@ -633,7 +637,7 @@ const SubAdminDashboard = () => {
       } else {
         // Create new product
         const response = await api.post('/subadmin/products', formDataToSend);
-        
+
         // Upload images if any
         if (productImages.length > 0) {
           const uploadFormData = new FormData();
@@ -646,7 +650,7 @@ const SubAdminDashboard = () => {
         }
         alert('Product created successfully');
       }
-      
+
       handleCloseProductModal();
       await fetchProducts({ page: productsPagination.current });
     } catch (error) {
@@ -655,7 +659,7 @@ const SubAdminDashboard = () => {
   };
 
   // ============ CATEGORIES MANAGEMENT FUNCTIONS ============
-  
+
   // Fetch categories with filters
   const fetchCategories = async ({ page = 1, isActive, search } = {}) => {
     try {
@@ -664,10 +668,10 @@ const SubAdminDashboard = () => {
       const params = new URLSearchParams();
       params.append('page', page);
       params.append('limit', categoriesPagination.limit);
-      
+
       const filterSearch = search !== undefined ? search : categoryFilters.search;
       const filterIsActive = isActive !== undefined ? isActive : categoryFilters.isActive;
-      
+
       if (filterSearch) params.append('search', filterSearch);
       if (filterIsActive && filterIsActive !== 'all') params.append('isActive', filterIsActive === 'true');
 
@@ -737,7 +741,7 @@ const SubAdminDashboard = () => {
         await api.post('/subadmin/categories', categoryFormData);
         alert('Category created successfully');
       }
-      
+
       handleCloseCategoryModal();
       await fetchCategories({ page: categoriesPagination.current });
     } catch (error) {
@@ -1178,30 +1182,32 @@ const SubAdminDashboard = () => {
                           <option value="Accessories">Accessories</option>
                         </select>
                       </div>
-                      <div className="form-group">
-                        <label>Sub Category *</label>
-                        {productFormData.mainCategory === 'Accessories' ? (
-                          <select
-                            value={productFormData.subCategory}
-                            onChange={(e) => handleProductInputChange('subCategory', e.target.value)}
-                            required
-                          >
-                            <option value="Adhesive">Adhesive</option>
-                            <option value="Glue">Glue</option>
-                          </select>
-                        ) : (
-                          <select
-                            value={productFormData.subCategory}
-                            onChange={(e) => handleProductInputChange('subCategory', e.target.value)}
-                            required
-                          >
-                            <option value="Skin">Skin</option>
-                            <option value="Lace">Lace</option>
-                            <option value="Mono">Mono</option>
-                            <option value="Hybrid">Hybrid</option>
-                          </select>
-                        )}
-                      </div>
+                      {productFormData.choseBy === 'byBaseType' && (
+                        <div className="form-group">
+                          <label>Sub Category *</label>
+                          {productFormData.mainCategory === 'Accessories' ? (
+                            <select
+                              value={productFormData.subCategory}
+                              onChange={(e) => handleProductInputChange('subCategory', e.target.value)}
+                              required
+                            >
+                              <option value="Adhesive">Adhesive</option>
+                              <option value="Glue">Glue</option>
+                            </select>
+                          ) : (
+                            <select
+                              value={productFormData.subCategory}
+                              onChange={(e) => handleProductInputChange('subCategory', e.target.value)}
+                              required
+                            >
+                              <option value="Skin">Skin</option>
+                              <option value="Lace">Lace</option>
+                              <option value="Mono">Mono</option>
+                              <option value="Hybrid">Hybrid</option>
+                            </select>
+                          )}
+                        </div>
+                      )}
                     </div>
                     <div className="form-group">
                       <label>Product Code *</label>
@@ -1289,16 +1295,7 @@ const SubAdminDashboard = () => {
                   <div className="form-section">
                     <h4>Flags & Stock</h4>
                     <div className="form-row">
-                      <div className="form-group">
-                        <label>Stock Quantity *</label>
-                        <input
-                          type="number"
-                          value={productFormData.stock}
-                          onChange={(e) => handleProductInputChange('stock', parseInt(e.target.value) || 0)}
-                          min="0"
-                          required
-                        />
-                      </div>
+
                       <div className="form-group">
                         <label>
                           <input
@@ -1569,6 +1566,26 @@ const SubAdminDashboard = () => {
                     </div>
                   </div>
 
+                  {/* Chose By Field */}
+                  <div className="form-section"> {/* Added form-section for consistency */}
+                    <h4>Categorization Method</h4> {/* Added a title for the section */}
+                    <div className="form-group">
+                      <label>Chose By *</label>
+                      <select
+                        value={productFormData.choseBy}
+                        onChange={(e) => handleProductInputChange('choseBy', e.target.value)}
+                        required
+                      >
+                        <option value="byBaseType">By Base Type</option>
+                        <option value="byHairstyle">By Hairstyle</option>
+                        <option value="byLifestyle">By Lifestyle</option>
+                        <option value="byHairLossAreas">By Hair Loss Areas</option>
+                        <option value="byConsultation">By Consultation</option>
+                      </select>
+                      <small><em>Categorization method for this product</em></small>
+                    </div>
+                  </div>
+
                   {/* Haircut Options Section */}
                   {productFormData.mainCategory === 'Hair Systems' && (
                     <div className="form-section">
@@ -1578,19 +1595,21 @@ const SubAdminDashboard = () => {
                           <label>Haircut Price</label>
                           <input
                             type="number"
-                            value={productFormData.haircut.price}
-                            onChange={(e) => handleProductInputChange('haircut.price', parseFloat(e.target.value) || 0)}
+                            value={productFormData.hairCut.price}
+                            onChange={(e) => handleProductInputChange('hairCut.price', parseFloat(e.target.value) || 0)}
                             min="0"
                             step="0.01"
                             placeholder="e.g., 35.49"
                           />
                         </div>
+                      </div>
+                      <div className="form-row">
                         <div className="form-group">
                           <label>
                             <input
                               type="checkbox"
-                              checked={productFormData.haircut.sendEmailToHairStore}
-                              onChange={(e) => handleProductInputChange('haircut.sendEmailToHairStore', e.target.checked)}
+                              checked={productFormData.hairCut.sendEmailToHairStore}
+                              onChange={(e) => handleProductInputChange('hairCut.sendEmailToHairStore', e.target.checked)}
                             />
                             Send Email to Hair Store
                           </label>
@@ -1599,37 +1618,15 @@ const SubAdminDashboard = () => {
                           <label>
                             <input
                               type="checkbox"
-                              checked={productFormData.haircut.uploadImageHairStyle}
-                              onChange={(e) => handleProductInputChange('haircut.uploadImageHairStyle', e.target.checked)}
+                              checked={productFormData.hairCut.uploadImageHairStyle}
+                              onChange={(e) => handleProductInputChange('hairCut.uploadImageHairStyle', e.target.checked)}
                             />
                             Upload Image Hair Style
                           </label>
                         </div>
                       </div>
-                      <div className="form-row">
-                        <div className="form-group">
-                          <label>Order Hair Length Height (inches)</label>
-                          <input
-                            type="number"
-                            value={productFormData.haircut.orderHairLength.height}
-                            onChange={(e) => handleProductInputChange('haircut.orderHairLength.height', parseInt(e.target.value) || 8)}
-                            min="1"
-                          />
-                        </div>
-                        <div className="form-group">
-                          <label>Order Hair Length Width (inches)</label>
-                          <input
-                            type="number"
-                            value={productFormData.haircut.orderHairLength.width}
-                            onChange={(e) => handleProductInputChange('haircut.orderHairLength.width', parseInt(e.target.value) || 6)}
-                            min="1"
-                          />
-                        </div>
-                      </div>
                       <div className="form-group">
-                        <label>
-                          <em>Note: Hair Colors and Haircut Styles will be added after product creation</em>
-                        </label>
+                        <small><em>Note: Hair Colors and Haircut Styles can be managed after product creation</em></small>
                       </div>
                     </div>
                   )}
@@ -1814,7 +1811,7 @@ const SubAdminDashboard = () => {
                     icon = faCheckCircle;
                     tooltip = `Update to ${st.replaceAll('_', ' ')}`;
                   }
-                  
+
                   return (
                     <div key={st} className="tooltip-wrapper">
                       <button
@@ -2234,6 +2231,10 @@ const SubAdminDashboard = () => {
     );
   };
 
+  const renderInstallments = () => {
+    return <AdminInstallments />;
+  };
+
   const renderPage = () => {
     switch (activePage) {
       case 'dashboard':
@@ -2244,6 +2245,8 @@ const SubAdminDashboard = () => {
         return renderOrders();
       case 'categories':
         return renderCategories();
+      case 'installments':
+        return renderInstallments();
       default:
         return renderDashboard();
     }

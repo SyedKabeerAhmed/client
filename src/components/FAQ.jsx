@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
+import { lordhairFaqs } from '../data/faqs'
 import './FAQ.css'
 
 const FAQ = ({ 
@@ -10,40 +11,9 @@ const FAQ = ({
 }) => {
   const { t } = useTranslation()
   
-  const defaultFAQs = [
-    {
-      id: 1,
-      question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci a diam viverra ultrices."
-    },
-    {
-      id: 2,
-      question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci a diam viverra ultrices."
-    },
-    {
-      id: 3,
-      question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci a diam viverra ultrices."
-    },
-    {
-      id: 4,
-      question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci a diam viverra ultrices."
-    },
-    {
-      id: 5,
-      question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci a diam viverra ultrices."
-    },
-    {
-      id: 6,
-      question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci a diam viverra ultrices."
-    }
-  ]
+  const defaultFAQs = lordhairFaqs
 
-  const [expandedItem, setExpandedItem] = useState(2) // Default to item 2 being expanded
+  const [expandedItem, setExpandedItem] = useState(1)
   const displayFAQs = faqs.length > 0 ? faqs : defaultFAQs
 
   const toggleExpanded = (id) => {

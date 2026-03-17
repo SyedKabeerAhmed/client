@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faEye, 
-  faTrash, 
-  faSearch, 
+import {
+  faEye,
+  faTrash,
+  faSearch,
   faFilter,
   faTimes,
   faSave,
@@ -23,6 +23,7 @@ import { useNavigate } from 'react-router-dom';
 import { getBasePriceForUser } from '../../utils/pricingUtils';
 import api from '../../config/api';
 import './UserDashboard.css';
+import UserInstallments from './UserInstallments';
 
 const UserDashboard = () => {
   const { user, logout, updateUser } = useAuth();
@@ -80,6 +81,11 @@ const UserDashboard = () => {
   const [couponsError, setCouponsError] = useState(null);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab');
+    if (tab && ['dashboard', 'orders', 'installments', 'wishlist', 'profile', 'discounts'].includes(tab)) {
+      setActivePage(tab);
+    }
     fetchDashboardData();
   }, []);
 
@@ -121,13 +127,13 @@ const UserDashboard = () => {
       const params = new URLSearchParams();
       params.append('page', page);
       params.append('limit', ordersPagination.limit || 10);
-      
+
       const filterStatus = status !== undefined ? status : orderFilters.status;
       const filterPaymentMethod = paymentMethod !== undefined ? paymentMethod : orderFilters.paymentMethod;
       const filterSearch = search !== undefined ? search : orderFilters.search;
       const filterDateFrom = dateFrom !== undefined ? dateFrom : orderFilters.dateFrom;
       const filterDateTo = dateTo !== undefined ? dateTo : orderFilters.dateTo;
-      
+
       if (filterStatus && filterStatus !== 'all') params.append('status', filterStatus);
       if (filterPaymentMethod && filterPaymentMethod !== 'all') params.append('paymentMethod', filterPaymentMethod);
       if (filterSearch) params.append('search', filterSearch);
@@ -209,7 +215,7 @@ const UserDashboard = () => {
       'delivered': { class: 'delivered', label: 'Delivered' },
       'cancelled': { class: 'cancelled', label: 'Cancelled' }
     };
-    
+
     const statusInfo = statusMap[status] || { class: 'pending', label: status };
     return (
       <span className={`status-badge ${statusInfo.class}`}>
@@ -226,7 +232,7 @@ const UserDashboard = () => {
       const params = new URLSearchParams();
       params.append('page', page);
       params.append('limit', wishlistPagination.limit || 10);
-      
+
       const filterSearch = search !== undefined ? search : wishlistSearch;
       if (filterSearch) params.append('search', filterSearch);
 
@@ -299,7 +305,7 @@ const UserDashboard = () => {
       alert('New passwords do not match');
       return;
     }
-    
+
     if (passwordData.newPassword.length < 6) {
       alert('Password must be at least 6 characters');
       return;
@@ -418,9 +424,9 @@ const UserDashboard = () => {
           </div>
           <div className="card-content">
             <div className="profile-info">
-              <img 
-                src="/default-avatar.png" 
-                alt="Profile" 
+              <img
+                src="/default-avatar.png"
+                alt="Profile"
                 className="profile-image"
                 onError={(e) => {
                   e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM0QTkwRTIiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDEyQzE0LjIwOTEgMTIgMTYgMTAuMjA5MSAxNiA4QzE2IDUuNzkwODYgMTQuMjA5MSA0IDEyIDRDOS43OTA4NiA0IDggNS43OTA4NiA4IDhDOCAxMC4yMDkxIDkuNzkwODYgMTIgMTJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTIgMTRDOC42ODYyOSAxNCA2IDE2LjY4NjMgNiAyMEgxOEMxOCAxNi42ODYzIDE1LjMxMzcgMTQgMTIgMTRaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+';
@@ -486,9 +492,9 @@ const UserDashboard = () => {
               id: order._id,
               product: (
                 <div className="product-info">
-                  <img 
-                    src={order.items[0]?.product?.images?.[0] || '/default-product.png'} 
-                    alt="Product" 
+                  <img
+                    src={order.items[0]?.product?.images?.[0] || '/default-product.png'}
+                    alt="Product"
                     className="product-image"
                   />
                   <div>
@@ -535,16 +541,16 @@ const UserDashboard = () => {
       date: new Date(order.createdAt).toLocaleDateString(),
       actions: (
         <div className="actions-cell">
-          <button 
-            className="btn-icon" 
+          <button
+            className="btn-icon"
             onClick={() => handleViewOrderDetail(order)}
             title="View Details"
           >
             <FontAwesomeIcon icon={faEye} />
           </button>
           {['pending', 'confirmed'].includes(order.status) && (
-            <button 
-              className="btn-icon" 
+            <button
+              className="btn-icon"
               onClick={() => handleCancelOrder(order._id)}
               title="Cancel Order"
               style={{ color: '#ef4444' }}
@@ -674,13 +680,13 @@ const UserDashboard = () => {
                   <p><strong>Date:</strong> {new Date(selectedOrder.createdAt).toLocaleString()}</p>
                   <p><strong>Payment Method:</strong> {selectedOrder.payment?.method || 'N/A'}</p>
                 </div>
-                
+
                 <div className="detail-section">
                   <h4>Items</h4>
                   {(selectedOrder.items || []).map((item, idx) => (
                     <div key={idx} className="order-item">
-                      <img 
-                        src={item.product?.productImages?.[0] || '/default-product.png'} 
+                      <img
+                        src={item.product?.productImages?.[0] || '/default-product.png'}
                         alt={item.product?.productName || 'Product'}
                         className="item-image"
                       />
@@ -704,10 +710,56 @@ const UserDashboard = () => {
                   <p><strong>Total:</strong> ${(selectedOrder.pricing?.total || 0).toFixed(2)}</p>
                 </div>
 
+                {typeof selectedOrder.installmentPlan === 'object' && selectedOrder.installmentPlan !== null && (
+                  <div className="detail-section installment-progress-box" style={{ background: '#f8fafc', padding: '15px', borderRadius: '8px', border: '1px solid #e2e8f0', marginTop: '15px' }}>
+                    <div className="d-flex justify-content-between align-items-center mb-3">
+                      <h4 className="mb-0">Installment Progress</h4>
+                      {selectedOrder.installmentPlan.status && (
+                        <span className={`status-badge ${selectedOrder.installmentPlan.status}`} style={{ fontSize: '10px' }}>
+                          {selectedOrder.installmentPlan.status.toUpperCase()}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="progress-summary mb-3">
+                      <div className="row text-center">
+                        <div className="col">
+                          <small className="text-muted d-block" style={{ fontSize: '10px' }}>Paid</small>
+                          <span className="fw-bold text-success" style={{ fontSize: '14px' }}>${(selectedOrder.installmentPlan.amountPaid || 0).toFixed(2)}</span>
+                        </div>
+                        <div className="col">
+                          <small className="text-muted d-block" style={{ fontSize: '10px' }}>Remaining</small>
+                          <span className="fw-bold text-danger" style={{ fontSize: '14px' }}>${((selectedOrder.installmentPlan.totalAmount || 0) - (selectedOrder.installmentPlan.amountPaid || 0)).toFixed(2)}</span>
+                        </div>
+                        <div className="col">
+                          <small className="text-muted d-block" style={{ fontSize: '11px' }}>Next Due</small>
+                          <span className="fw-bold" style={{ fontSize: '12px' }}>{selectedOrder.installmentPlan.nextPaymentDate ? new Date(selectedOrder.installmentPlan.nextPaymentDate).toLocaleDateString() : '-'}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mini-progress-bar mb-2" style={{ height: '8px', background: '#e2e8f0', borderRadius: '4px', overflow: 'hidden' }}>
+                      <div
+                        style={{
+                          width: `${((selectedOrder.installmentPlan.amountPaid || 0) / (selectedOrder.installmentPlan.totalAmount || 1)) * 100}%`,
+                          height: '100%',
+                          background: '#10b981',
+                          transition: 'width 0.3s ease'
+                        }}
+                      ></div>
+                    </div>
+                    <div className="text-center">
+                      <small className="text-muted" style={{ fontSize: '11px' }}>
+                        {selectedOrder.installmentPlan.installmentsPaid} of {selectedOrder.installmentPlan.totalInstallments} installments paid
+                      </small>
+                    </div>
+                  </div>
+                )}
+
                 {['pending', 'confirmed'].includes(selectedOrder.status) && (
                   <div className="detail-section">
-                    <button 
-                      className="btn-secondary" 
+                    <button
+                      className="btn-secondary"
                       onClick={() => handleCancelOrder(selectedOrder._id)}
                       style={{ backgroundColor: '#ef4444', color: 'white' }}
                     >
@@ -737,8 +789,8 @@ const UserDashboard = () => {
         id: item._id,
         product: (
           <div className="wishlist-product">
-            <img 
-              src={product.productImages?.[0] || '/default-product.png'} 
+            <img
+              src={product.productImages?.[0] || '/default-product.png'}
               alt={product.productName || 'Product'}
               className="product-thumb"
             />
@@ -749,15 +801,15 @@ const UserDashboard = () => {
         added: new Date(item.addedAt || item.createdAt).toLocaleDateString(),
         actions: (
           <div className="actions-cell">
-            <button 
-              className="btn-icon" 
+            <button
+              className="btn-icon"
               onClick={() => handleAddToCartFromWishlist(product)}
               title="View Product"
             >
               <FontAwesomeIcon icon={faShoppingCart} />
             </button>
-            <button 
-              className="btn-icon" 
+            <button
+              className="btn-icon"
               onClick={() => handleRemoveFromWishlist(item._id)}
               title="Remove from Wishlist"
               style={{ color: '#ef4444' }}
@@ -831,7 +883,7 @@ const UserDashboard = () => {
       <div className="user-profile-page">
         <div className="section-header">
           <h3>My Profile</h3>
-          <button 
+          <button
             className="btn-primary"
             onClick={() => isEditingProfile ? handleUpdateProfile() : setIsEditingProfile(true)}
           >
@@ -917,8 +969,8 @@ const UserDashboard = () => {
                 className="form-input"
               />
             </div>
-            <button 
-              className="btn-primary" 
+            <button
+              className="btn-primary"
               onClick={handleChangePassword}
               disabled={changingPassword}
             >
@@ -979,7 +1031,7 @@ const UserDashboard = () => {
                   )}
                 </div>
                 <div className="coupon-footer">
-                  <button 
+                  <button
                     className="btn-primary"
                     onClick={() => handleApplyCoupon(coupon.code)}
                   >
@@ -994,6 +1046,10 @@ const UserDashboard = () => {
     );
   };
 
+  const renderInstallments = () => {
+    return <UserInstallments />;
+  };
+
   const renderPage = () => {
     switch (activePage) {
       case 'dashboard':
@@ -1004,6 +1060,8 @@ const UserDashboard = () => {
         return renderWishlist();
       case 'profile':
         return renderProfile();
+      case 'installments':
+        return renderInstallments();
       case 'discounts':
         return renderDiscounts();
       default:
@@ -1063,8 +1121,8 @@ const UserDashboard = () => {
               <button className="btn-secondary" onClick={handleCancelModalClose}>
                 Cancel
               </button>
-              <button 
-                className="btn-primary" 
+              <button
+                className="btn-primary"
                 onClick={handleCancelOrderConfirm}
                 style={{ backgroundColor: '#ef4444', color: 'white' }}
               >

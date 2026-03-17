@@ -29,6 +29,9 @@ export const API_CONFIG = {
       GET_BY_SLUG: (slug) => `/api/categories/${slug}`,
       GET_SUBCATEGORIES: (categorySlug) => `/api/categories/${categorySlug}/subcategories`,
     },
+    CONTACT: {
+      SUBMIT: '/api/contact'
+    },
     PRODUCTS_BY_CATEGORY: {
       MAIN_CATEGORY: (categorySlug) => `/api/products/category/${categorySlug}`,
       SUBCATEGORY: (categorySlug, subCategorySlug) => `/api/products/category/${categorySlug}/${subCategorySlug}`,

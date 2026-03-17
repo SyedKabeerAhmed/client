@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faListUl, 
-  faCog, 
-  faCheckCircle, 
-  faTruck, 
-  faStickyNote, 
+import {
+  faListUl,
+  faCog,
+  faCheckCircle,
+  faTruck,
+  faStickyNote,
   faSyncAlt,
   faExclamationTriangle,
   faBox,
@@ -15,7 +15,8 @@ import {
   faTimes,
   faSave,
   faPaperPlane,
-  faEdit
+  faEdit,
+  faEye
 } from '@fortawesome/free-solid-svg-icons';
 import Layout from '../shared/Layout';
 import StatsCard from '../shared/StatsCard';
@@ -23,6 +24,7 @@ import DataTable from '../shared/DataTable';
 import { useAuth } from '../../contexts/AuthContext';
 import api from '../../config/api';
 import './FactoryDashboard.css';
+import FactoryInstallments from './FactoryInstallments';
 
 const FactoryDashboard = () => {
   const { user, logout } = useAuth();
@@ -44,7 +46,11 @@ const FactoryDashboard = () => {
   const [etaDate, setEtaDate] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+  const [showDetailModal, setShowDetailModal] = useState(false);
+  const [productionDetail, setProductionDetail] = useState(null);
+  const [detailLoading, setDetailLoading] = useState(false);
+  const [detailError, setDetailError] = useState(null);
+
   // Inventory page state
   const [inventory, setInventory] = useState([]);
   const [inventoryLoading, setInventoryLoading] = useState(false);
@@ -100,11 +106,11 @@ const FactoryDashboard = () => {
       const params = new URLSearchParams();
       params.append('page', page);
       params.append('limit', pagination.limit);
-      
+
       // Use provided values or current filter state
       const filterSearch = search !== undefined ? search : orderFilters.search;
       const filterStatus = status !== undefined ? status : orderFilters.status;
-      
+
       if (filterSearch) params.append('search', filterSearch);
       if (filterStatus && filterStatus !== 'all') params.append('status', filterStatus);
 
@@ -128,6 +134,9 @@ const FactoryDashboard = () => {
     try {
       await api.put(`/factory/orders/${orderId}/status`, { status: nextStatus });
       fetchOrders({ page: pagination.current });
+      if (productionDetail && productionDetail._id === orderId) {
+        setProductionDetail(prev => ({ ...prev, status: nextStatus }));
+      }
     } catch (error) {
       alert(error.response?.data?.message || 'Failed to update status');
     }
@@ -135,7 +144,7 @@ const FactoryDashboard = () => {
 
   const handleOpenNotes = async (order) => {
     setSelectedOrder(order);
-    setEtaDate(order.estimatedDelivery ? new Date(order.estimatedDelivery).toISOString().slice(0,10) : '');
+    setEtaDate(order.estimatedDelivery ? new Date(order.estimatedDelivery).toISOString().slice(0, 10) : '');
     setNewNote('');
     setNewNoteInternal(false);
     setNewNotePriority('medium');
@@ -209,8 +218,34 @@ const FactoryDashboard = () => {
     }
   };
 
+  const handleViewDetails = async (orderId) => {
+    setShowDetailModal(true);
+    setDetailLoading(true);
+    setDetailError(null);
+    setProductionDetail(null);
+    try {
+      const res = await api.get(`/factory/orders/${orderId}/production-detail`);
+      if (res.data.success) {
+        setProductionDetail(res.data.data);
+      } else {
+        setDetailError('Error loading details');
+      }
+    } catch (err) {
+      console.error('Failed to load details', err);
+      setDetailError('Failed to load details');
+    } finally {
+      setDetailLoading(false);
+    }
+  };
+
+  const handleCloseDetails = () => {
+    setShowDetailModal(false);
+    setProductionDetail(null);
+    setDetailError(null);
+  };
+
   // ============ INVENTORY MANAGEMENT FUNCTIONS ============
-  
+
   // Fetch inventory with filters
   const fetchInventory = async ({ page = 1, lowStock, search } = {}) => {
     try {
@@ -219,10 +254,10 @@ const FactoryDashboard = () => {
       const params = new URLSearchParams();
       params.append('page', page);
       params.append('limit', inventoryPagination.limit);
-      
+
       const filterSearch = search !== undefined ? search : inventoryFilters.search;
       const filterLowStock = lowStock !== undefined ? lowStock : inventoryFilters.lowStock;
-      
+
       if (filterSearch) params.append('search', filterSearch);
       if (filterLowStock) params.append('lowStock', 'true');
 
@@ -245,7 +280,7 @@ const FactoryDashboard = () => {
   const handleUpdateThreshold = async (inventoryId, currentThreshold) => {
     const newThreshold = prompt('Enter new low stock threshold:', currentThreshold);
     if (newThreshold === null || newThreshold === '') return;
-    
+
     const threshold = parseInt(newThreshold);
     if (isNaN(threshold) || threshold < 0) {
       alert('Please enter a valid positive number');
@@ -283,7 +318,7 @@ const FactoryDashboard = () => {
       'ready_to_ship': { class: 'ready_to_ship', label: 'Ready to Ship' },
       'shipped': { class: 'shipped', label: 'Shipped' }
     };
-    
+
     const statusInfo = statusMap[status] || { class: 'pending', label: status };
     return (
       <span className={`status-badge ${statusInfo.class}`}>
@@ -427,7 +462,7 @@ const FactoryDashboard = () => {
           <div className="filters">
             <input
               type="text"
-              placeholder="Search by order or customer..."
+              placeholder="Search by order number..."
               value={orderFilters.search}
               onChange={(e) => setOrderFilters({ ...orderFilters, search: e.target.value })}
               onKeyDown={(e) => e.key === 'Enter' && fetchOrders({ page: 1 })}
@@ -471,6 +506,18 @@ const FactoryDashboard = () => {
             const nextStatuses = getNextStatuses(original?.status);
             return (
               <div className="actions-cell">
+                <div className="tooltip-wrapper">
+                  <button
+                    className="action-btn action-btn-info"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleViewDetails(row.id);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faEye} />
+                  </button>
+                  <span className="tooltip-text">View Product Specs</span>
+                </div>
                 {nextStatuses.map((st) => {
                   // Get appropriate icon and tooltip text based on status
                   let icon, tooltip;
@@ -490,7 +537,7 @@ const FactoryDashboard = () => {
                     icon = faCheckCircle; // fallback
                     tooltip = `Update to ${st.replaceAll('_', ' ')}`;
                   }
-                  
+
                   return (
                     <div key={st} className="tooltip-wrapper">
                       <button
@@ -542,6 +589,133 @@ const FactoryDashboard = () => {
             </button>
           </div>
         )}
+
+        {/* Production Details Modal */}
+        {showDetailModal && (
+          <div className="modal-overlay" onClick={handleCloseDetails}>
+            <div className="modal-card modal-lg" onClick={(e) => e.stopPropagation()}>
+              <div className="modal-header">
+                <h4>Order Production Specs</h4>
+                <button className="btn-icon" onClick={handleCloseDetails}>
+                  <FontAwesomeIcon icon={faTimes} />
+                </button>
+              </div>
+              <div className="modal-body" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
+                {detailLoading ? (
+                  <p>Loading details...</p>
+                ) : detailError ? (
+                  <div className="error-banner"><FontAwesomeIcon icon={faExclamationCircle} /> {detailError}</div>
+                ) : productionDetail ? (
+                  <div>
+                    <div className="detail-section mb-4">
+                      <div className="d-flex justify-content-between">
+                        <div>
+                          <strong>Order:</strong> {productionDetail.orderNumber}
+                        </div>
+                        <div>
+                          <strong>Status:</strong>
+                          <select
+                            value={productionDetail.status}
+                            onChange={(e) => handleUpdateStatus(productionDetail._id, e.target.value)}
+                            className="status-select ms-2"
+                            style={{ padding: '2px 8px', fontSize: '14px' }}
+                          >
+                            <option value="confirmed">Confirmed</option>
+                            <option value="in_queue">In Queue</option>
+                            <option value="in_process">In Process</option>
+                            <option value="ready_to_ship">Ready to Ship</option>
+                            <option value="shipped">Shipped</option>
+                          </select>
+                        </div>
+                        <div>
+                          <strong>Deadline:</strong> {productionDetail.estimatedDelivery ? new Date(productionDetail.estimatedDelivery).toLocaleDateString() : 'N/A'}
+                        </div>
+                      </div>
+                    </div>
+
+                    <h5>Production Items ({productionDetail.items.length})</h5>
+                    {productionDetail.items.map((item, idx) => (
+                      <div key={idx} className="production-item-card mb-3 p-3 border rounded">
+                        <div className="d-flex gx-3">
+                          {item.productImages?.[0] && (
+                            <div className="me-3">
+                              <img src={item.productImages[0]} alt="Product" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '4px' }} />
+                            </div>
+                          )}
+                          <div className="flex-grow-1">
+                            <h6>{item.productName} <small className="text-muted">(Code: {item.productCode})</small> — Qty: {item.quantity}</h6>
+
+                            <div className="row mt-2" style={{ fontSize: '13px' }}>
+                              <div className="col-md-6 mb-2">
+                                <strong>Base Size:</strong> {item.stockBaseSizeLabel || 'N/A'}
+                              </div>
+                              <div className="col-md-6 mb-2">
+                                <strong>Base Type:</strong> {item.baseType || 'N/A'}
+                              </div>
+                              <div className="col-md-6 mb-2">
+                                <strong>Hair Color:</strong> {item.hairColor || 'N/A'}
+                              </div>
+
+                              {item.customMeasurements && item.customMeasurements.size !== 'No' && item.customMeasurements.height && item.customMeasurements.height !== 'undefined' && item.customMeasurements.width !== 'undefined' && (
+                                <div className="col-md-6 mb-2">
+                                  <strong>Custom Dimensions:</strong> {item.customMeasurements.height}" x {item.customMeasurements.width}"
+                                </div>
+                              )}
+
+                              {item.cutToSize && item.cutToSize.cutByStylist === 'Yes' && item.cutToSize.size && item.cutToSize.size !== 'undefined' && (
+                                <div className="col-md-6 mb-2">
+                                  <strong>Cut to Size:</strong> Yes ({item.cutToSize.size})
+                                </div>
+                              )}
+
+                              {item.selectedHairCut && (
+                                <div className="col-12 mb-2">
+                                  <strong>Haircut:</strong>{' '}
+                                  <span className="badge bg-secondary me-2">{item.selectedHairCut.hairCutCode || 'Custom'}</span>
+                                  {item.selectedHairCut.customLengths && (item.selectedHairCut.customLengths.front || item.selectedHairCut.customLengths.top || item.selectedHairCut.customLengths.crown || item.selectedHairCut.customLengths.back || item.selectedHairCut.customLengths.sides || item.selectedHairCut.customLengths.temples) && (
+                                    <div className="mt-1" style={{ fontSize: '12px', background: '#f5f5f5', padding: '6px', borderRadius: '4px' }}>
+                                      Lengths: F: {item.selectedHairCut.customLengths.front || 'N/A'}", T: {item.selectedHairCut.customLengths.top || 'N/A'}", C: {item.selectedHairCut.customLengths.crown || 'N/A'}", B: {item.selectedHairCut.customLengths.back || 'N/A'}", S: {item.selectedHairCut.customLengths.sides || 'N/A'}", Tmp: {item.selectedHairCut.customLengths.temples || 'N/A'}"
+                                    </div>
+                                  )}
+                                  {item.selectedHairCut.hairCutImage && (
+                                    <div className="mt-2">
+                                      <a href={item.selectedHairCut.hairCutImage} target="_blank" rel="noopener noreferrer">
+                                        <img src={item.selectedHairCut.hairCutImage} alt="Haircut Style" style={{ maxHeight: '80px', borderRadius: '4px' }} />
+                                      </a>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+
+                              {item.additionalNotes && (
+                                <div className="col-12 mt-2">
+                                  <strong>Customer Notes:</strong>
+                                  <div className="p-2 border rounded" style={{ whiteSpace: 'pre-wrap', backgroundColor: '#f9f9f9' }}>
+                                    {item.additionalNotes}
+                                  </div>
+                                </div>
+                              )}
+
+                              {item.uploadedImage && (
+                                <div className="col-12 mt-2">
+                                  <strong>Reference Image:</strong><br />
+                                  <a href={item.uploadedImage} target="_blank" rel="noopener noreferrer">
+                                    <img src={item.uploadedImage} alt="Reference" style={{ maxHeight: '100px', maxWidth: '200px', marginTop: '5px' }} />
+                                  </a>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          </div>
+        )}
+
         {showNotesModal && selectedOrder && (
           <div className="modal-overlay" onClick={handleCloseNotes}>
             <div className="modal-card" onClick={(e) => e.stopPropagation()}>
@@ -627,7 +801,7 @@ const FactoryDashboard = () => {
     const tableData = (inventory || []).map((item) => {
       const available = item.quantity - (item.reserved || 0);
       const isLowStock = available <= (item.lowStockThreshold || 0);
-      
+
       return {
         id: item._id,
         product: item.product?.productName || 'N/A',
@@ -635,7 +809,7 @@ const FactoryDashboard = () => {
         totalQuantity: item.quantity || 0,
         reserved: item.reserved || 0,
         available: (
-          <span style={{ 
+          <span style={{
             color: isLowStock ? '#ef4444' : '#16a34a',
             fontWeight: isLowStock ? 'bold' : 'normal'
           }}>
@@ -732,6 +906,10 @@ const FactoryDashboard = () => {
     );
   };
 
+  const renderInstallments = () => {
+    return <FactoryInstallments />;
+  };
+
   const renderPage = () => {
     switch (activePage) {
       case 'dashboard':
@@ -740,6 +918,8 @@ const FactoryDashboard = () => {
         return renderOrders();
       case 'inventory':
         return renderInventory();
+      case 'installments':
+        return renderInstallments();
       default:
         return renderDashboard();
     }

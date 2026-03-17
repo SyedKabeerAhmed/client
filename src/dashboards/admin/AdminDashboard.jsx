@@ -124,6 +124,12 @@ const AdminDashboard = () => {
             icon="fas fa-ticket-alt"
             color="yellow"
           />
+          <StatsCard
+            title="Active Installments"
+            value={dashboardData.stats.activeInstallmentPlans || 0}
+            icon="fas fa-calendar-alt"
+            color="orange"
+          />
         </div>
 
         {/* Order Status Stats */}
@@ -229,11 +235,11 @@ const AdminDashboard = () => {
                 <i className="fas fa-chart-line"></i>
                 Sales Trends (Last 30 Days)
               </h3>
-              <SalesTrendChart 
+              <SalesTrendChart
                 data={dashboardData.salesAnalytics.map(item => ({
                   name: `${item._id.month}/${item._id.day}`,
                   sales: item.totalSales
-                }))} 
+                }))}
               />
             </div>
 
@@ -242,13 +248,13 @@ const AdminDashboard = () => {
                 <i className="fas fa-chart-bar"></i>
                 Order Status Distribution
               </h3>
-              <OrderStatusChart 
+              <OrderStatusChart
                 data={[
                   { name: 'Pending', count: dashboardData.stats.pendingOrders },
                   { name: 'Processing', count: dashboardData.stats.processingOrders },
                   { name: 'Shipped', count: dashboardData.stats.shippedOrders },
                   { name: 'Delivered', count: dashboardData.stats.deliveredOrders }
-                ]} 
+                ]}
               />
             </div>
           </div>
@@ -280,6 +286,8 @@ const AdminDashboard = () => {
   const renderInventory = () => {
     return <AdminInventory />;
   };
+
+
 
   const renderPage = () => {
     switch (activePage) {

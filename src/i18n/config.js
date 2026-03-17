@@ -101,11 +101,13 @@ const en = {
   },
   nav: {
     hairSystems: "Hair Systems",
-    allHairSystems: "All Hair Systems",
-    skinSystems: "Skin Systems",
-    laceSystems: "Lace Systems",
-    hybridSystems: "Hybrid Systems",
-    monoSystems: "Mono Systems",
+    allHairSystems: "All Hair System",
+    chooseBy: "CHOOSE BY",
+    byBaseType: "By Base Type",
+    byHairstyle: "By Hairstyle",
+    byLifestyle: "By Life Style",
+    byHairLossAreas: "By Hair Loss Areas",
+    byConsultation: "By Consultation",
     accessories: "Accessories",
     allAccessories: "All Accessories",
     adhesives: "Adhesives",
@@ -135,7 +137,7 @@ const en = {
     }
   },
   features: {
-    freeDelivery: "Free Delivery",
+    freeDelivery: "Free Shipping",
     support247: "Support 24/7",
     authentic: "100% Authentic"
   },
@@ -480,11 +482,11 @@ i18n
     fallbackLng: 'en', // Fallback to English (base language)
     lng: 'en', // Default to English
     debug: false,
-    
+
     interpolation: {
       escapeValue: false // React already escapes values
     },
-    
+
     detection: {
       order: ['localStorage', 'navigator'],
       caches: ['localStorage'],
@@ -502,4 +504,3 @@ i18n.on('languageChanged', (lng) => {
 document.documentElement.dir = i18n.language === 'ar' ? 'rtl' : 'ltr'
 
 export default i18n
-
