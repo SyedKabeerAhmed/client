@@ -1,399 +1,448 @@
-import React, { useState, useEffect } from 'react'
-import { Container, Row, Col, Card, Form, Button, Spinner, Alert } from 'react-bootstrap'
-import { useSearchParams, useNavigate } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { productService } from '../services/productService'
-import { categoryService } from '../services/categoryService'
-import { useAuth } from '../contexts/AuthContext'
-import { getBasePriceForUser, getDiscountedPriceForUser } from '../utils/pricingUtils'
-import './Shop.css'
+import React, { useState, useEffect } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Form,
+  Button,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { productService } from "../services/productService";
+import { categoryService } from "../services/categoryService";
+import { useAuth } from "../contexts/AuthContext";
+import {
+  getBasePriceForUser,
+  getDiscountedPriceForUser,
+} from "../utils/pricingUtils";
+import "./Shop.css";
+import { Helmet } from "react-helmet-async";
 
 const Shop = () => {
-  const { t } = useTranslation()
-  const { user } = useAuth()
-  const [searchParams, setSearchParams] = useSearchParams()
-  const navigate = useNavigate()
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-  const [searchQuery, setSearchQuery] = useState('')
-  const [sortBy, setSortBy] = useState('createdAt')
-  const [filterCategory, setFilterCategory] = useState('all')
-  const [currentPage, setCurrentPage] = useState(1)
-  const [hasMore, setHasMore] = useState(false)
-  const [categories, setCategories] = useState([])
-  const [subcategories, setSubcategories] = useState([])
-  const [searchInfo, setSearchInfo] = useState(null)
-  const [choseBy, setChoseBy] = useState('all')
+  const { t } = useTranslation();
+  const { user } = useAuth();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState("createdAt");
+  const [filterCategory, setFilterCategory] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [subcategories, setSubcategories] = useState([]);
+  const [searchInfo, setSearchInfo] = useState(null);
+  const [choseBy, setChoseBy] = useState("all");
 
   // Helper function to get display name for category
   const getCategoryDisplayName = (categorySlug) => {
     const categoryNames = {
-      'all': t('shop.ourHairSystems'),
-      'hair-systems': t('shop.hairSystems'),
-      'accessories': t('shop.accessories'),
-      'skin': t('shop.skinHairSystems'),
-      'lace': t('shop.laceHairSystems'),
-      'hybrid': t('shop.hybridHairSystems'),
-      'mono': t('shop.monoHairSystems'),
-      'adhesive': t('shop.adhesives'),
-      'glue': t('shop.glues'),
-      'tools': t('shop.tools'),
-      'care-products': t('shop.careProducts'),
-      'byBaseType': t('nav.byBaseType') || 'By Base Type',
-      'byHairstyle': t('nav.byHairstyle') || 'By Hairstyle',
-      'byLifestyle': t('nav.byLifestyle') || 'By Lifestyle',
-      'byHairLossAreas': t('nav.byHairLossAreas') || 'By Hair Loss Areas'
-    }
-    const currentName = categoryNames[categorySlug] || (choseBy !== 'all' ? categoryNames[choseBy] : null)
-    return currentName || t('shop.ourHairSystems')
-  }
+      all: t("shop.ourHairSystems"),
+      "hair-systems": t("shop.hairSystems"),
+      accessories: t("shop.accessories"),
+      skin: t("shop.skinHairSystems"),
+      lace: t("shop.laceHairSystems"),
+      hybrid: t("shop.hybridHairSystems"),
+      mono: t("shop.monoHairSystems"),
+      adhesive: t("shop.adhesives"),
+      glue: t("shop.glues"),
+      tools: t("shop.tools"),
+      "care-products": t("shop.careProducts"),
+      byBaseType: t("nav.byBaseType") || "By Base Type",
+      byHairstyle: t("nav.byHairstyle") || "By Hairstyle",
+      byLifestyle: t("nav.byLifestyle") || "By Lifestyle",
+      byHairLossAreas: t("nav.byHairLossAreas") || "By Hair Loss Areas",
+    };
+    const currentName =
+      categoryNames[categorySlug] ||
+      (choseBy !== "all" ? categoryNames[choseBy] : null);
+    return currentName || t("shop.ourHairSystems");
+  };
 
   // Helper function to get subtitle for category
   const getCategorySubtitle = (categorySlug) => {
     const subtitles = {
-      'all': t('shop.exploreSubtitle'),
-      'hair-systems': t('shop.hairSystemsSubtitle'),
-      'accessories': t('shop.accessoriesSubtitle'),
-      'skin': t('shop.skinSubtitle'),
-      'lace': t('shop.laceSubtitle'),
-      'hybrid': t('shop.hybridSubtitle'),
-      'mono': t('shop.monoSubtitle'),
-      'adhesive': t('shop.adhesiveSubtitle'),
-      'glue': t('shop.glueSubtitle'),
-      'tools': t('shop.toolsSubtitle'),
-      'care-products': t('shop.careProductsSubtitle'),
-      'byBaseType': 'Find the perfect system based on base material and construction.',
-      'byHairstyle': 'Choose a system pre-styled for your desired look.',
-      'byLifestyle': 'Systems tailored for your daily activities and environment.',
-      'byHairLossAreas': 'Targeted solutions for specific thinning areas.'
-    }
-    const currentSubtitle = subtitles[categorySlug] || (choseBy !== 'all' ? subtitles[choseBy] : null)
-    return currentSubtitle || t('shop.exploreSubtitle')
-  }
+      all: t("shop.exploreSubtitle"),
+      "hair-systems": t("shop.hairSystemsSubtitle"),
+      accessories: t("shop.accessoriesSubtitle"),
+      skin: t("shop.skinSubtitle"),
+      lace: t("shop.laceSubtitle"),
+      hybrid: t("shop.hybridSubtitle"),
+      mono: t("shop.monoSubtitle"),
+      adhesive: t("shop.adhesiveSubtitle"),
+      glue: t("shop.glueSubtitle"),
+      tools: t("shop.toolsSubtitle"),
+      "care-products": t("shop.careProductsSubtitle"),
+      byBaseType:
+        "Find the perfect system based on base material and construction.",
+      byHairstyle: "Choose a system pre-styled for your desired look.",
+      byLifestyle:
+        "Systems tailored for your daily activities and environment.",
+      byHairLossAreas: "Targeted solutions for specific thinning areas.",
+    };
+    const currentSubtitle =
+      subtitles[categorySlug] ||
+      (choseBy !== "all" ? subtitles[choseBy] : null);
+    return currentSubtitle || t("shop.exploreSubtitle");
+  };
 
   // Helper function to get parent category for subcategories
   const getParentCategoryForSubcategory = (subCategorySlug) => {
     const subcategoryToParentMap = {
-      'skin': 'hair-systems',
-      'lace': 'hair-systems',
-      'hybrid': 'hair-systems',
-      'mono': 'hair-systems',
-      'adhesive': 'accessories',
-      'glue': 'accessories',
-      'tools': 'accessories',
-      'care-products': 'accessories'
-    }
-    return subcategoryToParentMap[subCategorySlug] || 'hair-systems'
-  }
+      skin: "hair-systems",
+      lace: "hair-systems",
+      hybrid: "hair-systems",
+      mono: "hair-systems",
+      adhesive: "accessories",
+      glue: "accessories",
+      tools: "accessories",
+      "care-products": "accessories",
+    };
+    return subcategoryToParentMap[subCategorySlug] || "hair-systems";
+  };
 
   // Load categories on component mount
   useEffect(() => {
-    loadCategories()
-  }, [])
+    loadCategories();
+  }, []);
 
   // Load products on component mount and when filters change
   useEffect(() => {
-    loadProducts()
-  }, [filterCategory, choseBy, sortBy, currentPage])
+    loadProducts();
+  }, [filterCategory, choseBy, sortBy, currentPage]);
 
   // Handle URL parameters for category filtering
   useEffect(() => {
-    const categoryFromUrl = searchParams.get('category')
-    const filterFromUrl = searchParams.get('filter')
+    const categoryFromUrl = searchParams.get("category");
+    const filterFromUrl = searchParams.get("filter");
 
     if (categoryFromUrl) {
-      setFilterCategory(categoryFromUrl)
-      setChoseBy('all') // Reset choseBy if category is specified
+      setFilterCategory(categoryFromUrl);
+      setChoseBy("all"); // Reset choseBy if category is specified
     } else if (filterFromUrl) {
       // Map URL filter names to schema choseBy names
       const filterMap = {
-        'base-type': 'byBaseType',
-        'hairstyle': 'byHairstyle',
-        'lifestyle': 'byLifestyle',
-        'hair-loss-areas': 'byHairLossAreas',
-        'consultation': 'byConsultation'
-      }
-      setChoseBy(filterMap[filterFromUrl] || 'all')
-      setFilterCategory('all') // Reset category if filter is specified
+        "base-type": "byBaseType",
+        hairstyle: "byHairstyle",
+        lifestyle: "byLifestyle",
+        "hair-loss-areas": "byHairLossAreas",
+        consultation: "byConsultation",
+      };
+      setChoseBy(filterMap[filterFromUrl] || "all");
+      setFilterCategory("all"); // Reset category if filter is specified
     }
-  }, [searchParams])
+  }, [searchParams]);
 
   // Load categories function
   const loadCategories = async () => {
     try {
-      const response = await categoryService.getAllCategories()
+      const response = await categoryService.getAllCategories();
 
       // Debug: Log the response to understand the structure
-      console.log('Categories API Response:', response)
-      console.log('Response type:', typeof response)
-      console.log('Is Array:', Array.isArray(response))
+      console.log("Categories API Response:", response);
+      console.log("Response type:", typeof response);
+      console.log("Is Array:", Array.isArray(response));
 
       // Handle different response formats
-      let categoriesData = []
+      let categoriesData = [];
 
       // Check if response is directly an array
       if (Array.isArray(response)) {
-        categoriesData = response
+        categoriesData = response;
       }
       // Check if response has a data property with array
       else if (response && response.data && Array.isArray(response.data)) {
-        categoriesData = response.data
+        categoriesData = response.data;
       }
       // Check if response has a categories property with array
-      else if (response && response.categories && Array.isArray(response.categories)) {
-        categoriesData = response.categories
+      else if (
+        response &&
+        response.categories &&
+        Array.isArray(response.categories)
+      ) {
+        categoriesData = response.categories;
       }
       // Check if response has a result property with array
       else if (response && response.result && Array.isArray(response.result)) {
-        categoriesData = response.result
+        categoriesData = response.result;
       }
       // Check if response is a single object (wrap in array)
-      else if (response && typeof response === 'object' && response.slug) {
-        categoriesData = [response]
+      else if (response && typeof response === "object" && response.slug) {
+        categoriesData = [response];
       }
       // If none of the above, log error and use fallback
       else {
-        console.error('Unexpected categories response format:', response)
-        throw new Error('Invalid response format')
+        console.error("Unexpected categories response format:", response);
+        throw new Error("Invalid response format");
       }
 
-      console.log('Processed categories data:', categoriesData)
+      console.log("Processed categories data:", categoriesData);
 
       // Ensure categoriesData is an array before setting
       if (Array.isArray(categoriesData)) {
         // Normalize categories to enforce your structure
-        const normalized = categoriesData.map(cat => {
-          if (cat.slug === 'hair-systems') {
+        const normalized = categoriesData.map((cat) => {
+          if (cat.slug === "hair-systems") {
             return {
               ...cat,
               subCategories: [
-                { name: 'Skin', slug: 'skin' },
-                { name: 'Lace', slug: 'lace' },
-                { name: 'Mono', slug: 'mono' },
-                { name: 'Hybrid', slug: 'hybrid' }
-              ]
-            }
+                { name: "Skin", slug: "skin" },
+                { name: "Lace", slug: "lace" },
+                { name: "Mono", slug: "mono" },
+                { name: "Hybrid", slug: "hybrid" },
+              ],
+            };
           }
-          if (cat.slug === 'accessories') {
-            return { ...cat, subCategories: [] } // No subcategories for accessories
+          if (cat.slug === "accessories") {
+            return { ...cat, subCategories: [] }; // No subcategories for accessories
           }
-          return cat
-        })
-        setCategories(normalized)
+          return cat;
+        });
+        setCategories(normalized);
 
         // Find hair systems category and set its subcategories
-        const hairSystemsCategory = normalized.find(cat => cat.slug === 'hair-systems')
+        const hairSystemsCategory = normalized.find(
+          (cat) => cat.slug === "hair-systems",
+        );
         if (hairSystemsCategory && hairSystemsCategory.subCategories) {
-          setSubcategories(hairSystemsCategory.subCategories)
+          setSubcategories(hairSystemsCategory.subCategories);
         }
       } else {
-        throw new Error('Categories data is not an array')
+        throw new Error("Categories data is not an array");
       }
     } catch (err) {
-      console.error('Error loading categories:', err)
+      console.error("Error loading categories:", err);
       // Set fallback categories if API fails
       const fallbackCategories = [
         {
-          _id: 'hair-systems',
-          name: 'Hair Systems',
-          slug: 'hair-systems',
+          _id: "hair-systems",
+          name: "Hair Systems",
+          slug: "hair-systems",
           subCategories: [
-            { name: 'Skin', slug: 'skin' },
-            { name: 'Lace', slug: 'lace' },
-            { name: 'Hybrid', slug: 'hybrid' },
-            { name: 'Mono', slug: 'mono' }
-          ]
+            { name: "Skin", slug: "skin" },
+            { name: "Lace", slug: "lace" },
+            { name: "Hybrid", slug: "hybrid" },
+            { name: "Mono", slug: "mono" },
+          ],
         },
         {
-          _id: 'accessories',
-          name: 'Accessories',
-          slug: 'accessories',
-          subCategories: [] // No subcategories for accessories
-        }
-      ]
-      setCategories(fallbackCategories)
+          _id: "accessories",
+          name: "Accessories",
+          slug: "accessories",
+          subCategories: [], // No subcategories for accessories
+        },
+      ];
+      setCategories(fallbackCategories);
     }
-  }
+  };
 
   // Load products function
   const loadProducts = async () => {
     try {
-      setLoading(true)
-      setError('')
-      setSearchInfo(null) // Clear search info when loading regular products
+      setLoading(true);
+      setError("");
+      setSearchInfo(null); // Clear search info when loading regular products
 
-      let response
+      let response;
       const params = {
         page: currentPage,
         limit: 12,
         sortBy: sortBy,
-        sortOrder: sortBy === 'pricing.priceForIndividual' ? 'asc' : 'desc'
-      }
+        sortOrder: sortBy === "pricing.priceForIndividual" ? "asc" : "desc",
+      };
 
-      if (filterCategory !== 'all') {
+      if (filterCategory !== "all") {
         // Determine if this is a main category or subcategory
-        const isMainCategory = ['hair-systems', 'accessories'].includes(filterCategory)
+        const isMainCategory = ["hair-systems", "accessories"].includes(
+          filterCategory,
+        );
 
         if (isMainCategory) {
           // Use main category endpoint
-          response = await productService.getProductsByMainCategory(filterCategory, params)
+          response = await productService.getProductsByMainCategory(
+            filterCategory,
+            params,
+          );
         } else {
           // Use subcategory endpoint - determine parent category
-          const parentCategory = getParentCategoryForSubcategory(filterCategory)
-          console.log('🔍 Using Subcategory:', parentCategory, '->', filterCategory)
-          response = await productService.getProductsByCategoryAndSubcategory(parentCategory, filterCategory, params)
+          const parentCategory =
+            getParentCategoryForSubcategory(filterCategory);
+          console.log(
+            "🔍 Using Subcategory:",
+            parentCategory,
+            "->",
+            filterCategory,
+          );
+          response = await productService.getProductsByCategoryAndSubcategory(
+            parentCategory,
+            filterCategory,
+            params,
+          );
         }
-      } else if (choseBy !== 'all') {
+      } else if (choseBy !== "all") {
         // Use choseBy filter
-        params.choseBy = choseBy
-        response = await productService.getProducts(params)
+        params.choseBy = choseBy;
+        response = await productService.getProducts(params);
       } else {
         // Use general products endpoint for all products
-        response = await productService.getProducts(params)
+        response = await productService.getProducts(params);
       }
 
-      console.log('🔍 API Response Received:', response)
+      console.log("🔍 API Response Received:", response);
 
       if (response.success && response.data) {
-        console.log('🔍 Processing Success Response:', response.data)
+        console.log("🔍 Processing Success Response:", response.data);
         if (currentPage === 1) {
-          setProducts(response.data.products)
+          setProducts(response.data.products);
         } else {
-          setProducts(prev => [...prev, ...response.data.products])
+          setProducts((prev) => [...prev, ...response.data.products]);
         }
-        setHasMore(response.data.pagination?.hasNext || false)
+        setHasMore(response.data.pagination?.hasNext || false);
       } else {
-        console.log('🔍 Processing Direct Response:', response)
+        console.log("🔍 Processing Direct Response:", response);
         // Handle direct response format (without success wrapper)
         if (currentPage === 1) {
-          setProducts(response.products || [])
+          setProducts(response.products || []);
         } else {
-          setProducts(prev => [...prev, ...(response.products || [])])
+          setProducts((prev) => [...prev, ...(response.products || [])]);
         }
-        setHasMore(response.pagination?.hasNext || false)
+        setHasMore(response.pagination?.hasNext || false);
       }
     } catch (err) {
-      setError(err.message || 'Failed to load products')
-      console.error('Error loading products:', err)
+      setError(err.message || "Failed to load products");
+      console.error("Error loading products:", err);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   // Search products function
   const handleSearch = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!searchQuery.trim()) {
-      loadProducts()
-      return
+      loadProducts();
+      return;
     }
 
     try {
-      setLoading(true)
-      setError('')
+      setLoading(true);
+      setError("");
 
       // Use the new unified search API
       const response = await productService.searchProducts(searchQuery, {
         page: 1,
-        limit: 12
-      })
+        limit: 12,
+      });
 
-      console.log('🔍 Search API Response:', response)
+      console.log("🔍 Search API Response:", response);
 
       if (response.success && response.data) {
-        setProducts(response.data.products)
-        setHasMore(response.data.pagination?.totalPages > 1)
-        setCurrentPage(1)
+        setProducts(response.data.products);
+        setHasMore(response.data.pagination?.totalPages > 1);
+        setCurrentPage(1);
 
         // Store search information
         setSearchInfo({
           query: response.data.query,
           searchType: response.data.searchType,
-          totalResults: response.data.pagination?.totalProducts || response.data.products.length
-        })
+          totalResults:
+            response.data.pagination?.totalProducts ||
+            response.data.products.length,
+        });
 
         // Show search type info
-        console.log(`🔍 Search Type: ${response.data.searchType}`)
-        console.log(`🔍 Found ${response.data.products.length} products for query: "${response.data.query}"`)
+        console.log(`🔍 Search Type: ${response.data.searchType}`);
+        console.log(
+          `🔍 Found ${response.data.products.length} products for query: "${response.data.query}"`,
+        );
       } else {
         // Handle direct response format (without success wrapper)
-        setProducts(response.products || [])
-        setHasMore(false)
-        setCurrentPage(1)
+        setProducts(response.products || []);
+        setHasMore(false);
+        setCurrentPage(1);
         setSearchInfo({
           query: searchQuery,
-          searchType: 'general',
-          totalResults: response.products?.length || 0
-        })
+          searchType: "general",
+          totalResults: response.products?.length || 0,
+        });
       }
     } catch (err) {
-      setError(err.message || 'Search failed')
-      console.error('Search error:', err)
+      setError(err.message || "Search failed");
+      console.error("Search error:", err);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   // Load more products
   const loadMoreProducts = () => {
-    setCurrentPage(prev => prev + 1)
-  }
+    setCurrentPage((prev) => prev + 1);
+  };
 
   // Handle filter change
   const handleFilterChange = (e) => {
-    const newCategory = e.target.value
-    setFilterCategory(newCategory)
-    setChoseBy('all') // Reset categorization tabs when using dropdown
-    setCurrentPage(1)
+    const newCategory = e.target.value;
+    setFilterCategory(newCategory);
+    setChoseBy("all"); // Reset categorization tabs when using dropdown
+    setCurrentPage(1);
 
     // Update URL parameters
-    if (newCategory === 'all') {
-      setSearchParams({})
+    if (newCategory === "all") {
+      setSearchParams({});
     } else {
-      setSearchParams({ category: newCategory })
+      setSearchParams({ category: newCategory });
     }
-  }
+  };
 
   // Handle sort change
   const handleSortChange = (e) => {
-    setSortBy(e.target.value)
-    setCurrentPage(1)
-  }
+    setSortBy(e.target.value);
+    setCurrentPage(1);
+  };
 
   // Handle product click
   const handleProductClick = (productId) => {
-    navigate(`/product/${productId}`)
-  }
+    navigate(`/product/${productId}`);
+  };
 
   const renderStars = (rating) => {
-    const stars = []
+    const stars = [];
     for (let i = 0; i < 5; i++) {
       stars.push(
-        <span key={i} className={`star ${i < rating ? 'filled' : ''}`}>
+        <span key={i} className={`star ${i < rating ? "filled" : ""}`}>
           ★
-        </span>
-      )
+        </span>,
+      );
     }
-    return stars
-  }
+    return stars;
+  };
 
   return (
     <div className="shop-page">
+      <Helmet>
+        <title>Shop Hair Systems & Accessories | Affordable Custom Wigs</title>
+        <meta
+          name="description"
+          content="Browse hair systems, wigs, and care products. Find skin, lace, hybrid types with easy customization and fast delivery."
+        />
+        <meta
+          name="keywords"
+          content="shop hair systems, custom wigs, hair accessories, hair care products, affordable hair replacement"
+        />
+      </Helmet>
       <div className="shop-content">
         <Container>
           {/* Page Header */}
           <div className="page-header">
-            <h1
-              className="page-title"
-
-            >
+            <h1 className="page-title">
               {getCategoryDisplayName(filterCategory)}
             </h1>
-            <p
-              className="page-subtitle"
-
-            >
+            <p className="page-subtitle">
               {getCategorySubtitle(filterCategory)}
             </p>
           </div>
@@ -405,7 +454,10 @@ const Shop = () => {
                 <Col md={8}>
                   <Form.Control
                     type="text"
-                    placeholder={t('common.searchPlaceholder') || "Search by product name or code (e.g., HS-SKIN-003)..."}
+                    placeholder={
+                      t("common.searchPlaceholder") ||
+                      "Search by product name or code (e.g., HS-SKIN-003)..."
+                    }
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="search-input"
@@ -413,9 +465,7 @@ const Shop = () => {
                 </Col>
                 <Col md={4}>
                   <Button type="submit" className="search-button">
-                    <span>
-                      {t('common.search')}
-                    </span>
+                    <span>{t("common.search")}</span>
                   </Button>
                 </Col>
               </Row>
@@ -428,54 +478,54 @@ const Shop = () => {
             <div className="categorization-tabs mb-4">
               <div className="tabs-scroll-container">
                 <button
-                  className={`tab-item ${choseBy === 'all' && filterCategory === 'all' ? 'active' : ''}`}
+                  className={`tab-item ${choseBy === "all" && filterCategory === "all" ? "active" : ""}`}
                   onClick={() => {
-                    setChoseBy('all')
-                    setFilterCategory('all')
-                    setSearchParams({})
+                    setChoseBy("all");
+                    setFilterCategory("all");
+                    setSearchParams({});
                   }}
                 >
                   All Products
                 </button>
                 <button
-                  className={`tab-item ${choseBy === 'byBaseType' ? 'active' : ''}`}
+                  className={`tab-item ${choseBy === "byBaseType" ? "active" : ""}`}
                   onClick={() => {
-                    setChoseBy('byBaseType')
-                    setFilterCategory('all')
-                    setSearchParams({ filter: 'base-type' })
+                    setChoseBy("byBaseType");
+                    setFilterCategory("all");
+                    setSearchParams({ filter: "base-type" });
                   }}
                 >
-                  {t('nav.byBaseType')}
+                  {t("nav.byBaseType")}
                 </button>
                 <button
-                  className={`tab-item ${choseBy === 'byHairstyle' ? 'active' : ''}`}
+                  className={`tab-item ${choseBy === "byHairstyle" ? "active" : ""}`}
                   onClick={() => {
-                    setChoseBy('byHairstyle')
-                    setFilterCategory('all')
-                    setSearchParams({ filter: 'hairstyle' })
+                    setChoseBy("byHairstyle");
+                    setFilterCategory("all");
+                    setSearchParams({ filter: "hairstyle" });
                   }}
                 >
-                  {t('nav.byHairstyle')}
+                  {t("nav.byHairstyle")}
                 </button>
                 <button
-                  className={`tab-item ${choseBy === 'byLifestyle' ? 'active' : ''}`}
+                  className={`tab-item ${choseBy === "byLifestyle" ? "active" : ""}`}
                   onClick={() => {
-                    setChoseBy('byLifestyle')
-                    setFilterCategory('all')
-                    setSearchParams({ filter: 'lifestyle' })
+                    setChoseBy("byLifestyle");
+                    setFilterCategory("all");
+                    setSearchParams({ filter: "lifestyle" });
                   }}
                 >
-                  {t('nav.byLifestyle')}
+                  {t("nav.byLifestyle")}
                 </button>
                 <button
-                  className={`tab-item ${choseBy === 'byHairLossAreas' ? 'active' : ''}`}
+                  className={`tab-item ${choseBy === "byHairLossAreas" ? "active" : ""}`}
                   onClick={() => {
-                    setChoseBy('byHairLossAreas')
-                    setFilterCategory('all')
-                    setSearchParams({ filter: 'hair-loss-areas' })
+                    setChoseBy("byHairLossAreas");
+                    setFilterCategory("all");
+                    setSearchParams({ filter: "hair-loss-areas" });
                   }}
                 >
-                  {t('nav.byHairLossAreas')}
+                  {t("nav.byHairLossAreas")}
                 </button>
               </div>
             </div>
@@ -489,23 +539,31 @@ const Shop = () => {
                     className="filter-select"
                   >
                     <option value="all">
-                      {t('shop.allCategories') || 'All Categories'}
+                      {t("shop.allCategories") || "All Categories"}
                     </option>
-                    {categories && Array.isArray(categories) && categories.map((category) => (
-                      <optgroup key={category._id} label={category.name}>
-                        {category.subCategories && category.subCategories.length > 0 ? (
-                          // Show subcategories if they exist (only for Hair Systems)
-                          category.subCategories.map((subcategory) => (
-                            <option key={subcategory.slug} value={subcategory.slug}>
-                              {subcategory.name}
+                    {categories &&
+                      Array.isArray(categories) &&
+                      categories.map((category) => (
+                        <optgroup key={category._id} label={category.name}>
+                          {category.subCategories &&
+                          category.subCategories.length > 0 ? (
+                            // Show subcategories if they exist (only for Hair Systems)
+                            category.subCategories.map((subcategory) => (
+                              <option
+                                key={subcategory.slug}
+                                value={subcategory.slug}
+                              >
+                                {subcategory.name}
+                              </option>
+                            ))
+                          ) : (
+                            // Show main category option if no subcategories (for Accessories)
+                            <option value={category.slug}>
+                              {category.name}
                             </option>
-                          ))
-                        ) : (
-                          // Show main category option if no subcategories (for Accessories)
-                          <option value={category.slug}>{category.name}</option>
-                        )}
-                      </optgroup>
-                    ))}
+                          )}
+                        </optgroup>
+                      ))}
                   </Form.Select>
                 </div>
               </Col>
@@ -516,20 +574,16 @@ const Shop = () => {
                     onChange={handleSortChange}
                     className="sort-select"
                   >
-                    <option value="createdAt">
-                      {t('shop.featured')}
+                    <option value="createdAt">{t("shop.featured")}</option>
+                    <option value="pricing.priceForIndividual">
+                      {t("shop.priceLowToHigh") || "Price: Low to High"}
                     </option>
                     <option value="pricing.priceForIndividual">
-                      {t('shop.priceLowToHigh') || 'Price: Low to High'}
+                      {t("shop.priceHighToLow") || "Price: High to Low"}
                     </option>
-                    <option value="pricing.priceForIndividual">
-                      {t('shop.priceHighToLow') || 'Price: High to Low'}
-                    </option>
-                    <option value="createdAt">
-                      {t('shop.newest')}
-                    </option>
+                    <option value="createdAt">{t("shop.newest")}</option>
                     <option value="productReviews.averageReviewRating">
-                      {t('shop.highestRated')}
+                      {t("shop.highestRated")}
                     </option>
                   </Form.Select>
                 </div>
@@ -543,20 +597,22 @@ const Shop = () => {
               <div className="alert alert-info d-flex justify-content-between align-items-center">
                 <div>
                   <i className="fas fa-search me-2"></i>
-                  <strong>
-                    {t('shop.searchResults')}:
-                  </strong>{' '}
+                  <strong>{t("shop.searchResults")}:</strong>{" "}
                   <span>
-                    {t('shop.foundResults', { count: searchInfo.totalResults, query: searchInfo.query }) || `Found ${searchInfo.totalResults} product${searchInfo.totalResults !== 1 ? 's' : ''} for "${searchInfo.query}"`}
+                    {t("shop.foundResults", {
+                      count: searchInfo.totalResults,
+                      query: searchInfo.query,
+                    }) ||
+                      `Found ${searchInfo.totalResults} product${searchInfo.totalResults !== 1 ? "s" : ""} for "${searchInfo.query}"`}
                   </span>
-                  {searchInfo.searchType === 'product_code' && (
+                  {searchInfo.searchType === "product_code" && (
                     <span className="ms-2 badge bg-primary">
-                      {t('shop.productCodeSearch') || 'Product Code Search'}
+                      {t("shop.productCodeSearch") || "Product Code Search"}
                     </span>
                   )}
-                  {searchInfo.searchType === 'general' && (
+                  {searchInfo.searchType === "general" && (
                     <span className="ms-2 badge bg-secondary">
-                      {t('shop.generalSearch') || 'General Search'}
+                      {t("shop.generalSearch") || "General Search"}
                     </span>
                   )}
                 </div>
@@ -564,15 +620,13 @@ const Shop = () => {
                   variant="outline-secondary"
                   size="sm"
                   onClick={() => {
-                    setSearchQuery('')
-                    setSearchInfo(null)
-                    loadProducts()
+                    setSearchQuery("");
+                    setSearchInfo(null);
+                    loadProducts();
                   }}
                 >
                   <i className="fas fa-times me-1"></i>
-                  <span>
-                    {t('shop.clearSearch') || 'Clear Search'}
-                  </span>
+                  <span>{t("shop.clearSearch") || "Clear Search"}</span>
                 </Button>
               </div>
             </div>
@@ -590,7 +644,7 @@ const Shop = () => {
             <div className="text-center py-5">
               <Spinner animation="border" variant="primary" />
               <p className="mt-3">
-                {t('shop.loadingProducts') || 'Loading products...'}
+                {t("shop.loadingProducts") || "Loading products..."}
               </p>
             </div>
           )}
@@ -604,37 +658,45 @@ const Shop = () => {
                     <Card className="product-card">
                       <div className="product-image-container">
                         <img
-                          src={product.productImages?.[0] || '/src/assets/images/image_108.png'}
+                          src={
+                            product.productImages?.[0] ||
+                            "/src/assets/images/image_108.png"
+                          }
                           alt={product.productName}
                           className="product-image"
                           onError={(e) => {
-                            e.target.src = '/src/assets/images/image_108.png'
+                            e.target.src = "/src/assets/images/image_108.png";
                           }}
                         />
                         {product.bestSelling && (
                           <div className="best-selling-badge">
-                            {t('shop.bestSelling') || 'Best Selling'}
+                            {t("shop.bestSelling") || "Best Selling"}
                           </div>
                         )}
                         {product.premiumProduct && (
                           <div className="premium-badge">
-                            {t('shop.premium') || 'Premium'}
+                            {t("shop.premium") || "Premium"}
                           </div>
                         )}
                       </div>
 
                       <Card.Body className="product-content">
                         <h5 className="product-name">{product.productName}</h5>
-                        <p className="product-short-title">{product.productShortTitle}</p>
+                        <p className="product-short-title">
+                          {product.productShortTitle}
+                        </p>
                         <p className="product-price">
-                          £{getBasePriceForUser(product.pricing, user) || 'N/A'}
+                          £{getBasePriceForUser(product.pricing, user) || "N/A"}
                           {getDiscountedPriceForUser(product.pricing, user) && (
                             <span className="discounted-price">
-                              £{getDiscountedPriceForUser(product.pricing, user)}
+                              £
+                              {getDiscountedPriceForUser(product.pricing, user)}
                             </span>
                           )}
                         </p>
-                        <p className="product-description">{product.productDescription}</p>
+                        <p className="product-description">
+                          {product.productDescription}
+                        </p>
 
                         {/* Product Benefits */}
                         {product.productBenefits && (
@@ -642,7 +704,9 @@ const Shop = () => {
                             <div className="benefit-item">
                               <span className="benefit-label">Durability:</span>
                               <div className="benefit-stars">
-                                {renderStars(product.productBenefits.durability)}
+                                {renderStars(
+                                  product.productBenefits.durability,
+                                )}
                               </div>
                             </div>
                             <div className="benefit-item">
@@ -654,7 +718,9 @@ const Shop = () => {
                             <div className="benefit-item">
                               <span className="benefit-label">Appearance:</span>
                               <div className="benefit-stars">
-                                {renderStars(product.productBenefits.appearance)}
+                                {renderStars(
+                                  product.productBenefits.appearance,
+                                )}
                               </div>
                             </div>
                           </div>
@@ -664,22 +730,30 @@ const Shop = () => {
                         {product.productReviews && (
                           <div className="product-rating">
                             <div className="rating-stars">
-                              {renderStars(Math.round(product.productReviews.averageReviewRating))}
+                              {renderStars(
+                                Math.round(
+                                  product.productReviews.averageReviewRating,
+                                ),
+                              )}
                             </div>
-                            <span className="rating-text">({product.productReviews.totalReviewers} reviews)</span>
+                            <span className="rating-text">
+                              ({product.productReviews.totalReviewers} reviews)
+                            </span>
                           </div>
                         )}
 
                         {/* Product Code */}
                         <div className="product-code">
-                          <small>Code: {product.productDetails?.productCode}</small>
+                          <small>
+                            Code: {product.productDetails?.productCode}
+                          </small>
                         </div>
 
                         <Button
                           className="shop-now-button"
                           onClick={() => handleProductClick(product._id)}
                         >
-                          {t('product.shopNow')}
+                          {t("product.shopNow")}
                         </Button>
                       </Card.Body>
                     </Card>
@@ -692,8 +766,11 @@ const Shop = () => {
           {/* No Products Message */}
           {!loading && products.length === 0 && !error && (
             <div className="text-center py-5">
-              <h4>{t('shop.noProducts')}</h4>
-              <p>{t('shop.tryAdjusting') || 'Try adjusting your search or filter criteria'}</p>
+              <h4>{t("shop.noProducts")}</h4>
+              <p>
+                {t("shop.tryAdjusting") ||
+                  "Try adjusting your search or filter criteria"}
+              </p>
             </div>
           )}
 
@@ -706,7 +783,7 @@ const Shop = () => {
                 className="load-more-btn"
                 onClick={loadMoreProducts}
               >
-                {t('shop.loadMore')}
+                {t("shop.loadMore")}
               </Button>
             </div>
           )}
@@ -715,13 +792,15 @@ const Shop = () => {
           {loading && currentPage > 1 && (
             <div className="text-center py-3">
               <Spinner animation="border" variant="primary" size="sm" />
-              <span className="ms-2">{t('shop.loadingMore') || 'Loading more products...'}</span>
+              <span className="ms-2">
+                {t("shop.loadingMore") || "Loading more products..."}
+              </span>
             </div>
           )}
         </Container>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Shop
+export default Shop;

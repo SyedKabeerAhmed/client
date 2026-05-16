@@ -3,6 +3,30 @@
   overflow: hidden;
 }
 
+.banner-slider-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.banner-slider {
+  width: 100%;
+}
+
+.banner-slider .slick-list,
+.banner-slider .slick-track {
+  width: 100%;
+}
+
+.banner-slide {
+  outline: none !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+.slick-slide {
+  display: block !important;
+}
+
 .banner-background {
   background-size: cover;
   background-position: center;
@@ -20,6 +44,42 @@
   background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(30, 58, 138, 0.3) 100%);
   display: flex;
   align-items: center;
+}
+
+/* Carousel dot styling */
+.slick-dots {
+  display: flex !important;
+  justify-content: center;
+  list-style: none;
+  padding: 20px 0 !important;
+  position: relative;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 !important;
+}
+
+.slick-dots li {
+  margin: 0 8px;
+}
+
+.slick-dots li button {
+  display: block;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0;
+}
+
+.slick-dots li.slick-active button {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.9);
+  width: 14px;
+  height: 14px;
 }
 
 .banner-content {

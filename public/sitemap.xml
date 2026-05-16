@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://yourdomain.com/</loc></url>
+  <url><loc>https://yourdomain.com/about</loc></url>
+  <url><loc>https://yourdomain.com/shop</loc></url>
+  <url><loc>https://yourdomain.com/contact</loc></url>
+  <url><loc>https://yourdomain.com/custom-hair-system</loc></url>
+  <url><loc>https://yourdomain.com/help</loc></url>
+  <url><loc>https://yourdomain.com/beginners-guide</loc></url>
+  <url><loc>https://yourdomain.com/help-me-choose</loc></url>
+  <url><loc>https://yourdomain.com/book-appointment</loc></url>
+  <url><loc>https://yourdomain.com/login</loc></url>
+  <url><loc>https://yourdomain.com/signup</loc></url>
+  <!-- Add dynamic product URLs if needed -->
+</urlset>
